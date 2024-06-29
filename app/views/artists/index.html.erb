@@ -3,12 +3,28 @@
 <h1>Artists</h1>
 
 <div id="artists">
-  <% @artists.each do |artist| %>
-    <%= render artist %>
-    <p>
-      <%= link_to "Show this artist", artist %>
-    </p>
-  <% end %>
-</div>
+   <div class="row">
+    <% @dummy_data.each do |artist| %>
+    <div class="col-sm-12 col-lg-4">
+    <div class="card m-4">
+      <img src='<%= artist.second %>' class='card-img-top'>
+        <div class="card-body">
+          <p class="card-text fw-bold">
+            <%= artist.first %>
+          </p>
+          <span class="badge bg-primary mb-4"><%= @stages.sample %></span>
+          <p class="card-text">
+            <%= @days.sample %> at <%= @times.sample %>
+          </p>
 
-<%= link_to "New artist", new_artist_path %>
+          <div class="d-flex flex-wrap gap-2">
+            <% @music_genres.sample((1..4).to_a.sample).each do |genre| %>
+              <a href="#" class="btn btn-outline-primary btn-sm"><%= genre %></a>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      </div>
+    <% end %>
+  </div>
+</div>
