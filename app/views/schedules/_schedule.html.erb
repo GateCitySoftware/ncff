@@ -231,21 +231,8 @@
           </div>
         </div>
 
-        <% last_end_time = "00:00" %>
         <% stage["performances"].each_with_index do |performance, index| %>
           <% start_time, end_time = performance["time"].split(" - ") %>
-
-          <% if start_time > last_end_time && index != 0 %>
-            <!-- Stage Break Card -->
-            <div class="card my-2 border-black text-white text-center" style="height: 80px; background-color: #6c757d;">
-              <div class="card-body">
-                <h5 class="card-title mb-0">Stage Break</h5>
-                <p class="card-text">
-                  <small><%= last_end_time %> - <%= start_time %></small>
-                </p>
-              </div>
-            </div>
-          <% end %>
 
           <!-- Performance Card -->
           <div class="card my-2 border-black">
@@ -280,8 +267,6 @@
 
             </div>
           </div>
-
-          <% last_end_time = end_time %>
         <% end %>
       </div>
     <% end %>
