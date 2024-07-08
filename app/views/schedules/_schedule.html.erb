@@ -1,5 +1,28 @@
 
+
+
+<style>
+  .ncff-darkblue { background-color: #1E3A5C !important; }
+  .ncff-red { background-color: #E94E36 !important; }
+  .ncff-orange { background-color: #F47D4A !important; }
+  .ncff-yellow { background-color: #FDB827 !important; }
+  .ncff-teal { background-color: #39A7B1 !important; }
+  .ncff-gray { background-color: #55595C !important; }
+</style>
+
+
+
+
+
 <%
+  @ncff_colors = [
+  'ncff-darkblue',
+  'ncff-red',
+  'ncff-orange',
+  'ncff-yellow',
+  'ncff-teal',
+  'ncff-white'
+]
 
     @music_genres = [
       'Alternative',
@@ -214,28 +237,74 @@
 ]
 }.deep_stringify_keys
 
+@stage_names = [
+  "All",
+  "CityStage",
+  "NC Stage @ Depot",
+  "LeBauer Park",
+  "Summit Stage",
+  "Center City Jams",
+  "Elm St. Stage",
+  "Dance at Van Dyke"
+]
+
+@dates = [
+  "Friday, September 6, 2024",
+  "Saturday, September 7, 2024",
+  "Sunday, September 8, 2024"
+]
 
 %>
 
 
+<div class="row justify-content-around align-items-center py-4 bg-primary text-center rounded-4 mb-4">
+  <div class="col-md-5">
+    <label for="stageDropdown" class="form-label text-uppercase fw-bold fs-4 text-white mb-3">Stages</label>
+    <div class="dropdown">
+      <button class="btn btn-light dropdown-toggle w-100" type="button" id="stageDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+        <%= @stage_names.first %>
+      </button>
+      <ul class="dropdown-menu w-100" aria-labelledby="stageDropdown">
+        <% @stage_names.each do |stage| %>
+          <li><a class="dropdown-item <%= 'active' if stage == @stage_names.first %>" href="#"><%= stage %></a></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="col-md-5">
+    <label for="dateDropdown" class="form-label text-uppercase fw-bold fs-4 text-white mb-3">Date</label>
+    <div class="dropdown">
+      <button class="btn btn-light dropdown-toggle w-100" type="button" id="dateDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+        <%= @dates.first %>
+      </button>
+      <ul class="dropdown-menu w-100" aria-labelledby="dateDropdown">
+        <% @dates.each do |date| %>
+          <li><a class="dropdown-item <%= 'active' if date == @dates.first %>" href="#"><%= date %></a></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>
 
-<div class="container-fluid">
-  <h1 class="text-center my-4"><%= @json["date"] %></h1>
   <div class="row">
-    <% @json["stages"].each do |stage| %>
+    <% @json["stages"].each_with_index do |stage, index| %>
       <div class="col-lg-3 col-md-3 mb-4">
         <!-- Stage Name Card -->
-        <div class="card rounded-0 bg-primary text-white text-center align-middle" style="height:100px;">
+        <div class="<%= @ncff_colors[index] %> card border-0 text-white text-center align-middle">
           <div class="card-body align-middle">
             <h2 class="card-title mb-0 align-middle"><%= stage["name"] %></h2>
           </div>
         </div>
 
-        <% stage["performances"].each_with_index do |performance, index| %>
+        <% stage["performances"].each do |performance| %>
           <% start_time, end_time = performance["time"].split(" - ") %>
 
           <!-- Performance Card -->
           <div class="card my-2 border-black">
+              <div class="bg-primary text-center text-white">
+                <h3 class="p-3"><strong><%= start_time %></strong></h2>
+              </div>
             <% if performance["image"] %>
               <img src="<%= performance["image"] %>" class="card-img-top rounded-0" alt="<%= performance["act"] %>">
             <% end %>
@@ -249,6 +318,9 @@
                 <h3 class="card-title"><%= performance["act"] %></h3>
               <% end %>
 
+              <button class="btn btn-small text-white mb-4 <%= @ncff_colors[index] %>">
+                <%= stage["name"] %>
+              </button>
 
               <div class="d-flex flex-wrap gap-2">
                 <% @music_genres.sample((1..4).to_a.sample).each do |genre| %>
