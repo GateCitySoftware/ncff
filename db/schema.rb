@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_08_014554) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_08_014937) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -19,6 +19,19 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_08_014554) do
     t.text "bio"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "performances", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "stage_id", null: false
+    t.uuid "artist_id", null: false
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.text "description"
+    t.boolean "is_headline"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["artist_id"], name: "index_performances_on_artist_id"
+    t.index ["stage_id"], name: "index_performances_on_stage_id"
   end
 
   create_table "stages", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -30,4 +43,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_08_014554) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "performances", "artists"
+  add_foreign_key "performances", "stages"
 end
