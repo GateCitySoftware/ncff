@@ -1,6 +1,11 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  get '/login', to: 'sessions#new'
+  post '/login', to: 'sessions#create'
+  get '/auth', to: 'sessions#auth'
+  delete '/logout', to: 'sessions#destroy'
+
   resources :schedules
   resources :performances
   resources :stages
