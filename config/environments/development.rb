@@ -39,9 +39,9 @@ Rails.application.configure do
   config.active_storage.service = :local
 
   # DO care if the mailer can't send.
-  config.action_mailer.raise_delivery_errors = true 
+  config.action_mailer.raise_delivery_errors = true
 
-  config.action_mailer.default_url_options = { :host => "dev.yourhost.com" }
+  config.action_mailer.default_url_options = { host: 'dev.yourhost.com' }
 
   # SO link: https://stackoverflow.com/questions/7219732/rails-missing-host-to-link-to-please-provide-host-parameter-or-set-default-ur
   config.action_mailer.perform_caching = false

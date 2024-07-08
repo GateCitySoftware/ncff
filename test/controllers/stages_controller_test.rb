@@ -1,45 +1,51 @@
-require "test_helper"
+# frozen_string_literal: true
+
+require 'test_helper'
 
 class StagesControllerTest < ActionDispatch::IntegrationTest
   setup do
     @stage = stages(:one)
   end
 
-  test "should get index" do
+  test 'should get index' do
     get stages_url
     assert_response :success
   end
 
-  test "should get new" do
+  test 'should get new' do
     get new_stage_url
     assert_response :success
   end
 
-  test "should create stage" do
-    assert_difference("Stage.count") do
-      post stages_url, params: { stage: { description: @stage.description, google_place_address: @stage.google_place_address, google_place_id: @stage.google_place_id, name: @stage.name } }
+  test 'should create stage' do
+    assert_difference('Stage.count') do
+      post stages_url,
+           params: { stage: { description: @stage.description, google_place_address: @stage.google_place_address,
+                              google_place_id: @stage.google_place_id, name: @stage.name } }
     end
 
     assert_redirected_to stage_url(Stage.last)
   end
 
-  test "should show stage" do
+  test 'should show stage' do
     get stage_url(@stage)
     assert_response :success
   end
 
-  test "should get edit" do
+  test 'should get edit' do
     get edit_stage_url(@stage)
     assert_response :success
   end
 
-  test "should update stage" do
-    patch stage_url(@stage), params: { stage: { description: @stage.description, google_place_address: @stage.google_place_address, google_place_id: @stage.google_place_id, name: @stage.name } }
+  test 'should update stage' do
+    patch stage_url(@stage),
+          params: { stage: { description: @stage.description, google_place_address: @stage.google_place_address,
+                             google_place_id: @stage.google_place_id, name: @stage.name } }
     assert_redirected_to stage_url(@stage)
   end
 
-  test "should destroy stage" do
-    assert_difference("Stage.count", -1) do
+  test 'should destroy stage' do
+    assert_difference('Stage.count', -1) do
       delete stage_url(@stage)
     end
 

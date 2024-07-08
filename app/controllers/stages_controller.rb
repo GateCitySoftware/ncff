@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class StagesController < ApplicationController
-  before_action :set_stage, only: %i[ show edit update destroy ]
+  before_action :set_stage, only: %i[show edit update destroy]
 
   # GET /stages or /stages.json
   def index
@@ -7,8 +9,7 @@ class StagesController < ApplicationController
   end
 
   # GET /stages/1 or /stages/1.json
-  def show
-  end
+  def show; end
 
   # GET /stages/new
   def new
@@ -16,8 +17,7 @@ class StagesController < ApplicationController
   end
 
   # GET /stages/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /stages or /stages.json
   def create
@@ -25,7 +25,7 @@ class StagesController < ApplicationController
 
     respond_to do |format|
       if @stage.save
-        format.html { redirect_to stage_url(@stage), notice: "Stage was successfully created." }
+        format.html { redirect_to stage_url(@stage), notice: 'Stage was successfully created.' }
         format.json { render :show, status: :created, location: @stage }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +38,7 @@ class StagesController < ApplicationController
   def update
     respond_to do |format|
       if @stage.update(stage_params)
-        format.html { redirect_to stage_url(@stage), notice: "Stage was successfully updated." }
+        format.html { redirect_to stage_url(@stage), notice: 'Stage was successfully updated.' }
         format.json { render :show, status: :ok, location: @stage }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -52,19 +52,20 @@ class StagesController < ApplicationController
     @stage.destroy!
 
     respond_to do |format|
-      format.html { redirect_to stages_url, notice: "Stage was successfully destroyed." }
+      format.html { redirect_to stages_url, notice: 'Stage was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_stage
-      @stage = Stage.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def stage_params
-      params.require(:stage).permit(:name, :description, :google_place_id, :google_place_address)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_stage
+    @stage = Stage.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def stage_params
+    params.require(:stage).permit(:name, :description, :google_place_id, :google_place_address)
+  end
 end
