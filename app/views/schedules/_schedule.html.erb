@@ -1,365 +1,247 @@
-<div class="row">
+
+<%
+
+
+@json = {
+  "date": "Sunday, September 8, 2024",
+  "stages": [
+    {
+      "name": "CityStage",
+      "performances": [
+        {
+          "time": "10:45 - 11:45",
+          "act": "Songs of Hope and Justice",
+          "image": nil
+        },
+        {
+          "time": "12:45 - 13:45",
+          "act": "OLIVE KLUG",
+          "image": "https://ncfolkfestival.com/wp-content/uploads/2024/06/21-1024x614.png"
+        },
+        {
+          "time": "14:15 - 15:15",
+          "act": "BIO RITMO",
+          "image": "https://ncfolkfestival.com/wp-content/uploads/2024/06/8-1024x614.png"
+        },
+        {
+          "time": "15:30 - 16:45",
+          "act": "SUSTO",
+          "image": "https://ncfolkfestival.com/wp-content/uploads/2024/06/Untitled-design-14-1024x683.png"
+        },
+        {
+          "time": "17:30 - 19:00",
+          "act": "MIPSO",
+          "image": "https://ncfolkfestival.com/wp-content/uploads/2024/06/2-1024x732.png"
+        }
+      ]
+    },
+    {
+      "name": "NC Stage @ Depot",
+      "performances": [
+        {
+          "time": "12:00 - 13:00",
+          "act": "WILD ROOTS",
+          "image": "https://ncfolkfestival.com/wp-content/uploads/2024/06/Untitled-design-13-1024x614.png"
+        },
+        {
+          "time": "13:30 - 14:30",
+          "act": "LAKOTA JOHN",
+          "image": "https://ncfolkfestival.com/wp-content/uploads/2024/06/4-1024x614.png"
+        },
+        {
+          "time": "15:00 - 16:00",
+          "act": "ABBY HAMILTON",
+          "image": "https://ncfolkfestival.com/wp-content/uploads/2024/06/6-1024x614.png"
+        },
+        {
+          "time": "16:30 - 17:30",
+          "act": "CAIQUE VIDAL & BATUQUE",
+          "image": "https://ncfolkfestival.com/wp-content/uploads/2024/06/13-1024x614.png"
+        }
+      ]
+    },
+    {
+      "name": "LeBauer Park",
+      "performances": [
+        {
+          "time": "10:00 - 12:00",
+          "act": "ETHNO USA",
+          "image": "https://ncfolkfestival.com/wp-content/uploads/2024/06/2-2-1024x614.png"
+        },
+        {
+          "time": "12:30 - 13:30",
+          "act": "DASHAWN HICKMAN presents SACRED STEEL featuring WENDY HICKMAN",
+          "image": "https://ncfolkfestival.com/wp-content/uploads/2024/06/10-1024x614.png"
+        },
+        {
+          "time": "14:00 - 15:00",
+          "act": "DREW FOUST & THE WHEELHOUSE",
+          "image": "https://ncfolkfestival.com/wp-content/uploads/2024/06/15-1024x614.png"
+        },
+        {
+          "time": "15:30 - 16:30",
+          "act": "EMANUEL WYNTER",
+          "image": "https://ncfolkfestival.com/wp-content/uploads/2024/06/Untitled-design-12-1024x614.png"
+        },
+        {
+          "time": "17:00 - 18:00",
+          "act": "SAM FRIBUSH ORGAN TRIO featuring Calvin Napper and Charlie Hunter",
+          "image": "https://ncfolkfestival.com/wp-content/uploads/2024/06/1-2-1024x614.png"
+        }
+      ]
+    },
+    {
+      "name": "Summit Stage",
+      "performances": [
+        {
+          "time": "12:00 - 13:00",
+          "act": "SHE RETURNS FROM WAR",
+          "image": "https://ncfolkfestival.com/wp-content/uploads/2024/06/12-1024x614.png"
+        },
+        {
+          "time": "14:00 - 15:00",
+          "act": "BLUE RIDGE GIRLS",
+          "image": "https://ncfolkfestival.com/wp-content/uploads/2024/06/16-1024x614.png"
+        },
+        {
+          "time": "15:30 - 16:30",
+          "act": "ELIAS ALEXANDER",
+          "image": "https://ncfolkfestival.com/wp-content/uploads/2024/06/22-1024x614.png"
+        },
+        {
+          "time": "17:00 - 18:00",
+          "act": "COLIN CUTLER & HOT PEPPER JAM",
+          "image": "https://ncfolkfestival.com/wp-content/uploads/2024/06/23-1024x614.png"
+        }
+      ]
+    },
+    {
+      "name": "Center City Jams",
+      "performances": [
+        {
+          "time": "11:45 - 12:45",
+          "act": "DEMEANOR",
+          "image": "https://ncfolkfestival.com/wp-content/uploads/2024/06/Untitled-design-11-1024x614.png"
+        },
+        {
+          "time": "13:30 - 14:30",
+          "act": "Blues Jam",
+          "image": nil
+        },
+        {
+          "time": "15:00 - 16:00",
+          "act": "Jazz",
+          "image": nil
+        },
+        {
+          "time": "16:30 - 17:30",
+          "act": "Old Time",
+          "image": nil
+        }
+      ]
+    },
+    {
+      "name": "Elm St. Stage",
+      "performances": [
+        {
+          "time": "11:45 - 12:45",
+          "act": "DEMEANOR",
+          "image": "https://ncfolkfestival.com/wp-content/uploads/2024/06/Untitled-design-11-1024x614.png"
+        },
+        {
+          "time": "13:30 - 14:30",
+          "act": "Blues Jam",
+          "image": nil
+        },
+        {
+          "time": "15:00 - 16:00",
+          "act": "Jazz",
+          "image": nil
+        },
+        {
+          "time": "16:30 - 17:30",
+          "act": "Old Time",
+          "image": nil
+        }
+      ]
+    },
+    {
+      "name": "Dance at Van Dyke",
+      "performances": [
+        {
+          "time": "12:00 - 13:00",
+          "act": "DEMEANOR",
+          "image": "https://ncfolkfestival.com/wp-content/uploads/2024/06/Untitled-design-11-1024x614.png"
+        },
+        {
+          "time": "13:30 - 14:30",
+          "act": "Blues Jam",
+          "image": nil
+        },
+        {
+          "time": "15:00 - 16:00",
+          "act": "Jazz",
+          "image": nil
+        },
+        {
+          "time": "16:30 - 17:30",
+          "act": "Old Time",
+          "image": nil
+        }
+      ]
+    }
+  ]
+}.deep_stringify_keys
+
+
+%>
 
 
 
+<div class="container-fluid">
+  <h1 class="text-center my-4"><%= @json["date"] %></h1>
+  <div class="row">
+    <% @json["stages"].each do |stage| %>
+      <div class="col-lg-3 col-md-6 mb-4">
+        <!-- Stage Name Card -->
+        <div class="card mb-3 bg-primary text-white text-center">
+          <div class="card-body">
+            <h2 class="card-title mb-0"><%= stage["name"] %></h2>
+          </div>
+        </div>
 
+        <% last_end_time = "00:00" %>
+        <% stage["performances"].each do |performance| %>
+          <% start_time, end_time = performance["time"].split(" - ") %>
 
-<div class="col-lg-2">
-  <!-- Stage Name Card -->
-  <div class="card mb-3 bg-primary text-white text-center">
-    <div class="card-body">
-      <h2 class="card-title mb-0">Main Stage</h2>
-    </div>
-  </div>
+          <% if start_time > last_end_time %>
+            <!-- Stage Break Card -->
+            <div class="card mb-3 bg-success text-white text-center" style="height: 80px;">
+              <div class="card-body">
+                <h5 class="card-title mb-0">Stage Break</h5>
+                <p class="card-text">
+                  <small><%= last_end_time %> - <%= start_time %></small>
+                </p>
+              </div>
+            </div>
+          <% end %>
 
-  <!-- Performance Card 1 -->
-  <div class="card mb-3">
-    <div class="card-body text-center">
-        <img src="stage-image.jpg" class="img-fluid mb-3 d-none d-md-block" alt="Main Stage">
+          <!-- Performance Card -->
+          <div class="card mb-3">
+            <% if performance["image"] %>
+              <img src="<%= performance["image"] %>" class="card-img-top" alt="<%= performance["act"] %>">
+            <% end %>
+            <div class="card-body text-center">
+              <h3 class="card-title"><%= performance["act"] %></h3>
+              <p class="card-text">
+                <strong><%= performance["time"] %></strong>
+              </p>
+            </div>
+          </div>
 
-      <h3 class="card-title">The Rockers</h3>
-      <p class="card-text">
-        <strong>Start: 18:00</strong><br>
-        <strong>End: 19:30</strong>
-      </p>
-      <div class="btn-group" role="group" aria-label="Genre">
-        <button type="button" class="btn btn-outline-primary btn-sm">Rock</button>
-        <button type="button" class="btn btn-outline-primary btn-sm">Alternative</button>
+          <% last_end_time = end_time %>
+        <% end %>
       </div>
-    </div>
+    <% end %>
   </div>
-
-  <!-- Stage Break Card 1 -->
-  <div class="card mb-3 bg-success text-white text-center" style="height: 100px;">
-    <div class="card-body">
-      <h5 class="card-title mb-0">Stage Break</h5>
-      <p class="card-text">
-        <small>19:30 - 20:00</small>
-      </p>
-    </div>
-  </div>
-
-  <!-- Performance Card 2 -->
-  <div class="card mb-3">
-    <div class="card-body text-center">
-      <h3 class="card-title">Jazz Ensemble</h3>
-      <p class="card-text">
-        <strong>Start: 20:00</strong><br>
-        <strong>End: 21:30</strong>
-      </p>
-      <div class="btn-group" role="group" aria-label="Genre">
-        <button type="button" class="btn btn-outline-primary btn-sm">Jazz</button>
-        <button type="button" class="btn btn-outline-primary btn-sm">Fusion</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Stage Break Card 2 -->
-  <div class="card mb-3 bg-success text-white text-center" style="height: 100px;">
-    <div class="card-body">
-      <h5 class="card-title mb-0">Stage Break</h5>
-      <p class="card-text">
-        <small>21:30 - 22:00</small>
-      </p>
-    </div>
-  </div>
-
-  <!-- Performance Card 3 -->
-  <div class="card mb-3">
-    <div class="card-body text-center">
-      <h3 class="card-title">Pop Stars</h3>
-      <p class="card-text">
-        <strong>Start: 22:00</strong><br>
-        <strong>End: 23:30</strong>
-      </p>
-      <div class="btn-group" role="group" aria-label="Genre">
-        <button type="button" class="btn btn-outline-primary btn-sm">Pop</button>
-        <button type="button" class="btn btn-outline-primary btn-sm">Dance</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Stage Break Card 3 -->
-  <div class="card mb-3 bg-success text-white text-center" style="height: 100px;">
-    <div class="card-body">
-      <h5 class="card-title mb-0">Stage Break</h5>
-      <p class="card-text">
-        <small>23:30 - 00:00</small>
-      </p>
-    </div>
-  </div>
-</div>
-
-
-
-
-<div class="col-lg-2">
-  <!-- Stage Name Card -->
-  <div class="card mb-3 bg-primary text-white text-center">
-    <div class="card-body">
-      <h2 class="card-title mb-0">Main Stage</h2>
-    </div>
-  </div>
-
-  <!-- Performance Card 1 -->
-  <div class="card mb-3">
-    <div class="card-body text-center">
-      <h3 class="card-title">The Rockers</h3>
-      <p class="card-text">
-        <strong>Start: 18:00</strong><br>
-        <strong>End: 19:30</strong>
-      </p>
-      <div class="btn-group" role="group" aria-label="Genre">
-        <button type="button" class="btn btn-outline-primary btn-sm">Rock</button>
-        <button type="button" class="btn btn-outline-primary btn-sm">Alternative</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Stage Break Card 1 -->
-  <div class="card mb-3 bg-success text-white text-center" style="height: 100px;">
-    <div class="card-body">
-      <h5 class="card-title mb-0">Stage Break</h5>
-      <p class="card-text">
-        <small>19:30 - 20:00</small>
-      </p>
-    </div>
-  </div>
-
-  <!-- Performance Card 2 -->
-  <div class="card mb-3">
-    <div class="card-body text-center">
-      <h3 class="card-title">Jazz Ensemble</h3>
-      <p class="card-text">
-        <strong>Start: 20:00</strong><br>
-        <strong>End: 21:30</strong>
-      </p>
-      <div class="btn-group" role="group" aria-label="Genre">
-        <button type="button" class="btn btn-outline-primary btn-sm">Jazz</button>
-        <button type="button" class="btn btn-outline-primary btn-sm">Fusion</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Stage Break Card 2 -->
-  <div class="card mb-3 bg-success text-white text-center" style="height: 100px;">
-    <div class="card-body">
-      <h5 class="card-title mb-0">Stage Break</h5>
-      <p class="card-text">
-        <small>21:30 - 22:00</small>
-      </p>
-    </div>
-  </div>
-
-  <!-- Performance Card 3 -->
-  <div class="card mb-3">
-    <div class="card-body text-center">
-      <h3 class="card-title">Pop Stars</h3>
-      <p class="card-text">
-        <strong>Start: 22:00</strong><br>
-        <strong>End: 23:30</strong>
-      </p>
-      <div class="btn-group" role="group" aria-label="Genre">
-        <button type="button" class="btn btn-outline-primary btn-sm">Pop</button>
-        <button type="button" class="btn btn-outline-primary btn-sm">Dance</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Stage Break Card 3 -->
-  <div class="card mb-3 bg-success text-white text-center" style="height: 100px;">
-    <div class="card-body">
-      <h5 class="card-title mb-0">Stage Break</h5>
-      <p class="card-text">
-        <small>23:30 - 00:00</small>
-      </p>
-    </div>
-  </div>
-</div>
-
-
-
-
-<div class="col-lg-2">
-  <!-- Stage Name Card -->
-  <div class="card mb-3 bg-primary text-white text-center">
-    <div class="card-body">
-      <h2 class="card-title mb-0">Main Stage</h2>
-    </div>
-  </div>
-
-  <!-- Performance Card 1 -->
-  <div class="card mb-3">
-    <div class="card-body text-center">
-      <h3 class="card-title">The Rockers</h3>
-      <p class="card-text">
-        <strong>Start: 18:00</strong><br>
-        <strong>End: 19:30</strong>
-      </p>
-      <div class="btn-group" role="group" aria-label="Genre">
-        <button type="button" class="btn btn-outline-primary btn-sm">Rock</button>
-        <button type="button" class="btn btn-outline-primary btn-sm">Alternative</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Stage Break Card 1 -->
-  <div class="card mb-3 bg-success text-white text-center" style="height: 100px;">
-    <div class="card-body">
-      <h5 class="card-title mb-0">Stage Break</h5>
-      <p class="card-text">
-        <small>19:30 - 20:00</small>
-      </p>
-    </div>
-  </div>
-
-  <!-- Performance Card 2 -->
-  <div class="card mb-3">
-    <div class="card-body text-center">
-      <h3 class="card-title">Jazz Ensemble</h3>
-      <p class="card-text">
-        <strong>Start: 20:00</strong><br>
-        <strong>End: 21:30</strong>
-      </p>
-      <div class="btn-group" role="group" aria-label="Genre">
-        <button type="button" class="btn btn-outline-primary btn-sm">Jazz</button>
-        <button type="button" class="btn btn-outline-primary btn-sm">Fusion</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Stage Break Card 2 -->
-  <div class="card mb-3 bg-success text-white text-center" style="height: 100px;">
-    <div class="card-body">
-      <h5 class="card-title mb-0">Stage Break</h5>
-      <p class="card-text">
-        <small>21:30 - 22:00</small>
-      </p>
-    </div>
-  </div>
-
-  <!-- Performance Card 3 -->
-  <div class="card mb-3">
-    <div class="card-body text-center">
-      <h3 class="card-title">Pop Stars</h3>
-      <p class="card-text">
-        <strong>Start: 22:00</strong><br>
-        <strong>End: 23:30</strong>
-      </p>
-      <div class="btn-group" role="group" aria-label="Genre">
-        <button type="button" class="btn btn-outline-primary btn-sm">Pop</button>
-        <button type="button" class="btn btn-outline-primary btn-sm">Dance</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Stage Break Card 3 -->
-  <div class="card mb-3 bg-success text-white text-center" style="height: 100px;">
-    <div class="card-body">
-      <h5 class="card-title mb-0">Stage Break</h5>
-      <p class="card-text">
-        <small>23:30 - 00:00</small>
-      </p>
-    </div>
-  </div>
-</div>
-
-
-
-<div class="col-lg-2">
-  <!-- Stage Name Card -->
-  <div class="card mb-3 bg-primary text-white text-center">
-    <div class="card-body">
-      <h2 class="card-title mb-0">Main Stage</h2>
-    </div>
-  </div>
-
-  <!-- Performance Card 1 -->
-  <div class="card mb-3">
-    <div class="card-body text-center">
-      <h3 class="card-title">The Rockers</h3>
-      <p class="card-text">
-        <strong>Start: 18:00</strong><br>
-        <strong>End: 19:30</strong>
-      </p>
-      <div class="btn-group" role="group" aria-label="Genre">
-        <button type="button" class="btn btn-outline-primary btn-sm">Rock</button>
-        <button type="button" class="btn btn-outline-primary btn-sm">Alternative</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Stage Break Card 1 -->
-  <div class="card mb-3 bg-success text-white text-center" style="height: 100px;">
-    <div class="card-body">
-      <h5 class="card-title mb-0">Stage Break</h5>
-      <p class="card-text">
-        <small>19:30 - 20:00</small>
-      </p>
-    </div>
-  </div>
-
-  <!-- Performance Card 2 -->
-  <div class="card mb-3">
-    <div class="card-body text-center">
-      <h3 class="card-title">Jazz Ensemble</h3>
-      <p class="card-text">
-        <strong>Start: 20:00</strong><br>
-        <strong>End: 21:30</strong>
-      </p>
-      <div class="btn-group" role="group" aria-label="Genre">
-        <button type="button" class="btn btn-outline-primary btn-sm">Jazz</button>
-        <button type="button" class="btn btn-outline-primary btn-sm">Fusion</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Stage Break Card 2 -->
-  <div class="card mb-3 bg-success text-white text-center" style="height: 100px;">
-    <div class="card-body">
-      <h5 class="card-title mb-0">Stage Break</h5>
-      <p class="card-text">
-        <small>21:30 - 22:00</small>
-      </p>
-    </div>
-  </div>
-
-  <!-- Performance Card 3 -->
-  <div class="card mb-3">
-    <div class="card-body text-center">
-      <h3 class="card-title">Pop Stars</h3>
-      <p class="card-text">
-        <strong>Start: 22:00</strong><br>
-        <strong>End: 23:30</strong>
-      </p>
-      <div class="btn-group" role="group" aria-label="Genre">
-        <button type="button" class="btn btn-outline-primary btn-sm">Pop</button>
-        <button type="button" class="btn btn-outline-primary btn-sm">Dance</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Stage Break Card 3 -->
-  <div class="card mb-3 bg-success text-white text-center" style="height: 100px;">
-    <div class="card-body">
-      <h5 class="card-title mb-0">Stage Break</h5>
-      <p class="card-text">
-        <small>23:30 - 00:00</small>
-      </p>
-    </div>
-  </div>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
 </div>

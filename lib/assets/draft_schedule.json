@@ -1,0 +1,160 @@
+{
+    "date": "Sunday, September 8, 2024",
+    "stages": [
+      {
+        "name": "CityStage",
+        "performances": [
+          {
+            "time": "10:45 - 11:45",
+            "act": "Songs of Hope and Justice"
+          },
+          {
+            "time": "12:45 - 13:45",
+            "act": "Olive Klug"
+          },
+          {
+            "time": "14:15 - 15:15",
+            "act": "BioRitmo"
+          },
+          {
+            "time": "15:30 - 16:45",
+            "act": "Susto"
+          },
+          {
+            "time": "17:30 - 19:00",
+            "act": "Mipso"
+          }
+        ]
+      },
+      {
+        "name": "NC Stage @ Depot",
+        "performances": [
+          {
+            "time": "12:00 - 13:00",
+            "act": "Wild Roots Rising"
+          },
+          {
+            "time": "13:30 - 14:30",
+            "act": "Lakota John"
+          },
+          {
+            "time": "15:00 - 16:00",
+            "act": "Abby Hamilton"
+          },
+          {
+            "time": "16:30 - 17:30",
+            "act": "Caique Vidal & Batuque"
+          }
+        ]
+      },
+      {
+        "name": "LeBauer Park",
+        "performances": [
+          {
+            "time": "10:00 - 12:00",
+            "act": "ETHNO Spotlight"
+          },
+          {
+            "time": "12:30 - 13:30",
+            "act": "DaShawn & Wendy"
+          },
+          {
+            "time": "14:00 - 15:00",
+            "act": "Drew Foust & The Wheelhouse"
+          },
+          {
+            "time": "15:30 - 16:30",
+            "act": "Emanuel Wynter"
+          },
+          {
+            "time": "17:00 - 18:00",
+            "act": "Sam Fribush Organ Trio"
+          }
+        ]
+      },
+      {
+        "name": "Summit Stage",
+        "performances": [
+          {
+            "time": "12:00 - 13:00",
+            "act": "She Returns from War"
+          },
+          {
+            "time": "14:00 - 15:00",
+            "act": "Blue Ridge Girls"
+          },
+          {
+            "time": "15:30 - 16:30",
+            "act": "Elias Alexander"
+          },
+          {
+            "time": "17:00 - 18:00",
+            "act": "Colin Cutler & Hot Pepper Jam"
+          }
+        ]
+      },
+      {
+        "name": "Center City Jams",
+        "performances": [
+          {
+            "time": "11:45 - 12:45",
+            "act": "Demeanor Workshop"
+          },
+          {
+            "time": "13:30 - 14:30",
+            "act": "Blues Jam"
+          },
+          {
+            "time": "15:00 - 16:00",
+            "act": "Jazz"
+          },
+          {
+            "time": "16:30 - 17:30",
+            "act": "Old Time"
+          }
+        ]
+      },
+      {
+        "name": "Elm St. Stage",
+        "performances": [
+          {
+            "time": "11:45 - 12:45",
+            "act": "Demeanor Workshop"
+          },
+          {
+            "time": "13:30 - 14:30",
+            "act": "Blues Jam"
+          },
+          {
+            "time": "15:00 - 16:00",
+            "act": "Jazz"
+          },
+          {
+            "time": "16:30 - 17:30",
+            "act": "Old Time"
+          }
+        ]
+      },
+      {
+        "name": "Dance at Van Dyke",
+        "performances": [
+          {
+            "time": "12:00 - 13:00",
+            "act": "Demeanor Workshop"
+          },
+          {
+            "time": "13:30 - 14:30",
+            "act": "Blues Jam"
+          },
+          {
+            "time": "15:00 - 16:00",
+            "act": "Jazz"
+          },
+          {
+            "time": "16:30 - 17:30",
+            "act": "Old Time"
+          }
+        ]
+      }
+    ]
+  }
