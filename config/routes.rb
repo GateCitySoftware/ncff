@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  resources :activations
+  resources :merchants
+  resources :vendors
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
   get '/auth', to: 'sessions#auth'

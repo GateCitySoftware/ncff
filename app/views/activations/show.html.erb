@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @activation %>
+
+<div>
+  <%= link_to "Edit this activation", edit_activation_path(@activation) %> |
+  <%= link_to "Back to activations", activations_path %>
+
+  <%= button_to "Destroy this activation", @activation, method: :delete %>
+</div>
