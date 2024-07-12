@@ -1,14 +1,26 @@
-<p style="color: green"><%= notice %></p>
-
-<h1>Merchants</h1>
-
-<div id="merchants">
-  <% @merchants.each do |merchant| %>
-    <%= render merchant %>
-    <p>
-      <%= link_to "Show this merchant", merchant %>
-    </p>
-  <% end %>
+<div class="container mt-4">
+  <h1 class="mb-4">Merchants</h1>
+  
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    <% @merchants.each do |merchant| %>
+      <div class="col">
+        <div class="card h-100">
+          <img src="<%= merchant.image %>" class="card-img-top img-fluid mx-auto d-block" alt="<%= merchant.name %>" style="max-width: 200px; height: auto;">
+          <div class="card-body">
+            <h5 class="card-title"><%= merchant.name %></h5>
+            <p class="card-text"><%= merchant.description %></p>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item"><strong>Product Type:</strong> <%= merchant.product_type %></li>
+              <li class="list-group-item"><strong>Website:</strong> <a href="<%= merchant.website %>" target="_blank"><%= merchant.website %></a></li>
+            </ul>
+          </div>
+          <div class="card-footer">
+            <% merchant.social_media_links.each do |platform, username| %>
+              <a href="#" class="btn btn-outline-secondary btn-sm me-2"><%= platform.capitalize %>: <%= username %></a>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
 </div>
-
-<%= link_to "New merchant", new_merchant_path %>
