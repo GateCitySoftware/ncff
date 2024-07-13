@@ -1,160 +1,89 @@
 {
-    "date": "Sunday, September 8, 2024",
-    "stages": [
-      {
-        "name": "CityStage",
-        "performances": [
-          {
-            "time": "10:45 - 11:45",
-            "act": "Songs of Hope and Justice"
-          },
-          {
-            "time": "12:45 - 13:45",
-            "act": "Olive Klug"
-          },
-          {
-            "time": "14:15 - 15:15",
-            "act": "BioRitmo"
-          },
-          {
-            "time": "15:30 - 16:45",
-            "act": "Susto"
-          },
-          {
-            "time": "17:30 - 19:00",
-            "act": "Mipso"
-          }
-        ]
-      },
-      {
-        "name": "NC Stage @ Depot",
-        "performances": [
-          {
-            "time": "12:00 - 13:00",
-            "act": "Wild Roots Rising"
-          },
-          {
-            "time": "13:30 - 14:30",
-            "act": "Lakota John"
-          },
-          {
-            "time": "15:00 - 16:00",
-            "act": "Abby Hamilton"
-          },
-          {
-            "time": "16:30 - 17:30",
-            "act": "Caique Vidal & Batuque"
-          }
-        ]
-      },
-      {
-        "name": "LeBauer Park",
-        "performances": [
-          {
-            "time": "10:00 - 12:00",
-            "act": "ETHNO Spotlight"
-          },
-          {
-            "time": "12:30 - 13:30",
-            "act": "DaShawn & Wendy"
-          },
-          {
-            "time": "14:00 - 15:00",
-            "act": "Drew Foust & The Wheelhouse"
-          },
-          {
-            "time": "15:30 - 16:30",
-            "act": "Emanuel Wynter"
-          },
-          {
-            "time": "17:00 - 18:00",
-            "act": "Sam Fribush Organ Trio"
-          }
-        ]
-      },
-      {
-        "name": "Summit Stage",
-        "performances": [
-          {
-            "time": "12:00 - 13:00",
-            "act": "She Returns from War"
-          },
-          {
-            "time": "14:00 - 15:00",
-            "act": "Blue Ridge Girls"
-          },
-          {
-            "time": "15:30 - 16:30",
-            "act": "Elias Alexander"
-          },
-          {
-            "time": "17:00 - 18:00",
-            "act": "Colin Cutler & Hot Pepper Jam"
-          }
-        ]
-      },
-      {
-        "name": "Center City Jams",
-        "performances": [
-          {
-            "time": "11:45 - 12:45",
-            "act": "Demeanor Workshop"
-          },
-          {
-            "time": "13:30 - 14:30",
-            "act": "Blues Jam"
-          },
-          {
-            "time": "15:00 - 16:00",
-            "act": "Jazz"
-          },
-          {
-            "time": "16:30 - 17:30",
-            "act": "Old Time"
-          }
-        ]
-      },
-      {
-        "name": "Elm St. Stage",
-        "performances": [
-          {
-            "time": "11:45 - 12:45",
-            "act": "Demeanor Workshop"
-          },
-          {
-            "time": "13:30 - 14:30",
-            "act": "Blues Jam"
-          },
-          {
-            "time": "15:00 - 16:00",
-            "act": "Jazz"
-          },
-          {
-            "time": "16:30 - 17:30",
-            "act": "Old Time"
-          }
-        ]
-      },
-      {
-        "name": "Dance at Van Dyke",
-        "performances": [
-          {
-            "time": "12:00 - 13:00",
-            "act": "Demeanor Workshop"
-          },
-          {
-            "time": "13:30 - 14:30",
-            "act": "Blues Jam"
-          },
-          {
-            "time": "15:00 - 16:00",
-            "act": "Jazz"
-          },
-          {
-            "time": "16:30 - 17:30",
-            "act": "Old Time"
-          }
-        ]
-      }
-    ]
-  }
+  "schedule": [
+    {"date": "2024-09-06", "stage_name": "CityStageNC Stage @ Depot", "time": "16:00", "act": "Queen Bees", "end_time": null},
+    {"date": "2024-09-06", "stage_name": "CityStageNC Stage @ Depot", "time": "17:30", "act": "Abigale Dowd", "end_time": null},
+    {"date": "2024-09-06", "stage_name": "CityStageNC Stage @ Depot", "time": "18:30", "act": "Ethno USA", "end_time": null},
+    {"date": "2024-09-06", "stage_name": "CityStageNC Stage @ Depot", "time": "20:15", "act": "Rissi Palmer", "end_time": null},
+    {"date": "2024-09-06", "stage_name": "CityStageNC Stage @ Depot", "time": "21:45", "act": "HEADLINER - The War & Treaty", "end_time": "22:30"},
+    {"date": "2024-09-06", "stage_name": "LeBauer Park", "time": "17:15", "act": "Drum Circle", "end_time": null},
+    {"date": "2024-09-06", "stage_name": "LeBauer Park", "time": "18:00", "act": "Caique Vidal & Batuque", "end_time": "19:30"},
+    {"date": "2024-09-06", "stage_name": "LeBauer Park", "time": "20:00", "act": "Candice Ivory Ensemble", "end_time": "21:30"},
+    {"date": "2024-09-06", "stage_name": "LeBauer Park", "time": "21:30", "act": "Elias Alexander", "end_time": "22:30"},
+    {"date": "2024-09-06", "stage_name": "Summit Stage", "time": "16:00", "act": "Announcements/kickoff", "end_time": "16:45"},
+    {"date": "2024-09-06", "stage_name": "Summit Stage", "time": "17:15", "act": "A&T Drumline parade to Depot", "end_time": null},
+    {"date": "2024-09-06", "stage_name": "Summit Stage", "time": "17:30", "act": "Old Heavy Hands", "end_time": "18:30"},
+    {"date": "2024-09-06", "stage_name": "Summit Stage", "time": "19:00", "act": "Holler Choir", "end_time": "20:00"},
+    {"date": "2024-09-06", "stage_name": "Summit Stage", "time": "20:30", "act": "Tae Lewis", "end_time": "21:30"},
+    {"date": "2024-09-06", "stage_name": "Summit Stage", "time": "22:45", "act": "NuBeing Collective", "end_time": "23:45"},
+    {"date": "2024-09-06", "stage_name": "Center City Jams", "time": "16:00", "act": "Queen Bees", "end_time": "16:45"},
+    {"date": "2024-09-06", "stage_name": "Center City Jams", "time": "17:00", "act": "Open Mic", "end_time": "19:00"},
+    {"date": "2024-09-06", "stage_name": "Center City Jams", "time": "18:30", "act": "Demeanor", "end_time": "21:00"},
+    {"date": "2024-09-06", "stage_name": "Elm St Stage", "time": "16:00", "act": "A&T Drumline (in front of stage)", "end_time": null},
+    {"date": "2024-09-06", "stage_name": "Elm St Stage", "time": "17:00", "act": "Open Mic", "end_time": "18:30"},
+    {"date": "2024-09-06", "stage_name": "Elm St Stage", "time": "19:15", "act": "Olive Klug", "end_time": "20:15"},
+    {"date": "2024-09-07", "stage_name": "CityStageNC Stage @ Depot", "time": "10:00", "act": "Not Your Average Folk Contest 3rd prize", "end_time": null},
+    {"date": "2024-09-07", "stage_name": "CityStageNC Stage @ Depot", "time": "11:30", "act": "Not Your Average Folk Contest 2nd prize", "end_time": null},
+    {"date": "2024-09-07", "stage_name": "CityStageNC Stage @ Depot", "time": "14:30", "act": "She Returns from War", "end_time": null},
+    {"date": "2024-09-07", "stage_name": "CityStageNC Stage @ Depot", "time": "16:30", "act": "Blue Ridge Girls", "end_time": "17:30"},
+    {"date": "2024-09-07", "stage_name": "CityStageNC Stage @ Depot", "time": "17:30", "act": "DeShawn Hickman Presents Sacred Steel, feat Wendy Hickman", "end_time": "18:30"},
+    {"date": "2024-09-07", "stage_name": "CityStageNC Stage @ Depot", "time": "19:00", "act": "Jon Muq", "end_time": "20:00"},
+    {"date": "2024-09-07", "stage_name": "CityStageNC Stage @ Depot", "time": "20:30", "act": "Psycodelics", "end_time": "21:30"},
+    {"date": "2024-09-07", "stage_name": "CityStageNC Stage @ Depot", "time": "22:00", "act": "HEADLINER - Los Lonely Boys", "end_time": "23:00"},
+    {"date": "2024-09-07", "stage_name": "CityStageNC Stage @ Depot", "time": "22:45", "act": "SunQueen Kelcey", "end_time": "23:45"},
+    {"date": "2024-09-07", "stage_name": "LeBauer Park", "time": "12:00", "act": "Abigale Dowd", "end_time": "13:00"},
+    {"date": "2024-09-07", "stage_name": "LeBauer Park", "time": "13:30", "act": "Ethno USA", "end_time": "14:30"},
+    {"date": "2024-09-07", "stage_name": "LeBauer Park", "time": "15:00", "act": "Oxente", "end_time": "16:00"},
+    {"date": "2024-09-07", "stage_name": "LeBauer Park", "time": "16:30", "act": "Holler Choir", "end_time": "17:30"},
+    {"date": "2024-09-07", "stage_name": "LeBauer Park", "time": "18:00", "act": "Colin Cutler & Hot Pepper Jam", "end_time": "19:00"},
+    {"date": "2024-09-07", "stage_name": "LeBauer Park", "time": "19:30", "act": "Olive Klug", "end_time": "20:30"},
+    {"date": "2024-09-07", "stage_name": "LeBauer Park", "time": "20:30", "act": "BioRitmo", "end_time": "21:30"},
+    {"date": "2024-09-07", "stage_name": "Summit Stage", "time": "12:00", "act": "Tae Lewis", "end_time": "13:00"},
+    {"date": "2024-09-07", "stage_name": "Summit Stage", "time": "13:45", "act": "Unheard Project", "end_time": "14:45"},
+    {"date": "2024-09-07", "stage_name": "Summit Stage", "time": "15:15", "act": "Wild Roots", "end_time": "16:15"},
+    {"date": "2024-09-07", "stage_name": "Summit Stage", "time": "16:45", "act": "Lakota John", "end_time": "17:45"},
+    {"date": "2024-09-07", "stage_name": "Summit Stage", "time": "18:15", "act": "Unheard Project", "end_time": "19:15"},
+    {"date": "2024-09-07", "stage_name": "Summit Stage", "time": "19:45", "act": "Old Heavy Hands", "end_time": "20:45"},
+    {"date": "2024-09-07", "stage_name": "Summit Stage", "time": "20:45", "act": "Candice Ivory Ensemble", "end_time": "21:45"},
+    {"date": "2024-09-07", "stage_name": "Center City Jams", "time": "10:00", "act": "Not Your Average Folk Contest", "end_time": "10:45"},
+    {"date": "2024-09-07", "stage_name": "Center City Jams", "time": "12:00", "act": "Ukulele Jam", "end_time": "12:45"},
+    {"date": "2024-09-07", "stage_name": "Center City Jams", "time": "13:00", "act": "Colin Cutler & Hot Pepper Jam", "end_time": "14:00"},
+    {"date": "2024-09-07", "stage_name": "Center City Jams", "time": "15:00", "act": "Oxente pop up from center city jams tent to in front of city stage", "end_time": "16:00"},
+    {"date": "2024-09-07", "stage_name": "Center City Jams", "time": "16:00", "act": "Not Your Average Folk Contest 1st prize", "end_time": "17:00"},
+    {"date": "2024-09-07", "stage_name": "Center City Jams", "time": "18:00", "act": "Honky Tonk Jam", "end_time": "19:30"},
+    {"date": "2024-09-07", "stage_name": "Center City Jams", "time": "19:45", "act": "Free Improv Jam", "end_time": "20:45"},
+    {"date": "2024-09-07", "stage_name": "Center City Jams", "time": "21:00", "act": "Demeanor", "end_time": "22:00"},
+    {"date": "2024-09-07", "stage_name": "Elm St. Stage", "time": "12:30", "act": "BioRitmo Workshop", "end_time": "13:30"},
+    {"date": "2024-09-07", "stage_name": "Elm St. Stage", "time": "13:30", "act": "Drew Foust & The Wheelhouse", "end_time": "14:30"},
+    {"date": "2024-09-07", "stage_name": "Elm St. Stage", "time": "15:30", "act": "Abby Hamilton", "end_time": "16:30"},
+    {"date": "2024-09-07", "stage_name": "Elm St. Stage", "time": "16:30", "act": "Irish Seisun", "end_time": "17:30"},
+    {"date": "2024-09-07", "stage_name": "Elm St. Stage", "time": "18:30", "act": "Elias Alexander", "end_time": "19:30"},
+    {"date": "2024-09-07", "stage_name": "Elm St. Stage", "time": "20:00", "act": "Sam Fribush Organ Trio", "end_time": "21:00"},
+    {"date": "2024-09-07", "stage_name": "Dance at Vandyke", "time": "13:00", "act": "Eli Motley: House Dance", "end_time": "14:00"},
+    {"date": "2024-09-07", "stage_name": "Dance at Vandyke", "time": "15:15", "act": "Flamenkatha (Maitri Acharya/Seema Viswanath): Stomp, spin & clap - Flamenco & Kathak", "end_time": "16:15"},
+    {"date": "2024-09-07", "stage_name": "Dance at Vandyke", "time": "18:30", "act": "Maria Gonzalez: Latin Social Dance", "end_time": null},
+    {"date": "2024-09-08", "stage_name": "CityStageNC Stage @ Depot", "time": "10:00", "act": "Songs of Hope and Justice", "end_time": "12:00"},
+    {"date": "2024-09-08", "stage_name": "CityStageNC Stage @ Depot", "time": "12:30", "act": "DaShawn Hickman Presents: Sacred Steel feat. Wendy Hickman", "end_time": "13:30"},
+    {"date": "2024-09-08", "stage_name": "CityStageNC Stage @ Depot", "time": "14:15", "act": "BioRitmo", "end_time": "15:00"},
+    {"date": "2024-09-08", "stage_name": "CityStageNC Stage @ Depot", "time": "15:45", "act": "Susto", "end_time": "16:45"},
+    {"date": "2024-09-08", "stage_name": "CityStageNC Stage @ Depot", "time": "17:30", "act": "Mipso", "end_time": "19:00"},
+    {"date": "2024-09-08", "stage_name": "LeBauer Park", "time": "12:00", "act": "Wild Roots", "end_time": "13:00"},
+    {"date": "2024-09-08", "stage_name": "LeBauer Park", "time": "13:30", "act": "Lakota John", "end_time": "14:30"},
+    {"date": "2024-09-08", "stage_name": "LeBauer Park", "time": "15:15", "act": "Emanuel Wynter", "end_time": "16:15"},
+    {"date": "2024-09-08", "stage_name": "LeBauer Park", "time": "16:30", "act": "Caique Vidal & Batuque", "end_time": "17:30"},
+    {"date": "2024-09-08", "stage_name": "Summit Stage", "time": "12:00", "act": "ETHNO Spotlight", "end_time": "13:00"},
+    {"date": "2024-09-08", "stage_name": "Summit Stage", "time": "13:45", "act": "Drew Foust & The Wheelhouse", "end_time": "14:45"},
+    {"date": "2024-09-08", "stage_name": "Summit Stage", "time": "15:15", "act": "Elias Alexander", "end_time": "16:15"},
+    {"date": "2024-09-08", "stage_name": "Summit Stage", "time": "16:45", "act": "Sam Fribush Organ Trio", "end_time": "17:45"},
+    {"date": "2024-09-08", "stage_name": "Center City Jams", "time": "12:00", "act": "Demeanor Workshop", "end_time": "13:00"},
+    {"date": "2024-09-08", "stage_name": "Center City Jams", "time": "12:45", "act": "Olive Klug", "end_time": "13:45"},
+    {"date": "2024-09-08", "stage_name": "Center City Jams", "time": "14:00", "act": "Blue Ridge Girls", "end_time": "15:00"},
+    {"date": "2024-09-08", "stage_name": "Center City Jams", "time": "15:30", "act": "Old Time", "end_time": "16:30"},
+    {"date": "2024-09-08", "stage_name": "Center City Jams", "time": "16:45", "act": "Colin Cutler & Hot Pepper Jam", "end_time": "17:45"},
+    {"date": "2024-09-08", "stage_name": "Elm St. Stage", "time": "12:15", "act": "She Returns from War", "end_time": "13:15"},
+    {"date": "2024-09-08", "stage_name": "Elm St. Stage", "time": "13:45", "act": "Blues Jam", "end_time": "14:45"},
+    {"date": "2024-09-08", "stage_name": "Elm St. Stage", "time": "15:30", "act": "Jazz", "end_time": "16:30"},
+    {"date": "2024-09-08", "stage_name": "Dance at Van Dyke", "time": "13:30", "act": "Royal Expressions Repertory", "end_time": "14:30"},
+    {"date": "2024-09-08", "stage_name": "Dance at Van Dyke", "time": "15:00", "act": "Wesley Williams Jr: Ballet Style West African Dance", "end_time": "16:00"},
+    {"date": "2024-09-08", "stage_name": "Dance at Van Dyke", "time": "16:30", "act": "The Blue Ridge Girls: Appalachian Dance Styles", "end_time": "17:30"}
+  ]
+}
