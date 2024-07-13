@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Tagged items</h1>
+
+<div id="tagged_items">
+  <% @tagged_items.each do |tagged_item| %>
+    <%= render tagged_item %>
+    <p>
+      <%= link_to "Show this tagged item", tagged_item %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New tagged item", new_tagged_item_path %>
