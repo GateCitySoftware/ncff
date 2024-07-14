@@ -12,6 +12,7 @@
 #
 class Artist < ApplicationRecord
   include Sluggable
+  include CardImage
 
   sluggable_attributes :name
 

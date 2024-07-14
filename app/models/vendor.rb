@@ -17,6 +17,7 @@
 #
 class Vendor < ApplicationRecord
   include Sluggable
+  include CardImage
 
   sluggable_attributes :name
 

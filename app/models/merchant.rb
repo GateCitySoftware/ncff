@@ -14,6 +14,7 @@
 #
 class Merchant < ApplicationRecord
   include Sluggable
+  include CardImage
 
   sluggable_attributes :name
 end
