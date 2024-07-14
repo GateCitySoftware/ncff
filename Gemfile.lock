@@ -124,6 +124,11 @@ GEM
     drb (2.2.1)
     error_highlight (0.6.0)
     erubi (1.13.0)
+    factory_bot (6.4.6)
+      activesupport (>= 5.0.0)
+    factory_bot_rails (6.4.3)
+      factory_bot (~> 6.4)
+      railties (>= 5.0.0)
     faker (2.23.0)
       i18n (>= 1.8.11, < 2)
     globalid (1.2.1)
@@ -320,6 +325,7 @@ DEPENDENCIES
   capybara
   debug
   error_highlight (>= 0.4.0)
+  factory_bot_rails
   faker (~> 2.20)
   importmap-rails
   jbuilder
