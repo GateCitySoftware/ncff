@@ -73,3 +73,5 @@ end
 
 gem 'faker', '~> 2.20'
 gem 'rubocop', '~> 1.64'
+gem 'aws-sdk-s3'
+
