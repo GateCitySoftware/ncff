@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_14_143843) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_14_155527) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -22,6 +22,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_14_143843) do
     t.json "social_media_links"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "slug"
+    t.index ["slug"], name: "index_activations_on_slug", unique: true
   end
 
   create_table "artists", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -29,6 +31,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_14_143843) do
     t.text "bio"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "slug"
+    t.index ["slug"], name: "index_artists_on_slug", unique: true
   end
 
   create_table "merchants", force: :cascade do |t|
@@ -40,6 +44,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_14_143843) do
     t.string "product_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "slug"
+    t.index ["slug"], name: "index_merchants_on_slug", unique: true
   end
 
   create_table "performances", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -60,6 +66,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_14_143843) do
     t.date "date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "slug"
+    t.index ["slug"], name: "index_schedules_on_slug", unique: true
   end
 
   create_table "stages", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -69,6 +77,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_14_143843) do
     t.string "google_place_address"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "slug"
+    t.index ["slug"], name: "index_stages_on_slug", unique: true
   end
 
   create_table "tagged_items", force: :cascade do |t|
@@ -116,6 +126,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_14_143843) do
     t.string "cuisine_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "slug"
+    t.index ["slug"], name: "index_vendors_on_slug", unique: true
   end
 
   add_foreign_key "performances", "artists"
