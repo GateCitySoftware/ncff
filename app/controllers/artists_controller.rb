@@ -24,7 +24,7 @@ class ArtistsController < ApplicationController
 
   # POST /artists or /artists.json
   def create
-    @artist = Artist.new(artist_params)
+    @artist = Artist.new(params)
 
     respond_to do |format|
       if @artist.save
@@ -39,7 +39,9 @@ class ArtistsController < ApplicationController
 
   # PATCH/PUT /artists/1 or /artists/1.json
   def update
-    if @artist.update(artist_params)
+    service = SaveArtist.new(@artist, params[:artist]).call
+
+    if service.success?
       redirect_to @artist, notice: 'Artist was successfully updated.'
     else
       @tags = Tag.all
@@ -66,10 +68,5 @@ class ArtistsController < ApplicationController
               else
                 Artist.find_by_slug!(params[:id])
               end
-  end
-
-  # Only allow a list of trusted parameters through.
-  def artist_params
-    params.require(:artist).permit(:name, :bio)
   end
 end

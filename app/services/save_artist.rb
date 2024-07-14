@@ -7,12 +7,14 @@ class SaveArtist
   end
 
   def call
-    ActiveRecord::Base.transaction do
-      update_artist_attributes
-      update_tags
-      @success = true
+    tap do
+      ActiveRecord::Base.transaction do
+        update_artist_attributes
+        update_tags
+        @success = true
+      end
+      @artist
     end
-    @artist
   end
 
   private
@@ -31,9 +33,11 @@ class SaveArtist
     tags_to_remove = current_tag_ids - new_tag_ids
 
     tags_to_add.each do |tag_id|
-      TaggedItem.create!(artist: @artist, tag_id:)
+      next if tag_id == 0 || tag_id.blank? # not sure why I need this, but can fix later
+
+      TaggedItem.create!(taggable: @artist, tag_id:)
     end
 
-    TaggedItem.where(artist: @artist, tag_id: tags_to_remove).destroy_all
+    TaggedItem.where(taggable: @artist, tag_id: tags_to_remove).destroy_all
   end
 end

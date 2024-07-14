@@ -47,9 +47,9 @@
   <%= image_tag("ncff-logo.png", class: "", style: "max-height:100px;width:auto;", alt: "...") %>
   <h1 class="display-2"><%= @artist.name %></h1>
   <div class="d-flex flex-wrap gap-2">
-    <a href="#" class="btn btn-outline-primary btn-sm">Hip-Hop</a>
-    <a href="#" class="btn btn-outline-primary btn-sm">Rap</a>
-    <a href="#" class="btn btn-outline-primary btn-sm">Rapper</a>
+    <% @artist.tags.each do |tag| %>
+      <a href="#" class="btn btn-outline-primary btn-sm"><%= tag.name %></a>
+    <% end %>
   </div>
 </div>
 <!-- END START -->
@@ -60,7 +60,8 @@
     <blockquote class="blockquote">
       <p class="mb-0"><strong>Something, something, something</strong></p>
     </blockquote>
-    <p class="mt-3"><%= @artist.bio %>
+    <!-- TODO: look into using ActiveText to make this a full featured editor -->
+    <p class="mt-3"><%= @artist.bio.html_safe %>
   </div>
   <!-- BIO END -->
   
