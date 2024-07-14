@@ -12,8 +12,9 @@
 #  updated_at         :datetime         not null
 #
 class Activation < ApplicationRecord
-  include Sluggable
   include CardImage
+  include Sluggable
+  include Uploadable
 
   sluggable_attributes :name
 end

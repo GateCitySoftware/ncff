@@ -13,8 +13,9 @@
 #  updated_at         :datetime         not null
 #
 class Merchant < ApplicationRecord
-  include Sluggable
   include CardImage
+  include Sluggable
+  include Uploadable
 
   sluggable_attributes :name
 end

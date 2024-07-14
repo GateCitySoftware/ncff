@@ -17,7 +17,10 @@ class ArtistsController < ApplicationController
   end
 
   # GET /artists/1/edit
-  def edit; end
+  def edit
+    @artist.tagged_items.build if @artist.tagged_items.empty?
+    @tags = Tag.all
+  end
 
   # POST /artists or /artists.json
   def create
@@ -36,14 +39,11 @@ class ArtistsController < ApplicationController
 
   # PATCH/PUT /artists/1 or /artists/1.json
   def update
-    respond_to do |format|
-      if @artist.update(artist_params)
-        format.html { redirect_to artist_url(@artist), notice: 'Artist was successfully updated.' }
-        format.json { render :show, status: :ok, location: @artist }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @artist.errors, status: :unprocessable_entity }
-      end
+    if @artist.update(artist_params)
+      redirect_to @artist, notice: 'Artist was successfully updated.'
+    else
+      @tags = Tag.all
+      render :edit
     end
   end
 
@@ -61,7 +61,11 @@ class ArtistsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_artist
-    #    @artist = Artist.find(params[:id])
+    @artist = if uuid?(params[:id])
+                Artist.find(params[:id])
+              else
+                Artist.find_by_slug!(params[:id])
+              end
   end
 
   # Only allow a list of trusted parameters through.

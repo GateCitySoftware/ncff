@@ -11,6 +11,8 @@
 #  updated_at   :datetime         not null
 #
 class Upload < ApplicationRecord
+  belongs_to :uploadable, polymorphic: true
+
   validates :filename, presence: true
   validates :content_type, presence: true
   validates :file_size, presence: true, numericality: { greater_than: 0 }

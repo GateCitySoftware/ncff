@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_14_160705) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_14_163334) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -106,7 +106,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_14_160705) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "image_type", default: "gallery", null: false
+    t.string "uploadable_type"
+    t.bigint "uploadable_id"
     t.index ["key"], name: "index_uploads_on_key", unique: true
+    t.index ["uploadable_type", "uploadable_id"], name: "index_uploads_on_uploadable"
   end
 
   create_table "users", force: :cascade do |t|

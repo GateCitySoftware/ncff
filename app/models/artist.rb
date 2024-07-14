@@ -11,21 +11,15 @@
 #  updated_at :datetime         not null
 #
 class Artist < ApplicationRecord
-  include Sluggable
   include CardImage
+  include Sluggable
+  include Uploadable
 
   sluggable_attributes :name
 
-  GENRES = [
-    'Rock', 'Pop', 'Hip Hop', 'R&B', 'Country',
-    'Jazz', 'Blues', 'Classical', 'Electronic', 'Dance',
-    'Reggae', 'Folk', 'Alternative', 'Indie', 'Metal',
-    'Punk', 'Soul', 'Funk', 'Disco', 'Techno',
-    'House', 'Trance', 'Ambient', 'Rap', 'Gospel',
-    'Latin', 'World', 'New Age', 'Ska', 'Grunge',
-    'Experimental', 'Instrumental', 'Acoustic', 'Bluegrass', 'Opera',
-    'Soundtrack', 'EDM', 'Trap', 'Dubstep', 'Grime',
-    'K-Pop', 'J-Pop', 'Salsa', 'Bossa Nova', 'Flamenco',
-    'Afrobeat', 'Reggaeton', 'Synthwave', 'Lofi', 'Psychedelic'
-  ]
+  has_many :performances
+  has_many :tagged_items, as: :taggable, dependent: :destroy
+  has_many :tags, through: :tagged_items
+
+  accepts_nested_attributes_for :tagged_items, allow_destroy: true, reject_if: :all_blank
 end

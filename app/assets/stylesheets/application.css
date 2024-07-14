@@ -21,3 +21,24 @@
 .ncff-yellow { background-color: #FDB827 !important; }
 .ncff-teal { background-color: #39A7B1 !important; }
 .ncff-gray { background-color: #55595C !important; }
+
+.tag-selection {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    max-height: 300px;
+    overflow-y: auto;
+    padding: 10px;
+}
+
+.tag-checkbox {
+    display: flex;
+    align-items: center;
+    background-color: #f0f0f0;
+    padding: 5px 10px;
+    border-radius: 15px;
+}
+
+.tag-checkbox input[type="checkbox"] {
+    margin-right: 5px;
+}

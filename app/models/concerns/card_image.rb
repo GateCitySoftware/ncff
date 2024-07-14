@@ -2,13 +2,12 @@ module CardImage
   extend ActiveSupport::Concern
 
   included do
-    has_many :uploads, as: :uploadable
     validate :validate_single_card_image
   end
 
-  def card_image_path
+  def card_image
     card_image_upload = uploads.find_by(image_type: 'card_image')
-    card_image_upload&.file&.url
+    card_image_upload&.s3_url
   end
 
   private

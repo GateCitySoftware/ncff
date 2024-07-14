@@ -1,12 +1,6 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  resources :uploads
-  resources :tagged_items
-  resources :tags
-  resources :activations
-  resources :merchants
-  resources :vendors
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
   get '/auth', to: 'sessions#auth'
@@ -16,7 +10,12 @@ Rails.application.routes.draw do
   resources :performances
   resources :stages
   resources :artists
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  resources :uploads
+  resources :tagged_items
+  resources :tags
+  resources :activation
+  resources :merchant
+  resources :vendor
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.

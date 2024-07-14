@@ -17,16 +17,14 @@
             <p class="card-text fw-bold">
               <%= artist.name %>
             </p>
-            <span class="badge bg-primary mb-4"><%= @stages.sample %></span>
+            <span class="badge bg-primary mb-4">@stages.sample</span>
 
             <p class="card-text">
-              <%= @days.sample %> at <%= @times.sample %>
+              @days.sample at @times.sample
             </p>
 
             <div class="d-flex flex-wrap gap-2">
-              <% @music_genres.sample((1..4).to_a.sample).each do |genre| %>
-                <a href="#" class="btn btn-outline-primary btn-sm"><%= genre %></a>
-              <% end %>
+              <a href="#" class="btn btn-outline-primary btn-sm">genre</a>
             </div>
           </div>
         </div>

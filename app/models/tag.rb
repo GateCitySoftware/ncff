@@ -11,4 +11,7 @@
 class Tag < ApplicationRecord
   validates :name, presence: true, uniqueness: true
   validates :category, presence: true
+
+  has_many :tagged_items
+  has_many :artists, through: :tagged_items, source: :taggable, source_type: 'Artist'
 end
