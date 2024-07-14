@@ -8,3 +8,27 @@
 
   <%= button_to "Destroy this upload", @upload, method: :delete %>
 </div>
+
+<!-- app/views/uploads/show.html.erb -->
+<p>
+  <strong>Filename:</strong>
+  <%= @upload.filename %>
+</p>
+
+<p>
+  <strong>Content Type:</strong>
+  <%= @upload.content_type %>
+</p>
+
+<p>
+  <strong>File Size:</strong>
+  <%= number_to_human_size(@upload.file_size) %>
+</p>
+
+<p>
+  <strong>Image:</strong>
+  <%= image_tag @upload.s3_url, alt: @upload.filename %>
+</p>
+
+<%= link_to 'Edit', edit_upload_path(@upload) %> |
+<%= link_to 'Back', uploads_path %>
