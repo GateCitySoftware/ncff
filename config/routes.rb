@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  resources :uploads
   resources :tagged_items
   resources :tags
   resources :activations
