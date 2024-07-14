@@ -62,6 +62,7 @@ group :development do
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
 
+  gem 'annotate'
   gem 'error_highlight', '>= 0.4.0', platforms: [:ruby]
 end
 
@@ -71,7 +72,6 @@ group :test do
   gem 'selenium-webdriver'
 end
 
+gem 'aws-sdk-s3'
 gem 'faker', '~> 2.20'
 gem 'rubocop', '~> 1.64'
-gem 'aws-sdk-s3'
-

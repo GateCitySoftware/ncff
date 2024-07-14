@@ -1,5 +1,16 @@
 # frozen_string_literal: true
 
+# == Schema Information
+#
+# Table name: users
+#
+#  id                      :bigint           not null, primary key
+#  email                   :string
+#  login_token             :string
+#  login_token_valid_until :datetime
+#  created_at              :datetime         not null
+#  updated_at              :datetime         not null
+#
 class User < ApplicationRecord
   def generate_login_token
     self.login_token = SecureRandom.urlsafe_base64

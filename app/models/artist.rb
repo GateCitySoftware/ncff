@@ -1,6 +1,20 @@
 # frozen_string_literal: true
 
+# == Schema Information
+#
+# Table name: artists
+#
+#  id         :uuid             not null, primary key
+#  name       :string
+#  bio        :text
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
 class Artist < ApplicationRecord
+  include Sluggable
+
+  sluggable_attributes :name
+
   GENRES = [
     'Rock', 'Pop', 'Hip Hop', 'R&B', 'Country',
     'Jazz', 'Blues', 'Classical', 'Electronic', 'Dance',
