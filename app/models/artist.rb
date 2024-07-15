@@ -9,11 +9,13 @@
 #  bio        :text
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  slug       :string
 #
 class Artist < ApplicationRecord
   include CardImage
   include Sluggable
   include Uploadable
+  include Linkable
 
   sluggable_attributes :name
 

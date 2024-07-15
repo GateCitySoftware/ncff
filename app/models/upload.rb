@@ -2,13 +2,16 @@
 #
 # Table name: uploads
 #
-#  id           :bigint           not null, primary key
-#  filename     :string
-#  content_type :string
-#  file_size    :integer
-#  key          :string
-#  created_at   :datetime         not null
-#  updated_at   :datetime         not null
+#  id              :bigint           not null, primary key
+#  filename        :string
+#  content_type    :string
+#  file_size       :integer
+#  key             :string
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  image_type      :string           default("gallery"), not null
+#  uploadable_type :string
+#  uploadable_id   :bigint
 #
 class Upload < ApplicationRecord
   belongs_to :uploadable, polymorphic: true

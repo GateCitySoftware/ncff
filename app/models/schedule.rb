@@ -9,6 +9,7 @@
 #  date       :date
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  slug       :string
 #
 class Schedule < ApplicationRecord
   include Sluggable
