@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_14_163334) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_15_194147) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -19,7 +19,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_14_163334) do
     t.text "description"
     t.string "image"
     t.string "website"
-    t.json "social_media_links"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "slug"
@@ -40,7 +39,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_14_163334) do
     t.text "description"
     t.string "image"
     t.string "website"
-    t.json "social_media_links"
     t.string "product_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -125,7 +123,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_14_163334) do
     t.text "description"
     t.string "image"
     t.string "website"
-    t.json "social_media_links"
     t.string "category"
     t.string "cuisine_type"
     t.datetime "created_at", null: false

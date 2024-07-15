@@ -82,6 +82,6 @@ task seed_tags: :environment do
   ]
   cuisine_types.each do |cuisine_type|
     puts "creating cuisine_type: #{cuisine_type}"
-    Tag.find_or_create_by!(name: cuisine_type, category: 'cuisine_type')
+    Tag.find_or_create_by!(name: cuisine_type, category: 'cuisine')
   end
 end

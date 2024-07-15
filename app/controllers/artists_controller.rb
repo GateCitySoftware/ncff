@@ -19,7 +19,7 @@ class ArtistsController < ApplicationController
   # GET /artists/1/edit
   def edit
     @artist.tagged_items.build if @artist.tagged_items.empty?
-    @tags = Tag.all
+    @tags = Tag.genres.order(:name)
   end
 
   # POST /artists or /artists.json

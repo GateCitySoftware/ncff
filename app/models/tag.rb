@@ -14,4 +14,7 @@ class Tag < ApplicationRecord
 
   has_many :tagged_items
   has_many :artists, through: :tagged_items, source: :taggable, source_type: 'Artist'
+
+  scope :genres, -> { where(category: 'genre') }
+  scope :cuisines, -> { where(category: 'cuisine') }
 end
