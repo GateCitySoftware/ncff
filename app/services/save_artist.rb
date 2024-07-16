@@ -11,6 +11,7 @@ class SaveArtist
       ActiveRecord::Base.transaction do
         update_artist_attributes
         update_tags
+        update_external_links
         @success = true
       end
       @artist
@@ -39,5 +40,24 @@ class SaveArtist
     end
 
     TaggedItem.where(taggable: @artist, tag_id: tags_to_remove).destroy_all
+  end
+
+  def update_external_links
+    @params[:external_links].each do |link_type, url|
+      link_type = link_type.to_s.sub('_url', '')
+
+      existing_link = @artist.external_links.find_by(link_type:)
+      binding.pry
+
+      if url.present?
+        if existing_link
+          existing_link.update(url:)
+        else
+          @artist.external_links.create(link_type:, url:)
+        end
+      elsif existing_link
+        existing_link.destroy
+      end
+    end
   end
 end

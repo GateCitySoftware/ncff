@@ -16,36 +16,55 @@ class UploadsController < ApplicationController
     @upload = Upload.new
   end
 
-  # POST /uploads
+  # POST /uploads for handling upload of multiple images
   def create
-    file = params[:upload][:image]
+    @upload = Upload.new
+    files = params[:images].reject(&:blank?) # not sure why its sending a blank string but this fixes it
 
-    if file
+    if files && !files.empty?
       uploader = S3Uploader.new(s3_bucket_name, s3_region)
-      s3_key = generate_unique_key(file.original_filename)
+      uploaded_files = []
 
-      if uploader.upload(file.tempfile.path, s3_key)
-        @upload = Upload.new(
-          filename: file.original_filename,
-          content_type: file.content_type,
-          file_size: file.size,
-          key: s3_key
-        )
+      files.each do |file|
+        s3_key = generate_unique_key(file.original_filename)
 
-        if @upload.save
-          redirect_to @upload, notice: 'Image was successfully uploaded.'
+        if uploader.upload(file.tempfile.path, s3_key)
+          uploaded_files << {
+            filename: file.original_filename,
+            content_type: file.content_type,
+            file_size: file.size,
+            key: s3_key
+          }
         else
-          uploader.delete_file(s3_key) # Rollback S3 upload if model save fails
+          @upload.errors.add(:base, "Failed to upload file #{file.original_filename} to S3")
+        end
+      end
+
+      if @upload.errors.empty?
+        uploaded_files.each do |file_data|
+          upload = Upload.new(file_data)
+          upload.uploadable_type = params[:uploadable_type]
+          upload.uploadable_id = params[:uploadable_id]
+          binding.pry
+          if upload.save
+            binding.pry
+          else
+            binding.pry
+            @upload.errors.add(:base, "Failed to save file #{file_data[:filename]} to database")
+            uploader.delete_file(file_data[:key])
+          end
+        end
+
+        if @upload.errors.empty?
+          redirect_to uploads_path, notice: 'Images were successfully uploaded.'
+        else
           render :new
         end
       else
-        @upload = Upload.new
-        @upload.errors.add(:base, 'Failed to upload file to S3')
         render :new
       end
     else
-      @upload = Upload.new
-      @upload.errors.add(:image, 'must be selected')
+      @upload.errors.add(:images, 'must be selected')
       render :new
     end
   end

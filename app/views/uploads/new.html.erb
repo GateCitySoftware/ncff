@@ -1,4 +1,4 @@
-<h1>Upload New Image</h1>
+<h1>Upload New Images</h1>
 
 <%= form_with(model: @upload, local: true, multipart: true) do |form| %>
   <% if @upload.errors.any? %>
@@ -13,12 +13,12 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :image %>
-    <%= form.file_field :image, accept: 'image/*' %>
+    <%= form.label :images %>
+    <%= form.file_field :images, multiple: true, accept: 'image/*' %>
   </div>
 
   <div class="actions">
-    <%= form.submit 'Upload Image' %>
+    <%= form.submit 'Upload Images' %>
   </div>
 <% end %>
 

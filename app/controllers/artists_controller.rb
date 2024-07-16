@@ -20,6 +20,7 @@ class ArtistsController < ApplicationController
   def edit
     @artist.tagged_items.build if @artist.tagged_items.empty?
     @tags = Tag.genres.order(:name)
+    @upload = Upload.new
   end
 
   # POST /artists or /artists.json
@@ -39,6 +40,7 @@ class ArtistsController < ApplicationController
 
   # PATCH/PUT /artists/1 or /artists/1.json
   def update
+    File.open('tmp/params.json', 'w') { |f| f.write(JSON.pretty_generate(params.to_unsafe_h)) }
     service = SaveArtist.new(@artist, params[:artist]).call
 
     if service.success?
