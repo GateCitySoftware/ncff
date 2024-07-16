@@ -40,10 +40,15 @@
       <h3>Social Media Links / Website</h3>
       <div class="row">
         <%= form.fields_for :external_links do |link_form| %>
-          <% ExternalLink::LINK_TYPES.each do |link_type| %>
+          <% ExternalLink::LINK_TYPES.each do |key, value| %>
             <div class="col-lg-6 col-md-12 mb-3">
-              <%= link_form.label "#{link_type.downcase}_url".to_sym, "#{link_type} URL", class: "form-label" %>
-              <%= link_form.text_field "#{link_type.downcase}_url".to_sym, class: "form-control", placeholder: "Copy and paste #{link_type} link here or leave blank" %>
+              <%= link_form.label "#{key}_url".to_sym, "#{value[:display_text]} URL", class: "form-label" %>
+              <%= link_form.text_field "#{key}_url".to_sym,
+                    class: "form-control",
+                    placeholder: "Copy and paste #{value[:display_text]} link here or leave blank",
+                    value: @artist.external_links.find{|link| link.link_type == key}&.url
+                    # TODO: this is a likely N+1 query, fix htis!!!!!!!!!
+              %>
             </div>
           <% end %>
         <% end %>
@@ -57,28 +62,20 @@
 
 <h3>Images</h3>
 
-
-
 <div class="container">
   <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4 justify-content-center">
     <% @artist.uploads.each do |upload| %>
       <div class="col">
-        <%= image_tag(upload.s3_url, class: "img-thumbnail", alt: "Artist upload") %>
-      </div>
-    <% end %>
-  </div>
-</div>
-
-
-<div class="container">
-  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4 justify-content-center">
-    <% @artist.uploads.each do |upload| %>
-      <div class="col">
-        <div class="position-relative image-container">
+        <div class="position-relative image-container <%= 'border border-3 border-primary' if upload.image_type == 'primary' %>">
           <%= image_tag(upload.s3_url, class: "img-thumbnail w-100", alt: "Artist upload") %>
+          <% if upload.image_type == 'primary' %>
+            <p class="text-center fw-bold my-3">Primary Image</p> 
+          <% end %>
           <div class="overlay d-flex justify-content-center align-items-center">
             <%= button_to "Delete", upload_path(upload), method: :delete, class: "btn btn-danger btn-sm me-2", data: { confirm: "Are you sure?" } %>
-            <%= button_to "Make Card Image", upload_path(upload), method: :patch, class: "btn btn-primary btn-sm" %>
+            <% unless upload.image_type == 'primary' %>
+              <%= button_to "Set as Primary", set_primary_upload_path(upload), method: :patch, class: "btn btn-primary btn-sm" %>
+            <% end %>
           </div>
         </div>
       </div>
@@ -121,12 +118,6 @@
 </script>
 
 
-
-
-
-
-
-
 <%= form_with(url: @upload, local: true, multipart: true) do |form| %>
   <% if @upload.errors.any? %>
     <div id="error_explanation">
@@ -139,8 +130,8 @@
     </div>
   <% end %>
 
-  <%= form.hidden_field :uploadable_type, value: @artist.class.name %>%
-  <%= form.hidden_field :uploadable_id, value: @artist.id %>%
+  <%= form.hidden_field :uploadable_type, value: @artist.class.name %>
+  <%= form.hidden_field :uploadable_id, value: @artist.id %>
 
   <div class="field">
     <%= form.label :images %>

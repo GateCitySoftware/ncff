@@ -43,17 +43,19 @@ class SaveArtist
   end
 
   def update_external_links
-    @params[:external_links].each do |link_type, url|
+    external_links = @params[:external_links].to_unsafe_h.reject { |k, v| v.blank? }
+    external_links.each do |link_type, url|
       link_type = link_type.to_s.sub('_url', '')
 
       existing_link = @artist.external_links.find_by(link_type:)
-      binding.pry
 
       if url.present?
         if existing_link
           existing_link.update(url:)
         else
+          binding.pry
           @artist.external_links.create(link_type:, url:)
+          binding.pry
         end
       elsif existing_link
         existing_link.destroy

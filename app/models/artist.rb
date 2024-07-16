@@ -22,6 +22,4 @@ class Artist < ApplicationRecord
   has_many :performances
   has_many :tagged_items, as: :taggable, dependent: :destroy
   has_many :tags, through: :tagged_items
-
-  accepts_nested_attributes_for :tagged_items, allow_destroy: true, reject_if: :all_blank
 end

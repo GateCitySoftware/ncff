@@ -52,7 +52,7 @@ class UploadsController < ApplicationController
         end
 
         if @upload.errors.empty?
-          redirect_to uploads_path, notice: 'Images were successfully uploaded.'
+          redirect_back(fallback_location: artists_path, notice: 'Upload was successfully created.')
         else
           render :new
         end
@@ -69,7 +69,7 @@ class UploadsController < ApplicationController
   def set_primary
     @upload = Upload.find(params[:id])
     @upload.set_as_primary
-    redirect_to @upload, notice: 'Upload was set as primary.'
+    redirect_back(fallback_location: artists_path)
   end
 
   # DELETE /uploads/1
@@ -77,7 +77,7 @@ class UploadsController < ApplicationController
     uploader = S3Uploader.new(s3_bucket_name, s3_region)
     uploader.delete_file(@upload.key)
     @upload.destroy
-    redirect_to uploads_url, notice: 'Upload was successfully destroyed.'
+    redirect_back(fallback_location: artists_path, notice: 'Upload was successfully destroyed.')
   end
 
   private
