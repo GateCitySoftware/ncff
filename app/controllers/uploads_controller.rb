@@ -45,11 +45,7 @@ class UploadsController < ApplicationController
           upload = Upload.new(file_data)
           upload.uploadable_type = params[:uploadable_type]
           upload.uploadable_id = params[:uploadable_id]
-          binding.pry
-          if upload.save
-            binding.pry
-          else
-            binding.pry
+          unless upload.save
             @upload.errors.add(:base, "Failed to save file #{file_data[:filename]} to database")
             uploader.delete_file(file_data[:key])
           end
@@ -67,6 +63,13 @@ class UploadsController < ApplicationController
       @upload.errors.add(:images, 'must be selected')
       render :new
     end
+  end
+
+  # specific update action
+  def set_primary
+    @upload = Upload.find(params[:id])
+    @upload.set_as_primary
+    redirect_to @upload, notice: 'Upload was set as primary.'
   end
 
   # DELETE /uploads/1

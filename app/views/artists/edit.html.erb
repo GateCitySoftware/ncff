@@ -56,9 +56,77 @@
   <% end %>
 
 <h3>Images</h3>
-<% @artist.uploads.each do |upload| %>
-  <%= image_tag(upload.s3_url) %>
-<% end %>
+
+
+
+<div class="container">
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4 justify-content-center">
+    <% @artist.uploads.each do |upload| %>
+      <div class="col">
+        <%= image_tag(upload.s3_url, class: "img-thumbnail", alt: "Artist upload") %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+
+<div class="container">
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4 justify-content-center">
+    <% @artist.uploads.each do |upload| %>
+      <div class="col">
+        <div class="position-relative image-container">
+          <%= image_tag(upload.s3_url, class: "img-thumbnail w-100", alt: "Artist upload") %>
+          <div class="overlay d-flex justify-content-center align-items-center">
+            <%= button_to "Delete", upload_path(upload), method: :delete, class: "btn btn-danger btn-sm me-2", data: { confirm: "Are you sure?" } %>
+            <%= button_to "Make Card Image", upload_path(upload), method: :patch, class: "btn btn-primary btn-sm" %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<style>
+  .image-container {
+    position: relative;
+    overflow: hidden;
+  }
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .image-container:hover .overlay {
+    opacity: 1;
+  }
+</style>
+
+<script>
+  document.addEventListener('turbo:load', function() {
+    const containers = document.querySelectorAll('.image-container');
+    containers.forEach(container => {
+      container.addEventListener('mouseenter', () => {
+        container.querySelector('.overlay').style.opacity = '1';
+      });
+      container.addEventListener('mouseleave', () => {
+        container.querySelector('.overlay').style.opacity = '0';
+      });
+    });
+  });
+</script>
+
+
+
+
+
+
+
+
 <%= form_with(url: @upload, local: true, multipart: true) do |form| %>
   <% if @upload.errors.any? %>
     <div id="error_explanation">
