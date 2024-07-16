@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @embedded_content %>
+
+<div>
+  <%= link_to "Edit this embedded content", edit_embedded_content_path(@embedded_content) %> |
+  <%= link_to "Back to embedded contents", embedded_contents_path %>
+
+  <%= button_to "Destroy this embedded content", @embedded_content, method: :delete %>
+</div>

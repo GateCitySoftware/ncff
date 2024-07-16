@@ -1,0 +1,47 @@
+<%= form_with(model: embedded_content) do |form| %>
+  <% if embedded_content.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(embedded_content.errors.count, "error") %> prohibited this embedded_content from being saved:</h2>
+
+      <ul>
+        <% embedded_content.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :url, style: "display: block" %>
+    <%= form.text_field :url %>
+  </div>
+
+  <div>
+    <%= form.label :content_type, style: "display: block" %>
+    <%= form.text_field :content_type %>
+  </div>
+
+  <div>
+    <%= form.label :title, style: "display: block" %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div>
+    <%= form.label :embed_code, style: "display: block" %>
+    <%= form.text_area :embed_code %>
+  </div>
+
+  <div>
+    <%= form.label :description, style: "display: block" %>
+    <%= form.text_area :description %>
+  </div>
+
+  <div>
+    <%= form.label :embeddable_id, style: "display: block" %>
+    <%= form.text_field :embeddable_id %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
