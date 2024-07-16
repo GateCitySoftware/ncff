@@ -22,4 +22,5 @@ class Artist < ApplicationRecord
   has_many :performances
   has_many :tagged_items, as: :taggable, dependent: :destroy
   has_many :tags, through: :tagged_items
+  has_many :embedded_contents, as: :embeddable
 end

@@ -1,5 +1,5 @@
 class EmbeddedContentsController < ApplicationController
-  before_action :set_embedded_content, only: %i[ show edit update destroy ]
+  before_action :set_embedded_content, only: %i[show edit update destroy]
 
   # GET /embedded_contents or /embedded_contents.json
   def index
@@ -21,16 +21,12 @@ class EmbeddedContentsController < ApplicationController
 
   # POST /embedded_contents or /embedded_contents.json
   def create
-    @embedded_content = EmbeddedContent.new(embedded_content_params)
-
-    respond_to do |format|
-      if @embedded_content.save
-        format.html { redirect_to embedded_content_url(@embedded_content), notice: "Embedded content was successfully created." }
-        format.json { render :show, status: :created, location: @embedded_content }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @embedded_content.errors, status: :unprocessable_entity }
-      end
+    @embedded_content = EmbeddedContent.new(params.to_unsafe_h.slice(*EmbeddedContent.new.attributes.keys))
+    if @embedded_content.save
+      redirect_back(fallback_location: artists_path, notice: 'Embedded content was successfully created.')
+    else
+      redirect_back(fallback_location: artists_path,
+                    error: "Embedded content was not saved. Errors: #{@embedded_content.errors.full_messages}")
     end
   end
 
@@ -38,7 +34,9 @@ class EmbeddedContentsController < ApplicationController
   def update
     respond_to do |format|
       if @embedded_content.update(embedded_content_params)
-        format.html { redirect_to embedded_content_url(@embedded_content), notice: "Embedded content was successfully updated." }
+        format.html do
+          redirect_to embedded_content_url(@embedded_content), notice: 'Embedded content was successfully updated.'
+        end
         format.json { render :show, status: :ok, location: @embedded_content }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -52,19 +50,15 @@ class EmbeddedContentsController < ApplicationController
     @embedded_content.destroy!
 
     respond_to do |format|
-      format.html { redirect_to embedded_contents_url, notice: "Embedded content was successfully destroyed." }
+      format.html { redirect_to embedded_contents_url, notice: 'Embedded content was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_embedded_content
-      @embedded_content = EmbeddedContent.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def embedded_content_params
-      params.require(:embedded_content).permit(:url, :content_type, :title, :embed_code, :description, :embeddable_id, :embeddable_type)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_embedded_content
+    @embedded_content = EmbeddedContent.find(params[:id])
+  end
 end

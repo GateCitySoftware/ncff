@@ -21,6 +21,7 @@ class ArtistsController < ApplicationController
     @artist.tagged_items.build if @artist.tagged_items.empty?
     @tags = Tag.genres.order(:name)
     @upload = Upload.new
+    @embedded_content = EmbeddedContent.new
   end
 
   # POST /artists or /artists.json
