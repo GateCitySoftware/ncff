@@ -9,7 +9,7 @@
 #  updated_at :datetime         not null
 #
 class Tag < ApplicationRecord
-  validates :name, presence: true, uniqueness: true
+  validates :name, presence: true, uniqueness: { scope: :category }
   validates :category, presence: true
 
   has_many :tagged_items

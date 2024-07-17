@@ -12,7 +12,6 @@ namespace :artist_images do
     # Read and parse the JSON data
     json_data = File.read('lib/assets/artists_and_images.json')
     artists = JSON.parse(json_data)
-    binding.pry
 
     # Download each image
     artists.each do |artist|

@@ -6,7 +6,7 @@ module CardImage
   end
 
   def card_image
-    card_image_upload = uploads.find_by(image_type: 'card_image')
+    card_image_upload = uploads.find_by(image_type: 'primary')
     card_image_upload&.s3_url
   end
 

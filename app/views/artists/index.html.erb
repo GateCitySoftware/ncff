@@ -7,27 +7,24 @@
   <div class="row">
     <% @artists.each do |artist| %>
       <div class="col-sm-12 col-lg-4">
-        <div class="card m-4">
-          <%= link_to artist_path(artist.slug) do %>
-            <img src='<%= artist.card_image %>' class='card-img-top'>
-          <% end %>
+        <%= link_to artist_path(artist.slug), class: 'text-decoration-none' do %>
+          <div class="card m-4 shadow-lg">
+              <img src='<%= artist.card_image %>' class='card-img-top'>
 
-          <div class="card-body">
+            <div class="card-body">
 
-            <p class="card-text fw-bold">
-              <%= artist.name %>
-            </p>
-            <span class="badge bg-primary mb-4">@stages.sample</span>
+              <p class="card-text fw-bold">
+                <%= artist.name %>
+              </p>
 
-            <p class="card-text">
-              @days.sample at @times.sample
-            </p>
-
-            <div class="d-flex flex-wrap gap-2">
-              <a href="#" class="btn btn-outline-primary btn-sm">genre</a>
+              <div class="d-flex flex-wrap gap-2">
+                <% artist.tags.genres.each do |genre_tag| %>
+                  <a href="#" class="btn btn-outline-primary btn-sm"><%= genre_tag.name %></a>
+                <% end %>
+              </div>
             </div>
           </div>
-        </div>
+        <% end %>
       </div>
     <% end %>
   </div>

@@ -20,7 +20,7 @@ namespace :uploads do
       { file_name: 'holler_choir.png', artist_name: 'Holler Choir' },
       { file_name: 'jon_muq.png', artist_name: 'Jon Muq' },
       { file_name: 'lakota_john.png', artist_name: 'Lakota John' },
-      { file_name: 'los_lonely_boys.png', artist_name: 'HEADLINER - Los Lonely Boys' },
+      { file_name: 'los_lonely_boys.png', artist_name: 'Los Lonely Boys' },
       { file_name: 'mipso.png', artist_name: 'Mipso' },
       { file_name: 'old_heavy_hands.png', artist_name: 'Old Heavy Hands' },
       { file_name: 'olive_klug.png', artist_name: 'Olive Klug' },
@@ -32,7 +32,7 @@ namespace :uploads do
       { file_name: 'susto.png', artist_name: 'Susto' },
       { file_name: 'tae_lewis.png', artist_name: 'Tae Lewis' },
       { file_name: 'the_psycodelics.png', artist_name: 'Psycodelics' },
-      { file_name: 'the_war_treaty.png', artist_name: 'HEADLINER - The War & Treaty' },
+      { file_name: 'the_war_treaty.png', artist_name: 'The War & Treaty' },
       { file_name: 'unheard_project.png', artist_name: 'Unheard Project' },
       { file_name: 'wild_roots.png', artist_name: 'Wild Roots' }
     ]
@@ -47,6 +47,7 @@ namespace :uploads do
       content_type = Marcel::MimeType.for(Pathname.new(file_path))
 
       artist = Artist.find_by_name(artists_data.find { |hash| hash[:file_name] == file_name }[:artist_name])
+      next if artist.uploads.where(image_type: 'primary').exists?
 
       # Generate a unique key for S3
       key = "#{SecureRandom.uuid}-#{file_name}"
@@ -61,6 +62,7 @@ namespace :uploads do
           key:
         )
         upload.uploadable = artist
+        upload.image_type = 'primary'
         upload.save!
 
         puts "Uploaded #{file_name} to S3 and created Upload record"

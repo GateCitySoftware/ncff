@@ -53,9 +53,7 @@ class SaveArtist
         if existing_link
           existing_link.update(url:)
         else
-          binding.pry
           @artist.external_links.create(link_type:, url:)
-          binding.pry
         end
       elsif existing_link
         existing_link.destroy
