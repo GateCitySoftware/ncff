@@ -4,38 +4,34 @@
   <h1 class="mb-4 text-center display-3">NC Folk Festival Artists</h1>
 </div>
 
-
-
-
-
-    <div class="container mt-5">
-        <div class="row">
-            <div class="col-lg-4 col-md-4 col-sm-12 mb-3">
-                <h4>Search Artists by</h4>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-12 mb-3">
-                <div class="dropdown">
-                    <button class="btn btn-primary dropdown-toggle w-100" type="button" id="categoryDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                      Genre, Stage, or Date
-                    </button>
-                    <ul class="dropdown-menu w-100" aria-labelledby="categoryDropdown">
-                        <li><a class="dropdown-item" href="#" data-value="genre">Genre</a></li>
-                        <li><a class="dropdown-item" href="#" data-value="stage">Stage</a></li>
-                        <li><a class="dropdown-item" href="#" data-value="date">Date</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-12 mb-3">
-                <div class="dropdown">
-                    <button class="btn btn-primary dropdown-toggle w-100" type="button" id="optionDropdown" data-bs-toggle="dropdown" aria-expanded="false" disabled>
-                    </button>
-                    <ul class="dropdown-menu w-100" aria-labelledby="optionDropdown" id="optionMenu">
-                        <!-- Options will be populated here -->
-                    </ul>
-                </div>
-            </div>
-        </div>
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-lg-4 offset-lg-4 text-center">
+      <h4>Search Artists by</h4>
     </div>
+    <div class="col-lg-4 offset-lg-4 text-center my-2">
+      <div class="dropdown">
+        <button class="btn btn-primary dropdown-toggle w-100"  type="button" id="categoryDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+          Genre, Stage, or Date
+        </button>
+        <ul class="dropdown-menu w-100" aria-labelledby="categoryDropdown">
+          <li><a class="dropdown-item" href="#" data-value="genre">Genre</a></li>
+          <li><a class="dropdown-item" href="#" data-value="stage">Stage</a></li>
+          <li><a class="dropdown-item" href="#" data-value="date">Date</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-lg-4 offset-lg-4 text-center">
+      <div class="dropdown">
+        <button class="btn btn-primary dropdown-toggle w-100" type="button" id="optionDropdown" data-bs-toggle="dropdown" aria-expanded="false" disabled>
+        </button>
+        <ul class="dropdown-menu w-100" aria-labelledby="optionDropdown" id="optionMenu">
+          <!-- Options will be populated here -->
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
 
     <script>
         const categoryDropdown = document.getElementById('categoryDropdown');
@@ -80,117 +76,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <script>
-        const categorySelect = document.getElementById('categorySelect');
-        const optionSelect = document.getElementById('optionSelect');
-
-        const options = {
-            genre: ['Rock', 'Pop', 'Jazz', 'Hip Hop', 'Classical'],
-            stage: ['Main Stage', 'Second Stage', 'Acoustic Stage'],
-            date: ['Friday', 'Saturday', 'Sunday']
-        };
-
-        categorySelect.addEventListener('change', function() {
-            const selectedCategory = this.value;
-            optionSelect.innerHTML = '<option value="">Select an option</option>';
-
-            if (selectedCategory) {
-                optionSelect.disabled = false;
-                options[selectedCategory].forEach(option => {
-                    const optionElement = document.createElement('option');
-                    optionElement.value = option;
-                    optionElement.textContent = option;
-                    optionSelect.appendChild(optionElement);
-                });
-            } else {
-                optionSelect.disabled = true;
-            }
-        });
-    </script>
-
-
-<div class="container mt-5">
-  <div class="row">
-    <div class="col-lg-4 col-md-4 col-sm-12 mb-3">
-      <h4>Search Artists by</h4>
-    </div>
-    <div class="col-lg-4 col-md-4 col-sm-12 mb-3">
-      <select id="categorySelect" class="form-select">
-        <option value="">Select a category</option>
-        <option value="genre">Genre</option>
-        <option value="stage">Stage</option>
-        <option value="date">Date</option>
-      </select>
-    </div>
-    <div class="col-lg-4 col-md-4 col-sm-12 mb-3">
-      <select id="optionSelect" class="form-select" disabled>
-        <option value="">Select an option</option>
-      </select>
-    </div>
-  </div>
-</div>
-
-
-<div class="container">
-  <div class="row row-cols-1 row-cols-md-3 g-4">
-    <div class="col">
-      <div class="dropdown mb-4">
-        <button class="btn btn-primary dropdown-toggle w-100" type="button" id="genreDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-          Filter by Genre
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="genreDropdown">
-          <li><a class="dropdown-item" href="<%= artists_path(stage_name: params[:stage_name], date: params[:date]) %>"><%= "All (#{Artist.count})" %></a></li>
-          <% Tag.genre_map.each do |genre, artist_count| %>
-            <li><a class="dropdown-item" href="<%= artists_path(genre: genre, stage_name: params[:stage_name], date: params[:date]) %>"><%= "#{genre} (#{artist_count})" %></a></li>
-          <% end %>
-        </ul>
-      </div>
-    </div>
-    <div class="col">
-      <div class="dropdown mb-4">
-        <button class="btn btn-primary dropdown-toggle w-100" type="button" id="stageNameDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-          Filter by Stage Name
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="stageNameDropdown">
-          <li><a class="dropdown-item" href="<%= artists_path(genre: params[:genre], date: params[:date]) %>">All</a></li>
-          <% Stage.all.each do |stage| %>
-            <li><a class="dropdown-item" href="<%= artists_path(genre: params[:genre], stage_name: stage.name, date: params[:date]) %>"><%= stage.name %></a></li>
-          <% end %>
-        </ul>
-      </div>
-    </div>
-    <div class="col">
-      <div class="dropdown mb-4">
-        <button class="btn btn-primary dropdown-toggle w-100" type="button" id="dateDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-          Filter by Date 
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="dateDropdown">
-          <li><a class="dropdown-item" href="<%= artists_path(genre: params[:genre], stage_name: params[:stage_name]) %>">All</a></li>
-          <% Performance::DATES_2024.each do |date| %>
-            <li><a class="dropdown-item" href="<%= artists_path(genre: params[:genre], stage_name: params[:stage_name], date: date) %>"><%= Date.parse(date).strftime('%A, %B %e, %Y') %></a></li>
-          <% end %>
-        </ul>
-      </div>
-    </div>
-  </div>
-</div>
 
 <div id="artists">
   <div class="row">
