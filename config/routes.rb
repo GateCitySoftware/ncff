@@ -14,9 +14,9 @@ Rails.application.routes.draw do
   resources :artists
   resources :tagged_items
   resources :tags
-  resources :activation
-  resources :merchant
-  resources :vendor
+  resources :activations
+  resources :merchants
+  resources :vendors
   resources :uploads do
     member do
       patch :set_primary
