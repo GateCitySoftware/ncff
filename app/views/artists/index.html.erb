@@ -4,75 +4,59 @@
   <h1 class="mb-4 text-center display-3">NC Folk Festival Artists</h1>
 </div>
 
-<div class="container mt-5">
-  <div class="row">
-    <div class="col-lg-4 offset-lg-4 text-center">
-      <h4>Search Artists by</h4>
-    </div>
-    <div class="col-lg-4 offset-lg-4 text-center my-2">
-      <div class="dropdown">
-        <button class="btn btn-primary dropdown-toggle w-100"  type="button" id="categoryDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-          Genre, Stage, or Date
+<div class="container">
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    <div class="col">
+      <div class="dropdown mb-4">
+        <button class="btn btn-primary dropdown-toggle w-100" type="button" id="genreDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+          By Genre
         </button>
-        <ul class="dropdown-menu w-100" aria-labelledby="categoryDropdown">
-          <li><a class="dropdown-item" href="#" data-value="genre">Genre</a></li>
-          <li><a class="dropdown-item" href="#" data-value="stage">Stage</a></li>
-          <li><a class="dropdown-item" href="#" data-value="date">Date</a></li>
+        <ul class="dropdown-menu" aria-labelledby="genreDropdown">
+          <li><a class="dropdown-item" href="<%= artists_path %>"><%= "All (#{Artist.count})" %></a></li>
+          <% Tag.genre_map.each do |genre, artist_count| %>
+            <li><a class="dropdown-item" href="<%= artists_path(category: 'genre', option: genre) %>"><%= "#{genre} (#{artist_count})" %></a></li>
+          <% end %>
         </ul>
       </div>
     </div>
-    <div class="col-lg-4 offset-lg-4 text-center" id="optionDropdownContainer" style="display: none;">
-      <div class="dropdown">
-        <button class="btn btn-primary dropdown-toggle w-100" type="button" id="optionDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+    <div class="col">
+      <div class="dropdown mb-4">
+        <button class="btn btn-primary dropdown-toggle w-100" type="button" id="stageNameDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+          By Stage Name
         </button>
-        <ul class="dropdown-menu w-100" aria-labelledby="optionDropdown" id="optionMenu">
-          <!-- Options will be populated here -->
+        <ul class="dropdown-menu" aria-labelledby="stageNameDropdown">
+          <li><a class="dropdown-item" href="<%= artists_path %>">All</a></li>
+          <% Stage.all.each do |stage| %>
+            <li><a class="dropdown-item" href="<%= artists_path(category: 'stage', option: stage.name) %>"><%= stage.name %></a></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+    <div class="col">
+      <div class="dropdown mb-4">
+        <button class="btn btn-primary dropdown-toggle w-100" type="button" id="dateDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+          By Date 
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dateDropdown">
+          <li><a class="dropdown-item" href="<%= artists_path %>">All</a></li>
+          <% Performance::DATES_2024.each do |date| %>
+            <li><a class="dropdown-item" href="<%= artists_path(category: 'date', option: date) %>"><%= Date.parse(date).strftime('%A, %B %e, %Y') %></a></li>
+          <% end %>
         </ul>
       </div>
     </div>
   </div>
 </div>
-<script>
-    const categoryDropdown = document.getElementById('categoryDropdown');
-    const optionDropdown = document.getElementById('optionDropdown');
-    const optionMenu = document.getElementById('optionMenu');
-    const optionDropdownContainer = document.getElementById('optionDropdownContainer');
-    const options = {
-        genre: Object.keys(gon.genre_map),
-        stage: Object.keys(gon.stage_map),
-        date: Object.keys(gon.date_map)
-    };
-    document.querySelectorAll('#categoryDropdown + .dropdown-menu .dropdown-item').forEach(item => {
-        item.addEventListener('click', function(e) {
-            e.preventDefault();
-            const selectedCategory = this.getAttribute('data-value');
-            categoryDropdown.textContent = this.textContent;
-            optionDropdown.textContent = 'SELECT ' + selectedCategory;
-            populateOptionMenu(selectedCategory);
-            optionDropdownContainer.style.display = 'block';
-        });
-    });
-    function populateOptionMenu(category) {
-        optionMenu.innerHTML = '';
-        options[category].forEach(option => {
-            const li = document.createElement('li');
-            const a = document.createElement('a');
-            a.classList.add('dropdown-item');
-            a.href = '/artists?category=' + category + '&option=' + option;
-            a.textContent = option + ' (' + gon[category + '_map'][option] + ')';
-            a.addEventListener('click', function(e) {
-                e.preventDefault();
-                optionDropdown.textContent = this.textContent;
-            });
-            li.appendChild(a);
-            optionMenu.appendChild(li);
-        });
-    }
-</script>
+
+<div class="row">
+  <div class="col text-center mt-3">
+    <h3><%= @data.filter_name %><h3>
+  </div>
+</div>
 
 <div id="artists" class="my-4">
   <div class="row">
-    <% @artists.each do |artist| %>
+    <% @data.artists.each do |artist| %>
       <div class="col-sm-12 col-lg-4">
         <%= link_to artist_path(artist.slug), class: 'text-decoration-none' do %>
           <div class="card m-4 shadow-lg">

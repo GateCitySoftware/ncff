@@ -15,4 +15,7 @@ class Schedule < ApplicationRecord
   include Sluggable
 
   sluggable_attributes :name
+
+  # Not sure if we actually need a schedule?
+  # really just a stage/day
 end
