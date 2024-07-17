@@ -64,7 +64,7 @@
   </div>
 
   <div class="col-lg-6 col-md-12 p-4">
-    <%= @artist.embedded_contents.first.embed_code.html_safe %>
+    <%= @artist.embedded_contents.first&.embed_code&.html_safe %>
   </div>
 </div>
 <!-- BIO END -->
@@ -84,7 +84,7 @@
 <!-- SOCIAL MEDIA END -->
 
 <!-- IFRAMES START -->
-<% @artist.embedded_contents[1..-1].each do |embedded_content| %>
+<% @artist.embedded_contents[1..-1]&.each do |embedded_content| %>
   <div class="row my-4">
     <div class="col text-center">
       <%= embedded_content.embed_code.html_safe %>
