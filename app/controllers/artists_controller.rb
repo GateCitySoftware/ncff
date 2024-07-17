@@ -7,7 +7,8 @@ class ArtistsController < ApplicationController
   # TODO: consider creating a MatView for performance summary
   # TODO: also, use caching (with or without MatView)
   def index
-    @artists = ArtistFilter.new(params).call
+    @artists = ArtistFilter.new(params[:category], params[:option]).call
+    gon.push({ genre_map: Tag.genre_map, stage_map: Performance.stage_map, date_map: Performance.date_map })
   end
 
   # GET /artists/1 or /artists/1.json

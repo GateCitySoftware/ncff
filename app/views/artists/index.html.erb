@@ -4,9 +4,6 @@
   <h1 class="mb-4 text-center display-3">NC Folk Festival Artists</h1>
 </div>
 
-
-
-
 <div class="container mt-5">
   <div class="row">
     <div class="col-lg-4 offset-lg-4 text-center">
@@ -41,9 +38,9 @@
     const optionMenu = document.getElementById('optionMenu');
     const optionDropdownContainer = document.getElementById('optionDropdownContainer');
     const options = {
-        genre: ['Rock', 'Pop', 'Jazz', 'Hip Hop', 'Classical'],
-        stage: ['Main Stage', 'Second Stage', 'Acoustic Stage'],
-        date: ['Friday', 'Saturday', 'Sunday']
+        genre: Object.keys(gon.genre_map),
+        stage: Object.keys(gon.stage_map),
+        date: Object.keys(gon.date_map)
     };
     document.querySelectorAll('#categoryDropdown + .dropdown-menu .dropdown-item').forEach(item => {
         item.addEventListener('click', function(e) {
@@ -62,7 +59,7 @@
             const a = document.createElement('a');
             a.classList.add('dropdown-item');
             a.href = '/artists?category=' + category + '&option=' + option;
-            a.textContent = option;
+            a.textContent = option + ' (' + gon[category + '_map'][option] + ')';
             a.addEventListener('click', function(e) {
                 e.preventDefault();
                 optionDropdown.textContent = this.textContent;

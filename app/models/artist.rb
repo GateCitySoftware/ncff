@@ -25,6 +25,8 @@ class Artist < ApplicationRecord
   has_many :embedded_contents, as: :embeddable
 
   scope :by_genre, ->(genre) { joins(:tags).where(tags: { name: genre, category: 'genre' }) }
+  scope :by_stage, ->(stage) { joins(performances: :stage).where(stages: { name: stage }) }
+  scope :by_date, ->(date) { joins(:performances).where('performances.start_time::date = ?', date) }
 
   def genres
     tags.map(&:name)
