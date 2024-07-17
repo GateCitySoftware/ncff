@@ -19,4 +19,7 @@ class Stage < ApplicationRecord
   include Uploadable
 
   sluggable_attributes :name
+
+  def self.artist_map
+  end
 end

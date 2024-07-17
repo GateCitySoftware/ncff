@@ -23,4 +23,10 @@ class Artist < ApplicationRecord
   has_many :tagged_items, as: :taggable, dependent: :destroy
   has_many :tags, through: :tagged_items
   has_many :embedded_contents, as: :embeddable
+
+  scope :by_genre, ->(genre) { joins(:tags).where(tags: { name: genre, category: 'genre' }) }
+
+  def genres
+    tags.map(&:name)
+  end
 end

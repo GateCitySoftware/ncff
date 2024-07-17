@@ -17,4 +17,10 @@ class Tag < ApplicationRecord
 
   scope :genres, -> { where(category: 'genre') }
   scope :cuisines, -> { where(category: 'cuisine') }
+
+  # TODO: cache this!!!!!!!! only needs to be busted when an Admin has updated ANY genre tag
+  def self.genre_map
+    hash = genres.map { |genre| [genre.name, genre.artists.count] }.sort.to_h
+    hash.reject { |_k, v| v.zero? }.to_h
+  end
 end
