@@ -12,7 +12,7 @@
         <ul class="dropdown-menu" aria-labelledby="genreDropdown">
           <li><a class="dropdown-item" href="<%= artists_path %>"><%= "All (#{Artist.count})" %></a></li>
           <% Tag.genre_map.each do |genre, artist_count| %>
-            <li><a class="dropdown-item" href="<%= artists_path(category: 'genre', option: genre) %>"><%= "#{genre} (#{artist_count})" %></a></li>
+            <li><a class="dropdown-item" href="<%= artists_path(category: 'genre', option: genre) %>"><%= "#{genre}  (#{artist_count})" %></a></li>
           <% end %>
         </ul>
       </div>
@@ -24,8 +24,8 @@
         </button>
         <ul class="dropdown-menu" aria-labelledby="stageNameDropdown">
           <li><a class="dropdown-item" href="<%= artists_path %>">All</a></li>
-          <% Stage.all.each do |stage| %>
-            <li><a class="dropdown-item" href="<%= artists_path(category: 'stage', option: stage.name) %>"><%= stage.name %></a></li>
+          <% Performance.stage_map.each do |stage, performance_count| %>
+            <li><a class="dropdown-item" href="<%= artists_path(category: 'stage', option: stage) %>"><%= "#{stage}  (#{performance_count})" %></a></li>
           <% end %>
         </ul>
       </div>
@@ -37,8 +37,8 @@
         </button>
         <ul class="dropdown-menu" aria-labelledby="dateDropdown">
           <li><a class="dropdown-item" href="<%= artists_path %>">All</a></li>
-          <% Performance::DATES_2024.each do |date| %>
-            <li><a class="dropdown-item" href="<%= artists_path(category: 'date', option: date) %>"><%= Date.parse(date).strftime('%A, %B %e, %Y') %></a></li>
+          <% Performance.date_map.each do |date, performances_count| %>
+            <li><a class="dropdown-item" href="<%= artists_path(category: 'date', option: date.to_s) %>"><%= "#{date.strftime('%A, %B %e, %Y')}  (#{performances_count})" %></a></li>
           <% end %>
         </ul>
       </div>
@@ -55,29 +55,37 @@
 <div id="artists" class="my-4">
   <div class="row">
     <% @data.artists.each do |artist| %>
-      <div class="col-sm-12 col-lg-4">
+      <div class="col-sm-12 col-md-4">
+
+          <div class="card rounded-2 my-3 border-1 border-gray shadow">
         <%= link_to artist_path(artist.slug), class: 'text-decoration-none' do %>
-          <div class="card m-4 shadow-lg">
             <% if artist.card_image %>
               <%= image_tag(artist.card_image, class: 'card-img-top') %>
             <% else %>
               <%= image_tag('placeholder.jpg', class: 'card-img-top') %>
             <% end %>
+        <% end %>
 
             <div class="card-body">
+        <%= link_to artist_path(artist.slug), class: 'text-decoration-none' do %>
+              <% if artist.name.length > 25 %>
+                <h5 class="card-title"><%= artist.name %></h5>
+              <% else %>
+                <h4 class="card-title"><%= artist.name %></h4>
+              <% end %>
+        <% end %>
 
-              <p class="card-text fw-bold">
-                <%= artist.name %>
-              </p>
 
               <div class="d-flex flex-wrap gap-2">
                 <% artist.tags.genres.each do |genre_tag| %>
                   <a href="#" class="btn btn-outline-primary btn-sm"><%= genre_tag.name %></a>
                 <% end %>
               </div>
+
             </div>
           </div>
-        <% end %>
+
+
       </div>
     <% end %>
   </div>
