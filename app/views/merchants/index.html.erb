@@ -1,83 +1,76 @@
-  <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-    <div class="carousel-inner">
-      <% @data.each_slice(3).with_index do |stages, index| %>
-        <% stages.to_h.each do |stage_name, performances| %>
+ <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
 
-          <div class="carousel-item <%= 'active' if index.zero? %>">
-            <div class="carousel-columns-wrapper row">
-              <% stages.each do |stage_name, performances| %>
-                <div class="carousel-column col-lg-3">
-                  <div class="carousel-column-body">
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
 
-                    <!-- Stage Name Card START -->
-                    <div class="card rounded-0 bg-primary text-white text-center" style="height:100px;">
-                      <div class="card-body align-middle">
-                        <h2 class="card-title mb-0 align-middle"><%= stage_name %></h2>
-                      </div>
-                    </div>
-                    <!-- Stage Name Card END -->
-
-                    <% performances.each do |performance| %>
-
-                      <!-- Performance Card START -->
-                      <div class="card my-2 border-black">
-                        <div class="card-body">
-                          <p class="card-text">
-                            <strong><%= performance[:start_time] %></strong>
-                            <% if performance[:end_time] %>
-                              - <%= performance[:end_time] %>
-                            <% end %>
-                          </p>
-                          <% if performance[:artist_name].length > 25 %>
-                            <h4 class="card-title"><%= performance[:artist_name] %></h4>
-                          <% else %>
-                            <h3 class="card-title"><%= performance[:artist_name] %></h3>
-                          <% end %>
-                          <div class="d-flex flex-wrap gap-2">
-                            <% performance[:artist_genres].each do |genre| %>
-                              <a href="#" class="btn btn-outline-primary btn-sm"><%= genre %></a>
-                            <% end %>
-                          </div>
-
-                          <button type="button" class="mt-4 btn btn-sm btn-success w-100">
-                            <span class="d-flex justify-content-center align-items-center">
-                              <span class="me-2">FAVORITE</span>
-                              <i class="bi bi-heart"></i>
-                            </span>
-                          </button>
-
-                        </div>
-                      </div>
-                      <!-- Performance Card END -->
-                    <% end %>
+  <div class="carousel-inner">
+    <% @data.each_slice(3).with_index do |stage_group, index| %>
+      <div class="carousel-item mt-4 <%= 'active' if index.zero? %>">
+        <div class="carousel-columns-wrapper row">
+          <% stage_group.each do |stage_name, performances| %>
+            <div class="carousel-column col-lg-4">
+              <div class="carousel-column-body">
+                <!-- Stage Name Card START -->
+                <div class="card rounded-0 bg-primary text-white text-center" style="height:100px;">
+                  <div class="card-body d-flex align-items-center justify-content-center">
+                    <h2 class="card-title mb-0"><%= stage_name %></h2>
                   </div>
                 </div>
-              <% end %>
+                <!-- Stage Name Card END -->
+                <% performances.each do |performance| %>
+                  <!-- Performance Card START -->
+                  <div class="card my-2 border-black">
+                    <div class="card-body">
+                      <p class="card-text">
+                        <strong><%= performance[:start_time] %></strong>
+                        <% if performance[:end_time] %>
+                          - <%= performance[:end_time] %>
+                        <% end %>
+                      </p>
+                      <% if performance[:artist_name].length > 25 %>
+                        <h4 class="card-title"><%= performance[:artist_name] %></h4>
+                      <% else %>
+                        <h3 class="card-title"><%= performance[:artist_name] %></h3>
+                      <% end %>
+                      <div class="d-flex flex-wrap gap-2">
+                        <% performance[:artist_genres].each do |genre| %>
+                          <a href="#" class="btn btn-outline-primary btn-sm"><%= genre %></a>
+                        <% end %>
+                      </div>
+                      <button type="button" class="mt-4 btn btn-sm btn-success w-100">
+                        <span class="d-flex justify-content-center align-items-center">
+                          <span class="me-2">FAVORITE</span>
+                          <i class="bi bi-heart"></i>
+                        </span>
+                      </button>
+                    </div>
+                  </div>
+                  <!-- Performance Card END -->
+                <% end %>
+              </div>
             </div>
-          </div>
-
-        <% end %>
-      <% end %>
-
-    </div>
-    <%= button_tag type: "button", class: "carousel-control-prev", data: { bs_target: "#carouselExampleControls", bs_slide: "prev" } do %> < <% end %>
-    <%= button_tag type: "button", class: "carousel-control-next", data: { bs_target: "#carouselExampleControls", bs_slide: "next" } do %> > <% end %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
   </div>
-  <!-- https://www.youtube.com/watch?v=kHPm_AlxP7U -->
-
-
+</div> 
+<!-- https://www.youtube.com/watch?v=kHPm_AlxP7U -->
 
 <style>
-
 .carousel-columns-wrapper {
   display: flex;
-  justify-content: space-between;
 }
 
 .carousel-column {
-  flex: 0 0 32%; /* Adjust this value to control column width */
-  max-width: 32%; /* Adjust this value to match the flex-basis */
-  margin-bottom: 1em;
+  flex: 0 0 33.333%; /* Change to create three equal columns */
+  max-width: 33.333%; /* Match the flex-basis */
 }
 
 .carousel-column-body {
@@ -95,7 +88,6 @@
   width: 5vh;
   height: 5vh;
   border-radius: 50%;
-  top: 50%;
   transform: translateY(-50%);
 }
 
