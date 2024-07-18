@@ -1,76 +1,63 @@
-
-
-
-
-
-
-
-
-
-
   <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner">
-<% @data.each_slice(3).with_index do |stages, index| %>
+      <% @data.each_slice(3).with_index do |stages, index| %>
+        <% stages.to_h.each do |stage_name, performances| %>
 
-      <% stages.to_h.each do |stage_name, performances| %>
-        <div class="carousel-item <%= 'active' if index.zero? %>"> <!-- only first carousel item can have active class, use index! -->
-          <div class="carousel-columns-wrapper">
+          <div class="carousel-item <%= 'active' if index.zero? %>">
+            <div class="carousel-columns-wrapper row">
+              <% stages.each do |stage_name, performances| %>
+                <div class="carousel-column col-lg-3">
+                  <div class="carousel-column-body">
 
-            <div class="carousel-column">
-              <div class="carousel-column-body">
+                    <!-- Stage Name Card START -->
+                    <div class="card rounded-0 bg-primary text-white text-center" style="height:100px;">
+                      <div class="card-body align-middle">
+                        <h2 class="card-title mb-0 align-middle"><%= stage_name %></h2>
+                      </div>
+                    </div>
+                    <!-- Stage Name Card END -->
 
-                <!-- Stage Name Card START -->
-                <div class="card rounded-0 bg-primary text-white text-center" style="height:100px;">
-                  <div class="card-body align-middle">
-                    <h2 class="card-title mb-0 align-middle"><%= stage_name %></h2>
+                    <% performances.each do |performance| %>
+
+                      <!-- Performance Card START -->
+                      <div class="card my-2 border-black">
+                        <div class="card-body">
+                          <p class="card-text">
+                            <strong><%= performance[:start_time] %></strong>
+                            <% if performance[:end_time] %>
+                              - <%= performance[:end_time] %>
+                            <% end %>
+                          </p>
+                          <% if performance[:artist_name].length > 25 %>
+                            <h4 class="card-title"><%= performance[:artist_name] %></h4>
+                          <% else %>
+                            <h3 class="card-title"><%= performance[:artist_name] %></h3>
+                          <% end %>
+                          <div class="d-flex flex-wrap gap-2">
+                            <% performance[:artist_genres].each do |genre| %>
+                              <a href="#" class="btn btn-outline-primary btn-sm"><%= genre %></a>
+                            <% end %>
+                          </div>
+
+                          <button type="button" class="mt-4 btn btn-sm btn-success w-100">
+                            <span class="d-flex justify-content-center align-items-center">
+                              <span class="me-2">FAVORITE</span>
+                              <i class="bi bi-heart"></i>
+                            </span>
+                          </button>
+
+                        </div>
+                      </div>
+                      <!-- Performance Card END -->
+                    <% end %>
                   </div>
                 </div>
-                <!-- Stage Name Card END -->
-
-                <% performances.each do |performance| %>
-
-                  <!-- Performance Card START -->
-                  <div class="card my-2 border-black">
-                    <div class="card-body">
-                      <p class="card-text">
-                        <strong><%= performance[:start_time] %></strong>
-                        <% if performance[:end_time] %>
-                          - <%= performance[:end_time] %>
-                        <% end %>
-                      </p>
-                      <% if performance[:artist_name].length > 25 %>
-                        <h4 class="card-title"><%= performance[:artist_name] %></h4>
-                      <% else %>
-                        <h3 class="card-title"><%= performance[:artist_name] %></h3>
-                      <% end %>
-                      <div class="d-flex flex-wrap gap-2">
-                        <% performance[:artist_genres].each do |genre| %>
-                          <a href="#" class="btn btn-outline-primary btn-sm"><%= genre %></a>
-                        <% end %>
-                      </div>
-
-                      <button type="button" class="mt-4 btn btn-sm btn-success w-100">
-                        <span class="d-flex justify-content-center align-items-center">
-                          <span class="me-2">FAVORITE</span>
-                          <i class="bi bi-heart"></i>
-                        </span>
-                      </button>
-
-                    </div>
-                  </div>
-                  <!-- Performance Card END -->
-
-                <% end %>
-
-
-
-              </div>
+              <% end %>
             </div>
-
           </div>
-        </div>
+
+        <% end %>
       <% end %>
-<% end %>
 
     </div>
     <%= button_tag type: "button", class: "carousel-control-prev", data: { bs_target: "#carouselExampleControls", bs_slide: "prev" } do %> < <% end %>
@@ -80,26 +67,28 @@
 
 
 
-
-
-
 <style>
+
 .carousel-columns-wrapper {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
 }
-.carousel-column img {
-  max-width: 100%;
-  max-height: 100%;
-}
+
 .carousel-column {
-  margin: 0 0.5em;
-  border: none;
-  border-radius: 0;
+  flex: 0 0 32%; /* Adjust this value to control column width */
+  max-width: 32%; /* Adjust this value to match the flex-basis */
+  margin-bottom: 1em;
 }
+
+.carousel-column-body {
+  height: 100%;
+  overflow-y: auto;
+}
+
 .carousel-inner {
   padding: 1em;
 }
+
 .carousel-control-prev,
 .carousel-control-next {
   background-color: #1a1a1a;
@@ -109,9 +98,11 @@
   top: 50%;
   transform: translateY(-50%);
 }
-@media (min-width: 768px) {
-  .carousel-column img {
-    height: 11em;
+
+@media (max-width: 767px) {
+  .carousel-column {
+    flex: 0 0 100%;
+    max-width: 100%;
   }
 }
 </style>
