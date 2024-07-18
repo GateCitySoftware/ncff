@@ -4,6 +4,7 @@ class MerchantsController < ApplicationController
   # GET /merchants or /merchants.json
   def index
     @merchants = Merchant.all
+    @data = StageSchedules.generate["2024-09-06"]
   end
 
   # GET /merchants/1 or /merchants/1.json
