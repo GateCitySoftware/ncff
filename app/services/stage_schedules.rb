@@ -51,9 +51,18 @@ class StageSchedules
   def format_performance(performance)
     {
       start_time: performance.start_time,
-      end_time: performance.end_time,
+      display_time: display_time(performance),
       artist_name: performance.artist.name,
-      artist_genres: performance.artist.genres
+      artist_genres: performance.artist.genres,
+      artist_image: performance.artist.card_image
     }
+  end
+
+  def display_time(performance)
+    if performance.end_time
+      "#{performance.start_time.strftime('%-l:%M %p')} - #{performance.end_time.strftime('%-l:%M %p')}"
+    else
+      performance.start_time.strftime('%-l:%M %p')
+    end
   end
 end

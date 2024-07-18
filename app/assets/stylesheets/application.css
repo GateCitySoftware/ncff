@@ -42,3 +42,8 @@
 .tag-checkbox input[type="checkbox"] {
     margin-right: 5px;
 }
+
+
+.body {
+    background-color:hsl(from color h s l)
+}

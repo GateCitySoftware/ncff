@@ -9,50 +9,53 @@
     <span class="visually-hidden">Next</span>
   </button>
 
+  <% stage_index = 0 %>
   <div class="carousel-inner">
     <% @data.each_slice(3).with_index do |stage_group, index| %>
       <div class="carousel-item mt-4 <%= 'active' if index.zero? %>">
         <div class="carousel-columns-wrapper row">
           <% stage_group.each do |stage_name, performances| %>
+            <% stage_bg_color_class = ncff_css_color_names[stage_index] %>
+            <% stage_index += 1 %>
             <div class="carousel-column col-lg-4">
               <div class="carousel-column-body">
+
                 <!-- Stage Name Card START -->
-                <div class="card rounded-0 bg-primary text-white text-center" style="height:100px;">
+                <div class="card m-3 text-white text-center border-gray <%= stage_bg_color_class %>" style="height:100px;">
                   <div class="card-body d-flex align-items-center justify-content-center">
                     <h2 class="card-title mb-0"><%= stage_name %></h2>
                   </div>
                 </div>
                 <!-- Stage Name Card END -->
+
                 <% performances.each do |performance| %>
                   <!-- Performance Card START -->
-                  <div class="card my-2 border-black">
+                  <div class="card rounded-2 m-3 border-1 border-gray shadow">
+                    <div class="<%= stage_bg_color_class %>">
+                      <%= image_tag(performance[:artist_image] || 'placeholder.jpg', class: 'border-gray', style: "display: block; height: 120px; margin: auto") %>
+                    </div>
                     <div class="card-body">
-                      <p class="card-text">
-                        <strong><%= performance[:start_time] %></strong>
-                        <% if performance[:end_time] %>
-                          - <%= performance[:end_time] %>
-                        <% end %>
-                      </p>
+                      <h3><%= performance[:display_time] %></h3>
                       <% if performance[:artist_name].length > 25 %>
-                        <h4 class="card-title"><%= performance[:artist_name] %></h4>
+                        <h5 class="card-title"><%= performance[:artist_name] %></h5>
                       <% else %>
-                        <h3 class="card-title"><%= performance[:artist_name] %></h3>
+                        <h4 class="card-title"><%= performance[:artist_name] %></h4>
                       <% end %>
                       <div class="d-flex flex-wrap gap-2">
                         <% performance[:artist_genres].each do |genre| %>
                           <a href="#" class="btn btn-outline-primary btn-sm"><%= genre %></a>
                         <% end %>
                       </div>
-                      <button type="button" class="mt-4 btn btn-sm btn-success w-100">
+                      <button type="button" class="mt-4 btn btn-sm btn-primary w-100 rounded-2">
                         <span class="d-flex justify-content-center align-items-center">
-                          <span class="me-2">FAVORITE</span>
-                          <i class="bi bi-heart"></i>
+                          <span class="me-2">Have To See</span>
                         </span>
                       </button>
                     </div>
                   </div>
                   <!-- Performance Card END -->
                 <% end %>
+
               </div>
             </div>
           <% end %>
@@ -97,4 +100,5 @@
     max-width: 100%;
   }
 }
+
 </style>
