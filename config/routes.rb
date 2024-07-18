@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  resources :stage_schedules
   resources :embedded_contents
   resources :external_links
   get '/login', to: 'sessions#new'
