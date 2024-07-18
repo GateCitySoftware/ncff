@@ -8,7 +8,5 @@ class StageSchedule < ApplicationRecord
 
     stage_date_performances.each do |name, performances|
     end
-
-    binding.pry
   end
 end

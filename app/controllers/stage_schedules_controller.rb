@@ -1,9 +1,9 @@
 class StageSchedulesController < ApplicationController
-  before_action :set_stage_schedule, only: %i[ show edit update destroy ]
+  before_action :set_stage_schedule, only: %i[show edit update destroy]
 
   # GET /stage_schedules or /stage_schedules.json
   def index
-    @stage_schedules = StageSchedule.all
+    @data = StageSchedules.generate
   end
 
   # GET /stage_schedules/1 or /stage_schedules/1.json
@@ -25,7 +25,9 @@ class StageSchedulesController < ApplicationController
 
     respond_to do |format|
       if @stage_schedule.save
-        format.html { redirect_to stage_schedule_url(@stage_schedule), notice: "Stage schedule was successfully created." }
+        format.html do
+          redirect_to stage_schedule_url(@stage_schedule), notice: 'Stage schedule was successfully created.'
+        end
         format.json { render :show, status: :created, location: @stage_schedule }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +40,9 @@ class StageSchedulesController < ApplicationController
   def update
     respond_to do |format|
       if @stage_schedule.update(stage_schedule_params)
-        format.html { redirect_to stage_schedule_url(@stage_schedule), notice: "Stage schedule was successfully updated." }
+        format.html do
+          redirect_to stage_schedule_url(@stage_schedule), notice: 'Stage schedule was successfully updated.'
+        end
         format.json { render :show, status: :ok, location: @stage_schedule }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -52,19 +56,20 @@ class StageSchedulesController < ApplicationController
     @stage_schedule.destroy!
 
     respond_to do |format|
-      format.html { redirect_to stage_schedules_url, notice: "Stage schedule was successfully destroyed." }
+      format.html { redirect_to stage_schedules_url, notice: 'Stage schedule was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_stage_schedule
-      @stage_schedule = StageSchedule.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def stage_schedule_params
-      params.require(:stage_schedule).permit(:id, :name, :date, :stage_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_stage_schedule
+    @stage_schedule = StageSchedule.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def stage_schedule_params
+    params.require(:stage_schedule).permit(:id, :name, :date, :stage_id)
+  end
 end

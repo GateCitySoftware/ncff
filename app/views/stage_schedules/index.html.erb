@@ -1,14 +1,82 @@
-<p style="color: green"><%= notice %></p>
-
-<h1>Stage schedules</h1>
-
 <div id="stage_schedules">
-  <% @stage_schedules.each do |stage_schedule| %>
-    <%= render stage_schedule %>
-    <p>
-      <%= link_to "Show this stage schedule", stage_schedule %>
-    </p>
+  <% @data.each do |date, stages| %>
+    <h1 class="text-center my-4"><%= date %></h1>
+    <div class="container-fluid">
+      <div class="row flex-nowrap overflow-auto">
+        <% stages.each do |stage_name, performances| %>
+          <div class="col-lg-4 col-md-6 stage-column">
+            <!-- Stage Name Card -->
+            <div class="card rounded-0 bg-primary text-white text-center align-middle" style="height:100px;">
+              <div class="card-body align-middle">
+                <h2 class="card-title mb-0 align-middle"><%= stage_name %></h2>
+              </div>
+            </div>
+            <% performances.each do |performance| %>
+              <!-- Performance Card -->
+              <div class="card my-2 border-black">
+                <div class="card-body">
+                  <p class="card-text">
+                    <strong><%= performance[:start_time] %></strong>
+                    <% if performance[:end_time] %>
+                      - <%= performance[:end_time] %>
+                    <% end %>
+                  </p>
+                  <% if performance[:artist_name].length > 25 %>
+                    <h4 class="card-title"><%= performance[:artist_name] %></h4>
+                  <% else %>
+                    <h3 class="card-title"><%= performance[:artist_name] %></h3>
+                  <% end %>
+                  <div class="d-flex flex-wrap gap-2">
+                    <% performance[:artist_genres].each do |genre| %>
+                      <a href="#" class="btn btn-outline-primary btn-sm"><%= genre %></a>
+                    <% end %>
+                  </div>
+                  <button type="button" class="mt-4 btn btn-sm btn-success w-100">
+                    <span class="d-flex justify-content-center align-items-center">
+                      <span class="me-2">FAVORITE</span>
+                      <i class="bi bi-heart"></i>
+                    </span>
+                  </button>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
   <% end %>
 </div>
 
-<%= link_to "New stage schedule", new_stage_schedule_path %>
+<style>
+  .row.flex-nowrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .stage-column {
+    min-width: 300px;
+    max-width: 400px;
+    flex: 0 0 auto;
+  }
+
+  .stage-column .card {
+    width: 100%;
+    white-space: normal;
+    word-wrap: break-word;
+  }
+
+  .stage-column .card-body {
+    overflow-wrap: break-word;
+  }
+
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .row.flex-nowrap::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .row.flex-nowrap {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+</style>
