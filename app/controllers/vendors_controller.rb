@@ -1,9 +1,10 @@
 class VendorsController < ApplicationController
   before_action :set_vendor, only: %i[ show edit update destroy ]
 
-  # GET /vendors or /vendors.json
+  # TODO: consider creating a MatView for performance summary
+  # TODO: also, use caching (with or without MatView)
   def index
-    @vendors = Vendor.all
+    @data = ::VendorIndex.all(params[:category], params[:option])
   end
 
   # GET /vendors/1 or /vendors/1.json

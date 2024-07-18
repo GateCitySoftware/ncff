@@ -21,6 +21,7 @@ class ExternalLink < ApplicationRecord
     'website' => { bi_icon: 'bi-globe', display_text: 'Website' },
     'youtube' => { bi_icon: 'bi-youtube', display_text: 'YouTube' }
   }.freeze
+  SOCIAL_MEDIA = %w(facebook instagram linkedin pinterest tiktok twitter youtube) 
 
   belongs_to :linkable, polymorphic: true
 
@@ -28,6 +29,8 @@ class ExternalLink < ApplicationRecord
   validates :linkable_type, presence: true
   validates :linkable_id, presence: true
   validates :link_type, presence: true, inclusion: { in: LINK_TYPES.keys }
+
+  scope :social_media_links, -> { where(link_type: SOCIAL_MEDIA) }
 
   def bootstrap_icon_value
     LINK_TYPES[link_type][:bi_icon]

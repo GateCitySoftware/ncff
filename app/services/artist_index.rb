@@ -1,5 +1,9 @@
 class ArtistIndex
-  DATA = Struct.new(:artists, :filter_name)
+  DATA = Struct.new(:artists, :filter_category, :filter_name, :stage_slug)
+
+  def self.all(category, option)
+    new(category, option).call
+  end
 
   def initialize(category, option)
     @category = category
@@ -7,7 +11,7 @@ class ArtistIndex
   end
 
   def call
-    DATA.new(artists.order(:name), filter_name)
+    DATA.new(artists.order(:name), @category, filter_name, stage_slug)
   end
 
   private
@@ -31,5 +35,10 @@ class ArtistIndex
     else
       @option || 'All'
     end
+  end
+
+  def stage_slug
+    return unless @category == 'stage'
+    Stage.find_by_name(@option).slug
   end
 end

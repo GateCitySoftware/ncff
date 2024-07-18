@@ -2,7 +2,7 @@
   <h1 class="mb-4">Vendors</h1>
   
   <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-    <% @vendors.each do |vendor| %>
+    <% @data.vendors.each do |vendor| %>
       <div class="col">
         <div class="card h-100">
           <img src="<%= vendor.image %>" class="card-img-top img-fluid mx-auto d-block" alt="<%= vendor.name %>" style="max-width: 200px; height: auto;">

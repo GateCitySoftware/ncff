@@ -14,13 +14,26 @@
  *= require_self
  */
 
-
+/*
 .ncff-darkblue { background-color: #1E3A5C !important; }
 .ncff-red { background-color: #E94E36 !important; }
 .ncff-orange { background-color: #F47D4A !important; }
 .ncff-yellow { background-color: #FDB827 !important; }
 .ncff-teal { background-color: #39A7B1 !important; }
 .ncff-gray { background-color: #55595C !important; }
+*/
+
+.ncff-teal {
+  background-color: #00828e
+}
+
+.ncff-blue { 
+  background-color: #012745
+}
+
+.ncff-orange {
+  background-color: #c64924;
+}
 
 .tag-selection {
     display: flex;

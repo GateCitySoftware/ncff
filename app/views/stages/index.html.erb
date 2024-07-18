@@ -7,11 +7,13 @@
     <% @stages.each do |stage| %>
       <div class="col">
         <%= link_to stage, class: "text-decoration-none" do %>
-          <div class="card h-100">
+          <div class="card h-100 <%= stage_css_color_classes[stage.name] %> <%= 'text-white' unless stage.name.include?('Van') %>">
             <div class="card-body">
-              <h5 class="card-title"><%= stage.name %></h5>
+              <h3 class="card-title"><%= stage.name %></h3>
               <p class="card-text">
                 <i class="bi bi-geo-alt-fill text-primary me-2"></i>
+              </p>
+              <p>
                 <%= stage.google_place_address %>
               </p>
             </div>

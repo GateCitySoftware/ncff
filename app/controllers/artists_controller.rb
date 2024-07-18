@@ -3,11 +3,10 @@
 class ArtistsController < ApplicationController
   before_action :set_artist, only: %i[show edit update destroy]
 
-  # GET /artists or /artists.json
   # TODO: consider creating a MatView for performance summary
   # TODO: also, use caching (with or without MatView)
   def index
-    @data = ArtistIndex.new(params[:category], params[:option]).call
+    @data = ArtistIndex.all(params[:category], params[:option])
   end
 
   # GET /artists/1 or /artists/1.json

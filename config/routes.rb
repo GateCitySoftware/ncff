@@ -16,7 +16,6 @@ Rails.application.routes.draw do
   resources :tagged_items
   resources :tags
   resources :activations
-  resources :merchants
   resources :vendors
   resources :uploads do
     member do

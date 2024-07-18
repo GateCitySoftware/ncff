@@ -5,7 +5,7 @@ class StagesController < ApplicationController
 
   # GET /stages or /stages.json
   def index
-    @stages = Stage.all
+    @stages = Stage.ordered
   end
 
   # GET /stages/1 or /stages/1.json
@@ -61,7 +61,7 @@ class StagesController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_stage
-    @stage = Stage.find(params[:id])
+    @stage = Stage.find_by_id(params[:id]) || Stage.find_by_slug(params[:id])
   end
 
   # Only allow a list of trusted parameters through.

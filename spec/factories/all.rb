@@ -14,16 +14,6 @@ FactoryBot.define do
     slug { Faker::Internet.slug }
   end
 
-  factory :merchant do
-    name { Faker::Company.name }
-    description { Faker::Lorem.paragraph }
-    image { Faker::Internet.url }
-    website { Faker::Internet.url }
-    social_media_links { { facebook: Faker::Internet.url, twitter: Faker::Internet.url } }
-    product_type { Faker::Commerce.product_name }
-    slug { Faker::Internet.slug }
-  end
-
   factory :performance do
     association :stage
     association :artist

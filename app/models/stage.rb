@@ -18,8 +18,18 @@ class Stage < ApplicationRecord
   include Sluggable
   include Uploadable
 
+  STAGE_ORDER = [
+    'CityStage NC @ The Depot',
+    'Summit Stage',
+    'LeBauer Park',
+    'Elm St. Stage',
+    'Center City Jams',
+    'Dance at Van Dyke'
+  ]
+
   sluggable_attributes :name
 
-  def self.artist_map
+  def self.ordered
+    all.sort_by { |record| STAGE_ORDER.index(record.name) }
   end
 end

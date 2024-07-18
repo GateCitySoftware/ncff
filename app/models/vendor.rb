@@ -20,6 +20,15 @@ class Vendor < ApplicationRecord
   include Sluggable
   include Uploadable
   include Linkable
+  # 1. DELETE CUISINE TYPE
+
+  CATEGORIES  = ['Eat & Drink'
 
   sluggable_attributes :name
+
+  scope :by_tag, ->(genre) { joins(:tags).where(tags: { name: genre, category: 'vendor' }) }
+
+  def social_media_links
+    external_links.social_media_links
+  end
 end

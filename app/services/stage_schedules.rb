@@ -1,12 +1,4 @@
 class StageSchedules
-  STAGE_ORDER = [
-    'CityStage NC @ The Depot',
-    'Summit Stage',
-    'LeBauer Park',
-    'Elm St. Stage',
-    'Center City Jams',
-    'Dance at Van Dyke'
-  ]
 
   def self.generate
     new.generate
@@ -30,17 +22,7 @@ class StageSchedules
   end
 
   def order_stages(stages_hash)
-    ordered_stages = {}
-    STAGE_ORDER.each do |stage_name|
-      ordered_stages[stage_name] = stages_hash[stage_name] if stages_hash.key?(stage_name)
-    end
-
-    # Add any stages that are in the data but not in STAGE_ORDER at the end
-    (stages_hash.keys - STAGE_ORDER).each do |stage_name|
-      ordered_stages[stage_name] = stages_hash[stage_name]
-    end
-
-    ordered_stages
+    stages_hash.sort_by { |stage, data| Stage::STAGE_ORDER.index(stage) }
   end
 
   def format_performances(performances)
