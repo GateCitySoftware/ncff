@@ -19,8 +19,8 @@
         </button>
         <ul class="dropdown-menu" aria-labelledby="genreDropdown">
           <li><a class="dropdown-item" href="<%= artists_path %>"><%= "All (#{Artist.count})" %></a></li>
-          <% Tag.cuisines.with_count.each do |tag| %>
-            <li><a class="dropdown-item" href="<%= artists_path(category: 'cuisine', option: tag) %>"><%= "#{tag} (#{count})" %></a></li>
+          <% Tag.cuisines.each do |tag| %>
+            <li><a class="dropdown-item" href="<%= artists_path(category: 'cuisine', option: tag) %>"><%= "#{tag} (1234)" %></a></li>
           <% end %>
         </ul>
       </div>

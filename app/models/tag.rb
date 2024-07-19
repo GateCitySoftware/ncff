@@ -17,28 +17,28 @@ class Tag < ApplicationRecord
 
   scope :genres, -> { where(category: 'genre') }
   scope :cuisines, -> { where(category: 'cuisine') }
-   
+
   attr_accessor :tagged_items_count
 
   def self.with_count(reload: false)
-    tap do
-      if cache_hit = Rails.cache.fetch('tags_with_count')
-      if not_cached? || reload
-        all.each { |tag| tag.map { tagged_items.count } }
-      else
-        # retrieve cached count if it exists
-        Rails.cache.fetch('tags_with_count', expires_in: 30.minutes) do
-        end
-      end
-    end
+    #  tap do
+    #    if cache_hit = Rails.cache.fetch('tags_with_count')
+    #    if not_cached? || reload
+    #      all.each { |tag| tag.map { tagged_items.count } }
+    #    else
+    #      # retrieve cached count if it exists
+    #      Rails.cache.fetch('tags_with_count', expires_in: 30.minutes) do
+    #      end
+    #    end
+    #  end
   end
 
-  def genre_map
+  def self.genre_map
     hash = genres.map { |genre| [genre.name, genre.artists.count] }.sort.to_h
     hash.reject { |_k, v| v.zero? }.to_h
   end
 
-  def cuisine_map
+  def self.cuisine_map
     cuisines.map { |cuisine| [cuisine.name, cuisine.artists.count] }.sort.to_h
   end
 end
