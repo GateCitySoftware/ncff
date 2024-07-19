@@ -32,14 +32,14 @@
 
 
 <% @data.vendors.each_with_index do |vendor, index| %>
-  <div class="row mx-4 text-white <%= repeat_colors_by_index(index) %>">
+  <div class="row mx-4 text-white p-4 m-4 <%= repeat_colors_by_index(index) %>">
     <!-- Row with two 25% and 75% columns -->
     <div class="row">
         <div class="col-lg-3">
               <%= image_tag('stock_logo.png', class: 'dblock w-100') %>
         </div>
         <div class="col-lg-9">
-              <h2><%= vendor.name %></h2>
+              <h2 class="text-white"><%= vendor.name %></h2>
               <p><%= vendor.description %>
         </div>
     </div>
@@ -47,21 +47,20 @@
     <!-- Row with three 50%, 25% and 25% columns -->
     <div class="row">
         <div class="col-lg-6">
-                <h3>Products/Services</h3>
+                <h3 class="text-white">Cuisine</h3>
                 <ul>
-                    <li>Product 1</li>
-                    <li>Product 2</li>
-                    <li>Service 1</li>
-                    <li>Service 2</li>
+                  <% vendor.tags.cuisines.each do |cuisine_tag| %>
+                    <li><%= cuisine_tag %></li>
+                  <% end %>
                 </ul>
         </div>
         <div class="col-lg-3">
-                <h3>Contact Info</h3>
+                <h3 class="text-white">Contact Info</h3>
                 <p>Phone: <%= vendor.phone %></p>
                 <p>Email: <%= vendor.email %>
         </div>
         <div class="col-lg-3">
-                <h3>Location</h3>
+                <h3 class="text-white">Location</h3>
                 <%= vendor.address %>
         </div>
     </div>

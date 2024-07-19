@@ -1,6 +1,6 @@
 class CreateVendors < ActiveRecord::Migration[7.1]
   def change
-    create_table :vendors do |t|
+    create_table :vendors, id: :uuid do |t|
       t.string :name
       t.text :description
       t.string :image

@@ -20,7 +20,7 @@ class VendorGenerator
     {
       name: generate_name,
       description: generate_description,
-      category: CATEGORIES[@category]
+      category: @category
     }
   end
 

@@ -127,7 +127,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_19_190011) do
     t.index ["uploadable_type", "uploadable_id"], name: "index_uploads_on_uploadable"
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "email"
     t.string "login_token"
     t.datetime "login_token_valid_until"
@@ -135,7 +135,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_19_190011) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "vendors", force: :cascade do |t|
+  create_table "vendors", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.text "description"
     t.string "image"

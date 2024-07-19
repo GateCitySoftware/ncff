@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-task seed_dev_db: :environment do
+task create_vendors: :environment do
   require 'vendor_generator'
 
   Vendor::CATEGORIES.keys.each do |category|
@@ -9,11 +9,18 @@ task seed_dev_db: :environment do
       Vendor.create!(params)
     end
   end
+  Vendor.all.each do |vendor|
+    vendor.update(
+      phone: Faker::PhoneNumber.phone_number,
+      email: Faker::Internet.email,
+      address: Faker::Address.full_address
+    )
+  end
 
   puts "Vendors created! Total vendor count: #{Vendor.count}"
 end
 
-task seed_tags: :environment do
+task create_genre_and_cuisine_tags: :environment do
   genres = [
     'Rock', 'Pop', 'Hip Hop', 'R&B', 'Country',
     'Jazz', 'Blues', 'Classical', 'Electronic', 'Dance',
@@ -48,7 +55,7 @@ task seed_tags: :environment do
   end
 end
 
-task fake_youtube_videos: :environment do
+task attach_youtube_videos_to_artists: :environment do
   embed_codes = [
     '<iframe width="560" height="315" src="https://www.youtube.com/embed/rPVQlQQgPLg?si=fvuXt6dpahRUUpWc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>',
     '<iframe width="560" height="315" src="https://www.youtube.com/embed/rPVQlQQgPLg?si=fvuXt6dpahRUUpWc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>',
@@ -71,12 +78,31 @@ task fake_youtube_videos: :environment do
   end
 end
 
-task add_info_to_vendors: :environment do
-  Vendor.all.each do |vendor|
-    vendor.update(
-      phone: Faker::PhoneNumber.phone_number,
-      email: Faker::Internet.email,
-      address: Faker::Address.full_address
-    )
+task add_cuisine_tags_to_eat_drink_vendors: :environment do
+  Vendor.by_category('eat_drink').each do |vendor|
+    tag_count = rand(1..3)
+    Tag.cuisines.sample(tag_count).each do |tag|
+      TaggedItem.find_or_create_by!(tag_id: tag.id, taggable_type: 'Vendor', taggable_id: vendor.id)
+    rescue StandardError => e
+      puts e
+      binding.pry
+      next
+    end
+  end
+end
+
+task seed_everything: :environment do
+  tasks = %w[
+    create_vendors
+    create_genre_and_cuisine_tags
+    add_cuisine_tags_to_eat_drink_vendors
+    seed_real_data
+    tag_artists_with_genres
+    attach_youtube_videos_to_artists
+  ]
+  tasks.each do |task|
+    puts "Starting task: #{task}"
+    Rake::Task[task].invoke
+    puts "Finished task: #{task}"
   end
 end

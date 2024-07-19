@@ -29,9 +29,13 @@ class Vendor < ApplicationRecord
     activation: 'Activation'
   }.freeze
 
+  scope :by_category, ->(category) { where(category:) }
+
   sluggable_attributes :name
 
-  scope :by_vendor_tag, ->(tag) { joins(tagged_items: :tags).where(tags: { name: tag, category: 'vendor' }) }
+  def cuisine_map
+    Tag.where(category: 'food-drink', sub_category: 'cuisine')
+  end
 
   def social_media_links
     external_links.social_media_links
