@@ -24,11 +24,13 @@ class Artist < ApplicationRecord
   has_many :tags, through: :tagged_items
   has_many :embedded_contents, as: :embeddable
 
-  scope :by_genre, ->(genre) { joins(:tags).where(tags: { name: genre, category: 'genre' }) }
+  scope :by_genre, lambda { |genre|
+                     joins(:tags).where(tags: { category: 'music', sub_category: 'genre', name: genre })
+                   }
   scope :by_stage, ->(stage) { joins(performances: :stage).where(stages: { name: stage }).distinct }
   scope :by_date, ->(date) { joins(:performances).where('performances.start_time::date = ?', date).distinct }
 
   def genres
-    tags.map(&:name)
+    tags.genres.pluck(:name)
   end
 end

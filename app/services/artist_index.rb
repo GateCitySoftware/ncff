@@ -39,6 +39,7 @@ class ArtistIndex
 
   def stage_slug
     return unless @category == 'stage'
+
     Stage.find_by_name(@option).slug
   end
 end
