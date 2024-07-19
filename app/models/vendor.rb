@@ -23,7 +23,7 @@ class Vendor < ApplicationRecord
   has_many :tagged_items, as: :taggable
   has_many :tags, through: :tagged_items
 
-  CATEGORIES = ['Eat & Drink', 'Shop & Do']
+  # CATEGORIES = ['Eat & Drink', 'Shop & Do']
 
   sluggable_attributes :name
 

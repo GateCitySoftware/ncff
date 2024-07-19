@@ -5,6 +5,9 @@ class VendorIndex
     new(category, option).call
   end
 
+  #  class="nav-link" href="/vendors?category=food-drink">Eat & Drink</a>
+  # <a class="nav-link" href="/vendors?category=shop-do">Shop & Do</a>
+
   def initialize(category, option)
     @category = category
     @option = option
