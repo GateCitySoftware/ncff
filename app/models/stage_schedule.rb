@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: stage_schedules
+#
+#  id         :uuid             not null, primary key
+#  name       :string
+#  date       :date
+#  stage_id   :uuid             not null
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
 class StageSchedule < ApplicationRecord
   belongs_to :stage
 

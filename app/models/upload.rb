@@ -11,7 +11,7 @@
 #  updated_at      :datetime         not null
 #  image_type      :string           default("gallery"), not null
 #  uploadable_type :string
-#  uploadable_id   :bigint
+#  uploadable_id   :uuid
 #
 class Upload < ApplicationRecord
   belongs_to :uploadable, polymorphic: true

@@ -14,8 +14,7 @@ task seed_dev_db: :environment do
         instagram: "@#{Faker::Internet.username}",
         facebook: Faker::Internet.username
       },
-      category: %w[food_truck bar downtown_business late_night].sample,
-      cuisine_type: Faker::Restaurant.type
+      category: %w[food_truck bar downtown_business late_night].sample
     )
   end
 
@@ -82,6 +81,6 @@ task seed_tags: :environment do
   ]
   cuisine_types.each do |cuisine_type|
     puts "creating cuisine_type: #{cuisine_type}"
-    Tag.find_or_create_by!(name: cuisine_type, category: 'cuisine')
+    Tag.find_or_create_by!(name: cuisine_type, category: 'vendor')
   end
 end

@@ -4,29 +4,30 @@
 #
 # Table name: vendors
 #
-#  id           :bigint           not null, primary key
-#  name         :string
-#  description  :text
-#  image        :string
-#  website      :string
-#  category     :string
-#  cuisine_type :string
-#  created_at   :datetime         not null
-#  updated_at   :datetime         not null
-#  slug         :string
+#  id          :bigint           not null, primary key
+#  name        :string
+#  description :text
+#  image       :string
+#  website     :string
+#  category    :string
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  slug        :string
 #
 class Vendor < ApplicationRecord
   include CardImage
   include Sluggable
   include Uploadable
   include Linkable
-  # 1. DELETE CUISINE TYPE
 
-  CATEGORIES  = ['Eat & Drink'
+  has_many :tagged_items, as: :taggable
+  has_many :tags, through: :tagged_items
+
+  CATEGORIES = ['Eat & Drink', 'Shop & Do']
 
   sluggable_attributes :name
 
-  scope :by_tag, ->(genre) { joins(:tags).where(tags: { name: genre, category: 'vendor' }) }
+  scope :by_vendor_tag, ->(tag) { joins(tagged_items: :tags).where(tags: { name: tag, category: 'vendor' }) }
 
   def social_media_links
     external_links.social_media_links

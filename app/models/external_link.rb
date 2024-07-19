@@ -6,9 +6,9 @@
 #  url           :string
 #  link_type     :string
 #  linkable_type :string           not null
-#  linkable_id   :bigint           not null
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
+#  linkable_id   :uuid
 #
 class ExternalLink < ApplicationRecord
   LINK_TYPES = {

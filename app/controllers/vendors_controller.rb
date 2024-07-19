@@ -1,5 +1,5 @@
 class VendorsController < ApplicationController
-  before_action :set_vendor, only: %i[ show edit update destroy ]
+  before_action :set_vendor, only: %i[show edit update destroy]
 
   # TODO: consider creating a MatView for performance summary
   # TODO: also, use caching (with or without MatView)
@@ -26,7 +26,7 @@ class VendorsController < ApplicationController
 
     respond_to do |format|
       if @vendor.save
-        format.html { redirect_to vendor_url(@vendor), notice: "Vendor was successfully created." }
+        format.html { redirect_to vendor_url(@vendor), notice: 'Vendor was successfully created.' }
         format.json { render :show, status: :created, location: @vendor }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -39,7 +39,7 @@ class VendorsController < ApplicationController
   def update
     respond_to do |format|
       if @vendor.update(vendor_params)
-        format.html { redirect_to vendor_url(@vendor), notice: "Vendor was successfully updated." }
+        format.html { redirect_to vendor_url(@vendor), notice: 'Vendor was successfully updated.' }
         format.json { render :show, status: :ok, location: @vendor }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -53,19 +53,20 @@ class VendorsController < ApplicationController
     @vendor.destroy!
 
     respond_to do |format|
-      format.html { redirect_to vendors_url, notice: "Vendor was successfully destroyed." }
+      format.html { redirect_to vendors_url, notice: 'Vendor was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_vendor
-      @vendor = Vendor.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def vendor_params
-      params.require(:vendor).permit(:name, :description, :image, :website, :social_media_links, :category, :cuisine_type)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_vendor
+    @vendor = Vendor.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def vendor_params
+    params.require(:vendor).permit(:name, :description, :image, :website, :social_media_links, :category)
+  end
 end
