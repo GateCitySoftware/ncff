@@ -2,11 +2,12 @@
 #
 # Table name: tags
 #
-#  id         :bigint           not null, primary key
-#  name       :string
-#  category   :string
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id           :bigint           not null, primary key
+#  name         :string
+#  category     :string
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  sub_category :string           not null
 #
 class Tag < ApplicationRecord
   validates :name, presence: true, uniqueness: { scope: :category }
@@ -18,6 +19,7 @@ class Tag < ApplicationRecord
   scope :genres, -> { where(category: 'genre') }
   scope :cuisines, -> { where(category: 'cuisine') }
 
+  # TODO: cache this!!!!!!!! only needs to be busted when an Admin has updated ANY genre tag
   # TODO: cache this!!!!!!!! only needs to be busted when an Admin has updated ANY genre tag
   def self.genre_map
     hash = genres.map { |genre| [genre.name, genre.artists.count] }.sort.to_h

@@ -65,7 +65,7 @@ task seed_tags: :environment do
   ]
   genres.each do |genre|
     puts "creating genre: #{genre}"
-    Tag.find_or_create_by!(name: genre, category: 'genre')
+    Tag.find_or_create_by!(name: genre, category: 'music', sub_category: 'genre')
   end
   cuisine_types = [
     'American', 'Italian', 'Mexican', 'Chinese', 'Japanese',
@@ -81,6 +81,6 @@ task seed_tags: :environment do
   ]
   cuisine_types.each do |cuisine_type|
     puts "creating cuisine_type: #{cuisine_type}"
-    Tag.find_or_create_by!(name: cuisine_type, category: 'food-drink')
+    Tag.find_or_create_by!(name: cuisine_type, category: 'food-drink', sub_category: 'cuisine')
   end
 end
