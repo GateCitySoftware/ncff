@@ -7,9 +7,9 @@
           By Cuisine
         </button>
         <ul class="dropdown-menu" aria-labelledby="genreDropdown">
-          <li><a class="dropdown-item" href="<%= artists_path %>"><%= "All (#{Artist.count})" %></a></li>
+          <li><a class="dropdown-item" href="<%= vendors_path %>"><%= "All (#{Vendor.count})" %></a></li>
           <% Tag.cuisines.each do |tag| %>
-            <li><a class="dropdown-item" href="<%= artists_path(category: 'cuisine', option: tag) %>"><%= "#{tag} (1234)" %></a></li>
+            <li><a class="dropdown-item" href="<%= vendors_path(category: 'cuisine', option: tag) %>"><%= "#{tag.name} (1234)" %></a></li>
           <% end %>
         </ul>
       </div>
@@ -20,9 +20,9 @@
           By Location 
         </button>
         <ul class="dropdown-menu" aria-labelledby="stageNameDropdown">
-          <li><a class="dropdown-item" href="<%= artists_path %>">All</a></li>
+          <li><a class="dropdown-item" href="<%= vendors_path %>">All</a></li>
           <% Performance.stage_map.each do |stage, performance_count| %>
-            <li><a class="dropdown-item" href="<%= artists_path(category: 'stage', option: stage) %>"><%= "#{stage}  (#{performance_count})" %></a></li>
+            <li><a class="dropdown-item" href="<%= vendors_path(category: 'stage', option: stage) %>"><%= "#{stage} (#{performance_count})" %></a></li>
           <% end %>
         </ul>
       </div>
