@@ -1,16 +1,5 @@
-   <style>
-        .vendor-box {
-            background-color: #f8f9fa;
-            border: 1px solid #dee2e6;
-            border-radius: 0.25rem;
-            padding: 1rem;
-            margin-bottom: 1rem;
-        }
-    </style>
-
-
 <div class="container">
-  <h1 class="mb-4">Eat & Drink</h1>
+  <h1 class="mb-4"><%= @data.page_name %></h1>
   <div class="row row-cols-1 row-cols-md-2 g-4 mb-4">
     <div class="col">
       <div class="dropdown">
@@ -42,51 +31,40 @@
 </div>
 
 
+<% @data.vendors.each_with_index do |vendor, index| %>
+  <div class="row mx-4 text-white <%= repeat_colors_by_index(index) %>">
+    <!-- Row with two 25% and 75% columns -->
+    <div class="row">
+        <div class="col-lg-3">
+              <%= image_tag('stock_logo.png', class: 'dblock w-100') %>
+        </div>
+        <div class="col-lg-9">
+              <h2><%= vendor.name %></h2>
+              <p><%= vendor.description %>
+        </div>
+    </div>
 
-
-
-
-  <!-- Row with two 25% and 75% columns -->
-  <div class="row">
-      <div class="col-lg-3">
-          <div class="vendor-box">
-              <h3>Vendor Logo</h3>
-              <p>Logo or image placeholder</p>
-          </div>
-      </div>
-      <div class="col-lg-9">
-          <div class="vendor-box">
-              <h2>Vendor Overview</h2>
-              <p>Detailed overview of the vendor, including key information, specialties, or unique selling points.</p>
-          </div>
-      </div>
+    <!-- Row with three 50%, 25% and 25% columns -->
+    <div class="row">
+        <div class="col-lg-6">
+                <h3>Products/Services</h3>
+                <ul>
+                    <li>Product 1</li>
+                    <li>Product 2</li>
+                    <li>Service 1</li>
+                    <li>Service 2</li>
+                </ul>
+        </div>
+        <div class="col-lg-3">
+                <h3>Contact Info</h3>
+                <p>Phone: <%= vendor.phone %></p>
+                <p>Email: <%= vendor.email %>
+        </div>
+        <div class="col-lg-3">
+                <h3>Location</h3>
+                <%= vendor.address %>
+        </div>
+    </div>
   </div>
-
-  <!-- Row with three 50%, 25% and 25% columns -->
-  <div class="row">
-      <div class="col-lg-6">
-          <div class="vendor-box">
-              <h3>Products/Services</h3>
-              <ul>
-                  <li>Product 1</li>
-                  <li>Product 2</li>
-                  <li>Service 1</li>
-                  <li>Service 2</li>
-              </ul>
-          </div>
-      </div>
-      <div class="col-lg-3">
-          <div class="vendor-box">
-              <h3>Contact Info</h3>
-              <p>Phone: (123) 456-7890</p>
-              <p>Email: vendor@example.com</p>
-          </div>
-      </div>
-      <div class="col-lg-3">
-          <div class="vendor-box">
-              <h3>Location</h3>
-              <p>123 Main Street</p>
-              <p>City, State 12345</p>
-          </div>
-      </div>
-  </div>
+  <hr>
+<% end %>

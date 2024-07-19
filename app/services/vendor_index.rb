@@ -1,5 +1,5 @@
 class VendorIndex
-  DATA = Struct.new(:vendors, :filter_category, :filter_name, :slug)
+  DATA = Struct.new(:vendors, :page_name, :filter_category, :filter_name, :slug)
 
   def self.all(category, option)
     new(category, option).call
@@ -14,10 +14,14 @@ class VendorIndex
   end
 
   def call
-    DATA.new(vendors, @category, filter_name, slug)
+    DATA.new(vendors, page_name, @category, filter_name, slug)
   end
 
   private
+
+  def page_name
+    Vendor::CATEGORIES[@category.to_sym]
+  end
 
   def vendors
     case @category

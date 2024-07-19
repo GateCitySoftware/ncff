@@ -70,3 +70,13 @@ task fake_youtube_videos: :environment do
     )
   end
 end
+
+task add_info_to_vendors: :environment do
+  Vendor.all.each do |vendor|
+    vendor.update(
+      phone: Faker::PhoneNumber.phone_number,
+      email: Faker::Internet.email,
+      address: Faker::Address.full_address
+    )
+  end
+end
