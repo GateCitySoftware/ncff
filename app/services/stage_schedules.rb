@@ -35,7 +35,8 @@ class StageSchedules
       display_time: display_time(performance),
       artist_name: performance.artist.name,
       artist_genres: performance.artist.genres,
-      artist_image: performance.artist.card_image
+      artist_image: performance.artist.card_image,
+      artist_slug: performance.artist.slug
     }
   end
 

@@ -39,7 +39,7 @@ namespace :uploads do
 
     s3_uploader = S3Uploader.new('gcs-ncff')
 
-    Dir.glob(Rails.root.join('tmp', 'artist_card_images', '*')).each do |file_path|
+    Dir.glob(Rails.root.join('app', 'assets', 'images', 'artist_card_images', '*')).each do |file_path|
       next if File.directory?(file_path)
 
       file_name = File.basename(file_path)
