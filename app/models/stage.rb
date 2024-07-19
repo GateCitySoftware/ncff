@@ -21,7 +21,7 @@ class Stage < ApplicationRecord
   validates :name, presence: true, uniqueness: true
 
   STAGE_ORDER = [
-    'CityStage NC @ The Depot',
+    'City Stage NC @ The Depot',
     'Summit Stage',
     'LeBauer Park',
     'Elm St. Stage',
