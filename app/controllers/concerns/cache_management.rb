@@ -10,7 +10,7 @@
 #      end
 #    end
 
-module CacheMagement
+module CacheManagement
   # Fetches data from the cache or executes the provided block if not found
   #
   # @param key [String] The cache key
