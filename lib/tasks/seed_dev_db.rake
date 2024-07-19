@@ -83,10 +83,39 @@ task add_cuisine_tags_to_eat_drink_vendors: :environment do
     tag_count = rand(1..3)
     Tag.cuisines.sample(tag_count).each do |tag|
       TaggedItem.find_or_create_by!(tag_id: tag.id, taggable_type: 'Vendor', taggable_id: vendor.id)
-    rescue StandardError => e
-      puts e
-      binding.pry
-      next
+    end
+  end
+end
+
+task add_photos_to_vendor: :environment do
+  s3_uploader = S3Uploader.new('gcs-ncff')
+
+  Dir.glob(Rails.root.join('app', 'assets', 'images', '*')).each do |file_path|
+    next unless file_path.include?('images/res-')
+
+    file_name = File.basename(file_path)
+    file_size = File.size(file_path)
+    content_type = Marcel::MimeType.for(Pathname.new(file_path))
+
+    # Generate a unique key for S3
+    key = "#{SecureRandom.uuid}-#{file_name}"
+
+    # Upload file to S3
+    if s3_uploader.upload(file_path, key)
+      # Create Upload record
+      upload = Upload.new(
+        filename: file_name,
+        content_type:,
+        file_size:,
+        key:
+      )
+      upload.uploadable = Vendor.first
+      upload.image_type = 'gallery'
+      upload.save!
+
+      puts "Uploaded #{file_name} to S3 and created Upload record"
+    else
+      puts "Failed to upload #{file_name} to S3"
     end
   end
 end
@@ -99,6 +128,7 @@ task seed_everything: :environment do
     seed_real_data
     tag_artists_with_genres
     attach_youtube_videos_to_artists
+    add_photos_to_vendors
   ]
   tasks.each do |task|
     puts "Starting task: #{task}"

@@ -18,6 +18,8 @@ class VendorsController < ApplicationController
 
   # GET /vendors/1/edit
   def edit
+    @tags = Tag.cuisines
+    @upload = Upload.new
   end
 
   # POST /vendors or /vendors.json

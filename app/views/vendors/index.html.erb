@@ -30,39 +30,77 @@
   </div>
 </div>
 
-
 <% @data.vendors.each_with_index do |vendor, index| %>
-  <div class="row mx-4 text-white p-4 m-4 <%= repeat_colors_by_index(index) %>">
-    <!-- Row with two 25% and 75% columns -->
+  <div class="row text-white p-4 m-4 <%= repeat_colors_by_index(index) %>">
     <div class="row">
-        <div class="col-lg-3">
-              <%= image_tag('stock_logo.png', class: 'dblock w-100') %>
-        </div>
-        <div class="col-lg-9">
-              <h2 class="text-white"><%= vendor.name %></h2>
-              <p><%= vendor.description %>
-        </div>
+      <div class="col d-flex justify-content-end">
+        <%= link_to edit_vendor_path(vendor.id) do %>
+          <button type="button" class="btn btn-primary">Edit</button>
+        <% end %>
+      </div>
     </div>
 
-    <!-- Row with three 50%, 25% and 25% columns -->
     <div class="row">
-        <div class="col-lg-6">
-                <h3 class="text-white">Cuisine</h3>
-                <ul>
-                  <% vendor.tags.cuisines.each do |cuisine_tag| %>
-                    <li><%= cuisine_tag %></li>
-                  <% end %>
-                </ul>
+      <div class="col-lg-3">
+        <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-inner">
+            <% vendor.uploads.each_with_index do |image, index| %>
+              <div class="carousel-item <%= 'active' if index == 0 %>">
+                <%= image_tag(image.s3_url, class: "d-block w-100", alt: "...") %>
+              </div>
+            <% end %>
+
+            <!-- TODO REMOVE! -->
+            <!-- TODO REMOVE! -->
+            <!-- TODO REMOVE! -->
+            <!-- TODO REMOVE! -->
+            <% if vendor.uploads.none? %>
+              <% images = %w( res-1.jpeg res-2.jpeg res-3.jpeg res-4.jpeg res-5.jpeg res-6.jpeg res-7.jpeg res-8.jpeg res-9.jpeg res-10.jpeg) %>
+              <% 3.times do |n| %>
+                <div class="carousel-item <%= 'active' if n == 0 %>">
+                  <%= image_tag(images.sample, class: "d-block w-100", alt: "...") %>
+                </div>
+              <% end %>
+            <% end %>
+
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
         </div>
-        <div class="col-lg-3">
-                <h3 class="text-white">Contact Info</h3>
-                <p>Phone: <%= vendor.phone %></p>
-                <p>Email: <%= vendor.email %>
+      </div>
+      <div class="col-lg-9">
+        <h2 class="text-white"><%= vendor.name %></h2>
+        <p><%= vendor.description %></p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-3">
+        <%= image_tag('stock_logo.png', class: 'dblock w-100') %>
+      </div>
+      <div class="col-lg-3">
+        <h3 class="text-white">Cuisine</h3>
+        <div class="d-flex flex-column gap-2">
+          <% vendor.tags.each do |tag| %>
+            <a href="#" class="btn btn-outline-primary btn-sm"><%= tag.name %></a>
+          <% end %>
         </div>
-        <div class="col-lg-3">
-                <h3 class="text-white">Location</h3>
-                <%= vendor.address %>
-        </div>
+      </div>
+      <div class="col-lg-3">
+        <h3 class="text-white">Contact Info</h3>
+        <p>Phone: <%= vendor.phone %></p>
+        <p>Email: <%= vendor.email %></p>
+      </div>
+      <div class="col-lg-3">
+        <h3 class="text-white">Location</h3>
+        <%= vendor.address %>
+      </div>
     </div>
   </div>
   <hr>

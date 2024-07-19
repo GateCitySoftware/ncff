@@ -83,6 +83,11 @@
         <% end %>
 
 
+<div class="d-flex flex-column gap-2">
+  <% artist.tags.genres.each do |genre_tag| %>
+    <a href="#" class="btn btn-outline-primary btn-sm"><%= genre_tag.name %></a>
+  <% end %>
+</div>
               <div class="d-flex flex-wrap gap-2">
                 <% artist.tags.genres.each do |genre_tag| %>
                   <a href="#" class="btn btn-outline-primary btn-sm"><%= genre_tag.name %></a>
