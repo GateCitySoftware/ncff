@@ -47,3 +47,26 @@ task seed_tags: :environment do
     Tag.find_or_create_by!(name: cuisine_type, category: 'food-drink', sub_category: 'cuisine')
   end
 end
+
+task fake_youtube_videos: :environment do
+  embed_codes = [
+    '<iframe width="560" height="315" src="https://www.youtube.com/embed/rPVQlQQgPLg?si=fvuXt6dpahRUUpWc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>',
+    '<iframe width="560" height="315" src="https://www.youtube.com/embed/rPVQlQQgPLg?si=fvuXt6dpahRUUpWc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>',
+    '<iframe width="560" height="315" src="https://www.youtube.com/embed/YcHL0kUFPhw?si=rHtuP9G_TxvMvCFb" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>',
+    '<iframe width="560" height="315" src="https://www.youtube.com/embed/tNV16tz1NK0?si=ve--BunDqfieYFqx" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>',
+    '<iframe width="560" height="315" src="https://www.youtube.com/embed/tNV16tz1NK0?si=gwCTxdqvfbp_c53h" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>',
+    '<iframe width="560" height="315" src="https://www.youtube.com/embed/QmlLdntYnpU?si=zIM6WXteCW077CG9" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>',
+    '<iframe width="560" height="315" src="https://www.youtube.com/embed/nGLjDIDxjGM?si=1H-bvoLoWszh1Ftc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>',
+    '<iframe width="560" height="315" src="https://www.youtube.com/embed/_lsran_Slzc?si=BkhbjxsnG9jrpwTp" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>'
+  ]
+
+  Artist.all.each do |artist|
+    artist.embedded_contents.create!(
+      embed_code: embed_codes.sample,
+      url: 'https://www.youtube.com/watch?v=1234567890',
+      content_type: 'YouTube Video',
+      title: 'Placeholder YouTube Video - UPDATE ME',
+      description: 'This is a placeholder YouTube video. Please update this with a real video.'
+    )
+  end
+end
