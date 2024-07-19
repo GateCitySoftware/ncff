@@ -18,6 +18,8 @@ class Stage < ApplicationRecord
   include Sluggable
   include Uploadable
 
+  validates :name, presence: true, uniqueness: true
+
   STAGE_ORDER = [
     'CityStage NC @ The Depot',
     'Summit Stage',
