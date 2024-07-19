@@ -23,7 +23,7 @@ task tag_artists_with_genres: :environment do
   JSON.parse(File.read('lib/assets/artist_genres.json')).each do |artist_name, genres|
     artist = Artist.find_by(name: artist_name)
     genres.map do |genre|
-      tag = Tag.genres.find_or_create_by(name: genre)
+      tag = Tag.genres.find_or_create_by(name: genre, category: 'music', sub_category: 'genre')
       TaggedItem.find_or_create_by(taggable: artist, tag_id: tag.id)
     end
   end

@@ -1,5 +1,4 @@
 class StageSchedules
-
   def self.generate
     new.generate
   end
