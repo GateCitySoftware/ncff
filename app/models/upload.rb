@@ -14,6 +14,8 @@
 #  uploadable_id   :uuid
 #
 class Upload < ApplicationRecord
+  S3_BUCKET =  'gcs-ncff'
+  S3_REGION =  'us-east-2'
   belongs_to :uploadable, polymorphic: true
 
   validates :filename, presence: true
@@ -40,11 +42,11 @@ class Upload < ApplicationRecord
   private
 
   def s3_bucket_name
-    Rails.application.credentials.aws[:bucket_name]
+    S3_BUCKET
   end
 
   def s3_region
-    Rails.application.credentials.aws[:region]
+    S3_REGION
   end
 
   def only_one_primary_image_per_uploadable

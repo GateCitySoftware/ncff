@@ -91,10 +91,10 @@ class UploadsController < ApplicationController
   end
 
   def s3_bucket_name
-    Rails.application.credentials.aws[:bucket_name]
+    Upload::S3_BUCKET
   end
 
   def s3_region
-    Rails.application.credentials.aws[:region]
+    Upload::S3_REGION
   end
 end
