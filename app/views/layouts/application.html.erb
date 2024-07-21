@@ -48,8 +48,8 @@
     <% end %>
 
     <div class="container">
-      <% if session[:user_id] %>
-        <p>Current: <%= User.find(session[:user_id]).email %></p>
+      <% if current_user %>
+        <p>Current: <%= current_user.email %></p>
       <% else %>
         <p>Not logged in</p>
       <% end %>

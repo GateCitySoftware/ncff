@@ -32,13 +32,16 @@
 
 <% @data.vendors.each_with_index do |vendor, index| %>
   <div class="row text-white p-4 m-4 <%= repeat_colors_by_index(index) %>">
-    <div class="row">
-      <div class="col d-flex justify-content-end">
-        <%= link_to edit_vendor_path(vendor.id) do %>
-          <button type="button" class="btn btn-primary">Edit</button>
-        <% end %>
+
+    <% if can_edit?(vendor) %>
+      <div class="row">
+        <div class="col d-flex justify-content-end">
+          <%= link_to edit_vendor_path(vendor.id) do %>
+            <button type="button" class="btn btn-primary">Edit</button>
+          <% end %>
+        </div>
       </div>
-    </div>
+    <% end %>
 
     <div class="row">
       <div class="col-lg-3">

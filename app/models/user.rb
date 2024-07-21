@@ -30,4 +30,8 @@ class User < ApplicationRecord
   def clear_login_token
     update(login_token: nil, login_token_valid_until: nil)
   end
+
+  def admin?
+    role == 'admin'
+  end
 end
