@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_21_160317) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_21_160456) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -21,6 +21,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_21_160317) do
     t.datetime "updated_at", null: false
     t.string "slug"
     t.string "tagline"
+    t.uuid "owner_id"
     t.index ["slug"], name: "index_artists_on_slug", unique: true
   end
 
@@ -45,18 +46,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_21_160317) do
     t.datetime "updated_at", null: false
     t.uuid "linkable_id"
     t.index ["linkable_type", "linkable_id"], name: "index_external_links_on_linkable"
-  end
-
-  create_table "merchants", force: :cascade do |t|
-    t.string "name"
-    t.text "description"
-    t.string "image"
-    t.string "website"
-    t.string "product_type"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "slug"
-    t.index ["slug"], name: "index_merchants_on_slug", unique: true
   end
 
   create_table "performances", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -137,6 +126,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_21_160317) do
     t.string "phone"
     t.string "email"
     t.text "address"
+    t.uuid "owner_id"
     t.index ["slug"], name: "index_vendors_on_slug", unique: true
   end
 

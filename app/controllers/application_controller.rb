@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
 
   def can_edit?(resource = nil)
     user = current_user
-    user.present? && (user.admin? || user.id == resource&.user_id)
+    user.present? && (user.admin? || user.id == resource&.owner_id)
   end
 
   def current_user
