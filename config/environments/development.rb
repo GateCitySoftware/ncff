@@ -40,8 +40,10 @@ Rails.application.configure do
 
   # DO care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.default_url_options = { host: 'localhost:3000' }
 
-  config.action_mailer.default_url_options = { host: 'dev.yourhost.com' }
+  config.action_mailer.delivery_method = :letter_opener
+  config.action_mailer.perform_deliveries = true
 
   # SO link: https://stackoverflow.com/questions/7219732/rails-missing-host-to-link-to-please-provide-host-parameter-or-set-default-ur
   config.action_mailer.perform_caching = false

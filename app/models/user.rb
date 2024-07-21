@@ -12,6 +12,11 @@
 #  updated_at              :datetime         not null
 #
 class User < ApplicationRecord
+  ROLES = %w[attendee vendor admin].freeze
+
+  validates :email, presence: true, uniqueness: true
+  validates :role, inclusion: { in: ROLES }
+
   def generate_login_token
     self.login_token = SecureRandom.urlsafe_base64
     self.login_token_valid_until = 72.hours.from_now
