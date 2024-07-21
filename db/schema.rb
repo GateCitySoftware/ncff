@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_21_160456) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_21_161323) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -46,6 +46,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_21_160456) do
     t.datetime "updated_at", null: false
     t.uuid "linkable_id"
     t.index ["linkable_type", "linkable_id"], name: "index_external_links_on_linkable"
+  end
+
+  create_table "favorites", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "user_id", null: false
+    t.string "item_type", null: false
+    t.uuid "item_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["item_type", "item_id"], name: "index_favorites_on_item"
+    t.index ["user_id"], name: "index_favorites_on_user_id"
   end
 
   create_table "performances", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -130,6 +140,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_21_160456) do
     t.index ["slug"], name: "index_vendors_on_slug", unique: true
   end
 
+  add_foreign_key "favorites", "users"
   add_foreign_key "performances", "artists"
   add_foreign_key "performances", "stages"
   add_foreign_key "tagged_items", "tags"
