@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  resources :favorites
   root "artists#index"
 
   resources :stage_schedules
