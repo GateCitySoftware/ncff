@@ -3,7 +3,7 @@ class StageSchedulesController < ApplicationController
 
   # GET /stage_schedules or /stage_schedules.json
   def index
-    @data = StageSchedules.generate['2024-09-06']
+    @data = StageScheduleIndex.all(params[:date], params[:stage])
   end
 
   # GET /stage_schedules/1 or /stage_schedules/1.json
