@@ -1,3 +1,0 @@
-json.extract! vendor, :id, :name, :description, :image, :website, :social_media_links, :category, :created_at,
-              :updated_at
-json.url vendor_url(vendor, format: :json)
