@@ -25,7 +25,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_21_161323) do
     t.index ["slug"], name: "index_artists_on_slug", unique: true
   end
 
-  create_table "embedded_contents", force: :cascade do |t|
+  create_table "embedded_contents", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "url"
     t.string "content_type"
     t.string "title"
@@ -38,7 +38,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_21_161323) do
     t.index ["embeddable_type", "embeddable_id"], name: "index_embedded_contents_on_embeddable"
   end
 
-  create_table "external_links", force: :cascade do |t|
+  create_table "external_links", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "url"
     t.string "link_type"
     t.string "linkable_type", null: false
@@ -82,8 +82,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_21_161323) do
     t.index ["slug"], name: "index_stages_on_slug", unique: true
   end
 
-  create_table "tagged_items", force: :cascade do |t|
-    t.bigint "tag_id", null: false
+  create_table "tagged_items", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "tag_id", null: false
     t.string "taggable_type", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -92,7 +92,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_21_161323) do
     t.index ["taggable_type", "taggable_id"], name: "index_tagged_items_on_taggable"
   end
 
-  create_table "tags", force: :cascade do |t|
+  create_table "tags", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.string "category"
     t.datetime "created_at", null: false
@@ -101,7 +101,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_21_161323) do
     t.index ["category", "sub_category"], name: "index_tags_on_category_and_sub_category"
   end
 
-  create_table "uploads", force: :cascade do |t|
+  create_table "uploads", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "filename"
     t.string "content_type"
     t.integer "file_size"
