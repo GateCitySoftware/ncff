@@ -1,6 +1,6 @@
 class CreateExternalLinks < ActiveRecord::Migration[7.1]
   def change
-    create_table :external_links do |t|
+    create_table :external_links, id: :uuid do |t|
       t.string :url
       t.string :link_type
       t.references :linkable, polymorphic: true, null: false

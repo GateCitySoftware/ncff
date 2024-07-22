@@ -1,6 +1,6 @@
 class CreateEmbeddedContents < ActiveRecord::Migration[7.1]
   def change
-    create_table :embedded_contents do |t|
+    create_table :embedded_contents, id: :uuid do |t|
       t.string :url
       t.string :content_type
       t.string :title
