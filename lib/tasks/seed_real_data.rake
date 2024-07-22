@@ -38,12 +38,10 @@ end
 
 task fill_in_artist_info: :environment do
   Artist.all.each do |artist|
-    if artist.bio.nil?
-      artist.bio = Faker::Lorem.paragraph(sentence_count: 10).split('.').each_slice(4).map do |sentences|
-        "<p>#{sentences.join('. ')}.</p>"
-      end.join('')
-    end
-    artist.tagline = Faker::Lorem.sentence(word_count: 3) if artist.tagline.nil?
+    artist.bio = Faker::Lorem.paragraph(sentence_count: 50).split('.').each_slice(10).map do |sentences|
+      "<p>#{sentences.join('. ')}.</p>"
+    end.join('')
+    artist.tagline = Faker::Lorem.sentence(word_count: 3)
     artist.save
   end
 end
