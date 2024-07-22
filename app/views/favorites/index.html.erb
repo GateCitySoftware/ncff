@@ -1,14 +1,6 @@
-<p style="color: green"><%= notice %></p>
 
-<h1>Favorites</h1>
-
-<div id="favorites">
-  <% @favorites.each do |favorite| %>
-    <%= render favorite %>
-    <p>
-      <%= link_to "Show this favorite", favorite %>
-    </p>
-  <% end %>
+  <div class="row">
+    <% @data.favorites.each do |favorite| %>
+      <%= render 'artists/artist_card', artist: favorite.item, favorite_id: favorite.id %>
+    <% end %>
 </div>
-
-<%= link_to "New favorite", new_favorite_path %>

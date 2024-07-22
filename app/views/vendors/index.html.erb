@@ -1,7 +1,7 @@
 <%= render 'category_dropdown' %>
 
 <% @data.vendors.each_with_index do |vendor, index| %>
-  <div class="row text-white p-4 m-4 <%= repeat_colors_by_index(index) %>">
+  <div class="row rounded text-white p-4 m-4 <%= repeat_colors_by_index(index) %>">
 
     <% if can_edit?(vendor) %>
       <div class="row">
@@ -13,7 +13,7 @@
       </div>
     <% end %>
 
-    <div class="row">
+    <div class="row p-3">
       <div class="col-lg-3">
         <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
           <div class="carousel-inner">
@@ -54,8 +54,10 @@
         </div>
       </div>
       <div class="col-lg-9">
-        <h2 class="text-white"><%= vendor.name %></h2>
-        <p><%= vendor.description %></p>
+        <div class="px-3">
+          <h2 class="text-white display-5"><%= vendor.name %></h2>
+          <p><%= vendor.description %></p>
+        </div>
       </div>
     </div>
 
@@ -64,21 +66,27 @@
         <%= image_tag('stock_logo.png', class: 'dblock w-100') %>
       </div>
       <div class="col-lg-3">
-        <h3 class="text-white">Cuisine</h3>
-        <div class="d-flex flex-column gap-2">
-          <% vendor.tags.each do |tag| %>
-            <a href="#" class="btn btn-outline-primary btn-sm"><%= tag.name %></a>
-          <% end %>
+        <div class="p-3">
+          <h3 class="text-white">Cuisine</h3>
+          <div class="d-flex flex-column gap-2">
+            <% vendor.tags.each do |tag| %>
+              <a href="#" class="btn btn-outline-secondary btn-sm text-white"><%= tag.name %></a>
+            <% end %>
+          </div>
         </div>
       </div>
       <div class="col-lg-3">
-        <h3 class="text-white">Contact Info</h3>
-        <p>Phone: <%= vendor.phone %></p>
-        <p>Email: <%= vendor.email %></p>
+        <div class="p-3">
+          <h3 class="text-white">Contact Info</h3>
+          <p>Phone: <%= vendor.phone %></p>
+          <p>Email: <%= vendor.email %></p>
+        </div>
       </div>
       <div class="col-lg-3">
-        <h3 class="text-white">Location</h3>
-        <%= vendor.address %>
+        <div class="p-3">
+          <h3 class="text-white">Location</h3>
+          <%= vendor.address %>
+        </div>
       </div>
     </div>
   </div>

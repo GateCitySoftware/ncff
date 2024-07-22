@@ -20,7 +20,7 @@
               <% end %>
 
               <% performances.each do |performance| %>
-                <%= render 'performance_card', performance: performance, stage_name: stage_name %>
+                <%= render 'performance_card', performance: performance, stage_name: stage_name, date: @data.date %>
               <% end %>
 
             </div>

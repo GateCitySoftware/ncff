@@ -1,0 +1,47 @@
+<div class="col-sm-12 col-md-4">
+    <div class="card rounded-2 my-3 border-1 border-gray shadow">
+        <%= link_to artist_path(artist.slug), class: 'text-decoration-none' do %>
+            <% if artist.card_image %>
+                <%= image_tag(artist.card_image, class: 'card-img-top') %>
+            <% else %>
+                <%= image_tag(artist_stock_image, class: 'card-img-top') %>
+            <% end %>
+        <% end %>
+        <div class="card-body">
+            <%= link_to artist_path(artist.slug), class: 'text-decoration-none' do %>
+                <% if artist.name.length > 25 %>
+                    <h5 class="card-title"><%= artist.name %></h5>
+                <% else %>
+                    <h4 class="card-title"><%= artist.name %></h4>
+                <% end %>
+            <% end %>
+            <div class="d-flex flex-wrap gap-2">
+                <% artist.tags.genres.each do |genre_tag| %>
+                    <a href="#" class="btn btn-outline-primary btn-sm"><%= genre_tag.name %></a>
+                <% end %>
+            </div>
+            <div class="row mt-2">
+    <div class="col">
+        <div class="btn-group d-flex flex-column" role="group" aria-label="Basic example">
+            <% if defined?(favorite_id) %>
+                <%= button_to "Remove from Favorites", favorite_path(favorite_id), 
+                    method: :delete, 
+                    class: "btn btn-sm btn-danger w-100 rounded-2"
+                %>
+            <% else %>
+                <%= button_to "Add to Favorites", favorites_path, 
+                    method: :post, 
+                    class: "mb-2 btn btn-sm btn-primary w-100 rounded-2",
+                    params: { 
+                        user_id: 'TODO', 
+                        item_type: 'Artist', 
+                        item_id: artist.id 
+                    } 
+                %>
+            <% end %>
+        </div>
+    </div>
+</div>
+        </div>
+    </div>
+</div>
