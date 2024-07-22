@@ -63,3 +63,9 @@ body {
 .navbar {
   background-color: #000000;
 }
+
+iframe {
+  max-width: 100%;
+  width: 100%;
+  height: auto;
+}

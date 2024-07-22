@@ -28,3 +28,10 @@ task tag_artists_with_genres: :environment do
     end
   end
 end
+
+task tag_all_artists_with_two_genres: :environment do
+  Artist.all.each do |artist|
+    artist.tags << Tag.genres.sample(1) if artist.tags.count < 2
+    artist.tags << Tag.genres.sample(1) if artist.tags.reload.count < 2
+  end
+end
