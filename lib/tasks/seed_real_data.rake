@@ -35,3 +35,11 @@ task tag_all_artists_with_two_genres: :environment do
     artist.tags << Tag.genres.sample(1) if artist.tags.reload.count < 2
   end
 end
+
+tag fill_in_artist_info: :environment do
+  Artist.all.each do |artist|
+    artist.bio = Faker::Lorem.paragraphs(number: 3) if artist.bio.nil?
+    artist.tagline = Faker::Lorem.sentence(word_count: 3) if artist.tagline.nil?
+    artist.save
+  end
+end
