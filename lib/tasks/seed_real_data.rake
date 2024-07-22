@@ -36,10 +36,36 @@ task tag_all_artists_with_two_genres: :environment do
   end
 end
 
-tag fill_in_artist_info: :environment do
+task fill_in_artist_info: :environment do
   Artist.all.each do |artist|
     artist.bio = Faker::Lorem.paragraphs(number: 3) if artist.bio.nil?
     artist.tagline = Faker::Lorem.sentence(word_count: 3) if artist.tagline.nil?
     artist.save
+  end
+end
+
+task add_spotify_players: :environment do
+  embed_codes = [
+    '<iframe style="border-radius:12px" src="https://open.spotify.com/embed/artist/4TeKBLCqmYXzvcgYX4t4YA?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>',
+    '<iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/37i9dQZF1DZ06evO1lW5tI?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>',
+    '<iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/37i9dQZF1DZ06evO2GADwp?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>',
+    '<iframe style="border-radius:12px" src="https://open.spotify.com/embed/artist/7bQu41HtZVGGuRjLUnQYaZ?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>',
+    '<iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/37i9dQZF1E4rpPB2i6w20m?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>',
+    '<iframe style="border-radius:12px" src="https://open.spotify.com/embed/album/1S6sk9yusYQoadSAbx3ZB8?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>',
+    '<iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/37i9dQZF1DWYzpSJHStHHx?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>',
+    '<iframe style="border-radius:12px" src="https://open.spotify.com/embed/album/3RHJNmuwD0fnwccBv2HTif?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>',
+    '<iframe style="border-radius:12px" src="https://open.spotify.com/embed/artist/3NPZs8XgXtaWslUcnIw6rY?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>',
+    '<iframe style="border-radius:12px" src="https://open.spotify.com/embed/album/3ahHxtwRwMIdHcAo0MEXxX?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>',
+    '<iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/37i9dQZF1DX9pryhDLql25?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>'
+  ]
+
+  Artist.all.each do |artist|
+    artist.embedded_contents.create!(
+      embed_code: embed_codes.sample,
+      url: 'https://www.youtube.com/watch?v=1234567890',
+      content_type: 'Spotify Player',
+      title: 'Placeholder Spotify Player - UPDATE ME',
+      description: 'This is a placeholder Spotify Player. Please update this with a real one.'
+    )
   end
 end
