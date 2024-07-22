@@ -1,3 +1,27 @@
+<div class="container">
+  <div class="row">
+    <div class="col text-center">
+      <div class="dropdown">
+        <button class="btn btn-primary dropdown-toggle w-100" type="button" id="dateDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+          Date
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dateDropdown">
+          <% @data.dates.each do |date| %>
+            <% formatted_date = Date.parse(date).strftime("%A, %B %-d, %Y") %>
+            <li><a class="dropdown-item" href="<%= stage_schedules_path(date: date) %>"><%= formatted_date %></a></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col text-center mt-3">
+    <h3 class="fw-bold"><%= Date.parse(@data.active_date).strftime("%A, %B %-d, %Y") %><h3>
+  </div>
+</div>
+
 <div id="mobileCarouselControls" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-inner">
     <% @data.stage_schedules.each_with_index do |(stage_name, performances), index| %>
@@ -7,7 +31,7 @@
             <div class="col-lg-4">
 
               <%= link_to 'https://maps.app.goo.gl/FBD4cg1AVZZm3bUt5', class: "text-decoration-none", target: "_blank" do %>
-                <div class="card m-3 text-center <%= stage_css_color_classes[stage_name] %>">
+                <div class="card my-3 text-center <%= stage_css_color_classes[stage_name] %>">
                   <div class="card-body text-white align-items-center justify-content-center">
                     <h2 class="card-title mb-0"><%= stage_name %></h2>
                     <div class="row">

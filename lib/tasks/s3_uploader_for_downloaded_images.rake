@@ -47,6 +47,7 @@ namespace :uploads do
       content_type = Marcel::MimeType.for(Pathname.new(file_path))
 
       artist = Artist.find_by_name(artists_data.find { |hash| hash[:file_name] == file_name }[:artist_name])
+      next if artist.nil?
       next if artist.uploads.where(image_type: 'primary').exists?
 
       # Generate a unique key for S3

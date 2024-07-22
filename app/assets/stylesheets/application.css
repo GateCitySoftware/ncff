@@ -64,8 +64,14 @@ body {
   background-color: #000000;
 }
 
-iframe {
-  max-width: 100%;
-  width: 100%;
-  height: auto;
+@media screen and (max-width: 767px) {
+  iframe {
+    max-width: 100%;
+    width: 100%;
+    height: auto;
+  }
+}
+
+.navbar-toggler-icon {
+  color: white;
 }

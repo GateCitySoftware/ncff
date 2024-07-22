@@ -1,3 +1,27 @@
+<div class="container">
+  <div class="row">
+    <div class="col text-center">
+      <div class="dropdown">
+        <button class="btn btn-primary dropdown-toggle w-50" type="button" id="dateDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+          Date
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dateDropdown">
+          <% @data.dates.each do |date| %>
+            <% formatted_date = Date.parse(date).strftime("%A, %B %-d, %Y") %>
+            <li><a class="dropdown-item" href="<%= stage_schedules_path(date: date) %>"><%= formatted_date %></a></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col text-center mt-3">
+    <h3 class="fw-bold"><%= Date.parse(@data.active_date).strftime("%A, %B %-d, %Y") %><h3>
+  </div>
+</div>
+
 <div id="desktopCarouselControls" class="carousel slide" data-bs-ride="carousel">
 
   <button class="carousel-control-prev" type="button" data-bs-target="#desktopCarouselControls" data-bs-slide="prev">
@@ -61,7 +85,7 @@
 }
 
 .carousel-inner {
-  padding: 1em;
+  padding: 0.5em;
 }
 
 .carousel-control-prev,
