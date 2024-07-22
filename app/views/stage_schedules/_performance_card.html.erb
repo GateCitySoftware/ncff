@@ -1,18 +1,13 @@
 <div class="card rounded-2 m-3 shadow">
-  <div class="rounded-2 border border-4 border-black <%= stage_css_color_classes[stage_name] %>">
-    <%= link_to artist_path(performance[:artist_slug]) do %>
-      <%= image_tag(performance[:artist_image] || artist_stock_image, class: 'border border-black', style: "display: block; height: 120px; margin: auto") %>
-    <% end %>
-  </div>
   <div class="card-body">
-    <h3><%= performance[:display_time] %></h3>
     <%= link_to artist_path(performance[:artist_slug]), class: 'text-decoration-none' do %>
       <% if performance[:artist_name].length > 25 %>
-        <h5 class="card-title"><%= performance[:artist_name] %></h5>
+        <h3 class="card-title"><%= performance[:artist_name] %></h3>
       <% else %>
-        <h4 class="card-title"><%= performance[:artist_name] %></h4>
+        <h2 class="card-title"><%= performance[:artist_name] %></h2>
       <% end %>
     <% end %>
+    <h3><%= performance[:display_time] %></h3>
     <div class="d-flex flex-wrap gap-2">
       <% performance[:artist_genres].each do |genre| %>
         <a href="#" class="btn btn-outline-primary btn-sm"><%= genre %></a>
