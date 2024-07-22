@@ -48,14 +48,6 @@
     <% end %>
 
     <div class="container">
-      <% if current_user %>
-        <p>Current: <%= current_user.email %></p>
-      <% else %>
-        <p>Not logged in</p>
-      <% end %>
-    </div>
-
-    <div class="container">
       <%= yield %>
     </div>
 

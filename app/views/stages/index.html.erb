@@ -6,16 +6,15 @@
   <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
     <% @stages.each do |stage| %>
       <div class="col">
-        <%= link_to stage, class: "text-decoration-none" do %>
-          <div class="card h-100 <%= stage_css_color_classes[stage.name] %> <%= 'text-white' unless stage.name.include?('Van') %>">
+        <%= link_to 'https://maps.app.goo.gl/FBD4cg1AVZZm3bUt5', class: "text-decoration-none", target: "_blank" do %>
+          <div class="card h-100 text-white <%= stage_css_color_classes[stage.name] %>">
             <div class="card-body">
               <h3 class="card-title"><%= stage.name %></h3>
-              <p class="card-text">
-                <i class="bi bi-geo-alt-fill text-primary me-2"></i>
+              <p class="card-text fw-bold fs-10">
+                <i class="bi bi-geo-alt-fill text-white me-2 display-6"></i>
               </p>
-              <p>
-                <%= stage.google_place_address %>
-              </p>
+              <p>123 Main St.</p>
+              <p><small>Click for Directions</small></p>
             </div>
           </div>
         <% end %>
