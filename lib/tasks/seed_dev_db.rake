@@ -87,7 +87,7 @@ task add_cuisine_tags_to_eat_drink_vendors: :environment do
   end
 end
 
-task add_photos_to_vendor: :environment do
+task add_photos_to_vendors: :environment do
   s3_uploader = S3Uploader.new('gcs-ncff')
 
   Dir.glob(Rails.root.join('app', 'assets', 'images', '*')).each do |file_path|

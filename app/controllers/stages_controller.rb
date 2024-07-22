@@ -5,7 +5,7 @@ class StagesController < ApplicationController
 
   # GET /stages or /stages.json
   def index
-    @stages = Stage.ordered
+    @data = StageIndex.all
   end
 
   # GET /stages/1 or /stages/1.json
