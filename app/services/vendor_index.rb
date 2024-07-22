@@ -23,7 +23,7 @@ class VendorIndex
   def vendors
     case @category
     when 'eat_drink'
-      Vendor.by_tag(@option)
+      @option.present? ? Vendor.by_tag(@option).by_category('eat_drink') : Vendor.by_category('eat_drink')
     else
       Vendor.all
     end

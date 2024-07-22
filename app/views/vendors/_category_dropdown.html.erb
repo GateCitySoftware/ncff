@@ -6,7 +6,7 @@
           By Cuisine
         </button>
         <ul class="dropdown-menu" aria-labelledby="vendorDropdown">
-          <li><a class="dropdown-item" href="<%= vendors_path %>"><%= "All (#{Vendor.by_category(params[:category]).count})" %></a></li>
+          <li><a class="dropdown-item" href="<%= vendors_path(category: params[:category]) %>"><%= "All (#{Vendor.by_category(params[:category]).count})" %></a></li>
           <% Tag.cuisine_map.each do |tag, count| %>
             <li><a class="dropdown-item" href="<%= vendors_path(category: params[:category], option: tag) %>"><%= "#{tag} (#{count})" %></a></li>
           <% end %>
