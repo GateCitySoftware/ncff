@@ -1,34 +1,4 @@
-<div class="container">
-  <h1 class="mb-4"><%= @data.page_name %></h1>
-  <div class="row row-cols-1 row-cols-md-2 g-4 mb-4">
-    <div class="col">
-      <div class="dropdown">
-        <button class="btn btn-primary dropdown-toggle w-100" type="button" id="genreDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-          By Cuisine
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="genreDropdown">
-          <li><a class="dropdown-item" href="<%= vendors_path %>"><%= "All (#{Vendor.count})" %></a></li>
-          <% Tag.cuisines.each do |tag| %>
-            <li><a class="dropdown-item" href="<%= vendors_path(category: 'cuisine', option: tag) %>"><%= "#{tag.name} (1234)" %></a></li>
-          <% end %>
-        </ul>
-      </div>
-    </div>
-    <div class="col">
-      <div class="dropdown">
-        <button class="btn btn-primary dropdown-toggle w-100" type="button" id="stageNameDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-          By Location 
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="stageNameDropdown">
-          <li><a class="dropdown-item" href="<%= vendors_path %>">All</a></li>
-          <% Performance.stage_map.each do |stage, performance_count| %>
-            <li><a class="dropdown-item" href="<%= vendors_path(category: 'stage', option: stage) %>"><%= "#{stage} (#{performance_count})" %></a></li>
-          <% end %>
-        </ul>
-      </div>
-    </div>
-  </div>
-</div>
+<%= render 'category_dropdown' %>
 
 <% @data.vendors.each_with_index do |vendor, index| %>
   <div class="row text-white p-4 m-4 <%= repeat_colors_by_index(index) %>">
@@ -53,10 +23,16 @@
               </div>
             <% end %>
 
-            <!-- TODO REMOVE! -->
-            <!-- TODO REMOVE! -->
-            <!-- TODO REMOVE! -->
-            <!-- TODO REMOVE! -->
+            <!-- TODO REMOVE STOCK PHOTOS! -->
+            <!-- TODO REMOVE STOCK PHOTOS! -->
+            <!-- TODO REMOVE STOCK PHOTOS! -->
+            <!-- TODO REMOVE STOCK PHOTOS! -->
+            <!-- TODO REMOVE STOCK PHOTOS! -->
+            <!-- TODO REMOVE STOCK PHOTOS! -->
+            <!-- TODO REMOVE STOCK PHOTOS! -->
+            <!-- TODO REMOVE STOCK PHOTOS! -->
+            <!-- TODO REMOVE STOCK PHOTOS! -->
+            <!-- TODO REMOVE STOCK PHOTOS! -->
             <% if vendor.uploads.none? %>
               <% images = %w( res-1.jpeg res-2.jpeg res-3.jpeg res-4.jpeg res-5.jpeg res-6.jpeg res-7.jpeg res-8.jpeg res-9.jpeg res-10.jpeg) %>
               <% 3.times do |n| %>

@@ -5,16 +5,19 @@
         <div class="container mt-4">
           <div class="row">
             <div class="col-lg-4">
-              <div class="card m-3 text-center <%= stage_css_color_classes[stage_name] %>">
-                <div class="card-body text-white align-items-center justify-content-center">
-                  <h2 class="card-title mb-0"><%= stage_name %></h2>
-                  <div class="row">
-                    <div class="text-center">
-                      <i class="bi bi-geo-alt-fill text-white me-2"></i>
+
+              <%= link_to 'https://maps.app.goo.gl/FBD4cg1AVZZm3bUt5', class: "text-decoration-none", target: "_blank" do %>
+                <div class="card m-3 text-center <%= stage_css_color_classes[stage_name] %>">
+                  <div class="card-body text-white align-items-center justify-content-center">
+                    <h2 class="card-title mb-0"><%= stage_name %></h2>
+                    <div class="row">
+                      <div class="text-center">
+                        <i class="bi bi-geo-alt-fill text-white me-2"></i>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
+              <% end %>
 
               <% performances.each do |performance| %>
                 <%= render 'performance_card', performance: performance, stage_name: stage_name %>

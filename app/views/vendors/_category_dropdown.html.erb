@@ -1,0 +1,17 @@
+<div class="container">
+  <div class="row">
+    <div class="col text-center">
+      <div class="dropdown">
+        <button class="btn btn-primary dropdown-toggle w-50" type="button" id="vendorDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+          By Cuisine
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="vendorDropdown">
+          <li><a class="dropdown-item" href="<%= vendors_path %>"><%= "All (#{Vendor.by_category(params[:category]).count})" %></a></li>
+          <% Tag.cuisine_map.each do |tag, count| %>
+            <li><a class="dropdown-item" href="<%= vendors_path(category: params[:category], option: tag) %>"><%= "#{tag} (#{count})" %></a></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

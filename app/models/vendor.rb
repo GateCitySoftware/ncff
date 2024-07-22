@@ -26,10 +26,11 @@ class Vendor < ApplicationRecord
   CATEGORIES = {
     eat_drink: 'Eat & Drink',
     shop_do: 'Shop & Do',
-    activation: 'Activation'
+    activation: 'Activations'
   }.freeze
 
   scope :by_category, ->(category) { where(category:) }
+  scope :by_tag, ->(tag) { joins(:tags).where(tags: { name: tag }) }
 
   sluggable_attributes :name
 

@@ -47,6 +47,12 @@
       </div>
     <% end %>
 
+    <% if @data&.respond_to?(:page_name) %>
+      <div class="row">
+        <h1 class="mb-4 text-center display-4 fw-bold"><%= @data.page_name %></h1>
+      </div>
+    <% end %>
+
     <div class="container">
       <%= yield %>
     </div>

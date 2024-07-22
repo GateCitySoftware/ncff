@@ -1,24 +1,25 @@
-
-class StageScheduleIndex 
-  DATES = ['2024-09-06', '2024-09-07', '2024-09-08']
-  DATA = Struct.new(:stage_schedules, :date, :stage, :dates)
+class StageScheduleIndex
+  DATES = %w[2024-09-06 2024-09-07 2024-09-08]
+  DATA = Struct.new(:page_name, :stage_schedules, :active_date, :date, :stage, :dates)
+  PAGE_NAME = 'NC Folk Festival Stage Schedules'
 
   def self.all(date, stage)
     new(date, stage).call
   end
 
   def initialize(date, stage)
+    @date_param = date
     @date = select_date(date)
     @stage = stage
   end
 
   def call
-    DATA.new(stage_schedules, @date, @stage, Performance::DATES_2024)
+    DATA.new(PAGE_NAME, stage_schedules, active_date, @date, @stage, Performance::DATES_2024)
   end
 
   private
 
-  def stage_schedules 
+  def stage_schedules
     @stage.nil? ? data : data[@stage]
   end
 
@@ -36,5 +37,9 @@ class StageScheduleIndex
     else
       DATES.first
     end
+  end
+
+  def active_date
+    @date_param || default_date(@date_param)
   end
 end

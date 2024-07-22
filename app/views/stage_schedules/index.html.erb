@@ -1,11 +1,8 @@
 <div class="container">
   <div class="row">
-    <div class="col-sm-12 col-md-6">
-      <h1>Stage Schedules</h1>
-    </div>
-    <div class="col-sm-12 col-md-6">
+    <div class="col text-center">
       <div class="dropdown">
-        <button class="btn btn-primary dropdown-toggle w-100" type="button" id="dateDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+        <button class="btn btn-primary dropdown-toggle w-50" type="button" id="dateDropdown" data-bs-toggle="dropdown" aria-expanded="false">
           Date
         </button>
         <ul class="dropdown-menu" aria-labelledby="dateDropdown">
@@ -16,6 +13,12 @@
         </ul>
       </div>
     </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col text-center mt-3">
+    <h3 class="fw-bold"><%= Date.parse(@data.active_date).strftime("%A, %B %-d, %Y") %><h3>
   </div>
 </div>
 

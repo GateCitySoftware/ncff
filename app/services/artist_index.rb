@@ -1,5 +1,6 @@
 class ArtistIndex
-  DATA = Struct.new(:artists, :filter_category, :filter_name, :stage_slug)
+  DATA = Struct.new(:page_name, :artists, :filter_category, :filter_name, :stage_slug)
+  PAGE_NAME = 'NC Folk Festival Artists'
 
   def self.all(category, option)
     new(category, option).call
@@ -11,7 +12,7 @@ class ArtistIndex
   end
 
   def call
-    DATA.new(artists.order(:name), @category, filter_name, stage_slug)
+    DATA.new(PAGE_NAME, artists.order(:name), @category, filter_name, stage_slug)
   end
 
   private

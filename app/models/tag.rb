@@ -14,6 +14,7 @@ class Tag < ApplicationRecord
 
   has_many :tagged_items
   has_many :artists, through: :tagged_items, source: :taggable, source_type: 'Artist'
+  has_many :vendors, through: :tagged_items, source: :taggable, source_type: 'Vendor'
 
   scope :genres, -> { where(category: 'music', sub_category: 'genre') }
   scope :cuisines, -> { where(category: 'food-drink', sub_category: 'cuisine') }
@@ -39,6 +40,7 @@ class Tag < ApplicationRecord
   end
 
   def self.cuisine_map
-    cuisines.map { |cuisine| [cuisine.name, cuisine.artists.count] }.sort.to_h
+    hash = cuisines.map { |cuisine| [cuisine.name, cuisine.vendors.count] }.sort.to_h
+    hash.reject { |_k, v| v.zero? }.to_h
   end
 end
