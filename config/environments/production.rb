@@ -79,9 +79,10 @@ Rails.application.configure do
     address: ENV['MAILGUN_SMTP_SERVER'],
     user_name: ENV['MAILGUN_SMTP_LOGIN'],
     password: ENV['MAILGUN_SMTP_PASSWORD'],
-    domain: 'yourapp.heroku.com',
+    domain: 'www.ncfolkfestival.app',
     authentication: :plain
   }
+  config.action_mailer.default_url_options = { host: 'www.ncfolkfestival.app' }
 
   config.action_mailer.perform_caching = false
 
