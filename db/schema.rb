@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_21_161323) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_23_133912) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -137,6 +137,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_21_161323) do
     t.string "email"
     t.text "address"
     t.uuid "owner_id"
+    t.boolean "approved", default: false, null: false
     t.index ["slug"], name: "index_vendors_on_slug", unique: true
   end
 
