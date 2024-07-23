@@ -32,11 +32,12 @@ class VendorIndex
   def vendors
     return all_unapproved_vendors if @unapproved_listings
 
-    case @category
-    when 'eat_drink'
-      @option.present? ? Vendor.by_tag(@option).by_category('eat_drink') : Vendor.by_category('eat_drink')
+    query = Vendor.by_category(@category)
+
+    if @option.present?
+      query.by_tag(@option)
     else
-      Vendor.all
+      query
     end
   end
 

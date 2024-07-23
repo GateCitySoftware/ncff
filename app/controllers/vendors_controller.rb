@@ -45,10 +45,13 @@ class VendorsController < ApplicationController
     # TODO: chaneg this when user login is working!
     user_can_edit = true
     just_approved = true if params[:vendor][:approved] == 'true' && user_can_edit && @vendor.update(approved: true)
+    just_archived = true if params[:vendor][:archived] == 'true' && user_can_edit && @vendor.update(archived: true)
 
     respond_to do |format|
       if just_approved
         format.html { redirect_to vendors_url(unapproved_listings: true), notice: 'Listing was successfully approved.' }
+      elsif just_archived
+        format.html { redirect_to vendors_url(unapproved_listings: true), notice: 'Vendor was successfully archived.' }
       elsif @vendor.update(vendor_params)
         format.html { redirect_to vendors_url, notice: 'Vendor was successfully updated.' }
         format.json { render :show, status: :ok, location: @vendor }
