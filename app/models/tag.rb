@@ -35,12 +35,16 @@ class Tag < ApplicationRecord
   end
 
   def self.genre_map
-    hash = genres.map { |genre| [genre.name, genre.artists.count] }.sort.to_h
-    hash.reject { |_k, v| v.zero? }.to_h
+    Rails.cache.fetch('cuisine_map', expires_in: 30.minutes) do
+      hash = genres.map { |genre| [genre.name, genre.artists.count] }.sort.to_h
+      hash.reject { |_k, v| v.zero? }.to_h
+    end
   end
 
   def self.cuisine_map
-    hash = cuisines.map { |cuisine| [cuisine.name, cuisine.vendors.count] }.sort.to_h
-    hash.reject { |_k, v| v.zero? }.to_h
+    Rails.cache.fetch('cuisine_map', expires_in: 30.minutes) do
+      hash = cuisines.map { |cuisine| [cuisine.name, cuisine.vendors.count] }.sort.to_h
+      hash.reject { |_k, v| v.zero? }.to_h
+    end
   end
 end

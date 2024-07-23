@@ -34,6 +34,8 @@ class Vendor < ApplicationRecord
 
   sluggable_attributes :name
 
+  default_scope { where(approved: true, archived: false) }
+
   def cuisine_map
     Tag.where(category: 'food-drink', sub_category: 'cuisine')
   end

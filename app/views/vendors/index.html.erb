@@ -5,9 +5,29 @@
 
     <% if can_edit?(vendor) %>
       <div class="row">
+        <% if @data.page_name == 'Unapproved Listings' %>
+          <div class="col d-flex justify-content-start">
+            <h3 class="text-white">Vendor Category: <%= Vendor::CATEGORIES[vendor.category.to_sym] %></h3>
+          </div>
+        <% end %>
         <div class="col d-flex justify-content-end">
           <%= link_to edit_vendor_path(vendor.id) do %>
-            <button type="button" class="btn btn-primary">Edit</button>
+            <button type="button" class="btn btn-primary m-2">Edit</button>
+          <% end %>
+
+          <% if @data.page_name == 'Unapproved Listings' %>
+<%= form_with(model: vendor, local: true, method: :patch, class: "d-inline") do |form| %>
+  <%= form.hidden_field :approved, value: true %>
+  <%= form.submit "Approve", class: "btn btn-success" %>
+<% end %>
+
+
+            <%= link_to edit_vendor_path(vendor.id) do %>
+              <button type="button" class="btn btn-success m-2">Approve</button>
+            <% end %>
+            <%= link_to edit_vendor_path(vendor.id) do %>
+              <button type="button" class="btn btn-danger m-2">Archive</button>
+            <% end %>
           <% end %>
         </div>
       </div>
