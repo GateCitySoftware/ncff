@@ -1,5 +1,5 @@
 class VendorIndex
-  DATA = Struct.new(:page_name, :vendors, :filter_category, :filter_name, :slug)
+  DATA = Struct.new(:page_name, :vendors, :filter_category, :filter_name, :slug, :cuisine_map)
 
   def self.all(category, option, unapproved_listings = false)
     new(category, option, unapproved_listings).call
@@ -17,7 +17,8 @@ class VendorIndex
       vendors.includes(:tags, :uploads),
       @category,
       filter_name,
-      slug
+      slug,
+      Tag.cuisine_map
     )
   end
 

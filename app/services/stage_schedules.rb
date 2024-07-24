@@ -12,7 +12,7 @@ class StageSchedules
   private
 
   def group_performances_by_date
-    Performance.all.group_by { |performance| performance.start_time.to_date.to_s }
+    Performance.all.includes(:stage, :artist).group_by { |performance| performance.start_time.to_date.to_s }
   end
 
   def group_performances_by_stage(performances)
