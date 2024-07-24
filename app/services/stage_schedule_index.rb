@@ -21,6 +21,8 @@ class StageScheduleIndex
 
   def stage_schedules
     @stage.nil? ? data : data[@stage]
+  rescue StandardError # TODO: remove this after debugging memory issue
+    {}
   end
 
   def data
