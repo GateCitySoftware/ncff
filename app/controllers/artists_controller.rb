@@ -6,13 +6,7 @@ class ArtistsController < ApplicationController
   # TODO: consider creating a MatView for performance summary
   # TODO: also, use caching (with or without MatView)
   def index
-    report = MemoryProfiler.report do
-      @data = ArtistIndex.all(params[:category], params[:option])
-      render :index
-    end
-
-    # Generate the report
-    report.pretty_print(to_file: "tmp/memory_profile_#{Time.now.to_i}.txt")
+    @data = ArtistIndex.all(params[:category], params[:option])
   end
 
   # GET /artists/1 or /artists/1.json
