@@ -1,10 +1,9 @@
 // Configure your import map in config/importmap.rb. Read more: https://github.com/rails/importmap-rails
-import "@hotwired/turbo-rails"
 import "controllers"
 
 
 // app/javascript/packs/artists.js
-$(document).on('turbolinks:load', function() {
+$(document).on('load', function() {
     $('#add_tag').click(function(e) {
       e.preventDefault();
       var new_id = new Date().getTime();
