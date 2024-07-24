@@ -68,6 +68,7 @@ group :development do
   gem 'bullet'
   gem 'error_highlight', '>= 0.4.0', platforms: [:ruby]
   gem 'letter_opener'
+  gem 'memory_profiler'
 end
 
 group :test do
