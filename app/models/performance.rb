@@ -21,11 +21,15 @@ class Performance < ApplicationRecord
   DATES_2024 = %w[2024-09-06 2024-09-07 2024-09-08]
 
   def self.stage_map
-    Performance.includes(:stage).all.group_by { |p| p.stage.name }.transform_values(&:count)
+    Rails.cache.fetch('stage_map', expires_in: 1.hour) do
+      Performance.includes(:stage).all.group_by { |p| p.stage.name }.transform_values(&:count)
+    end
   end
 
   def self.date_map
-    Performance.all.group_by { |p| p.start_time.to_date }.transform_values(&:count)
+    Rails.cache.fetch('date_map', expires_in: 1.hour) do
+      Performance.all.group_by { |p| p.start_time.to_date }.transform_values(&:count)
+    end
   end
 
   def self.create_summary_json_file
