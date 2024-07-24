@@ -6,7 +6,7 @@
           By Genre
         </button>
         <ul class="dropdown-menu" aria-labelledby="genreDropdown">
-          <li><a class="dropdown-item" href="<%= artists_path %>"><%= "All" %></a></li>
+          <li><a class="dropdown-item" href="<%= artists_path %>"><%= "All (#{Artist.count})" %></a></li>
           <% @data.genre_map.each do |genre, artist_count| %>
             <li><a class="dropdown-item" href="<%= artists_path(category: 'genre', option: genre) %>"><%= "#{genre}  (#{artist_count})" %></a></li>
           <% end %>
