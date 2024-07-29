@@ -34,7 +34,7 @@
   <div class="carousel-inner">
     <% @artist.uploads.each_with_index do |image, index| %>
       <div class="carousel-item <%= 'active' if index == 0 %>">
-        <%= image_tag(image.s3_url(size: 'medium'), class: "d-block w-100", alt: "...") %>
+        <%= image_tag(image.s3_url(size: 'large'), class: "d-block w-100", alt: "...") %>
       </div>
     <% end %>
   </div>

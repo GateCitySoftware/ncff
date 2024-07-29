@@ -25,6 +25,8 @@ class Upload < ApplicationRecord
   validates :image_type, presence: true, inclusion: { in: %w[primary gallery] }
   validate :only_one_primary_image_per_uploadable
 
+  after_save :set_as_primary, if: -> { image_type != 'primary' && !primary_image_exists? }
+
   def s3_url(size:)
     selected_key = case size
                    when 'original'
@@ -63,8 +65,12 @@ class Upload < ApplicationRecord
   end
 
   def only_one_primary_image_per_uploadable
-    return unless image_type == 'primary' && uploadable.uploads.where(image_type: 'primary').where.not(id:).exists?
+    return unless image_type == 'primary' && primary_image_exists?
 
     errors.add(:image_type, 'can only have one primary image per uploadable')
+  end
+
+  def primary_image_exists?
+    uploadable.uploads.where(image_type: 'primary').where.not(id:).exists?
   end
 end
