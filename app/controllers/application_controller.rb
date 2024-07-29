@@ -3,6 +3,7 @@
 class ApplicationController < ActionController::Base
   helper_method :current_user
   helper_method :can_edit?
+  helper_method :admin_user?
 
   def uuid?(string)
     uuid_regex = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i
@@ -10,6 +11,18 @@ class ApplicationController < ActionController::Base
   end
 
   private
+
+  def admin_user?
+    true
+    # TODO: fix this!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    # TODO: fix this!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    # TODO: fix this!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    # TODO: fix this!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    # TODO: fix this!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    # TODO: fix this!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    # TODO: fix this!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    # TODO: fix this!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  end
 
   def can_edit?(resource = nil)
     return true

@@ -1,7 +1,12 @@
 <div id="stages" class="container mt-4 text-center">
   <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
     <% @data.stages.each do |stage| %>
-      <div class="col">
+      <div class="col my-4">
+        <% if admin_user? %>
+          <%= link_to edit_stage_path(stage.slug) do %>
+            <button class="btn btn-primary btn-sm"><%= "Edit #{stage.name}" %></button>
+          <% end %>
+        <% end %>
         <%= link_to 'https://maps.app.goo.gl/FBD4cg1AVZZm3bUt5', class: "text-decoration-none", target: "_blank" do %>
           <div class="card h-100 text-white <%= stage_css_color_classes[stage.name] %>">
             <div class="card-body">
@@ -18,3 +23,5 @@
     <% end %>
   </div>
 </div>
+
+
