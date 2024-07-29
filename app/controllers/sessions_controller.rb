@@ -17,8 +17,11 @@ class SessionsController < ApplicationController
       user.clear_login_token
       redirect_to root_path, notice: 'Logged in successfully.'
     else
-      redirect_to login_path, alert: 'Invalid or expired login link.'
+      redirect_to login_path
     end
+  end
+
+  def admin_auth
   end
 
   def destroy
