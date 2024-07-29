@@ -19,21 +19,23 @@ class UploadsController < ApplicationController
   # POST /uploads for handling upload of multiple images
   def create
     @upload = Upload.new
-    files = params[:images].reject(&:blank?) # not sure why its sending a blank string but this fixes it
+    files = Array(params[:images]).reject(&:blank?)
 
-    if files && !files.empty?
+    if files.present?
       uploader = S3Uploader.new(s3_bucket_name, s3_region)
       uploaded_files = []
 
       files.each do |file|
-        s3_key = generate_unique_key(file.original_filename)
+        original_key = generate_unique_key(file.original_filename)
 
-        if uploader.upload(file.tempfile.path, s3_key)
+        if uploader.upload(file.tempfile.path, original_key)
           uploaded_files << {
             filename: file.original_filename,
             content_type: file.content_type,
             file_size: file.size,
-            key: s3_key
+            key: original_key,
+            uploadable_type: params[:uploadable_type],
+            uploadable_id: params[:uploadable_id]
           }
         else
           @upload.errors.add(:base, "Failed to upload file #{file.original_filename} to S3")
@@ -41,28 +43,26 @@ class UploadsController < ApplicationController
       end
 
       if @upload.errors.empty?
-        uploaded_files.each do |file_data|
-          upload = Upload.new(file_data)
-          upload.uploadable_type = params[:uploadable_type]
-          upload.uploadable_id = params[:uploadable_id]
-          unless upload.save
-            @upload.errors.add(:base, "Failed to save file #{file_data[:filename]} to database")
-            uploader.delete_file(file_data[:key])
+        Upload.transaction do
+          uploaded_files.each do |file_data|
+            upload = Upload.create!(file_data)
+            ImageOptimizerWorker.perform_async(upload.id)
           end
         end
 
-        if @upload.errors.empty?
-          redirect_back(fallback_location: artists_path, notice: 'Upload was successfully created.')
-        else
-          render :new
-        end
+        redirect_back(fallback_location: artists_path, notice: 'Upload was successfully created.')
       else
+        cleanup_failed_uploads(uploader, uploaded_files)
         render :new
       end
     else
       @upload.errors.add(:images, 'must be selected')
       render :new
     end
+  rescue ActiveRecord::RecordInvalid => e
+    cleanup_failed_uploads(uploader, uploaded_files)
+    @upload.errors.add(:base, "Failed to save file: #{e.message}")
+    render :new
   end
 
   # specific update action
@@ -96,5 +96,9 @@ class UploadsController < ApplicationController
 
   def s3_region
     Upload::S3_REGION
+  end
+
+  def cleanup_failed_uploads(uploader, uploaded_files)
+    uploaded_files.each { |file_data| uploader.delete_file(file_data[:key]) }
   end
 end

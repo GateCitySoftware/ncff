@@ -1,9 +1,9 @@
 require 'aws-sdk-s3'
 
 class S3Uploader
-  def initialize(bucket_name, region = 'us-east-1')
-    @bucket_name = bucket_name
-    @region = region
+  def initialize(bucket_name, region)
+    @bucket_name = bucket_name || Upload::S3_BUCKET
+    @region = region || Upload::S3_REGION
     @s3 = Aws::S3::Resource.new(region: @region)
     @bucket = @s3.bucket(@bucket_name)
   end
