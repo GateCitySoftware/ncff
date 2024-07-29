@@ -79,9 +79,11 @@ end
 
 gem 'aws-sdk-s3'
 gem 'faker', '~> 2.20'
+gem 'figaro'
 gem 'gon'
 gem 'mini_magick'
 gem 'newrelic_rpm'
+gem 'postmark-rails'
 gem 'rubocop', '~> 1.64'
 gem 'scout_apm'
 gem 'sendgrid-ruby'

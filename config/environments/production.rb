@@ -74,16 +74,10 @@ Rails.application.configure do
   # config.active_job.queue_adapter = :resque
   # config.active_job.queue_name_prefix = "ncff_production"
 
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {
-    port: ENV['MAILGUN_SMTP_PORT'],
-    address: ENV['MAILGUN_SMTP_SERVER'],
-    user_name: ENV['MAILGUN_SMTP_LOGIN'],
-    password: ENV['MAILGUN_SMTP_PASSWORD'],
-    domain: 'www.ncfolkfestival.app',
-    authentication: :plain
+  config.action_mailer.delivery_method = :postmark
+  config.action_mailer.postmark_settings = {
+    api_token: ENV['postmark_api_token']
   }
-  config.action_mailer.default_url_options = { host: 'www.ncfolkfestival.app' }
 
   config.action_mailer.perform_caching = false
 
