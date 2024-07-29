@@ -176,6 +176,7 @@ GEM
     matrix (0.4.2)
     memory_profiler (1.0.2)
     method_source (1.1.0)
+    mini_magick (5.0.1)
     mini_mime (1.1.5)
     minitest (5.24.0)
     msgpack (1.7.2)
@@ -307,6 +308,12 @@ GEM
       websocket (~> 1.0)
     sendgrid-ruby (6.7.0)
       ruby_http_client (~> 3.4)
+    sidekiq (7.3.0)
+      concurrent-ruby (< 2)
+      connection_pool (>= 2.3.0)
+      logger
+      rack (>= 2.2.4)
+      redis-client (>= 0.22.2)
     sprockets (4.2.1)
       concurrent-ruby (~> 1.0)
       rack (>= 2.2.4, < 4)
@@ -358,6 +365,7 @@ DEPENDENCIES
   jbuilder
   letter_opener
   memory_profiler
+  mini_magick
   newrelic_rpm
   pg (~> 1.1)
   pry
@@ -369,6 +377,7 @@ DEPENDENCIES
   scout_apm
   selenium-webdriver
   sendgrid-ruby
+  sidekiq
   sprockets-rails
   stimulus-rails
   tzinfo-data

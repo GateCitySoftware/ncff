@@ -1,8 +1,12 @@
 # frozen_string_literal: true
 
+require 'sidekiq/web'
+
 Rails.application.routes.draw do
+  mount Sidekiq::Web => '/sidekiq'
+
   resources :favorites
-  root "artists#index"
+  root 'artists#index'
 
   resources :stage_schedules
   resources :embedded_contents
