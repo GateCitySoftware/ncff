@@ -12,6 +12,31 @@
 
 common: &default_settings
   # Required license key associated with your New Relic account.
+  # TODO: Remove and renew this!!!!!!!!!!!!
+  # TODO: Remove and renew this!!!!!!!!!!!!
+  # TODO: Remove and renew this!!!!!!!!!!!!
+  # TODO: Remove and renew this!!!!!!!!!!!!
+  # TODO: Remove and renew this!!!!!!!!!!!!
+  # TODO: Remove and renew this!!!!!!!!!!!!
+  # TODO: Remove and renew this!!!!!!!!!!!!
+  # TODO: Remove and renew this!!!!!!!!!!!!
+  # TODO: Remove and renew this!!!!!!!!!!!!
+  # TODO: Remove and renew this!!!!!!!!!!!!
+  # TODO: Remove and renew this!!!!!!!!!!!!
+  # TODO: Remove and renew this!!!!!!!!!!!!
+  # TODO: Remove and renew this!!!!!!!!!!!!
+  # TODO: Remove and renew this!!!!!!!!!!!!
+  # TODO: Remove and renew this!!!!!!!!!!!!
+  # TODO: Remove and renew this!!!!!!!!!!!!
+  # TODO: Remove and renew this!!!!!!!!!!!!
+  # TODO: Remove and renew this!!!!!!!!!!!!
+  # TODO: Remove and renew this!!!!!!!!!!!!
+  # TODO: Remove and renew this!!!!!!!!!!!!
+  # TODO: Remove and renew this!!!!!!!!!!!!
+  # TODO: Remove and renew this!!!!!!!!!!!!
+  # TODO: Remove and renew this!!!!!!!!!!!!
+  # TODO: Remove and renew this!!!!!!!!!!!!
+  # TODO: Remove and renew this!!!!!!!!!!!!
   license_key: '039c72dba77de31f103f6d1fe9331b82FFFFNRAL'
 
   # Your application name. Renaming here affects where data displays in New
