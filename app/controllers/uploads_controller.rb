@@ -46,7 +46,15 @@ class UploadsController < ApplicationController
         Upload.transaction do
           uploaded_files.each do |file_data|
             upload = Upload.create!(file_data)
-            ImageOptimizerWorker.perform_async(upload.id)
+            # TODO: make async!!!!!!!!!!
+            # TODO: make async!!!!!!!!!!
+            # TODO: make async!!!!!!!!!!
+            # TODO: make async!!!!!!!!!!
+            # TODO: make async!!!!!!!!!!
+            # TODO: make async!!!!!!!!!!
+            # TODO: make async!!!!!!!!!!
+            # ImageOptimizerWorker.perform_async(upload.id)
+            ImageOptimizerWorker.new.perform(upload.id)
           end
         end
 

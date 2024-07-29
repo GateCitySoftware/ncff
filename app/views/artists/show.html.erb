@@ -34,7 +34,7 @@
   <div class="carousel-inner">
     <% @artist.uploads.each_with_index do |image, index| %>
       <div class="carousel-item <%= 'active' if index == 0 %>">
-        <%= image_tag(image.s3_url, class: "d-block w-100", alt: "...") %>
+        <%= image_tag(image.s3_url(size: 'medium'), class: "d-block w-100", alt: "...") %>
       </div>
     <% end %>
   </div>
@@ -112,7 +112,7 @@
   <div class="row g-3 text-center">
     <% @artist.uploads.each do |upload| %>
       <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-        <%= image_tag(upload.s3_url, class: "img-fluid rounded", alt: "...") %>
+        <%= image_tag(upload.s3_url(size: 'medium'), class: "img-fluid rounded", alt: "...") %>
       </div>
     <% end %>
   </div>

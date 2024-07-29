@@ -25,8 +25,21 @@ class Upload < ApplicationRecord
   validates :image_type, presence: true, inclusion: { in: %w[primary gallery] }
   validate :only_one_primary_image_per_uploadable
 
-  def s3_url
-    "https://#{s3_bucket_name}.s3.#{s3_region}.amazonaws.com/#{key}"
+  def s3_url(size:)
+    selected_key = case size
+                   when 'original'
+                     key
+                   when 'small'
+                     small_key
+                   when 'medium'
+                     medium_key
+                   when 'large'
+                     large_key
+                   else
+                     raise ArgumentError, "Invalid size. Must be 'original', 'small', 'medium', or 'large'."
+                   end
+
+    "https://#{s3_bucket_name}.s3.#{s3_region}.amazonaws.com/#{selected_key}"
   end
 
   def set_as_primary

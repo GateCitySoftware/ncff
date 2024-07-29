@@ -80,7 +80,7 @@
     <% @artist.uploads.each do |upload| %>
       <div class="col">
         <div class="position-relative image-container <%= 'border border-3 border-primary' if upload.image_type == 'primary' %>">
-          <%= image_tag(upload.s3_url, class: "img-thumbnail w-100", alt: "Artist upload") %>
+          <%= image_tag(upload.s3_url(size: 'large'), class: "img-thumbnail w-100", alt: "Artist upload") %>
           <% if upload.image_type == 'primary' %>
             <p class="text-center fw-bold my-3">Primary Image</p> 
           <% end %>
