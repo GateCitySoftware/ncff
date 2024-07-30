@@ -37,9 +37,7 @@
     <%= favicon_link_tag 'ncff-logo.png' %>
     <title>NCFF</title>
   </head>
-  <body style="padding-top: 200px;">
-    <%= render 'shared/header' %>
-
+  <body>
     <% flash.each do |type, message| %>
       <% bootstrap_class = type == "notice" ? "alert-info" : "alert-danger" %>
       <div class="alert <%= bootstrap_class %> alert-dismissible fade show" role="alert">
@@ -54,9 +52,7 @@
       </div>
     <% end %>
 
-    <div class="container">
-      <%= yield %>
-    </div>
+    <%= yield %>
 
     <%= yield :full_width_content %>
 

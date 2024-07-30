@@ -4,18 +4,15 @@ require 'sidekiq/web'
 
 Rails.application.routes.draw do
   mount Sidekiq::Web => '/sidekiq'
-
-  resources :favorites
-  root 'artists#index'
-
-  resources :stage_schedules
-  resources :embedded_contents
-  resources :external_links
+  root 'home#index'
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
   get '/auth', to: 'sessions#auth'
   delete '/logout', to: 'sessions#destroy'
-
+  resources :favorites
+  resources :stage_schedules
+  resources :embedded_contents
+  resources :external_links
   resources :schedules
   resources :performances
   resources :stages
