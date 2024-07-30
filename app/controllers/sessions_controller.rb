@@ -4,10 +4,13 @@ class SessionsController < ApplicationController
   def new; end
 
   def create
-    user = User.find_or_create_by(email: params[:email])
-    user.generate_login_token
-    UserMailer.login_link(user).deliver_now
-    redirect_to login_path, notice: 'Check your email for the login link.'
+    session[:user_id] = User.find_or_create_by(identifier: params[:identifier])
+
+    if user.persisted?
+      redirect_to root_path, notice: 'Logged in successfully'
+    else
+      redirect_to root_path, notice: 'Account created and logged in successfully'
+    end
   end
 
   def auth
