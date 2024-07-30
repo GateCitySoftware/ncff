@@ -23,7 +23,7 @@
 </div>
 
 <div id="mobileCarouselControls" class="carousel slide" data-bs-ride="carousel">
-  <div class="carousel-inner">
+  <div>
     <% @data.stage_schedules.each_with_index do |(stage_name, performances), index| %>
       <div class="carousel-item <%= 'active' if index.zero? %>">
         <div class="container mt-4">

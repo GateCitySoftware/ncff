@@ -34,7 +34,7 @@
     <div class="row p-3">
       <div class="col-lg-3">
         <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
-          <div class="carousel-inner">
+          <div>
             <% vendor.uploads.each_with_index do |image, index| %>
               <div class="carousel-item <%= 'active' if index == 0 %>">
                 <%= image_tag(image.s3_url(size: 'small'), class: "d-block w-100", alt: "...") %>

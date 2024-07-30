@@ -33,7 +33,7 @@
     <span class="visually-hidden">Next</span>
   </button>
 
-  <div class="carousel-inner">
+  <div>
     <% @data.stage_schedules.each_slice(3).with_index do |stage_group, index| %>
       <div class="carousel-item mt-4 <%= 'active' if index.zero? %>">
         <div class="carousel-columns-wrapper row">
@@ -68,39 +68,3 @@
     <% end %>
   </div>
 </div> 
-
-<style>
-.carousel-columns-wrapper {
-  display: flex;
-}
-
-.carousel-column {
-  flex: 0 0 33.333%; /* Change to create three equal columns */
-  max-width: 33.333%; /* Match the flex-basis */
-}
-
-.carousel-column-body {
-  height: 100%;
-  overflow-y: auto;
-}
-
-.carousel-inner {
-  padding: 0.5em;
-}
-
-.carousel-control-prev,
-.carousel-control-next {
-  background-color: #1a1a1a;
-  width: 5vh;
-  height: 5vh;
-  border-radius: 50%;
-  transform: translateY(-50%);
-}
-
-@media (max-width: 767px) {
-  .carousel-column {
-    flex: 0 0 100%;
-    max-width: 100%;
-  }
-}
-</style>
