@@ -20,6 +20,21 @@ class HomeController < ApplicationController
   end
 
   def index_v3
+    @data = OpenStruct.new(
+      hero_images:,
+      statistics:,
+      offerings:,
+      artists:,
+      sponsors:,
+      stages:,
+      schedule_days:,
+      ticket_types:,
+      testimonials:,
+      gallery_items:,
+      attendee_avatars:,
+      footer_links:,
+      social_links:
+    )
   end
 
   def gcs_landing_page
