@@ -10,6 +10,12 @@ class ApplicationController < ActionController::Base
     uuid_regex.match?(string)
   end
 
+  def current_user
+    return unless session[:user_id].present?
+
+    @current_user ||= User.find_by(id: session[:user_id])
+  end
+
   private
 
   def admin_user?
