@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   get '/gcs_landing_page', to: 'home#gcs_landing_page'
   get '/landing_conference_example', to: 'home#landing_conference_example'
   get '/v3', to: 'home#index_v3'
+  get '/list_view', to: 'home#list_view'
+  get '/item_view', to: 'home#item_view'
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
   get '/auth', to: 'sessions#auth'

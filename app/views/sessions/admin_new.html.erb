@@ -1,0 +1,33 @@
+
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card mt-5">
+        <div class="card-body">
+          <h1 class="text-center mb-4">Admin Log In</h1>
+            <p class="text-center">Enter your admin email and password.</p>
+            <%= form_with(url: login_path, local: true, class: "needs-validation", novalidate: true) do |form| %>
+              <%= form.hidden_field :user_type, value: "admin" %>
+              <div class="mb-3">
+                <%= form.label :identifier, "Email", class: "form-label" %>
+                <%= form.email_field :identifier, required: true, class: "form-control", placeholder: "Enter your email" %>
+                <div class="invalid-feedback">
+                  Please provide a valid email address.
+                </div>
+              </div>
+              <div class="mb-3">
+                <%= form.label :password, "Password", class: "form-label" %>
+                <%= form.password_field :password, required: true, class: "form-control", placeholder: "Enter your password" %>
+                <div class="invalid-feedback">
+                  Please enter your password.
+                </div>
+              </div>
+              <div class="d-grid">
+                <%= form.submit "Login", class: "btn btn-primary" %>
+              </div>
+            <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

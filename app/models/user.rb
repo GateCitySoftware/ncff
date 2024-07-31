@@ -14,9 +14,10 @@
 class User < ApplicationRecord
   ROLES = %w[attendee vendor admin].freeze
 
-  validates :email, presence: true, uniqueness: true
   validates :identifier, presence: true, uniqueness: true
   validates :role, inclusion: { in: ROLES }
+
+  #  has_secure_password
 
   def generate_login_token
     self.login_token = SecureRandom.urlsafe_base64

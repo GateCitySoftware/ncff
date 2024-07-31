@@ -4,18 +4,19 @@
       <div class="card mt-5">
         <div class="card-body">
           <h1 class="text-center mb-4">Log In</h1>
-          <p class="text-center">Enter your email address and we'll send you a link to log in and start saving your Favorites.</p>
+          <p class="text-center">Enter your email address or phone number to start saving your Favorites.</p>
           <p class="text-center">No password, no username required.</p>
           <%= form_with(url: login_path, local: true, class: "needs-validation", novalidate: true) do |form| %>
+            <%= form.hidden_field :user_type, value: "fan" %>
             <div class="mb-3">
-              <%= form.label :email, class: "form-label" %>
-              <%= form.email_field :email, required: true, class: "form-control", placeholder: "Enter your email" %>
+              <%= form.label :identifier, "Email or Phone", class: "form-label" %>
+              <%= form.text_field :identifier, required: true, class: "form-control", placeholder: "Enter your email or phone" %>
               <div class="invalid-feedback">
-                Please provide a valid email address.
+                Please provide a valid email address or phone number.
               </div>
             </div>
             <div class="d-grid">
-              <%= form.submit "Send login link", class: "btn btn-primary" %>
+              <%= form.submit "Login", class: "btn btn-primary" %>
             </div>
           <% end %>
         </div>

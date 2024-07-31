@@ -1,256 +1,59 @@
-<!-- Page wrapper -->
-<main class="page-wrapper">
-  <header data-bs-theme="dark">
-    <!-- Navbar. Remove 'fixed-top' class to make the navigation bar scrollable with the page -->
-    <div class="navbar navbar-expand-lg fixed-top">
-      <div class="container">
-        <!-- Navbar brand (Logo) -->
-        <a class="navbar-brand pe-sm-3" href="index.html">
-          <span class="text-primary flex-shrink-0 me-2">
-            <svg width="35" height="32" viewBox="0 0 36 33" xmlns="http://www.w3.org/2000/svg">
-              <path fill="currentColor" d="M35.6,29c-1.1,3.4-5.4,4.4-7.9,1.9c-2.3-2.2-6.1-3.7-9.4-3.7c-3.1,0-7.5,1.8-10,4.1c-2.2,2-5.8,1.5-7.3-1.1c-1-1.8-1.2-4.1,0-6.2l0.6-1.1l0,0c0.6-0.7,4.4-5.2,12.5-5.7c0.5,1.8,2,3.1,3.9,3.1c2.2,0,4.1-1.9,4.1-4.2s-1.8-4.2-4.1-4.2c-2,0-3.6,1.4-4,3.3H7.7c-0.8,0-1.3-0.9-0.9-1.6l5.6-9.8c2.5-4.5,8.8-4.5,11.3,0L35.1,24C36,25.7,36.1,27.5,35.6,29z"></path>
-            </svg>
-          </span>
-          <span class="text-light opacity-90">Around</span>
-        </a>
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+  <head>
+    <meta charset="utf-8">
 
-        <!-- Mobile menu toggler (Hamburger) -->
-        <button class="navbar-toggler ms-sm-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
+    <!-- Viewport -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, viewport-fit=cover">
+    
+    <!-- SEO meta tags -->
+    <title>Around | Conference (Event)</title>
+    <meta name="description" content="Around - Multipurpose Bootstrap HTML Template">
+    <meta name="keywords" content="bootstrap, business, corporate, coworking space, services, creative agency, dashboard, e-commerce, mobile app showcase, saas, multipurpose, product landing, shop, software, ui kit, web studio, landing, light and dark mode, html5, css3, javascript, gallery, slider, touch, creative">
+    <meta name="author" content="Createx Studio">
 
-        <!-- Navbar collapse (Main navigation) -->
-        <nav class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav navbar-nav-scroll me-auto" style="--ar-scroll-height: 520px;">
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle active" href="#" data-bs-toggle="dropdown" aria-expanded="false">Landings</a>
-              <div class="dropdown-menu overflow-hidden p-0">
-                <!-- Dropdown menu content -->
-              </div>
-            </li>
-            <!-- More nav items -->
-          </ul>
-        </nav>
-      </div>
-    </div>
-  </header>
+    <!-- Webmanifest + Favicon / App icons -->
+    <link rel="manifest" href="/manifest.json">
+    <link rel="icon" type="image/png" href="assets/app-icons/icon-32x32.png" sizes="32x32">
+    <link rel="apple-touch-icon" href="assets/app-icons/icon-180x180.png">
+        
+    <!-- Theme switcher (color modes) -->
+    <script src="assets/js/theme-switcher.js"></script>
 
-  <!-- Hero -->
-  <section class="bg-dark position-relative py-5" data-bs-theme="dark">
-    <div class="position-absolute top-0 start-0 w-100 h-100" style="background-image: url(assets/img/landing/conference/noise.png); mix-blend-mode: soft-light; opacity: 12%"></div>
-    <div class="container position-relative z-2 py-md-3 py-lg-4 py-xl-5">
-      <div class="row align-items-center justify-content-center pt-5 pb-2 pb-sm-3 mt-sm-4">
-        <div class="col-10 col-sm-8 col-md-6 col-xl-5 offset-lg-1 offset-xl-2 order-md-2 pb-3 pb-md-0 mb-3 mb-sm-4 mb-md-0">
-          <!-- Hero image slider -->
-          <div class="swiper" data-swiper-options='{
-            "effect": "creative",
-            "loop": true,
-            "allowTouchMove": false,
-            "speed": 450,
-            "autoplay": {
-              "delay": 6000,
-              "disableOnInteraction": false
-            },
-            "creativeEffect": {
-              "prev": {
-                "shadow": true,
-                "translate": ["-20%", 0, -1]
-              },
-              "next": {
-                "translate": ["100%", 0, 0]
-              }
-            },
-            "thumbnails": {
-              "el": "#thumbnails",
-              "images": [
-                "assets/img/landing/conference/hero/th01.jpg",
-                "assets/img/landing/conference/hero/th02.jpg",
-                "assets/img/landing/conference/hero/th03.jpg"
-              ]
-            }
-          }' style="border-radius: 50%; border-bottom-right-radius: 0;">
-            <div class="swiper-wrapper">
-              <% @data.hero_images.each do |image| %>
-                <div class="swiper-slide">
-                  <div class="position-relative overflow-hidden" style="border-bottom-left-radius: 50%; border-top-left-radius: 50%;">
-                    <img src="<%= image.src %>" alt="<%= image.alt %>">
-                    <div class="d-flex align-items-end justify-content-end position-absolute start-0 bottom-0 w-100" style="height: 215px; background: linear-gradient(0deg, rgba(15, 17, 21, 0.8) 0%, rgba(16, 20, 24, 0) 100%);">
-                      <div class="text-end pe-4 pb-4">
-                        <h3 class="h5 mb-1"><%= image.name %></h3>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              <% end %>
-            </div>
-          </div>
+    <!-- Import Google font (Inter) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet" id="google-font">
 
-          <!-- Thumbnails -->
-          <div class="swiper-thumbnails swiper-thumbnails-circle flex-nowrap justify-content-end pt-4" id="thumbnails"></div>
-        </div>
+    <!-- Vendor styles -->
+    <link rel="stylesheet" media="screen" href="assets/vendor/swiper/swiper-bundle.min.css">
+    <link rel="stylesheet" media="screen" href="assets/vendor/simplebar/dist/simplebar.min.css">
+    <link rel="stylesheet" media="screen" href="assets/vendor/lightgallery/css/lightgallery-bundle.min.css">
 
-        <div class="col-sm-10 col-md-6 col-lg-5 order-md-1">
-          <div class="d-flex align-items-center lead pb-3 pb-sm-4 pb-lg-5 mb-2 mb-md-3 mb-lg-0 mb-xl-2">
-            <div class="text-light">SEPTEMBER 6-8, 2024</div>
-            <div class="text-warning mx-3 mx-sm-4">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12 0L12.6798 4.12733C13.2879 7.81883 16.1812 10.7121 19.8727 11.3202L24 12L19.8727 12.6798C16.1812 13.2879 13.2879 16.1812 12.6798 19.8727L12 24L11.3202 19.8727C10.7121 16.1812 7.81882 13.2879 4.12733 12.6798L0 12L4.12733 11.3202C7.81883 10.7121 10.7121 7.81882 11.3202 4.12733L12 0Z"></path>
-              </svg>
-            </div>
-            <div class="text-light">Greensboro, NC</div>
-          </div>
-          <h1 class="display-3 text-uppercase d-none d-lg-block pb-3 mb-4">North Carolina Folk Festival</h1>
-          <h1 class="display-5 text-uppercase d-lg-none pb-1 pb-sm-2">North Carolina Folk Festival</h1>
-          <p class="text-body fs-lg pb-2 pb-sm-3 pb-md-4 pb-xl-5 mb-xl-2">The North Carolina Folk Festival is a free 3-day music festival in downtown Greensboro, NC, celebrating its 10th year on September 6-8, 2024. Featuring diverse genres, world music, local artists, food trucks, a makers marketplace, and family activities.</p>
-          <div class="d-sm-flex">
-            <a class="btn btn-lg btn-primary w-100 w-md-auto mb-3 mb-sm-0 me-sm-3 me-lg-4" href="#artists" data-scroll data-scroll-offset="120">
-                Find and Favorite Artists
-              <i class="ai-arrow-down ms-2 me-n2"></i>
-            </a>
-            <a class="btn btn-lg btn-outline-light w-100 w-md-auto" href="#schedule">
-              <i class="ai-calendar me-2 ms-n2"></i>
-              View Stage Schedules
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+    <!-- Font icons -->
+    <link rel="stylesheet" href="assets/icons/around-icons.min.css">
 
-  <!-- Statistics -->
-  <section class="bg-secondary position-relative py-4 py-md-5">
-    <div class="container position-relative z-2">
-      <div class="row row-cols-2 row-cols-md-4">
-        <% @data.statistics.each do |stat| %>
-          <div class="col">
-            <div class="py-3 my-lg-2 my-xl-3">
-              <div class="text-dark display-4 mb-1"><%= stat.value %></div>
-              <p class="fs-xl mb-0"><%= stat.label %></p>
-            </div>
-          </div>
-        <% end %>
-      </div>
-    </div>
-  </section>
+    <!-- Theme styles + Bootstrap -->
+    <link rel="stylesheet" media="screen" href="assets/css/theme.min.css">
 
-<%= render 'offerings' %>
 
-  <!-- Artists -->
-  <section id="artists" class="container py-5 mb-lg-3 mb-xl-4 mt-xl-3 my-xxl-5">
-    <h2 class="h1 text-center pt-2 pt-sm-3 pt-md-4 pt-lg-5 mt-xl-2 mb-5">Meet our artists</h2>
-    <div class="mb-4 mb-lg-5 pb-4 px-3" data-simplebar>
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-4">
-        <% @data.artists.each do |artist| %>
-          <div class="col">
-            <a class="d-block text-center text-decoration-none" href="#" style="min-width: 210px;">
-              <img class="rounded-circle" src="<%= artist.card_image %>" width="120" alt="<%= artist.name %>">
-              <h3 class="h5 pt-4 mb-1"><%= artist.name %></h3>
-              <p class="text-body-secondary mb-0"><%= artist.genres %></p>
-            </a>
-          </div>
-        <% end %>
-      </div>
-    </div>
-    <div class="card bg-primary overflow-hidden py-2 py-sm-3 py-md-4 mb-sm-2 mb-md-4">
-      <div class="bg-dark position-absolute top-0 start-0 w-100 h-100 opacity-5"></div>
-      <div class="position-absolute top-0 start-0 w-100 h-100 opacity-15" style="background-image: url(assets/img/landing/conference/noise.png); mix-blend-mode: soft-light;"></div>
-      <div class="card-body position-relative d-sm-flex align-items-center justify-content-between z-2 text-center">
-        <div class="d-md-flex align-items-center pe-md-4">
-          <div class="d-none d-md-block text-warning flex-shrink-0 me-3">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-              <path d="M12 0L12.6798 4.12733C13.2879 7.81883 16.1812 10.7121 19.8727 11.3202L24 12L19.8727 12.6798C16.1812 13.2879 13.2879 16.1812 12.6798 19.8727L12 24L11.3202 19.8727C10.7121 16.1812 7.81882 13.2879 4.12733 12.6798L0 12L4.12733 11.3202C7.81883 10.7121 10.7121 7.81882 11.3202 4.12733L12 0Z"></path>
-            </svg>
-          </div>
-          <h2 class="text-light pb-1 pb-md-0 mb-md-0">Do you have an experience you want to share?</h2>
-        </div>
-        <a class="btn btn-lg btn-warning me-xl-4" href="#">Share your good vibes for all to see!</a>
-        </div>
-      </div>
-    </div>
-  </section>
+    <%= stylesheet_link_tag 'swiper-bundle.min', 'simplebar.min', 'lightgallery-bundle.min', 'around-icons.min', 'theme.min', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'theme-switcher', 'swiper-bundle.min', 'simplebar.min', 'lightgallery.min', 'lg-video.min', 'lg-fullscreen.min', 'lg-zoom.min', 'theme.min', 'data-turbolinks-track': 'reload' %>
+  </head>
 
-  <%= render 'schedule' %>
 
-  <!-- Contact form -->
-  <section class="bg-primary position-relative py-5" data-bs-theme="light">
-    <div class="bg-dark position-absolute top-0 start-0 w-100 h-100 opacity-5"></div>
-    <div class="position-absolute top-0 start-0 w-100 h-100 opacity-15" style="background-image: url(assets/img/landing/conference/noise.png); mix-blend-mode: soft-light;"></div>
-    <div class="container position-relative z-2 pt-sm-2 pb-3 py-md-4 py-lg-5">
-      <div class="row align-items-center">
-        <div class="col-md-6 col-lg-5 col-xxl-4 pb-2 pb-md-0 mb-4 mb-md-0">
-          <div class="text-warning pb-3 mb-1 mb-md-2 mb-lg-3">
-            <svg class="d-block" width="28" height="28" viewBox="0 0 28 28" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-              <path d="M14 0L14.659 4.14233C15.4424 9.06596 20.2555 12.9977 26.4868 13.8042L28 14L26.4868 14.1958C20.2555 15.0023 15.4424 18.934 14.659 23.8577L14 28L13.341 23.8577C12.5576 18.934 7.74447 15.0023 1.51323 14.1958L0 14L1.51323 13.8042C7.74447 12.9977 12.5576 9.06596 13.341 4.14234L14 0Z"></path>
-            </svg>
-          </div>
-          <h2 class="display-5 text-light mb-4 mb-md-5">Save your favorites, get directions, add to calendar</h2>
+  <!-- Body -->
+  <body>
 
-          <div class="d-flex align-items-center">
-            <div class="d-flex me-3">
-              <% @data.attendee_avatars.each_with_index do |avatar, index| %>
-                <div class="bg-white flex-shrink-0 rounded-circle position-relative z-<%= 4 - index %> <%= 'ms-n3' if index > 0 %>" style="padding: 3px;">
-                  <img class="rounded-circle" src="<%= avatar %>" width="48" alt="Avatar">
-                </div>
-              <% end %>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-6 offset-lg-1 offset-xxl-2">
-            <div class="card bg-white border-0 p-1 p-sm-2 p-lg-3">
-                <form class="card-body needs-validation p-4" novalidate>
-                <div class="mb-4">
-                    <label class="form-label fs-base" for="contactInput">Email or Phone Number</label>
-                    <input class="form-control form-control-lg" type="text" placeholder="Enter your email or phone number" required id="contactInput">
-                    <div class="invalid-feedback">Please provide a valid email address or phone number!</div>
-                </div>
-                <button class="btn btn-lg btn-warning" type="submit">Send request</button>
-                </form>
-            </div>
-        </div>
-      </div>
-    </div>
-  </section>
-</main>
-
-<!-- Footer -->
-<footer class="footer bg-dark py-5" data-bs-theme="dark">
-  <div class="container pt-1 pt-sm-2 pt-md-3 pt-lg-4 pt-xl-5">
-    <div class="border-bottom text-center pb-4">
-      <a class="navbar-brand d-inline-flex text-nav py-0 mb-3 mb-md-4" href="index.html">
-        <span class="text-primary flex-shrink-0 me-2">
-          <svg version="1.1" width="35" height="32" viewBox="0 0 36 33" xmlns="http://www.w3.org/2000/svg">
-            <path fill="currentColor" d="M35.6,29c-1.1,3.4-5.4,4.4-7.9,1.9c-2.3-2.2-6.1-3.7-9.4-3.7c-3.1,0-7.5,1.8-10,4.1c-2.2,2-5.8,1.5-7.3-1.1c-1-1.8-1.2-4.1,0-6.2l0.6-1.1l0,0c0.6-0.7,4.4-5.2,12.5-5.7c0.5,1.8,2,3.1,3.9,3.1c2.2,0,4.1-1.9,4.1-4.2s-1.8-4.2-4.1-4.2c-2,0-3.6,1.4-4,3.3H7.7c-0.8,0-1.3-0.9-0.9-1.6l5.6-9.8c2.5-4.5,8.8-4.5,11.3,0L35.1,24C36,25.7,36.1,27.5,35.6,29z"></path>
-          </svg>
-        </span>
-        <span class="text-light opacity-90">Around</span>
-      </a>
-      <ul class="nav justify-content-center py-1 pb-sm-2">
-        <% @data.footer_links.each do |link| %>
-          <li class="nav-item"><a class="nav-link py-2 px-3 mx-1" href="<%= link.url %>"><%= link.text %></a></li>
-        <% end %>
-      </ul>
-    </div>
-    <div class="d-sm-flex align-items-center justify-content-between pt-4 mt-2 mt-sm-0">
-      <div class="d-flex justify-content-center order-sm-2 mb-4 mb-sm-0">
-        <% @data.social_links.each do |social| %>
-          <a class="btn btn-icon btn-sm btn-secondary btn-<%= social.platform %> rounded-circle me-3" href="<%= social.url %>" aria-label="<%= social.platform.capitalize %>">
-            <i class="ai-<%= social.platform %>"></i>
-          </a>
-        <% end %>
-      </div>
-      <p class="nav fs-sm order-sm-1 text-center mb-0">
-        <span class="text-body-secondary">&copy; All rights reserved. Made by</span>
-        <a class="nav-link d-inline fw-normal p-0 ms-1" href="https://createx.studio/" target="_blank" rel="noopener">Createx Studio</a>
-      </p>
-    </div>
-  </div>
-</footer>
-
-<!-- Back to top button -->
-<a class="btn-scroll-top" href="#top" data-scroll aria-label="Scroll back to top">
-  <svg viewBox="0 0 40 40" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="20" cy="20" r="19" fill="none" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10"></circle>
-  </svg>
-  <i class="ai-arrow-up"></i>
-</a>
+    <!-- Page wrapper -->
+    <main class="page-wrapper">
+      <%= render 'shared/header' %>
+      <%= render 'v3_hero' %>
+      <%= render 'v3_statistics' %>
+      <%= render 'v3_target_audience' %>
+      <%= render 'v3_speakers' %>
+      <%= render 'schedule' %>
+      <%= render 'v3_contact_form' %>
+    </main>
+  </body>
+</html>
