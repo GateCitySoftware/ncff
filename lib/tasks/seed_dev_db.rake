@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 task create_vendors: :environment do
-  require 'vendor_generator'
+  require 'services/fake_vendor_generator'
 
   Vendor::CATEGORIES.keys.each do |category|
     50.times do
@@ -129,10 +129,15 @@ task seed_everything: :environment do
     tag_artists_with_genres
     attach_youtube_videos_to_artists
     add_photos_to_vendors
+    uploads:upload_to_s3
   ]
   tasks.each do |task|
     puts "Starting task: #{task}"
     Rake::Task[task].invoke
     puts "Finished task: #{task}"
   end
+
+  Artist.where("name ilike '%treaty%'").update(headliner: true)
+  Artist.where("name ilike '%mipso%'").update(headliner: true)
+  Artist.where("name ilike '%lonely%'").update(headliner: true)
 end

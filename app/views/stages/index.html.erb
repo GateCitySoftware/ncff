@@ -2,7 +2,7 @@
   <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
     <% @data.stages.each do |stage| %>
       <div class="col my-4">
-        <% if admin_user? %>
+        <% if current_user&.admin? %>
           <%= link_to edit_stage_path(stage.slug) do %>
             <button class="btn btn-primary btn-sm"><%= "Edit #{stage.name}" %></button>
           <% end %>

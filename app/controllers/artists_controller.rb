@@ -10,7 +10,8 @@ class ArtistsController < ApplicationController
   end
 
   # GET /artists/1 or /artists/1.json
-  def show; end
+  def show
+  end
 
   # GET /artists/new
   def new

@@ -2,7 +2,7 @@ class HomeController < ApplicationController
   layout false, only: %i[index_v3 list_view item_view]
 
   def landing_page
-    @data = OpenStruct.new(
+    @data = {
       hero_images:,
       statistics:,
       offerings:,
@@ -17,7 +17,7 @@ class HomeController < ApplicationController
       attendee_avatars:,
       footer_links:,
       social_links:
-    )
+    }
 
     render 'home/landing_page/base'
   end
@@ -50,49 +50,49 @@ class HomeController < ApplicationController
 
   def hero_images
     [
-      OpenStruct.new(src: 'assets/ncff-headliner-war-and-treaty.png', alt: 'Image of Performing Artist: War & Treaty',
-                     name: 'War & Treaty'),
-      OpenStruct.new(src: 'assets/ncff-headliner-mipso.png', alt: 'Image of Performing Artist: Mipso', name: 'Mipso'),
-      OpenStruct.new(src: 'assets/ncff-headeliner-los-lonely-boys.png',
-                     alt: 'Image of Performing Artist: Los Lonely Boys', name: 'Los Lonely Boys')
+      { src: 'assets/ncff-headliner-war-and-treaty.png', alt: 'Image of Performing Artist: War & Treaty',
+        name: 'War & Treaty' },
+      { src: 'assets/ncff-headliner-mipso.png', alt: 'Image of Performing Artist: Mipso', name: 'Mipso' },
+      { src: 'assets/ncff-headeliner-los-lonely-boys.png',
+        alt: 'Image of Performing Artist: Los Lonely Boys', name: 'Los Lonely Boys' }
     ]
   end
 
   def statistics
     [
-      OpenStruct.new(value: '100,000+', label: 'Attendees'),
-      OpenStruct.new(value: '50+', label: 'Artists'),
-      OpenStruct.new(value: '3', label: 'Days of Music'),
-      OpenStruct.new(value: '10', label: 'Years Running')
+      { value: '100,000+', label: 'Attendees' },
+      { value: '50+', label: 'Artists' },
+      { value: '3', label: 'Days of Music' },
+      { value: '10', label: 'Years Running' }
     ]
   end
 
   def offerings
     [
-      OpenStruct.new(
+      {
         id: 'offering1',
         name: 'Artists',
         description: 'Description of music offering',
         features: ['Feature 1', 'Feature 2', 'Feature 3']
-      ),
-      OpenStruct.new(
+      },
+      {
         id: 'offering1',
         name: 'Stages',
         description: 'Description of music offering',
         features: ['Feature 1', 'Feature 2', 'Feature 3']
-      ),
-      OpenStruct.new(
+      },
+      {
         id: 'offering1',
         name: 'Eat & Drink',
         description: 'Description of music offering',
         features: ['Feature 1', 'Feature 2', 'Feature 3']
-      ),
-      OpenStruct.new(
+      },
+      {
         id: 'offering1',
         name: 'Shop & Do',
         description: 'Description of music offering',
         features: ['Feature 1', 'Feature 2', 'Feature 3']
-      )
+      }
     ]
   end
 
@@ -117,18 +117,18 @@ class HomeController < ApplicationController
 
   def sponsors
     [
-      OpenStruct.new(
+      {
         name: 'Sponsor Name',
         description: 'Sponsor description',
         logo_light: 'path/to/logo_light.png',
         logo_dark: 'path/to/logo_dark.png'
-      )
+      }
     ]
   end
 
   def ticket_types
     [
-      OpenStruct.new(
+      {
         name: 'FREE',
         description: 'Free ticket description',
         price: 0,
@@ -136,29 +136,29 @@ class HomeController < ApplicationController
         bg_class: 'bg-secondary',
         bg_image: nil,
         features: ['Feature 1', 'Feature 2', 'Feature 3']
-      )
+      }
     ]
   end
 
   def testimonials
     [
-      OpenStruct.new(
+      {
         name: 'John Doe',
         avatar: 'path/to/avatar.jpg',
         rating: 5,
         content: 'Testimonial content here'
-      )
+      }
     ]
   end
 
   def gallery_items
     [
-      OpenStruct.new(
+      {
         col_class: 'col-md-4',
         full_image: 'path/to/full_image.jpg',
         thumbnail: 'path/to/thumbnail.jpg',
         alt: 'Image description'
-      )
+      }
     ]
   end
 
@@ -172,16 +172,16 @@ class HomeController < ApplicationController
 
   def footer_links
     [
-      OpenStruct.new(url: '#', text: 'About'),
-      OpenStruct.new(url: '#', text: 'Contact')
+      { url: '#', text: 'About' },
+      { url: '#', text: 'Contact' }
     ]
   end
 
   def social_links
     [
-      OpenStruct.new(platform: 'facebook', url: '#'),
-      OpenStruct.new(platform: 'twitter', url: '#'),
-      OpenStruct.new(platform: 'instagram', url: '#')
+      { platform: 'facebook', url: '#' },
+      { platform: 'twitter', url: '#' },
+      { platform: 'instagram', url: '#' }
     ]
   end
 end

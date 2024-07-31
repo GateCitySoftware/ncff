@@ -12,12 +12,12 @@
     <div class="d-flex align-items-center">
       <select id="stageSelect" class="form-select me-3 form-select-lg primary-bg">
         <option value="All">All Stages</option>
-        <% @data.stages.each do |stage| %>
+        <% @data[:stages].each do |stage| %>
           <option value="<%= stage %>"><%= stage %></option>
         <% end %>
       </select>
       <ul class="nav nav-tabs flex-nowrap mb-0" role="tablist">
-        <% @data.schedule_days.each_with_index do |day, index| %>
+        <% @data[:schedule_days].each_with_index do |day, index| %>
           <li class="nav-item me-1">
             <a class="nav-link px-3 px-sm-4 <%= 'active' if index == 0 %>" href="#day<%= index + 1 %>" data-bs-toggle="tab" role="tab"><%= day[:name] %></a>
           </li>
@@ -26,7 +26,7 @@
     </div>
   </div>
   <div class="tab-content border-top border-bottom mb-3 mb-sm-4 mb-lg-5">
-    <% @data.schedule_days.each_with_index do |day, index| %>
+    <% @data[:schedule_days].each_with_index do |day, index| %>
       <div class="tab-pane fade <%= 'show active' if index == 0 %>" id="day<%= index + 1 %>" role="tabpanel">
         <% day[:events].each do |event| %>
           <div class="row py-3 my-2 my-md-3 event-row" data-stage="<%= event[:stage] %>">
