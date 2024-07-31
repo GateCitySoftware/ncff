@@ -12,3 +12,6 @@ Rails.application.config.assets.version = '1.0'
 # application.js, application.css, and all non-JS/CSS in the app/assets
 # folder are already added.
 # Rails.application.config.assets.precompile += %w( admin.js admin.css )
+
+Rails.application.config.assets.precompile += %w[swiper-bundle.min.css simplebar.min.css lightgallery-bundle.min.css
+                                                 around-icons.min.css theme.min.css theme-switcher.js swiper-bundle.min.js simplebar.min.js lightgallery.min.js lg-video.min.js lg-fullscreen.min.js lg-zoom.min.js theme.min.js]
