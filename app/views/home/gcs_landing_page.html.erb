@@ -1,0 +1,99 @@
+    <header>
+        <h1>Your Business Name</h1>
+        <nav>
+            <a href="#about">About</a>
+            <a href="#features">Features</a>
+            <a href="#testimonials">Testimonials</a>
+            <a href="#contact">Contact</a>
+            <a href="#" id="hidden-link" style="color: transparent;">Join The Conversation</a>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero">
+            <h2>Welcome to Your Business</h2>
+            <p>Your compelling value proposition goes here.</p>
+        </section>
+
+        <section id="about">
+            <h2>About Us</h2>
+            <p>Information about your business and its mission.</p>
+        </section>
+
+        <section id="features">
+            <h2>Our Features</h2>
+            <ul>
+                <li>Feature 1</li>
+                <li>Feature 2</li>
+                <li>Feature 3</li>
+            </ul>
+        </section>
+
+        <section id="testimonials">
+            <h2>What Our Customers Say</h2>
+            <!-- Add testimonials here -->
+        </section>
+
+        <section id="contact">
+            <h2>Contact Us</h2>
+            <!-- Add contact form or information here -->
+        </section>
+
+        <section id="founders-club">
+            <h2>Join the Founders Club</h2>
+            <p>Complete our questionnaire for a chance to join our pilot program!</p>
+            <button id="start-questionnaire">Start Questionnaire</button>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Your Business Name. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Hidden "Join The Conversation" Link
+        document.getElementById('hidden-link').addEventListener('click', function(e) {
+            e.preventDefault();
+            const name = prompt("Enter your name to join the conversation:");
+            if (name) {
+                alert(`Welcome, ${name}! You've joined the conversation.`);
+                // Here you could redirect to a private page or show hidden content
+            }
+        });
+
+        // Founders Club Questionnaire
+        let questionnaireResponses = 0;
+
+        document.getElementById('start-questionnaire').addEventListener('click', function() {
+            const email = prompt("Enter your email address:");
+            if (email) {
+                // Simple email validation
+                if (email.includes('@') && email.includes('.')) {
+                    const questions = [
+                        "What's your biggest challenge in our industry?",
+                        "How often would you use our product?",
+                        "What features are most important to you?"
+                    ];
+                    
+                    for (let question of questions) {
+                        const answer = prompt(question);
+                        if (!answer) break;  // User cancelled
+                    }
+                    
+                    questionnaireResponses++;
+                    let discount;
+                    if (questionnaireResponses <= 1) {
+                        discount = 100;
+                    } else if (questionnaireResponses <= 20) {
+                        discount = 75;
+                    } else {
+                        discount = 50;
+                    }
+                    
+                    alert(`Thank you for completing the questionnaire! You've been added to our pilot program with a ${discount}% discount.`);
+                } else {
+                    alert("Please enter a valid email address.");
+                }
+            }
+        });
+    </script>

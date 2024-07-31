@@ -5,6 +5,7 @@ require 'sidekiq/web'
 Rails.application.routes.draw do
   mount Sidekiq::Web => '/sidekiq'
   root 'home#index'
+  get '/gcs_landing_page', to: 'home#gcs_landing_page'
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
   get '/auth', to: 'sessions#auth'
