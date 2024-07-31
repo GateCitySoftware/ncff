@@ -3,7 +3,7 @@
 <% @data.vendors.each_with_index do |vendor, index| %>
   <div class="row rounded text-white p-4 m-4 <%= repeat_colors_by_index(index) %>">
 
-    <% if can_edit?(vendor) %>
+    <% if current_user&.admin? || current_user&.owner?(vendor))) %>
       <div class="row">
         <% if @data.page_name == 'Unapproved Listings' %>
           <div class="col d-flex justify-content-start">

@@ -1,0 +1,11 @@
+    <div class="mb-3">
+      <h3>Genres</h3>
+      <div class="tag-selection">
+        <%= form.collection_check_boxes :tag_ids, @tags, :id, :name do |b| %>
+          <div class="form-check">
+            <%= b.check_box(class: "form-check-input") %>
+            <%= b.label(class: "form-check-label") %>
+          </div>
+        <% end %>
+      </div>
+    </div>

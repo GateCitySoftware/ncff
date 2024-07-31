@@ -34,24 +34,14 @@
       <%= form.text_area :bio, class: "form-control", rows: 5 %>
     </div>
 
-    <div class="mb-3">
-      <h3>Genres</h3>
-      <div class="tag-selection">
-        <%= form.collection_check_boxes :tag_ids, @tags, :id, :name do |b| %>
-          <div class="form-check">
-            <%= b.check_box(class: "form-check-input") %>
-            <%= b.label(class: "form-check-label") %>
-          </div>
-        <% end %>
-      </div>
-    </div>
+    <p>TODO: add back genre checkboxes</p>
 
     <div class="mb-3">
       <h3>Social Media Links / Website</h3>
       <div class="row">
         <%= form.fields_for :external_links do |link_form| %>
           <% ExternalLink::LINK_TYPES.each do |key, value| %>
-            <div class="col-lg-6 col-md-12 mb-3">
+            <div class="col-lg-4 col-md-6 mb-3">
               <%= link_form.label "#{key}_url".to_sym, "#{value[:display_text]} URL", class: "form-label" %>
               <%= link_form.text_field "#{key}_url".to_sym,
                     class: "form-control",

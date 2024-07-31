@@ -5,7 +5,7 @@
       <% @data[:headliner_artists].each do |artist| %>
         <!-- Headliner Artists -->
         <div class="col">
-          <a class="d-block text-center text-decoration-none artist-link" href="<%= artist[:link] %>" data-bs-toggle="modal" data-bs-target="#artistModal" data-artist-name="<%= artist[:name] %>" data-artist-image="<%= artist[:image] %>" data-artist-genres="<%= artist[:genres] %>" style="min-width: 210px;">
+          <a class="d-block text-center text-decoration-none artist-link" href="<%= artist[:link] %>" data-bs-toggle="modal" data-bs-target="#artistModal" data-artist-slug="<%= artist[:slug] %>" data-artist-name="<%= artist[:name] %>" data-artist-image="<%= artist[:image] %>" data-artist-genres="<%= artist[:genres] %>" style="min-width: 210px;">
             <%= image_tag(artist[:image], class: "rounded border-shadow") %>
             <h3 class="h5 pt-4 mb-1"><%= artist[:name] %></h3>
             <p class="text-body-secondary mb-0"><%= artist[:genres] %></p>
@@ -17,7 +17,7 @@
       <% @data[:artists].each do |artist| %>
         <div class="col">
           <!-- For other artists -->
-          <a class="d-block text-center text-decoration-none artist-link" href="<%= artist[:link] %>" data-bs-toggle="modal" data-bs-target="#artistModal" data-artist-name="<%= artist[:name] %>" data-artist-image="<%= artist[:image] %>" data-artist-genres="<%= artist[:genres].join(', ') %>" style="min-width: 210px;">
+          <a class="d-block text-center text-decoration-none artist-link" href="<%= artist[:link] %>" data-bs-toggle="modal" data-bs-target="#artistModal" data-artist-slug="<%= artist[:slug] %>" data-artist-name="<%= artist[:name] %>" data-artist-image="<%= artist[:image] %>" data-artist-genres="<%= artist[:genres].join(', ') %>" style="min-width: 210px;">
             <%= image_tag(artist[:image], class: "rounded border-shadow") %>
             <h3 class="h5 pt-4 mb-1"><%= artist[:name] %></h3>
           </a>
@@ -49,7 +49,7 @@
       <div class="modal-body">
         <img id="modalArtistImage" src="" alt="Artist Image" class="img-fluid rounded mb-3">
         <h3 id="modalArtistName"></h3>
-        <p id="modalArtistGenres"></p>
+        <div id="modalArtistGenres"></div>
         <div class="d-grid gap-2">
           <a id="viewBioBtn" href="#" class="btn btn-primary">View Bio</a>
           <button id="addToFavoritesBtn" class="btn btn-success">Add to Favorites</button>
@@ -74,16 +74,16 @@ document.addEventListener('DOMContentLoaded', function() {
       const artistName = this.getAttribute('data-artist-name');
       const artistImage = this.getAttribute('data-artist-image');
       const artistGenres = this.getAttribute('data-artist-genres');
-      const artistBioUrl = this.getAttribute('data-artist-bio-url');
+      const artistBioUrl = this.getAttribute('data-artist-slug');
       const artistId = this.getAttribute('data-artist-id');
       
       // Populate the modal
       document.getElementById('modalArtistName').textContent = artistName;
       document.getElementById('modalArtistImage').src = artistImage;
-      document.getElementById('modalArtistGenres').textContent = artistGenres;
+      document.getElementById('modalArtistGenres').html = artistGenres;
       
       // Update CTA buttons
-      document.getElementById('viewBioBtn').href = artistBioUrl;
+      document.getElementById('viewBioBtn').href = '/artists/' + artistBioUrl;
       document.getElementById('addToFavoritesBtn').onclick = () => addToFavorites(artistId);
       document.getElementById('addToCalendarBtn').onclick = () => addToCalendar(artistId);
       

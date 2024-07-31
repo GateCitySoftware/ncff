@@ -1,4 +1,4 @@
-<% if can_edit? %>
+<% if current_user.admin? %>
   <div class="mt-3 d-flex justify-content-end">
     <%= link_to 'Edit', edit_artist_path(@artist), class: 'btn btn-primary my-4' %>
   </div>

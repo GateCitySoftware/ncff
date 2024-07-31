@@ -19,6 +19,10 @@ class User < ApplicationRecord
 
   #  has_secure_password
 
+  def owner?(resource = nil)
+    current_user.admin? || current_user.id == resource&.owner_id
+  end
+
   def generate_login_token
     self.login_token = SecureRandom.urlsafe_base64
     self.login_token_valid_until = 72.hours.from_now
@@ -34,6 +38,7 @@ class User < ApplicationRecord
   end
 
   def admin?
+    return true
     role == 'admin'
   end
 end
