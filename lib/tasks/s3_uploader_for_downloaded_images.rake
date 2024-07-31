@@ -66,6 +66,10 @@ namespace :uploads do
         upload.image_type = 'primary'
         upload.save!
 
+        puts 'Optimizing images....'
+        ImageOptimizerWorker.new.perform(upload.id)
+        puts 'Finished images....'
+
         puts "Uploaded #{file_name} to S3 and created Upload record"
       else
         puts "Failed to upload #{file_name} to S3"
