@@ -4,7 +4,7 @@ require 'sidekiq/web'
 
 Rails.application.routes.draw do
   mount Sidekiq::Web => '/sidekiq'
-  root 'home#index'
+  root 'home#landing_page'
   get '/gcs_landing_page', to: 'home#gcs_landing_page'
   get '/landing_conference_example', to: 'home#landing_conference_example'
   get '/v3', to: 'home#index_v3'

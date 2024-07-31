@@ -1,7 +1,7 @@
 class HomeController < ApplicationController
   layout false, only: %i[index_v3 list_view item_view]
 
-  def index
+  def landing_page
     @data = OpenStruct.new(
       hero_images:,
       statistics:,
@@ -18,9 +18,7 @@ class HomeController < ApplicationController
       social_links:
     )
 
-    return unless params[:format] == 'v1'
-
-    render :index_v1
+    render 'home/landing_page/base'
   end
 
   def list_view
