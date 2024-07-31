@@ -15,7 +15,7 @@
 #  slug        :string
 #
 class Vendor < ApplicationRecord
-  include CardImage
+  include PrimaryImage
   include Sluggable
   include Uploadable
   include Linkable

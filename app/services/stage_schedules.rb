@@ -43,7 +43,7 @@ class StageSchedules
   def format_artist(artist)
     {
       name: artist.name,
-      avatar: artist.card_image
+      avatar: artist.primary_image
     }
   end
 

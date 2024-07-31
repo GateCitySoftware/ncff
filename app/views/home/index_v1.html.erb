@@ -143,7 +143,7 @@
         <% @data.artists.each do |artist| %>
           <div class="col">
             <a class="d-block text-center text-decoration-none" href="#" style="min-width: 210px;">
-              <img class="rounded-circle" src="<%= artist.card_image %>" width="120" alt="<%= artist.name %>">
+              <img class="rounded-circle" src="<%= artist.primary_image %>" width="120" alt="<%= artist.name %>">
               <h3 class="h5 pt-4 mb-1"><%= artist.name %></h3>
               <p class="text-body-secondary mb-0"><%= artist.genres %></p>
             </a>

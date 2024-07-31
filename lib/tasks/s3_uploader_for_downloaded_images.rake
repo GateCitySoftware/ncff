@@ -37,7 +37,7 @@ namespace :uploads do
       { file_name: 'wild_roots.png', artist_name: 'Wild Roots' }
     ]
 
-    s3_uploader = S3Uploader.new('gcs-ncff')
+    s3_uploader = S3Uploader.new
 
     Dir.glob(Rails.root.join('app', 'assets', 'images', 'artist_card_images', '*')).each do |file_path|
       next if File.directory?(file_path)

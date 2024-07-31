@@ -14,7 +14,7 @@
 #  slug                 :string
 #
 class Stage < ApplicationRecord
-  include CardImage
+  include PrimaryImage
   include Sluggable
   include Uploadable
 

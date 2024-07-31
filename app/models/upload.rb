@@ -14,7 +14,7 @@
 #  uploadable_id   :uuid
 #
 class Upload < ApplicationRecord
-  S3_BUCKET =  'gcs-ncff'
+  S3_BUCKET =  Rails.env.production? ? 'gcs-ncff' : 'gcs-ncff-dev'
   S3_REGION =  'us-east-2'
   belongs_to :uploadable, polymorphic: true
 

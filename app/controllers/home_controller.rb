@@ -7,6 +7,7 @@ class HomeController < ApplicationController
       statistics:,
       offerings:,
       artists:,
+      headliner_artists:,
       sponsors:,
       stages:,
       schedule_days:,
@@ -96,11 +97,20 @@ class HomeController < ApplicationController
   end
 
   def artists
-    Artist.all.map do |artist|
+    all_artists.reject { |artist| artist[:headliner] }.shuffle
+  end
+
+  def headliner_artists
+    all_artists.select { |artist| artist[:headliner] }.shuffle
+  end
+
+  def all_artists
+    @all_artists ||= Artist.all.map do |artist|
       {
         name: artist.name,
         genres: artist.genres,
-        image: artist.card_image
+        image: artist.primary_image(size: 'medium'),
+        headliner: artist.headliner?
       }
     end
   end

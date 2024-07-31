@@ -1,8 +1,8 @@
 <div class="col-sm-12 col-md-4">
     <div class="card rounded-2 my-3 border-1 border-gray shadow">
         <%= link_to artist_path(artist.slug), class: 'text-decoration-none' do %>
-            <% if artist.card_image %>
-                <%= image_tag(artist.card_image, class: 'card-img-top') %>
+            <% if artist.primary_image %>
+                <%= image_tag(artist.primary_image(size: 'medium'), class: 'card-img-top') %>
             <% else %>
                 <%= image_tag(artist_stock_image, class: 'card-img-top') %>
             <% end %>

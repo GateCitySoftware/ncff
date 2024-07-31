@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_31_135856) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_31_180851) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -22,6 +22,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_31_135856) do
     t.string "slug"
     t.string "tagline"
     t.uuid "owner_id"
+    t.boolean "headliner", default: false, null: false
     t.index ["slug"], name: "index_artists_on_slug", unique: true
   end
 

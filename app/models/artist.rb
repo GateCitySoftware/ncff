@@ -12,7 +12,7 @@
 #  slug       :string
 #
 class Artist < ApplicationRecord
-  include CardImage
+  include PrimaryImage
   include Sluggable
   include Uploadable
   include Linkable
