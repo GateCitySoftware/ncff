@@ -1,4 +1,6 @@
 class HomeController < ApplicationController
+  layout false, only: [:index_v3]
+
   def index
     @data = OpenStruct.new(
       hero_images:,
@@ -15,6 +17,9 @@ class HomeController < ApplicationController
       footer_links:,
       social_links:
     )
+  end
+
+  def index_v3
   end
 
   def gcs_landing_page

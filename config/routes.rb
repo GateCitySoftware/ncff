@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   root 'home#index'
   get '/gcs_landing_page', to: 'home#gcs_landing_page'
   get '/landing_conference_example', to: 'home#landing_conference_example'
+  get '/v3', to: 'home#index_v3'
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
   get '/auth', to: 'sessions#auth'
