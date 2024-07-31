@@ -1,64 +1,17 @@
-      <!-- Speakers -->
-      <section class="container py-5 mb-lg-3 mb-xl-4 mt-xl-3 my-xxl-5">
-        <h2 class="h1 text-center pt-2 pt-sm-3 pt-md-4 pt-lg-5 mt-xl-2 mb-5">Artist Lineup</h2>
-        <div class="mb-4 mb-lg-5 pb-4 px-3" data-simplebar>
-          <div class="row row-cols-lg-4 flex-nowrap flex-lg-wrap gy-lg-5 mx-n3">
-            <div class="col">
-              <a class="d-block text-center text-decoration-none" href="#" style="min-width: 210px;">
-                <img class="rounded-circle" src="assets/img/avatar/36.jpg" width="120" alt="Avatar">
-                <h3 class="h5 pt-4 mb-1">Marvin McKinney</h3>
-                <p class="text-body-secondary mb-0">Founder &amp; CEO, Uber</p>
-              </a>
-            </div>
-            <div class="col">
-              <a class="d-block text-center text-decoration-none" href="#" style="min-width: 210px;">
-                <img class="rounded-circle" src="assets/img/avatar/37.jpg" width="120" alt="Avatar">
-                <h3 class="h5 pt-4 mb-1">Jenny Wilson</h3>
-                <p class="text-body-secondary mb-0">Marketer, Glassdoor</p>
-              </a>
-            </div>
-            <div class="col">
-              <a class="d-block text-center text-decoration-none" href="#" style="min-width: 210px;">
-                <img class="rounded-circle" src="assets/img/avatar/38.jpg" width="120" alt="Avatar">
-                <h3 class="h5 pt-4 mb-1">Albert Flores</h3>
-                <p class="text-body-secondary mb-0">Product Manager, Google</p>
-              </a>
-            </div>
-            <div class="col">
-              <a class="d-block text-center text-decoration-none" href="#" style="min-width: 210px;">
-                <img class="rounded-circle" src="assets/img/avatar/39.jpg" width="120" alt="Avatar">
-                <h3 class="h5 pt-4 mb-1">Anneta Nikson</h3>
-                <p class="text-body-secondary mb-0">Founder &amp; CEO, Perfecto</p>
-              </a>
-            </div>
-            <div class="col">
-              <a class="d-block text-center text-decoration-none" href="#" style="min-width: 210px;">
-                <img class="rounded-circle" src="assets/img/avatar/40.jpg" width="120" alt="Avatar">
-                <h3 class="h5 pt-4 mb-1">Esther Howard</h3>
-                <p class="text-body-secondary mb-0">VP of Strategy, Stretto Inc.</p>
-              </a>
-            </div>
-            <div class="col">
-              <a class="d-block text-center text-decoration-none" href="#" style="min-width: 210px;">
-                <img class="rounded-circle" src="assets/img/avatar/41.jpg" width="120" alt="Avatar">
-                <h3 class="h5 pt-4 mb-1">Jerome Bell</h3>
-                <p class="text-body-secondary mb-0">Strategic Advisor, Shopify</p>
-              </a>
-            </div>
-            <div class="col"><a class="d-block text-center text-decoration-none" href="#" style="min-width: 210px;">
-              <img class="rounded-circle" src="assets/img/avatar/42.jpg" width="120" alt="Avatar">
-                <h3 class="h5 pt-4 mb-1">Kathryn Murphy</h3>
-                <p class="text-body-secondary mb-0">Marketing Coordinator</p>
-              </a>
-            </div>
-            <div class="col">
-              <a class="d-block text-center text-decoration-none" href="#" style="min-width: 210px;">
-                <img class="rounded-circle" src="assets/img/avatar/43.jpg" width="120" alt="Avatar">
-                <h3 class="h5 pt-4 mb-1">Guy Hawkins</h3>
-                <p class="text-body-secondary mb-0">President of Sales</p>
-              </a>
-            </div>
-          </div>
-        </div>
-        <%= render 'v3_share_experience' %>
-      </section>
+<section class="container py-5 mb-lg-3 mb-xl-4 mt-xl-3 my-xxl-5">
+  <h2 class="h1 text-center pt-2 pt-sm-3 pt-md-4 pt-lg-5 mt-xl-2 mb-5">Artist Lineup</h2>
+  <div class="mb-4 mb-lg-5 pb-4 px-3" data-simplebar>
+    <div class="row row-cols-lg-4 flex-nowrap flex-lg-wrap gy-lg-5 mx-n3">
+        <% @data.artists.each do |artist| %>
+      <div class="col">
+          <a class="d-block text-center text-decoration-none" href="#" style="min-width: 210px;">
+            <%= image_tag(artist[:image], class: "rounded-circle", width: "120") %>
+            <h3 class="h5 pt-4 mb-1"><%= artist[:name] %></h3>
+            <p class="text-body-secondary mb-0"><%= artist[:genres] %></p>
+          </a>
+      </div>
+        <% end %>
+    </div>
+  </div>
+  <%= render 'v3_share_experience' %>
+</section>

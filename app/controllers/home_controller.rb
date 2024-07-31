@@ -96,13 +96,13 @@ class HomeController < ApplicationController
   end
 
   def artists
-    [
-      OpenStruct.new(
-        name: 'Artist Name',
-        genres: 'Folk, Rock',
-        card_image: 'path/to/artist_image.jpg'
-      )
-    ]
+    Artist.all.map do |artist|
+      {
+        name: artist.name,
+        genres: artist.genres,
+        image: artist.card_image
+      }
+    end
   end
 
   def sponsors
