@@ -7,7 +7,7 @@ module CardImage
 
   def card_image
     card_image_upload = uploads.find_by(image_type: 'primary')
-    card_image_upload&.s3_url(size: 'small')
+    card_image_upload&.s3_url(size: 'small') || 'https://via.placeholder.com/300x200'
   end
 
   private

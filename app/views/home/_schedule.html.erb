@@ -1,0 +1,76 @@
+<!-- Schedule -->
+<section id="schedule" class="container py-5 mb-lg-2 mt-lg-3 my-xl-4 my-xxl-5">
+  <div class="d-md-flex align-items-center justify-content-between pt-2 pt-sm-3 pb-3 mt-md-3 mb-3 mb-lg-4">
+    <div class="d-flex align-items-center mb-4 mb-md-0">
+      <h2 class="h1 mb-0">Stage Schedules</h2>
+      <div class="text-warning flex-shrink-0 ps-sm-1 ms-3">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 0L12.6798 4.12733C13.2879 7.81883 16.1812 10.7121 19.8727 11.3202L24 12L19.8727 12.6798C16.1812 13.2879 13.2879 16.1812 12.6798 19.8727L12 24L11.3202 19.8727C10.7121 16.1812 7.81882 13.2879 4.12733 12.6798L0 12L4.12733 11.3202C7.81883 10.7121 10.7121 7.81882 11.3202 4.12733L12 0Z"></path>
+        </svg>
+      </div>
+    </div>
+    <div class="d-flex align-items-center">
+      <select id="stageSelect" class="form-select me-3 form-select-lg primary-bg">
+        <option value="All">All Stages</option>
+        <% @data.stages.each do |stage| %>
+          <option value="<%= stage %>"><%= stage %></option>
+        <% end %>
+      </select>
+      <ul class="nav nav-tabs flex-nowrap mb-0" role="tablist">
+        <% @data.schedule_days.each_with_index do |day, index| %>
+          <li class="nav-item me-1">
+            <a class="nav-link px-3 px-sm-4 <%= 'active' if index == 0 %>" href="#day<%= index + 1 %>" data-bs-toggle="tab" role="tab"><%= day[:name] %></a>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+  <div class="tab-content border-top border-bottom mb-3 mb-sm-4 mb-lg-5">
+    <% @data.schedule_days.each_with_index do |day, index| %>
+      <div class="tab-pane fade <%= 'show active' if index == 0 %>" id="day<%= index + 1 %>" role="tabpanel">
+        <% day[:events].each do |event| %>
+          <div class="row py-3 my-2 my-md-3 event-row" data-stage="<%= event[:stage] %>">
+            <div class="col-md-3">
+              <div class="h6 mb-2 mb-md-0"><%= event[:time_range] %></div>
+            </div>
+            <div class="col-md-6">
+              <h3 class="h4 mb-0"><%= event[:title] %></h3>
+              <p class="pt-2 pt-md-3 mb-md-0"><%= event[:description] %></p>
+            </div>
+            <div class="col-md-3 text-md-end">
+              <div class="d-inline-flex">
+                <% event[:artists].each_with_index do |artist, artist_index| %>
+                  <div class="bg-light flex-shrink-0 rounded-circle position-relative z-<%= 4 - artist_index %> <%= 'ms-n3' if artist_index > 0 %>" style="padding: 3px;">
+                    <img class="rounded-circle" src="<%= artist[:avatar] %>" width="48" alt="<%= artist[:name] %>">
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+          <% unless event == day[:events].last %>
+            <hr class="event-row" data-stage="<%= event[:stage] %>">
+          <% end %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const stageSelect = document.getElementById('stageSelect');
+  const eventRows = document.querySelectorAll('.event-row');
+
+  stageSelect.addEventListener('change', function() {
+    const selectedStage = this.value;
+    
+    eventRows.forEach(row => {
+      if (selectedStage === 'All' || row.dataset.stage === selectedStage) {
+        row.style.display = '';
+      } else {
+        row.style.display = 'none';
+      }
+    });
+  });
+});
+</script>

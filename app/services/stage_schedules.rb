@@ -4,39 +4,46 @@ class StageSchedules
   end
 
   def generate
-    group_performances_by_date.transform_values do |performances_by_date|
-      order_stages(group_performances_by_stage(performances_by_date))
-    end
+    {
+      stages: Stage.pluck(:name),
+      schedule_days: group_performances_by_date.map do |date, performances|
+        {
+          name: date_to_day_name(date),
+          events: format_performances(performances)
+        }
+      end
+    }
   end
 
   private
 
   def group_performances_by_date
-    Performance.all.includes(:stage, :artist).group_by { |performance| performance.start_time.to_date.to_s }
+    Performance.all.includes(:stage, :artist).group_by { |performance| performance.start_time.to_date }
   end
 
-  def group_performances_by_stage(performances)
-    performances.group_by { |performance| performance.stage.name }
-                .transform_values { |stage_performances| format_performances(stage_performances) }
-  end
-
-  def order_stages(stages_hash)
-    stages_hash.sort_by { |stage, data| Stage::STAGE_ORDER.index(stage) }
+  def date_to_day_name(date)
+    date.strftime('%A')
   end
 
   def format_performances(performances)
     performances.map { |performance| format_performance(performance) }
-                .sort_by { |perf| perf[:start_time] }
+                .sort_by { |perf| perf[:time_range] }
   end
 
   def format_performance(performance)
     {
-      start_time: performance.start_time,
-      display_time: display_time(performance),
-      artist_name: performance.artist.name,
-      artist_genres: performance.artist.genres,
-      artist_image: performance.artist.card_image,
-      artist_slug: performance.artist.slug
+      time_range: display_time(performance),
+      title: performance.artist.name,
+      description: "Performance at #{performance.stage.name}",
+      stage: performance.stage.name,
+      artists: [format_artist(performance.artist)]
+    }
+  end
+
+  def format_artist(artist)
+    {
+      name: artist.name,
+      avatar: artist.card_image
     }
   end
 
