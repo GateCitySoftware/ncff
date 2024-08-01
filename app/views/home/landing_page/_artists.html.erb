@@ -8,8 +8,14 @@
           <a class="d-block text-center text-decoration-none artist-link" href="<%= artist[:link] %>" data-bs-toggle="modal" data-bs-target="#artistModal" data-artist-slug="<%= artist[:slug] %>" data-artist-name="<%= artist[:name] %>" data-artist-image="<%= artist[:image] %>" data-artist-genres="<%= artist[:genres] %>" style="min-width: 210px;">
             <%= image_tag(artist[:image], class: "rounded border-shadow") %>
             <h3 class="h5 pt-4 mb-1"><%= artist[:name] %></h3>
-            <p class="text-body-secondary mb-0"><%= artist[:genres] %></p>
           </a>
+          <div class="row">
+            <div class="d-flex flex-wrap gap-2 justify-content-center">
+              <% artist[:genres].each do |genre| %>
+                <a href="#" class="btn btn-outline-primary btn-sm"><%= genre %></a>
+              <% end %>
+            </div>
+          </div>
         </div>
       <% end %>
     </div>
