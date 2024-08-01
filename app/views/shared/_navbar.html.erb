@@ -38,7 +38,16 @@
 
           <% if current_user&.admin?%>
             <li class="nav-item">
-              <a href="#" class="nav-link">Favorites</a>
+              <a class="nav-link" href="/artists">Artists</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/stage_schedules">Schedule</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/stages">Stages</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/vendors?unapproved_listings=true">Unapproved Listings</a>
             </li>
           <% end %>
 
