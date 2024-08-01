@@ -1,30 +1,31 @@
 <!-- Contact form -->
-  <section class="bg-primary position-relative py-5" data-bs-theme="light">
-    <div class="bg-dark position-absolute top-0 start-0 w-100 h-100 opacity-5"></div>
-    <div class="position-absolute top-0 start-0 w-100 h-100 opacity-15" style="background-image: url(assets/img/landing/conference/noise.png); mix-blend-mode: soft-light;"></div>
-    <div class="container position-relative z-2 pt-sm-2 pb-3 py-md-4 py-lg-5">
-      <div class="row align-items-center">
-        <div class="col-md-6 col-lg-5 col-xxl-4 pb-2 pb-md-0 mb-4 mb-md-0">
-          <div class="text-warning pb-3 mb-1 mb-md-2 mb-lg-3">
-            <svg class="d-block" width="28" height="28" viewBox="0 0 28 28" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-              <path d="M14 0L14.659 4.14233C15.4424 9.06596 20.2555 12.9977 26.4868 13.8042L28 14L26.4868 14.1958C20.2555 15.0023 15.4424 18.934 14.659 23.8577L14 28L13.341 23.8577C12.5576 18.934 7.74447 15.0023 1.51323 14.1958L0 14L1.51323 13.8042C7.74447 12.9977 12.5576 9.06596 13.341 4.14234L14 0Z"></path>
-            </svg>
-          </div>
-          <h2 class="display-6 text-light mb-4 mb-md-5">Save your favorites to get reminders and directions</h2>
+<section class="bg-primary position-relative py-5" data-bs-theme="light">
+  <div class="bg-dark position-absolute top-0 start-0 w-100 h-100 opacity-5"></div>
+  <div class="position-absolute top-0 start-0 w-100 h-100 opacity-15" style="background-image: url(assets/img/landing/conference/noise.png); mix-blend-mode: soft-light;"></div>
+  <div class="container position-relative z-2 pt-sm-2 pb-3 py-md-4 py-lg-5">
+    <div class="row align-items-center">
+      <div class="col-md-6 col-lg-5 col-xxl-4 pb-2 pb-md-0 mb-4 mb-md-0">
+        <div class="text-warning pb-3 mb-1 mb-md-2 mb-lg-3">
+          <svg class="d-block" width="28" height="28" viewBox="0 0 28 28" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path d="M14 0L14.659 4.14233C15.4424 9.06596 20.2555 12.9977 26.4868 13.8042L28 14L26.4868 14.1958C20.2555 15.0023 15.4424 18.934 14.659 23.8577L14 28L13.341 23.8577C12.5576 18.934 7.74447 15.0023 1.51323 14.1958L0 14L1.51323 13.8042C7.74447 12.9977 12.5576 9.06596 13.341 4.14234L14 0Z"></path>
+          </svg>
         </div>
+        <h2 class="display-6 text-light mb-4 mb-md-5">Save your favorites to get reminders and directions</h2>
+      </div>
 
-        <div class="col-md-6 offset-lg-1 offset-xxl-2">
-            <div class="card bg-white border-0 p-1 p-sm-2 p-lg-3">
-                <form class="card-body needs-validation p-4" novalidate>
-                <div class="mb-4">
-                    <label class="form-label fs-base" for="contactInput">Email or Phone Number</label>
-                    <input class="form-control form-control-lg" type="text" placeholder="Enter your email or phone number" required id="contactInput">
-                    <div class="invalid-feedback">Please provide a valid email address or phone number!</div>
-                </div>
-                <button class="btn btn-lg btn-warning" type="submit">Save My Favorites</button>
-                </form>
+      <div class="col-md-6 offset-lg-1 offset-xxl-2">
+        <div class="card bg-white border-0 p-1 p-sm-2 p-lg-3">
+          <%= form_with(url: login_path, local: true, class: "card-body needs-validation p-4", novalidate: true) do |form| %>
+            <%= form.hidden_field :user_type, value: "fan" %>
+            <div class="mb-4">
+              <%= form.label :identifier, "Email or Phone Number", class: "form-label fs-base" %>
+              <%= form.text_field :identifier, required: true, class: "form-control form-control-lg", placeholder: "Enter your email or phone number", id: "contactInput" %>
+              <div class="invalid-feedback">Please provide a valid email address or phone number!</div>
             </div>
+            <%= form.submit "Save My Favorites", class: "btn btn-lg btn-warning" %>
+          <% end %>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>

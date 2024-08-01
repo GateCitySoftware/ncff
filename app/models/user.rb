@@ -19,6 +19,7 @@ class User < ApplicationRecord
 
   validates :identifier, presence: true, uniqueness: true
   validates :role, inclusion: { in: ROLES }
+  validate :valid_identifier
 
   has_secure_password
 
@@ -50,5 +51,16 @@ class User < ApplicationRecord
 
   def fan?
     role == 'attendee'
+  end
+
+  private
+
+  def valid_identifier
+    email_regex = /\A[\w+\-.]+@[a-z\d-]+(\.[a-z\d-]+)*\.[a-z]+\z/i
+    phone_regex = /\A(\+1|1)?[-.\s]?\(?[2-9]\d{2}\)?[-.\s]?\d{3}[-.\s]?\d{4}\z/
+
+    return if identifier&.match?(email_regex) || identifier&.match?(phone_regex)
+
+    errors.add(:base, 'Must enter a valid email or phone number')
   end
 end
