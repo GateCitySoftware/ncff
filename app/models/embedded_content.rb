@@ -2,7 +2,7 @@
 #
 # Table name: embedded_contents
 #
-#  id              :bigint           not null, primary key
+#  id              :uuid             not null, primary key
 #  url             :string
 #  content_type    :string
 #  title           :string

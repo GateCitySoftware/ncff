@@ -56,6 +56,7 @@ class SessionsController < ApplicationController
         @user.password = params[:password]
         @user.role = 'vendor'
         @user.save!
+        @vendor = Vendor.create!(owner_id: @user.id, category: params[:category], name: params[:name])
         login_success("Vendor account created and logged in as: #{@user.identifier}")
       else
         login_failure('Password is required for new vendor accounts')
@@ -69,7 +70,11 @@ class SessionsController < ApplicationController
 
   def login_success(message)
     session[:user_id] = @user.id
-    redirect_to root_path, notice: message
+    if @user.vendor?
+      redirect_to edit_vendor_path(@vendor), notice: message
+    else
+      redirect_to root_path, notice: message
+    end
   end
 
   def login_failure(message)

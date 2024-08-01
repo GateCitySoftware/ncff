@@ -2,11 +2,12 @@
 #
 # Table name: tags
 #
-#  id         :bigint           not null, primary key
-#  name       :string
-#  category   :string
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id           :uuid             not null, primary key
+#  name         :string
+#  category     :string
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  sub_category :string           not null
 #
 class Tag < ApplicationRecord
   validates :name, presence: true, uniqueness: { scope: :category }

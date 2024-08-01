@@ -4,12 +4,15 @@
 #
 # Table name: users
 #
-#  id                      :bigint           not null, primary key
+#  id                      :uuid             not null, primary key
 #  email                   :string
 #  login_token             :string
 #  login_token_valid_until :datetime
 #  created_at              :datetime         not null
 #  updated_at              :datetime         not null
+#  role                    :string           default("attendee"), not null
+#  identifier              :string           not null
+#  password_digest         :string
 #
 class User < ApplicationRecord
   ROLES = %w[attendee vendor admin].freeze

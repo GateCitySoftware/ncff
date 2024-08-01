@@ -1,10 +1,8 @@
-# frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: vendors
 #
-#  id          :bigint           not null, primary key
+#  id          :uuid             not null, primary key
 #  name        :string
 #  description :text
 #  image       :string
@@ -13,6 +11,12 @@
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  slug        :string
+#  phone       :string
+#  email       :string
+#  address     :text
+#  owner_id    :uuid
+#  approved    :boolean          default(FALSE), not null
+#  archived    :boolean          default(FALSE), not null
 #
 class Vendor < ApplicationRecord
   include PrimaryImage

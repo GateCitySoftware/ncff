@@ -2,7 +2,7 @@
 #
 # Table name: uploads
 #
-#  id              :bigint           not null, primary key
+#  id              :uuid             not null, primary key
 #  filename        :string
 #  content_type    :string
 #  file_size       :integer
@@ -12,6 +12,9 @@
 #  image_type      :string           default("gallery"), not null
 #  uploadable_type :string
 #  uploadable_id   :uuid
+#  small_key       :string
+#  medium_key      :string
+#  large_key       :string
 #
 class Upload < ApplicationRecord
   S3_BUCKET =  Rails.env.production? ? 'gcs-ncff' : 'gcs-ncff-dev'

@@ -10,6 +10,9 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  slug       :string
+#  tagline    :string
+#  owner_id   :uuid
+#  headliner  :boolean          default(FALSE), not null
 #
 class Artist < ApplicationRecord
   include PrimaryImage

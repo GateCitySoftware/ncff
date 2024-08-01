@@ -2,7 +2,7 @@
 #
 # Table name: external_links
 #
-#  id            :bigint           not null, primary key
+#  id            :uuid             not null, primary key
 #  url           :string
 #  link_type     :string
 #  linkable_type :string           not null

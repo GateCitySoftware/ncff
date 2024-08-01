@@ -2,8 +2,8 @@
 #
 # Table name: tagged_items
 #
-#  id            :bigint           not null, primary key
-#  tag_id        :bigint           not null
+#  id            :uuid             not null, primary key
+#  tag_id        :uuid             not null
 #  taggable_type :string           not null
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
