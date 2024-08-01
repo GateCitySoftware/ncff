@@ -58,7 +58,7 @@
     <title>NCFF</title>
   </head>
   <body>
-    <%= render 'shared/navbar' %>
+    <%= render 'shared/navbar' unless controller.class.name == "SessionsController" %>
     <div class="container-fluid" style="margin-top: 150px;">
       <%= yield %>
     </div>

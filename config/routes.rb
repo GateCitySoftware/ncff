@@ -4,17 +4,17 @@ require 'sidekiq/web'
 
 Rails.application.routes.draw do
   mount Sidekiq::Web => '/sidekiq'
+
   root 'home#landing_page'
-  get '/gcs_landing_page', to: 'home#gcs_landing_page'
-  get '/landing_conference_example', to: 'home#landing_conference_example'
-  get '/v3', to: 'home#index_v3'
-  get '/todo', to: 'home#todo'
   get '/list_view', to: 'home#list_view'
   get '/item_view', to: 'home#item_view'
+  get '/todo', to: 'home#todo'
+
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
   get '/auth', to: 'sessions#auth'
   delete '/logout', to: 'sessions#destroy'
+
   resources :favorites
   resources :stage_schedules
   resources :embedded_contents

@@ -24,14 +24,16 @@ class Vendor < ApplicationRecord
   include Uploadable
   include Linkable
 
-  has_many :tagged_items, as: :taggable
-  has_many :tags, through: :tagged_items
-
   CATEGORIES = {
     eat_drink: 'Eat & Drink',
     shop_do: 'Shop & Do',
     activation: 'Activations'
   }.freeze
+
+  validates :category, inclusion: { in: CATEGORIES.keys.map(&:to_s) }
+
+  has_many :tagged_items, as: :taggable
+  has_many :tags, through: :tagged_items
 
   scope :by_category, ->(category) { where(category:) }
   scope :by_tag, ->(tag) { joins(:tags).where(tags: { name: tag }) }
@@ -39,6 +41,10 @@ class Vendor < ApplicationRecord
   sluggable_attributes :name
 
   default_scope { where(approved: true, archived: false) }
+
+  def category_name
+    CATEGORIES[category.to_sym]
+  end
 
   def cuisine_map
     Tag.where(category: 'food-drink', sub_category: 'cuisine')

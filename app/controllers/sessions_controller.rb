@@ -20,9 +20,16 @@ class SessionsController < ApplicationController
         @user.role = 'attendee'
         @user.password = SecureRandom.hex(16)
         @user.save!
+      elsif @user.fan?
+        session[:user_id] = @user.id
+        redirect_to root_path, notice: "Logged in as fan: #{@user.identifier}"
+      elsif @user.vendor?
+        flash.now[:alert] = 'This is an Vendor account, password is required.'
+        render :vendor_new
+      elsif @user.admin?
+        flash.now[:alert] = 'This is an Admin account, password is required.'
+        render :admin_new
       end
-      session[:user_id] = @user.id
-      redirect_to root_path, notice: "Logged in as fan: #{@user.identifier}"
     when 'admin'
       if @user.persisted? && @user.admin? && @user.authenticate(params[:password])
         session[:user_id] = @user.id

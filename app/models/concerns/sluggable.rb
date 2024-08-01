@@ -15,8 +15,6 @@ module Sluggable
   private
 
   def generate_slug
-    return if slug.present?
-
     slug_attrs = self.class.class_variable_get(:@@slug_attrs)
     slug_base = slug_attrs.map { |attr| send(attr).to_s }.join(' ')
     self.slug = unique_slug(slug_base)

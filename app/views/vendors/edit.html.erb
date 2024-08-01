@@ -1,1 +1,180 @@
-<%= render 'form' %>
+<div class="container">
+  <h1 class="mb-4">Edit Vendor Listing</h1>
+
+<h3>Basic Info</h3>
+
+<div class="row mb-4">
+  <%= form_with(model: @vendor, local: true, class: "needs-validation", novalidate: true) do |form| %>
+    <%= render 'shared/flash' %>
+    
+    <div class="row g-3">
+      <div class="col-md-3">
+        <%= form.label :name, class: "form-label" %>
+        <%= form.text_field :name, class: "form-control" %>
+      </div>
+      <div class="col-md-3">
+        <%= form.label :category, "Category", class: "form-label" %>
+        <%= form.select :category, options_for_select([["Eat & Drink", "eat_drink"], ["Shop & Do", "shop_do"]], @vendor.category), { include_blank: "Select a category" }, { class: "form-select", required: true } %>
+        <div class="invalid-feedback">
+          Please select a category.
+        </div>
+      </div>
+      <div class="col-md-3">
+        <%= form.label :website, class: "form-label" %>
+        <%= form.url_field :website, class: "form-control" %>
+      </div>
+      <div class="col-md-3">
+        <%= form.label :phone, class: "form-label" %>
+        <%= form.telephone_field :phone, class: "form-control" %>
+      </div>
+      <div class="col-md-3">
+        <%= form.label :email, class: "form-label" %>
+        <%= form.email_field :email, class: "form-control" %>
+      </div>
+      <div class="col-md-3">
+        <%= form.label :address, class: "form-label" %>
+        <%= form.text_field :address, class: "form-control", rows: 2 %>
+      </div>
+      <div class="col-md-3">
+        <%= form.label :city, class: "form-label" %>
+        <%= form.text_field :city, class: "form-control", rows: 2 %>
+      </div>
+      <div class="col-md-3">
+        <%= form.label :state, class: "form-label" %>
+        <%= form.text_field :state, class: "form-control", rows: 2 %>
+      </div>
+      <div class="col-12">
+        <%= form.label :description, class: "form-label" %>
+        <%= form.text_area :description, class: "form-control", rows: 3 %>
+      </div>
+      <div class="col-12">
+        <%= form.submit class: "btn btn-primary" %>
+      </div>
+    </div>
+<hr class="my-4">
+
+    <div class="mb-3">
+      <h3>Tags</h3>
+      <div class="row">
+        <%= form.collection_check_boxes :tag_ids, @tags, :id, :name do |b| %>
+          <div class="col-lg-2 col-md-4 col-sm- 12">
+            <div class="form-check">
+              <%= b.check_box(class: "form-check-input") %>
+              <%= b.label(class: "form-check-label") %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+<hr class="my-4">
+    <div class="mb-3">
+      <h3>Social Media Links / Website</h3>
+      <div class="row">
+        <%= form.fields_for :external_links do |link_form| %>
+          <% ExternalLink::LINK_TYPES.each do |key, value| %>
+            <div class="col-lg-4 col-md-6 mb-3">
+              <%= link_form.label "#{key}_url".to_sym, "#{value[:display_text]} URL", class: "form-label" %>
+              <%= link_form.text_field "#{key}_url".to_sym,
+                    class: "form-control",
+                    placeholder: "Copy and paste #{value[:display_text]} link here or leave blank",
+                    value: @vendor.external_links.find{|link| link.link_type == key}&.url
+                    # TODO: this is a likely N+1 query, fix htis!!!!!!!!!
+                %>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <%= form.submit class: "btn btn-primary" %>
+    </div>
+  <% end %>
+
+<hr class="my-4">
+
+<h3>Images</h3>
+
+<div class="container">
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4 justify-content-center">
+    <% @vendor.uploads.each do |upload| %>
+      <div class="col">
+        <div class="position-relative image-container <%= 'border border-3 border-primary' if upload.image_type == 'primary' %>">
+          <%= image_tag(upload.s3_url(size: 'large'), class: "img-thumbnail w-100", alt: "Artist upload") %>
+          <% if upload.image_type == 'primary' %>
+            <p class="text-center fw-bold my-3">Primary Image</p> 
+          <% end %>
+          <div class="overlay d-flex justify-content-center align-items-center">
+            <%= button_to "Delete", upload_path(upload), method: :delete, class: "btn btn-danger btn-sm me-2", data: { confirm: "Are you sure?" } %>
+            <% unless upload.image_type == 'primary' %>
+              <%= button_to "Set as Primary", set_primary_upload_path(upload), method: :patch, class: "btn btn-primary btn-sm" %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<style>
+  .image-container {
+    position: relative;
+    overflow: hidden;
+  }
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .image-container:hover .overlay {
+    opacity: 1;
+  }
+</style>
+
+<script>
+  document.addEventListener('load', function() {
+    const containers = document.querySelectorAll('.image-container');
+    containers.forEach(container => {
+      container.addEventListener('mouseenter', () => {
+        container.querySelector('.overlay').style.opacity = '1';
+      });
+      container.addEventListener('mouseleave', () => {
+        container.querySelector('.overlay').style.opacity = '0';
+      });
+    });
+  });
+</script>
+
+
+<h3 class="mt-4">Upload Images</h3>
+
+<%= form_with(url: @upload, local: true, multipart: true, class: "mb-4") do |form| %>
+  <% if @upload.errors.any? %>
+    <div class="alert alert-danger" role="alert">
+      <h4 class="alert-heading"><%= pluralize(@upload.errors.count, "error") %> prohibited this upload from being saved:</h4>
+      <ul>
+        <% @upload.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= form.hidden_field :uploadable_type, value: @vendor.class.name %>
+  <%= form.hidden_field :uploadable_id, value: @vendor.id %>
+
+  <div class="mb-3">
+    <%= form.label :images, class: "form-label" %>
+    <div class="input-group">
+      <%= form.file_field :images, multiple: true, accept: 'image/*', class: "form-control", id: "customFile" %>
+      <%= form.submit 'Upload Images', class: "btn btn-primary" %>
+    </div>
+  </div>
+<% end %>
+</div>

@@ -29,14 +29,10 @@ class VendorsController < ApplicationController
   def create
     @vendor = Vendor.new(vendor_params)
 
-    respond_to do |format|
-      if @vendor.save
-        format.html { redirect_to vendor_url(@vendor), notice: 'Vendor was successfully created.' }
-        format.json { render :show, status: :created, location: @vendor }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @vendor.errors, status: :unprocessable_entity }
-      end
+    if @vendor.save
+      redirect_to vendor_url(@vendor), notice: 'Vendor was successfully created.'
+    else
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -47,18 +43,14 @@ class VendorsController < ApplicationController
     just_approved = true if params[:vendor][:approved] == 'true' && user_can_edit && @vendor.update(approved: true)
     just_archived = true if params[:vendor][:archived] == 'true' && user_can_edit && @vendor.update(archived: true)
 
-    respond_to do |format|
-      if just_approved
-        format.html { redirect_to vendors_url(unapproved_listings: true), notice: 'Listing was successfully approved.' }
-      elsif just_archived
-        format.html { redirect_to vendors_url(unapproved_listings: true), notice: 'Vendor was successfully archived.' }
-      elsif @vendor.update(vendor_params)
-        format.html { redirect_to vendors_url, notice: 'Vendor was successfully updated.' }
-        format.json { render :show, status: :ok, location: @vendor }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @vendor.errors, status: :unprocessable_entity }
-      end
+    if just_approved
+      redirect_to vendors_url(unapproved_listings: true), notice: 'Listing was successfully approved.'
+    elsif just_archived
+      redirect_to vendors_url(unapproved_listings: true), notice: 'Vendor was successfully archived.'
+    elsif @vendor.update(vendor_params)
+      redirect_to edit_vendor_url(@vendor), notice: 'Vendor was successfully updated.'
+    else
+      redirect_to edit_vendor_url(@vendor), notice: "Updates were not saved: #{@vendor.errors.full_messages}"
     end
   end
 
@@ -81,6 +73,7 @@ class VendorsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def vendor_params
-    params.require(:vendor).permit(:name, :description, :image, :website, :social_media_links, :category)
+    params.require(:vendor).permit(:name, :description, :image, :website, :social_media_links, :category, :email,
+                                   :phone, :address)
   end
 end

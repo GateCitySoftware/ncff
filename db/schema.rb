@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_31_180851) do
+ActiveRecord::Schema[7.1].define(version: 2024_08_01_151101) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -146,6 +146,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_31_180851) do
     t.uuid "owner_id"
     t.boolean "approved", default: false, null: false
     t.boolean "archived", default: false, null: false
+    t.string "city"
+    t.string "state"
     t.index ["slug"], name: "index_vendors_on_slug", unique: true
   end
 
