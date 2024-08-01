@@ -1,16 +1,8 @@
 class HomeController < ApplicationController
-  layout false, only: %i[index_v3 list_view item_view landing_conference_example]
+  layout false, only: %i[landing_page list_view item_view landing_conference_example]
 
   def landing_page
-    @data = {
-      stats:,
-      artists:,
-      headliner_artists:,
-      stages:,
-      schedule_days:
-    }
-
-    render 'home/landing_page/base'
+    @data = { stats:, artists:, headliner_artists:, stages:, schedule_days: }
   end
 
   def list_view
@@ -19,7 +11,7 @@ class HomeController < ApplicationController
   def item_view
   end
 
-  def landing_conference_example
+  def todo
   end
 
   private

@@ -1,0 +1,71 @@
+<!-- Navbar with offcanvas menu on mobile -->
+<header class="header navbar navbar-expand-lg fixed-top bg-light text-black border-bottom">
+  <div class="container">
+    <a href="#" class="navbar-brand pe-xl-2 me-4">
+      <%= image_tag('ncff-10-anv-logo.png', style: 'height:80px;') %>
+    </a>
+    <button type="button" class="navbar-toggler me-2" data-bs-toggle="offcanvas" data-bs-target="#primaryMenu" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="offcanvas offcanvas-end" id="primaryMenu">
+      <div class="offcanvas-header">
+        <h5 class="mt-1 mb-0">Menu</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body pt-0">
+        <ul class="navbar-nav p-0 justify-content-end">
+
+          <% if current_user.nil? %>
+            <li class="nav-item">
+              <a class="btn btn-lg btn-outline-dark" href="/login">LOGIN</a>
+            </li>
+          <% end %>
+
+          <% if current_user&.fan?%>
+            <li class="nav-item">
+              <a href="#" class="nav-link">Favorites</a>
+            </li>
+          <% end %>
+
+          <% if current_user&.vendor?%>
+            <li class="nav-item">
+              <a href="#" class="nav-link">Preview Vendor Listing</a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link">Edit Vendor Listing</a>
+            </li>
+          <% end %>
+
+          <% if current_user&.admin?%>
+            <li class="nav-item">
+              <a href="#" class="nav-link">Favorites</a>
+            </li>
+          <% end %>
+
+          <% if current_user.present? %>
+            <li class="nav-item ms-4">
+              <% if current_user.fan? %>
+                <a href="#" class="nav-link"><%= current_user.identifier %></a>
+              <% else %>
+                <a href="#" class="nav-link"><%= "#{current_user.identifier} - #{current_user.role.capitalize} Account" %></a>
+              <% end %>
+            </li>
+
+            <li class="nav-item">
+              <%= button_to "LOG OUT", logout_path, method: :delete, class: "btn btn-outline-dark" %>
+            </li>
+          <% end %>
+
+        </ul>
+      </div>
+    </div>
+  </div>
+</header>
+
+<% if alert %>
+  <div class="row">
+    <div class="col text-center border border-white m-4 rounded">
+      <p class="fw-bold text-white p-4 m-4"><%= alert %></p>
+    </div>
+  </div>
+<% end %>
