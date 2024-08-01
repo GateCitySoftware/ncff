@@ -2,6 +2,12 @@ class HomeController < ApplicationController
   layout false, only: %i[landing_page list_view item_view landing_conference_example]
 
   def landing_page
+    if params[:welcome] == 'true'
+      first_favorite = Favorite.find_by(id: params['id'])
+      session[:user_id] = first_favorite.user_id if first_favorite.created_at.after?(1.minute.ago)
+      flash.now[:notice] = 'Welcome to the site! You have been logged in.'
+    end
+
     @data = { stats:, artists:, headliner_artists:, stages:, schedule_days: }
   end
 
@@ -47,6 +53,7 @@ class HomeController < ApplicationController
   def all_artists
     @all_artists ||= Artist.all.map do |artist|
       {
+        id: artist.id,
         name: artist.name,
         genres: artist.genres,
         image: artist.primary_image(size: 'medium'),

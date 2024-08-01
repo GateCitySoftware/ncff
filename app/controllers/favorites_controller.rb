@@ -3,7 +3,7 @@ class FavoritesController < ApplicationController
 
   # GET /favorites or /favorites.json
   def index
-    @data = FavoriteIndex.all(User.first.id) # TODO: change this!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    @data = FavoriteIndex.all(current_user.id)
   end
 
   # GET /favorites/1 or /favorites/1.json
@@ -21,21 +21,23 @@ class FavoritesController < ApplicationController
 
   # POST /favorites or /favorites.json
   def create
-    @favorite = Favorite.new(
-      item_id: params[:item_id],
-      item_type: params[:item_type],
-      user_id: User.first.id # TODO: change this!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    )
+    @favorite = Favorite.new(item_id: params[:item_id], item_type: params[:item_type])
 
-    respond_to do |format|
-      if @favorite.save
-        format.html { redirect_to favorites_url, notice: 'Favorite was successfully created.' }
-        format.json { render :show, status: :created, location: @favorite }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @favorite.errors, status: :unprocessable_entity }
+    if current_user.present?
+      @favorite.user_id = current_user.id
+    elsif params[:email].present?
+      user = User.find_or_initialize_by(identifier: params[:email])
+      if user.new_record?
+        user_created = true
+        user.password = SecureRandom.hex(16)
+        user.save!
       end
+      @favorite.user_id = user.id
+      session[:user_id] = user.id
     end
+
+    @favorite.save
+    render json: { success: true, uuid: @favorite.id }, status: 201
   end
 
   # PATCH/PUT /favorites/1 or /favorites/1.json

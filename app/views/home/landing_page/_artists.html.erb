@@ -23,7 +23,15 @@
       <% @data[:artists].each do |artist| %>
         <div class="col">
           <!-- For other artists -->
-          <a class="d-block text-center text-decoration-none artist-link" href="<%= artist[:link] %>" data-bs-toggle="modal" data-bs-target="#artistModal" data-artist-slug="<%= artist[:slug] %>" data-artist-name="<%= artist[:name] %>" data-artist-image="<%= artist[:image] %>" data-artist-genres="<%= artist[:genres].join(', ') %>" style="min-width: 210px;">
+          <a class="d-block text-center text-decoration-none artist-link" 
+            data-bs-toggle="modal"
+            data-bs-target="#artistModal"
+            data-artist-slug="<%= artist[:slug] %>"
+            data-artist-id="<%= artist[:id] %>"
+            data-artist-name="<%= artist[:name] %>"
+            data-artist-image="<%= artist[:image] %>"
+            data-artist-genres="<%= artist[:genres].join(', ') %>"
+            style="min-width: 210px;">
             <%= image_tag(artist[:image], class: "rounded border-shadow") %>
             <h3 class="h5 pt-4 mb-1"><%= artist[:name] %></h3>
           </a>
@@ -51,11 +59,14 @@
       <div class="modal-body">
         <img id="modalArtistImage" src="" alt="Artist Image" class="img-fluid rounded mb-3">
         <h3 id="modalArtistName"></h3>
-        <div id="modalArtistGenres"></div>
+        <p id="success-message"></p>
         <div class="d-grid gap-2">
           <a id="viewBioBtn" href="#" class="btn btn-primary">View Bio</a>
           <button id="addToFavoritesBtn" class="btn btn-success">Add to Favorites</button>
-          <button id="addToCalendarBtn" class="btn btn-info">Add to Calendar</button>
+          <div id="guestFavoriteForm" style="display: none;">
+            <input type="email" id="guestEmail" class="form-control mb-2" placeholder="Enter your email">
+            <button id="createAccountAndFavorite" class="btn btn-success w-100">Create Account & Save Favorite</button>
+          </div>
         </div>
       </div>
     </div>
@@ -64,57 +75,114 @@
 </section>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-  const artistLinks = document.querySelectorAll('.artist-link');
-  const modal = document.getElementById('artistModal');
-  const bsModal = new bootstrap.Modal(modal);
-  
-  artistLinks.forEach(link => {
-    link.addEventListener('click', function(e) {
-      e.preventDefault();
-      
-      const artistName = this.getAttribute('data-artist-name');
-      const artistImage = this.getAttribute('data-artist-image');
-      const artistGenres = this.getAttribute('data-artist-genres');
-      const artistBioUrl = this.getAttribute('data-artist-slug');
-      const artistId = this.getAttribute('data-artist-id');
-      
-      // Populate the modal
-      document.getElementById('modalArtistName').textContent = artistName;
-      document.getElementById('modalArtistImage').src = artistImage;
-      document.getElementById('modalArtistGenres').html = artistGenres;
-      
-      // Update CTA buttons
-      document.getElementById('viewBioBtn').href = '/artists/' + artistBioUrl;
-      document.getElementById('addToFavoritesBtn').onclick = () => addToFavorites(artistId);
-      document.getElementById('addToCalendarBtn').onclick = () => addToCalendar(artistId);
-      
-      // Open the modal
-      bsModal.show();
+  document.addEventListener('DOMContentLoaded', function() {
+    const artistLinks = document.querySelectorAll('.artist-link');
+    const modal = document.getElementById('artistModal');
+    const bsModal = new bootstrap.Modal(modal);
+    
+    artistLinks.forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+
+        const artistName = this.getAttribute('data-artist-name');
+        const artistImage = this.getAttribute('data-artist-image');
+        const artistBioUrl = this.getAttribute('data-artist-slug');
+        const artistId = this.getAttribute('data-artist-id');
+        
+        // Populate the modal
+        document.getElementById('modalArtistName').textContent = artistName;
+        document.getElementById('modalArtistImage').src = artistImage;
+        
+        // Update CTA buttons
+        document.getElementById('viewBioBtn').href = '/artists/' + artistBioUrl;
+        document.getElementById('addToFavoritesBtn').onclick = () => addToFavorites(artistId);
+        
+        // Reset guest favorite form
+        document.getElementById('guestFavoriteForm').style.display = 'none';
+        document.getElementById('guestEmail').value = '';
+        
+        // Open the modal
+        bsModal.show();
+      });
+    });
+
+    // Add event listener for modal close button
+    const closeButton = modal.querySelector('.btn-close');
+    closeButton.addEventListener('click', function() {
+      bsModal.hide();
+      resetModalState();
+    });
+
+    // Add event listener for clicking outside the modal
+    modal.addEventListener('click', function(e) {
+      if (e.target === modal) {
+        bsModal.hide();
+        resetModalState();
+      }
     });
   });
 
-  // Add event listener for modal close button
-  const closeButton = modal.querySelector('.btn-close');
-  closeButton.addEventListener('click', function() {
-    bsModal.hide();
-  });
-
-  // Add event listener for clicking outside the modal
-  modal.addEventListener('click', function(e) {
-    if (e.target === modal) {
-      bsModal.hide();
+  function addToFavorites(artistId) {
+    // Check if there's a current user (you'll need to implement this check)
+    if (gon.current_user_id) {
+      // Make POST request for logged-in user
+      fetch('/favorites', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          item_type: 'Artist',
+          item_id: artistId,
+          user_id: gon.current_user_id
+        })
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Favorite added:', data);
+        document.getElementById('success-message').textContent = 'Favorite added!';
+        // Handle success (e.g., show a success message)
+      })
+      .catch(error => {
+        console.error('Error adding favorite:', error);
+        // Handle error (e.g., show an error message)
+      });
+    } else {
+      // Show the guest favorite form
+      document.getElementById('addToFavoritesBtn').style.display = 'none';
+      document.getElementById('guestFavoriteForm').style.display = 'block';
+      document.getElementById('createAccountAndFavorite').onclick = () => createAccountAndFavorite(artistId);
     }
-  });
-});
+  }
 
-function addToFavorites(artistId) {
-  // Implement the logic to add the artist to favorites
-  console.log(`Adding artist ${artistId} to favorites`);
-}
+  function createAccountAndFavorite(artistId) {
+    const email = document.getElementById('guestEmail').value;
+    if (!email) {
+      alert('Please enter your email');
+      return;
+    }
 
-function addToCalendar(artistId) {
-  // Implement the logic to add the artist to calendar
-  console.log(`Adding artist ${artistId} to calendar`);
-}
+    fetch('/favorites', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        item_type: 'Artist',
+        item_id: artistId,
+        email: email
+      })
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log('Account created and favorite added:', data);
+      window.location = '/?welcome=true&id=' + data.uuid;
+    })
+    .catch(error => {
+      console.error('Error creating account and adding favorite:', error);
+      // Handle error (e.g., show an error message)
+    });
+  }
+
+  function resetModalState() {
+    document.getElementById('addToFavoritesBtn').style.display = 'block';
+    document.getElementById('guestFavoriteForm').style.display = 'none';
+    document.getElementById('guestEmail').value = '';
+  }
 </script>

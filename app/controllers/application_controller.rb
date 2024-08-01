@@ -1,8 +1,16 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
+  protect_from_forgery with: :null_session
+
+  before_action :gon_current_user
+
   helper_method :current_user
   helper_method :uuid?
+
+  def gon_current_user
+    gon.current_user_id = current_user&.id
+  end
 
   private
 
