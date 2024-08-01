@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
-  layout false, only: %i[index_v3 list_view item_view]
+  layout false, only: %i[index_v3 list_view item_view landing_conference_example]
 
   def landing_page
     @data = {
@@ -17,9 +17,6 @@ class HomeController < ApplicationController
   end
 
   def item_view
-  end
-
-  def gcs_landing_page
   end
 
   def landing_conference_example
@@ -40,13 +37,11 @@ class HomeController < ApplicationController
   end
 
   def stats
-    Rails.cache.fetch('festival_statistics', expires_in: 1.minute) do
-      [
-        { value: Artist.count, label: 'Artists' },
-        { value: Stage.count, label: 'Stages' },
-        { value: Tag.genre_map.count, label: 'Genres' }
-      ].sort_by { |stat| stat[:value] }.reverse
-    end
+    [
+      { value: Artist.count, label: 'Artists' },
+      { value: Stage.count, label: 'Stages' },
+      { value: Tag.genre_map.count, label: 'Genres' }
+    ].sort_by { |stat| stat[:value] }.reverse
   end
 
   def artists

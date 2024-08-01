@@ -34,7 +34,11 @@ class SessionsController < ApplicationController
   private
 
   def handle_fan_login
-    @user.save! if @user.new_record?
+    if @user.new_record?
+      @user.role = 'attendee'
+      @user.password = SecureRandom.hex(16)
+      @user.save!
+    end
     login_success("Logged in as fan: #{@user.identifier}")
   end
 
@@ -70,6 +74,16 @@ class SessionsController < ApplicationController
 
   def login_failure(message)
     flash.now[:alert] = message
-    render :new
+
+    case params[:user_type]
+    when 'fan'
+      render :fan_new
+    when 'admin'
+      render :admin_new
+    when 'vendor'
+      render :vendor_new
+    else
+      render :fan_new
+    end
   end
 end

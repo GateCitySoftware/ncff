@@ -13,10 +13,5 @@ class ApplicationController < ActionController::Base
 
   def current_user
     @current_user ||= User.find_by(id: session[:user_id]) if session[:user_id]
-
-    # remove this!
-    return unless @current_user.nil?
-
-    User.new.tap { |user| user.role = 'admin' }
   end
 end

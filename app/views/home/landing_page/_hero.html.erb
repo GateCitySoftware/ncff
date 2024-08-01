@@ -1,34 +1,63 @@
-      <!-- Hero -->
-      <section class="bg-dark position-relative py-5" data-bs-theme="dark">
-        <div class="position-absolute top-0 start-0 w-100 h-100" style="background-image: url(assets/img/landing/conference/noise.png); mix-blend-mode: soft-light; opacity: 12%"></div>
-        <div class="container position-relative z-2 py-md-3 py-lg-4 py-xl-5">
-          <div class="row align-items-center justify-content-center pt-5 pb-2 pb-sm-3 mt-sm-4">
-            <div class="col-10 col-sm-8 col-md-6 col-xl-5 offset-lg-1 offset-xl-2 order-md-2 pb-3 pb-md-0 mb-3 mb-sm-4 mb-md-0">
-              <%= image_tag("ncff-10-anv-logo.png", height: '100px') %>
-            </div>
-
-            <div class="col-sm-10 col-md-6 col-lg-5 order-md-1">
-              <div class="d-flex align-items-center lead pb-3 pb-sm-4 pb-lg-5 mb-2 mb-md-3 mb-lg-0 mb-xl-2">
-                <div class="text-light">September 6-8 2024</div>
-                <div class="text-warning mx-3 mx-sm-4">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 0L12.6798 4.12733C13.2879 7.81883 16.1812 10.7121 19.8727 11.3202L24 12L19.8727 12.6798C16.1812 13.2879 13.2879 16.1812 12.6798 19.8727L12 24L11.3202 19.8727C10.7121 16.1812 7.81882 13.2879 4.12733 12.6798L0 12L4.12733 11.3202C7.81883 10.7121 10.7121 7.81882 11.3202 4.12733L12 0Z"></path>
-                  </svg>
-                </div>
-                <div class="text-light">Greensboro, NC</div>
-              </div>
-              <h1 class="display-3 text-uppercase d-none d-lg-block pb-3 mb-4">North Carolina Folk Festival</h1>
-              <h1 class="display-5 text-uppercase d-lg-none pb-1 pb-sm-2">North Carolina Folk Festival</h1>
-              <p class="text-body fs-lg pb-2 pb-sm-3 pb-md-4 pb-xl-5 mb-xl-2">The North Carolina Folk Festival is a free 3-day music festival in downtown Greensboro, NC, celebrating its 10th year on September 6-8, 2024. Featuring diverse genres, world music, local artists, food trucks, a makers marketplace, and family activities.</p>
-              <div class="d-sm-flex">
-                <a class="btn btn-lg btn-primary w-100 w-md-auto mb-3 mb-sm-0 me-sm-3 me-lg-4" href="#artists">
-                  Save your favorite acts
-                </a>
-                <a class="btn btn-lg btn-outline-light w-100 w-md-auto" href="#schedule">
-                  Then add them to your calendar
-                </a>
-              </div>
-            </div>
+<section class="bg-dark position-relative py-5" data-bs-theme="dark">
+  <div class="container position-relative z-2 py-md-3 py-lg-4 py-xl-5">
+    <%= render 'shared/header' %>
+    <div class="row align-items-center justify-content-center pt-5 pb-2 pb-sm-3 mt-sm-4">
+      <div class="col-10 col-sm-8 col-md-6 col-xl-5 offset-lg-1 offset-xl-2 order-md-2 pb-3 pb-md-0 mb-3 mb-sm-4 mb-md-0">
+        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
           </div>
+
+          <% carousel_items = [
+            { image: "ncff-headliner-mipso.png", alt: "Mipso", text: "Mipso" },
+            { image: "ncff-headliner-los-lonely-boys.png", alt: "Los Lonely Boys", text: "Los Lonely Boys" },
+            { image: "ncff-headliner-war-and-treaty.png", alt: "War and Treaty", text: "War & Treaty" }
+          ].shuffle %>
+
+          <div class="carousel-inner">
+            <% carousel_items.each_with_index do |item, index| %>
+              <div class="carousel-item <%= 'active' if index.zero? %>">
+                <%= image_tag(item[:image], class: 'd-block w-100', alt: item[:alt]) %>
+                <h3 class="py-5"><%= item[:text] %></h3>
+              </div>
+            <% end %>
+          </div>
+
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
         </div>
-      </section>
+      </div>
+
+      <div class="col-sm-10 col-md-6 col-lg-5 order-md-1">
+        <div class="d-flex align-items-center lead pb-3 pb-sm-4 pb-lg-5 mb-2 mb-md-3 mb-lg-0 mb-xl-2">
+          <div class="text-light">September 6-8 2024</div>
+          <div class="text-warning mx-3 mx-sm-4">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 0L12.6798 4.12733C13.2879 7.81883 16.1812 10.7121 19.8727 11.3202L24 12L19.8727 12.6798C16.1812 13.2879 13.2879 16.1812 12.6798 19.8727L12 24L11.3202 19.8727C10.7121 16.1812 7.81882 13.2879 4.12733 12.6798L0 12L4.12733 11.3202C7.81883 10.7121 10.7121 7.81882 11.3202 4.12733L12 0Z"></path>
+            </svg>
+          </div>
+          <div class="text-light">Greensboro, NC</div>
+        </div>
+        <h1 class="display-3 text-uppercase d-none d-lg-block pb-3 mb-4">North Carolina Folk Festival</h1>
+        <h1 class="display-5 text-uppercase d-lg-none pb-1 pb-sm-2">North Carolina Folk Festival</h1>
+        <p class="text-body fs-lg pb-2 pb-sm-3 pb-md-4 pb-xl-5 mb-xl-2">The North Carolina Folk Festival is a free 3-day music festival in downtown Greensboro, NC, celebrating its 10th year on September 6-8, 2024. Featuring diverse genres, world music, local artists, food trucks, a makers marketplace, and family activities.</p>
+        <div class="d-sm-flex">
+          <a class="btn btn-lg btn-primary w-100 w-md-auto mb-3 mb-sm-0 me-sm-3 me-lg-4" href="#artists">
+            Save your favorite acts
+          </a>
+          <a class="btn btn-lg btn-outline-light w-100 w-md-auto" href="#schedule">
+            Then add them to your calendar
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

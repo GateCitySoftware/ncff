@@ -17,7 +17,7 @@ class User < ApplicationRecord
   validates :identifier, presence: true, uniqueness: true
   validates :role, inclusion: { in: ROLES }
 
-  #  has_secure_password
+  has_secure_password
 
   def owner?(resource = nil)
     current_user.admin? || current_user.id == resource&.owner_id
@@ -38,7 +38,14 @@ class User < ApplicationRecord
   end
 
   def admin?
-    return true
     role == 'admin'
+  end
+
+  def vendor?
+    role == 'vendor'
+  end
+
+  def fan?
+    role == 'attendee'
   end
 end

@@ -49,7 +49,6 @@
     <link rel="stylesheet" media="screen" href="assets/css/theme.min.css">
     <!-- END OF AROUND THEME IMPORTS FOR CONFERENCE LANDING PAGE -->
 
-
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -62,26 +61,7 @@
     <title>NCFF</title>
   </head>
   <body>
-    <%= render 'layouts/admin_header' %>
-
-    <% flash.each do |type, message| %>
-      <% bootstrap_class = type == "notice" ? "alert-info" : "alert-danger" %>
-      <div class="alert <%= bootstrap_class %> alert-dismissible fade show" role="alert">
-        <%= message %>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-      </div>
-    <% end %>
-
-    <% if @data&.respond_to?(:page_name) %>
-      <div class="row">
-        <h1 class="mb-4 text-center display-4 fw-bold"><%= @data.page_name %></h1>
-      </div>
-    <% end %>
-
     <%= yield %>
-
-    <%= yield :full_width_content %>
-
     <%= render 'shared/footer' %>
   </body>
 </html>
