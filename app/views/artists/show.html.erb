@@ -12,6 +12,12 @@
           </ol>
         </nav>
 
+        <% if current_user&.admin? %>
+          <%= link_to edit_artist_path(@artist) do %>
+            <button class="btn btn-lg btn-danger">Edit Artist</button>
+          <% end %>
+        <% end %>
+
         <div class="d-lg-flex align-items-center pt-3 pb-xxl-5">
           <img class="d-block order-lg-2 me-auto me-lg-0 ms-auto" src="<%= @artist.primary_image(size: 'large') %>" width="480" alt="Image">
           <div class="order-lg-1 text-center text-lg-start pe-lg-4 py-4 py-md-5">
@@ -74,7 +80,6 @@
               </div>
 
             </div>
-            <h2 class="h1 pt-2 pt-sm-3 pt-md-4 pt-lg-5 pb-2">Artist Info</h2>
             <p class="fs-lg"><%= @artist.content %></p>
           </div>
         </div>
