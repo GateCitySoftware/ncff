@@ -29,15 +29,10 @@
       <%= form.text_field :tagline, class: "form-control" %>
     </div>
 
-    <div class="mb-3">
-      <%= form.label :bio, class: "form-label" %>
-      <%= form.text_area :bio, class: "form-control", rows: 5 %>
+    <div class="field">
+      <%= form.label :content %>
+      <%= form.rich_text_area :content %>
     </div>
-
-  <div class="field">
-    <%= form.label :content %>
-    <%= form.rich_text_area :content %>
-  </div>
 
     <h1>TODO: add back genre checkboxes</h1>
 

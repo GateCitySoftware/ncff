@@ -37,4 +37,14 @@ class Artist < ApplicationRecord
   def genres
     tags.genres.pluck(:name)
   end
+
+  def stringified_performances
+    performances.includes(:stage).map do |performance|
+      "#{performance.start_time.strftime('%A at %I:%M %p')} on #{performance.stage.name}"
+    end
+  end
+
+  def performance_summary
+    "#{name} performs on #{stringified_performances.to_sentence}."
+  end
 end

@@ -8,7 +8,7 @@ module ExternalLinksHelper
                   href: link.url,
                   target: '_blank',
                   rel: 'noopener noreferrer',
-                  class: 'btn border',
+                  class: 'btn border w-100',
                   style: "background-color: #{link_info[:color_hex_code]}; color: white;" do
         content_tag(:i, '', class: "bi #{link_info[:bi_icon]} me-1") +
           link_info[:display_text]

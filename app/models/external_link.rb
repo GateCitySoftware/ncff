@@ -12,14 +12,14 @@
 #
 class ExternalLink < ApplicationRecord
   LINK_TYPES = {
-    'facebook' => { bi_icon: 'bi-facebook', display_text: 'Facebook', color_hex_code: '#1877F2' },
-    'instagram' => { bi_icon: 'bi-instagram', display_text: 'Instagram', color_hex_code: '#E4405F' },
-    'linkedin' => { bi_icon: 'bi-linkedin', display_text: 'LinkedIn', color_hex_code: '#0A66C2' },
-    'pinterest' => { bi_icon: 'bi-pinterest', display_text: 'Pinterest', color_hex_code: '#BD081C' },
-    'tiktok' => { bi_icon: 'bi-tiktok', display_text: 'TikTok', color_hex_code: '#000000' },
-    'twitter' => { bi_icon: 'bi-twitter', display_text: 'Twitter', color_hex_code: '#1DA1F2' },
-    'website' => { bi_icon: 'bi-globe', display_text: 'Website', color_hex_code: '#4285F4' },
-    'youtube' => { bi_icon: 'bi-youtube', display_text: 'YouTube', color_hex_code: '#FF0000' }
+    'facebook' => { bi_icon: 'bi-facebook', display_text: 'Facebook', color_hex_code: '#6C8BC1' },
+    'instagram' => { bi_icon: 'bi-instagram', display_text: 'Instagram', color_hex_code: '#C17A8B' },
+    'linkedin' => { bi_icon: 'bi-linkedin', display_text: 'LinkedIn', color_hex_code: '#6E95B5' },
+    'pinterest' => { bi_icon: 'bi-pinterest', display_text: 'Pinterest', color_hex_code: '#A66B75' },
+    'tiktok' => { bi_icon: 'bi-tiktok', display_text: 'TikTok', color_hex_code: '#4D4D4D' },
+    'twitter' => { bi_icon: 'bi-twitter', display_text: 'Twitter', color_hex_code: '#7FBCE6' },
+    'website' => { bi_icon: 'bi-globe', display_text: 'Website', color_hex_code: '#8CADD9' },
+    'youtube' => { bi_icon: 'bi-youtube', display_text: 'YouTube', color_hex_code: '#C16666' }
   }.freeze
 
   SOCIAL_MEDIA = %w[facebook instagram linkedin pinterest tiktok twitter youtube].freeze
