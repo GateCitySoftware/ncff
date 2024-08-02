@@ -52,7 +52,9 @@ class HomeController < ApplicationController
   end
 
   def all_artists
-    @all_artists ||= Artist.all.map do |artist|
+    @all_artists ||= Artist.all.filter_map do |artist|
+      next if artist.no_show_tile?
+
       {
         id: artist.id,
         name: artist.name,

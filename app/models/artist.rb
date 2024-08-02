@@ -35,6 +35,11 @@ class Artist < ApplicationRecord
   scope :by_stage, ->(stage) { joins(performances: :stage).where(stages: { name: stage }).distinct }
   scope :by_date, ->(date) { joins(:performances).where('performances.start_time::date = ?', date).distinct }
 
+  def no_show_tile?
+    _name = name.downcase
+    _name.include?('prize') || _name.include?('workshop') || (_name.include?('jam') && !_name.include?('hot pepper'))
+  end
+
   def genres
     tags.genres.pluck(:name)
   end
