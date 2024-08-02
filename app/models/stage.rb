@@ -16,6 +16,7 @@
 class Stage < ApplicationRecord
   include Slugs
   include Images
+  has_paper_trail
 
   validates :name, presence: true, uniqueness: true
 

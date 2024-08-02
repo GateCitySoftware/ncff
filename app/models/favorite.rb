@@ -12,4 +12,5 @@
 class Favorite < ApplicationRecord
   belongs_to :user
   belongs_to :item, polymorphic: true
+  has_paper_trail
 end

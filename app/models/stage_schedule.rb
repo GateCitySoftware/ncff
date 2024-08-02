@@ -12,6 +12,8 @@
 class StageSchedule < ApplicationRecord
   belongs_to :stage
 
+  has_paper_trail
+
   def self.recreate_all!
     stage_date_performances = Performance.all.group_by do |p|
       "#{p.stage.name} - #{p.start_time.to_date.strftime('%A')}"

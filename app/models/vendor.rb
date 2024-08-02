@@ -29,6 +29,8 @@ class Vendor < ApplicationRecord
     activation: 'Activations'
   }.freeze
 
+  has_paper_trail
+
   validates :category, inclusion: { in: CATEGORIES.keys.map(&:to_s) }
 
   has_many :tagged_items, as: :taggable

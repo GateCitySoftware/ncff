@@ -17,6 +17,7 @@
 class Performance < ApplicationRecord
   belongs_to :stage
   belongs_to :artist
+  has_paper_trail
 
   DATES_2024 = %w[2024-09-06 2024-09-07 2024-09-08]
 

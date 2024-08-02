@@ -21,6 +21,7 @@ class EmbeddedContent < ApplicationRecord
     'Apple Music Player',
     'Bandcamp Player'
   ]
+  has_paper_trail
 
   validates :embeddable, :url, :title, :content_type, presence: true
   validates :content_type, inclusion: { in: CONTENT_TYPES }

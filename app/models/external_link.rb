@@ -26,6 +26,7 @@ class ExternalLink < ApplicationRecord
 
   LINK_ORDER = %w[website instagram facebook youtube tiktok twitter linkedin pinterest].freeze
 
+  has_paper_trail
   belongs_to :linkable, polymorphic: true
 
   validates :url, presence: true

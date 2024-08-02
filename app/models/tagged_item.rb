@@ -10,6 +10,7 @@
 #  taggable_id   :uuid
 #
 class TaggedItem < ApplicationRecord
+  has_paper_trail
   belongs_to :tag
   belongs_to :taggable, polymorphic: true
   validates_uniqueness_of :tag_id, scope: %i[taggable_id taggable_type]

@@ -12,6 +12,7 @@
 class Tag < ApplicationRecord
   validates :name, presence: true, uniqueness: { scope: :category }
   validates :category, presence: true
+  has_paper_trail
 
   has_many :tagged_items
   has_many :artists, through: :tagged_items, source: :taggable, source_type: 'Artist'

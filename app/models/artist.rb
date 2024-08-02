@@ -19,6 +19,7 @@ class Artist < ApplicationRecord
   include Images
   include ExternalLinks
 
+  has_paper_trail
   has_rich_text :content
 
   sluggable_attributes :name

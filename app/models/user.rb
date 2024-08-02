@@ -16,6 +16,7 @@
 #
 class User < ApplicationRecord
   ROLES = %w[attendee vendor admin].freeze
+  has_paper_trail
 
   validates :identifier, presence: true, uniqueness: true
   validates :role, inclusion: { in: ROLES }
