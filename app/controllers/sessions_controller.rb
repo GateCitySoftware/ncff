@@ -22,6 +22,8 @@ class SessionsController < ApplicationController
         @user.role = 'attendee'
         @user.password = SecureRandom.hex(16)
         @user.save!
+        session[:user_id] = @user.id
+        redirect_to root_path, notice: "Logged in as fan: #{@user.identifier}"
       elsif @user.fan?
         session[:user_id] = @user.id
         redirect_to root_path, notice: "Logged in as fan: #{@user.identifier}"
