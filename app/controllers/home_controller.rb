@@ -1,5 +1,6 @@
 class HomeController < ApplicationController
   layout 'around_theme'
+  skip_before_action :require_admin, only: %i[landing_page]
 
   def landing_page
     if params[:welcome] == 'true'

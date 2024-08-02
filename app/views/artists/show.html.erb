@@ -13,7 +13,7 @@
         </nav>
 
         <div class="d-lg-flex align-items-center pt-3 pb-xxl-5">
-          <img class="d-block order-lg-2 me-auto me-lg-0 ms-auto" src="<%= @artist.primary_image.s3_url(size: 'large') %>" width="480" alt="Image">
+          <img class="d-block order-lg-2 me-auto me-lg-0 ms-auto" src="<%= @artist.primary_image(size: 'large') %>" width="480" alt="Image">
           <div class="order-lg-1 text-center text-lg-start pe-lg-4 py-4 py-md-5">
             <h1 class="display-2 text-uppercase pb-3 pb-lg-4"><%= @artist.name %></h1>
             <p class="fs-lg mx-auto mx-lg-0 mb-0" style="max-width: 530px;"><%= @artist.tagline %></p>
@@ -75,11 +75,7 @@
 
             </div>
             <h2 class="h1 pt-2 pt-sm-3 pt-md-4 pt-lg-5 pb-2">Artist Info</h2>
-            <p class="fs-lg"><%= @artist.bio %></p>
-            <h2 class="h1 pt-3 pt-sm-4 pt-xl-5 pb-2">The challenge</h2>
-            <p class="fs-lg">Sit diam nunc, et pellentesque ornare elit, ut. Interdum feugiat id ut egestas tellus congue faucibus habitant semper nunc et etiam ultrices id nisi urna amet, odio mauris risus nam aliquam pharetra amet nunc, enim aliquet egestas purus penatibus ac, elit ultricies proin adipiscing suspendisse sit proin.</p>
-            <h2 class="h1 pt-3 pt-sm-4 pt-xl-5 pb-2">The solution</h2>
-            <p class="fs-lg mb-0">Est enim mollis morbi vulputate egestas commodo vitae quis sed sit ultrices nulla habitant sit faucibus orci. Eu etiam ipsum porttitor morbi urna eget aliquet aenean tristique amet tempus, vestibulum vel montes, pellentesque sit. Cursus nulla viverra elit accumsan, vitae. Phasellus sed hac at pharetra urna. Imperdiet egestas ac eget porttitor ultrices morbi ornare. Libero, lectus eget adipiscing odio ornare non maecenas non vitae libero, at feugiat urna, risus augue fringilla. Venenatis quam.</p>
+            <p class="fs-lg"><%= @artist.content %></p>
           </div>
         </div>
       </div>

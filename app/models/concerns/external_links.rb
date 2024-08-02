@@ -1,4 +1,4 @@
-module Linkable
+module ExternalLinks
   extend ActiveSupport::Concern
 
   included do

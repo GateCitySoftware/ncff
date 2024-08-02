@@ -1,4 +1,4 @@
-module Sluggable
+module Slugs
   extend ActiveSupport::Concern
 
   included do

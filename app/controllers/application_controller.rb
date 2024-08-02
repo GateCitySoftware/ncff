@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   layout 'application'
 
   before_action :gon_current_user
+  before_action :require_admin
 
   helper_method :current_user
   helper_method :uuid?
@@ -22,5 +23,11 @@ class ApplicationController < ActionController::Base
 
   def current_user
     @current_user ||= User.find_by(id: session[:user_id]) if session[:user_id]
+  end
+
+  def require_admin
+    return if current_user&.admin?
+
+    redirect_to root_path, alert: 'You must be an admin to access this page.'
   end
 end

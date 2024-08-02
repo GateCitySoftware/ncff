@@ -19,10 +19,9 @@
 #  archived    :boolean          default(FALSE), not null
 #
 class Vendor < ApplicationRecord
-  include PrimaryImage
-  include Sluggable
-  include Uploadable
-  include Linkable
+  include Slugs
+  include Images
+  include ExternalLinks
 
   CATEGORIES = {
     eat_drink: 'Eat & Drink',

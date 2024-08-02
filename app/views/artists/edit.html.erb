@@ -34,7 +34,12 @@
       <%= form.text_area :bio, class: "form-control", rows: 5 %>
     </div>
 
-    <p>TODO: add back genre checkboxes</p>
+  <div class="field">
+    <%= form.label :content %>
+    <%= form.rich_text_area :content %>
+  </div>
+
+    <h1>TODO: add back genre checkboxes</h1>
 
     <div class="mb-3">
       <h3>Social Media Links / Website</h3>

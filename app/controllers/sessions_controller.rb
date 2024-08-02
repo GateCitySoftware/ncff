@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class SessionsController < ApplicationController
+  skip_before_action :require_admin
+
   def new
     if params[:admin] == 'true'
       render :admin_new

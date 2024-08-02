@@ -15,10 +15,9 @@
 #  headliner  :boolean          default(FALSE), not null
 #
 class Artist < ApplicationRecord
-  include PrimaryImage
-  include Sluggable
-  include Uploadable
-  include Linkable
+  include Slugs
+  include Images
+  include ExternalLinks
 
   has_rich_text :content
 

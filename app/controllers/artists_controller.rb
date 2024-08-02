@@ -3,6 +3,7 @@
 class ArtistsController < ApplicationController
   before_action :set_artist, only: %i[show edit update destroy]
   layout 'around_theme', only: %i[index show]
+  skip_before_action :require_admin, only: %i[index show]
 
   # TODO: consider creating a MatView for performance summary
   # TODO: also, use caching (with or without MatView)

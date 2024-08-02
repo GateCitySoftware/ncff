@@ -14,9 +14,8 @@
 #  slug                 :string
 #
 class Stage < ApplicationRecord
-  include PrimaryImage
-  include Sluggable
-  include Uploadable
+  include Slugs
+  include Images
 
   validates :name, presence: true, uniqueness: true
 
