@@ -20,6 +20,8 @@ class Artist < ApplicationRecord
   include Uploadable
   include Linkable
 
+  has_rich_text :content
+
   sluggable_attributes :name
 
   has_many :performances

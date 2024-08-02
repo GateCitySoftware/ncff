@@ -12,3 +12,6 @@ $(document).on('load', function() {
       $('#tagged_items_fields').append(content);
     });
   });
+
+import "trix"
+import "@rails/actiontext"
