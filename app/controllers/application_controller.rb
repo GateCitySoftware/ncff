@@ -2,6 +2,7 @@
 
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :null_session
+  layout 'application'
 
   before_action :gon_current_user
 

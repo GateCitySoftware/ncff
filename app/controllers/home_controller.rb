@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
-  layout false, only: %i[landing_page list_view item_view landing_conference_example]
+  layout 'around_theme'
 
   def landing_page
     if params[:welcome] == 'true'
