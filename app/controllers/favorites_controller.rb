@@ -1,5 +1,6 @@
 class FavoritesController < ApplicationController
   before_action :set_favorite, only: %i[show edit update destroy]
+  skip_before_action :require_admin
 
   # GET /favorites or /favorites.json
   def index
