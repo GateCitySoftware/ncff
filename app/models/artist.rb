@@ -24,10 +24,10 @@ class Artist < ApplicationRecord
 
   sluggable_attributes :name
 
-  has_many :performances
+  has_many :performances, dependent: :destroy
   has_many :tagged_items, as: :taggable, dependent: :destroy
   has_many :tags, through: :tagged_items
-  has_many :embedded_contents, as: :embeddable
+  has_many :embedded_contents, as: :embeddable, dependent: :destroy
 
   scope :by_genre, lambda { |genre|
                      joins(:tags).where(tags: { category: 'music', sub_category: 'genre', name: genre })
