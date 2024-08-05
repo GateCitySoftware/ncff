@@ -37,7 +37,12 @@ class Artist < ApplicationRecord
 
   def no_show_tile?
     _name = name.downcase
-    _name.include?('prize') || _name.include?('workshop') || (_name.include?('jam') && !_name.include?('hot pepper'))
+    _name.include?('prize') ||
+      _name.include?('workshop') ||
+      _name.include?('open mic') ||
+      _name.include?('drum circle') ||
+      _name.include?('contest') ||
+      (_name.include?('jam') && !_name.include?('hot pepper'))
   end
 
   def genres
