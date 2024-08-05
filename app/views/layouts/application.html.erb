@@ -60,6 +60,7 @@
   <body>
     <%= render 'shared/navbar' unless controller.class.name == "SessionsController" %>
     <div class="container-fluid" style="margin-top: 150px;">
+      <%= render 'shared/flash' %>
       <%= yield %>
     </div>
     <%= render 'shared/footer' %>

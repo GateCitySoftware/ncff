@@ -25,8 +25,8 @@ class EmbeddedContentsController < ApplicationController
     if @embedded_content.save
       redirect_back(fallback_location: artists_path, notice: 'Embedded content was successfully created.')
     else
-      redirect_back(fallback_location: artists_path,
-                    error: "Embedded content was not saved. Errors: #{@embedded_content.errors.full_messages}")
+      flash[:error] = "Embedded content was not saved. Errors: #{@embedded_content.errors.full_messages.to_sentence}"
+      redirect_back(fallback_location: artists_path)
     end
   end
 

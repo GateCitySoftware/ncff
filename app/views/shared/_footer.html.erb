@@ -1,13 +1,16 @@
-<div class="row m-4 p-4">
-  <div class="col-md text-center m-4 p-4">
-    <small>&copy; <%= Date.current.year %>  <a href="http://gatecitysoftware.com/" target="_blank" rel="noopener noreferrer">Gate City Software</a></small>
-  </div>
-</div>
 
-<div class="row justify-content-center">
-  <div class="col-auto">
-    <%= link_to 'Fan Login', login_path, class: 'btn btn-sm btn-link' %>
-    <%= link_to 'Vendor Login', login_path(vendor: true), class: 'btn btn-sm btn-link' %>
-    <%= link_to 'Admin Login', login_path(admin: true), class: 'btn btn-sm btn-link' %>
+<footer class="mt-4 pt-4">
+  <div class="row m-4 p-4">
+    <div class="col-md text-center m-4 p-4">
+      <small>&copy; <%= Date.current.year %>  <a href="http://gatecitysoftware.com/" target="_blank" rel="noopener noreferrer">Gate City Software</a></small>
+    </div>
   </div>
-</div>
+
+  <div class="row justify-content-center">
+    <div class="col-auto">
+      <%= link_to 'Fan Login', login_path, class: 'btn btn-sm btn-link' %>
+      <%= link_to 'Vendor Login', login_path(vendor: true), class: 'btn btn-sm btn-link' %>
+      <%= link_to 'Admin Login', login_path(admin: true), class: 'btn btn-sm btn-link' %>
+    </div>
+  </div>
+</footer>

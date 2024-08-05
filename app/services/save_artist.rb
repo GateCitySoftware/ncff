@@ -36,12 +36,7 @@ class SaveArtist
     tags_to_add.each do |tag_id|
       next if tag_id == 0 || tag_id.blank? # not sure why I need this, but can fix later
 
-      begin
-        TaggedItem.create!(taggable: @artist, tag_id:)
-      rescue StandardError => e
-        puts e
-        binding.pry
-      end
+      TaggedItem.create!(taggable: @artist, tag_id:)
     end
 
     TaggedItem.where(taggable: @artist, tag_id: tags_to_remove).destroy_all

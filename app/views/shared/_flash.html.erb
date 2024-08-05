@@ -1,7 +1,7 @@
-    <% flash.each do |type, message| %>
-      <% bootstrap_class = type == "notice" ? "alert-info" : "alert-danger" %>
-      <div class="alert <%= bootstrap_class %> alert-dismissible fade show" role="alert">
-        <%= message %>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-      </div>
-    <% end %>
+<% flash.each do |type, message| %>
+  <% bootstrap_class = type == "notice" ? "alert-info" : "alert-danger" %>
+  <div class="alert <%= bootstrap_class %> alert-dismissible fade show" role="alert">
+    <%= message %>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+<% end %>
