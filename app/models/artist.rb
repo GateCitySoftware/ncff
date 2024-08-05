@@ -41,6 +41,9 @@ class Artist < ApplicationRecord
       _name.include?('workshop') ||
       _name.include?('open mic') ||
       _name.include?('drum circle') ||
+      _name == 'old time' ||
+      _name == 'jazz' ||
+      _name.include?('drum circle') ||
       _name.include?('contest') ||
       (_name.include?('jam') && !_name.include?('hot pepper'))
   end
