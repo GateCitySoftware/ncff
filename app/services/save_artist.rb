@@ -27,7 +27,7 @@ class SaveArtist
   def update_tags
     return unless @params[:tag_ids]
 
-    new_tag_ids = @params[:tag_ids].map(&:to_i)
+    new_tag_ids = @params[:tag_ids]
     current_tag_ids = @artist.tags.pluck(:id)
 
     tags_to_add = new_tag_ids - current_tag_ids
@@ -36,7 +36,12 @@ class SaveArtist
     tags_to_add.each do |tag_id|
       next if tag_id == 0 || tag_id.blank? # not sure why I need this, but can fix later
 
-      TaggedItem.create!(taggable: @artist, tag_id:)
+      begin
+        TaggedItem.create!(taggable: @artist, tag_id:)
+      rescue StandardError => e
+        puts e
+        binding.pry
+      end
     end
 
     TaggedItem.where(taggable: @artist, tag_id: tags_to_remove).destroy_all
