@@ -50,7 +50,9 @@ class EmbeddedContentsController < ApplicationController
     @embedded_content.destroy!
 
     respond_to do |format|
-      format.html { redirect_to embedded_contents_url, notice: 'Embedded content was successfully destroyed.' }
+      format.html do
+        redirect_back(fallback_location: artists_path, notice: 'Embedded content was successfully destroyed.')
+      end
       format.json { head :no_content }
     end
   end

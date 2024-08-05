@@ -75,7 +75,7 @@
             <p class="text-center fw-bold my-3">Primary Image</p> 
           <% end %>
           <div class="overlay d-flex justify-content-center align-items-center">
-            <%= button_to "Delete", upload_path(upload), method: :delete, class: "btn btn-danger btn-sm me-2", data: { confirm: "Are you sure?" } %>
+            <%= button_to "Delete", upload_path(upload), method: :delete, class: "btn btn-danger btn-sm me-2" %>
             <% unless upload.image_type == 'primary' %>
               <%= button_to "Set as Primary", set_primary_upload_path(upload), method: :patch, class: "btn btn-primary btn-sm" %>
             <% end %>
@@ -147,24 +147,14 @@
   </div>
 <% end %>
 
-
-
-  <hr class="my-4">
-
+<hr class="my-4">
 
 <h3 class="mt-4">Media Players</h3>
 
-
-
-
-
 <% @artist.embedded_contents.each do |content| %>
-  <p><%= content.embed_code.html_safe %>
+  <%= button_to "Delete", embedded_content_path(content), method: :delete, class: "btn btn-danger btn-sm me-2" %>
+  <%= content.embed_code.html_safe %>
  <% end %>
-
-
-
-
 
 <h4 class="mt-4">Add New Media Player</h3>
 
