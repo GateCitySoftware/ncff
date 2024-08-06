@@ -1,7 +1,6 @@
 // Configure your import map in config/importmap.rb. Read more: https://github.com/rails/importmap-rails
 import "controllers"
 
-
 // app/javascript/packs/artists.js
 $(document).on('load', function() {
     $('#add_tag').click(function(e) {
