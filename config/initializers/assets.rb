@@ -15,3 +15,5 @@ Rails.application.config.assets.version = '1.0'
 
 Rails.application.config.assets.precompile += %w[swiper-bundle.min.css simplebar.min.css lightgallery-bundle.min.css
                                                  around-icons.min.css theme.min.css theme-switcher.js swiper-bundle.min.js simplebar.min.js lightgallery.min.js lg-video.min.js lg-fullscreen.min.js lg-zoom.min.js theme.min.js]
+
+Rails.application.config.assets.paths << Rails.root.join('app', 'javascripts')
