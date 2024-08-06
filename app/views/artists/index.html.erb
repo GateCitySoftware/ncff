@@ -1,64 +1,17 @@
-<div class="container">
-  <div class="row row-cols-1 row-cols-md-3 g-4 mb-4">
-    <div class="col">
-      <div class="dropdown">
-        <button class="btn btn-primary dropdown-toggle w-100" type="button" id="genreDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-          By Genre
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="genreDropdown">
-          <li><a class="dropdown-item" href="<%= artists_path %>"><%= "All (#{Artist.count})" %></a></li>
-          <% @data.genre_map.each do |genre, artist_count| %>
-            <li><a class="dropdown-item" href="<%= artists_path(category: 'genre', option: genre) %>"><%= "#{genre}  (#{artist_count})" %></a></li>
-          <% end %>
-        </ul>
-      </div>
-    </div>
-    <div class="col">
-      <div class="dropdown">
-        <button class="btn btn-primary dropdown-toggle w-100" type="button" id="stageNameDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-          By Stage Name
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="stageNameDropdown">
-          <li><a class="dropdown-item" href="<%= artists_path %>">All</a></li>
-          <% @data.stage_map.each do |stage, performance_count| %>
-            <li><a class="dropdown-item" href="<%= artists_path(category: 'stage', option: stage) %>"><%= "#{stage}  (#{performance_count})" %></a></li>
-          <% end %>
-        </ul>
-      </div>
-    </div>
-    <div class="col">
-      <div class="dropdown">
-        <button class="btn btn-primary dropdown-toggle w-100" type="button" id="dateDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-          By Date 
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="dateDropdown">
-          <li><a class="dropdown-item" href="<%= artists_path %>">All</a></li>
-          <% @data.date_map.each do |date, performances_count| %>
-            <li><a class="dropdown-item" href="<%= artists_path(category: 'date', option: date.to_s) %>"><%= "#{date.strftime('%A, %B %e, %Y')}  (#{performances_count})" %></a></li>
-          <% end %>
-        </ul>
-      </div>
-    </div>
-  </div>
-</div>
+<%= csrf_meta_tags %>
+<%= javascript_pack_tag 'artist-cards-bundle' %>
+<%= stylesheet_pack_tag 'artist-cards-bundle' %>
 
-<div class="row">
-  <div class="col text-center mt-3">
-    <% if @data.filter_category == 'stage' %>
-      <%= link_to stage_path(@data.stage_slug) do %>
-        <h3><%= @data.filter_name %></h3>
-        <i class="bi bi-geo-alt-fill text-primary me-2"></i>
-      <% end %>
-    <% else %>
-      <h3 class="fw-bold"><%= @data.filter_name %></h3>
-    <% end %>
-  </div>
-</div>
-
-<div id="artists" class="my-4">
-  <div class="row">
-    <% @data.artists.each do |artist| %>
-      <%= render 'artist_card', artist: artist %>
-    <% end %>
-  </div>
+<div class="container" style="margin-top:200px;">
+  <h1>Artists</h1>
+  <!--
+  # TODO: change back to prerender true for SEO optimization
+  # TODO: change back to prerender true for SEO optimization
+  # TODO: change back to prerender true for SEO optimization
+  # TODO: change back to prerender true for SEO optimization
+  # TODO: change back to prerender true for SEO optimization
+  # TODO: change back to prerender true for SEO optimization
+  # TODO: change back to prerender true for SEO optimization
+  -->
+  <%= react_component("ArtistCards", props: { artistData: @data }) %>
 </div>

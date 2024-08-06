@@ -7,9 +7,23 @@ class ArtistIndex
     new(category, option).call
   end
 
+  def self.json_for_react_component
+    json = Artist.all.joins(performances: :stage).each_with_object({}) do |artist, object|
+      extra_attrs = {
+        image: artist.primary_image(size: 'medium'),
+        genres: artist.genres,
+        performances: artist.performances.includes(:stage).map do |performance|
+                        { date: performance.start_time.to_date, stage: performance.stage.name }
+                      end
+      }
+      object[artist.slug] = artist.as_json.merge(extra_attrs)
+    end.as_json
+    ## File.open('tmp/artist_data.json', 'w') { |f| f.write(JSON.pretty_generate(json)) }
+  end
+
   def initialize(category, option)
-    @category = category
-    @option = option
+    @category = category || nil
+    @option = option || nil
   end
 
   def call

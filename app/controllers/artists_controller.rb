@@ -8,7 +8,7 @@ class ArtistsController < ApplicationController
   # TODO: consider creating a MatView for performance summary
   # TODO: also, use caching (with or without MatView)
   def index
-    @data = ArtistIndex.all(params[:category], params[:option])
+    @data = ArtistIndex.json_for_react_component
   end
 
   # GET /artists/1 or /artists/1.json
