@@ -23,8 +23,8 @@ Rails.application.routes.draw do
   resources :schedules
   resources :performances
   resources :stages
-  resources :artists, except: %i[index]
-  get '/artists', to: redirect('/', status: :moved_permanently)
+  resources :artists
+  # get '/artists', to: redirect('/', status: :moved_permanently)
   resources :tagged_items
   resources :tags
   resources :activations

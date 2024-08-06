@@ -6,6 +6,7 @@ class PerformancesController < ApplicationController
   # GET /performances or /performances.json
   def index
     @performances = Performance.all
+    @hello_world_props = { name: 'Stranger' }
   end
 
   # GET /performances/1 or /performances/1.json
