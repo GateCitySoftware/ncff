@@ -1,6 +1,7 @@
 # app/controllers/uploads_controller.rb
 class UploadsController < ApplicationController
   before_action :set_upload, only: %i[show edit destroy]
+  skip_before_action :require_admin, only: %i[create set_primary]
 
   # GET /uploads
   def index

@@ -28,11 +28,11 @@
           <% end %>
 
           <% if current_user&.vendor?%>
-            <li class="nav-item">
-              <a href="#" class="nav-link">Preview Vendor Listing</a>
+            <li class="nav-item text-decoration-none">
+              <%= link_to 'Preview Listing', vendor_path(current_user.vendor_record), class: 'text-decoration-none btn btn-secondary mx-4' %>
             </li>
-            <li class="nav-item">
-              <a href="#" class="nav-link">Edit Vendor Listing</a>
+            <li class="nav-item text-decoration-none">
+              <%= link_to 'Edit Listing', edit_vendor_path(current_user.vendor_record), class: 'text-decoration-none btn btn-secondary mx-4' %>
             </li>
           <% end %>
 

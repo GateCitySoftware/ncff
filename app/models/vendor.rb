@@ -17,6 +17,8 @@
 #  owner_id    :uuid
 #  approved    :boolean          default(FALSE), not null
 #  archived    :boolean          default(FALSE), not null
+#  city        :string
+#  state       :string
 #
 class Vendor < ApplicationRecord
   include Slugs

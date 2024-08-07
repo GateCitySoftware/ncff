@@ -25,7 +25,7 @@ class User < ApplicationRecord
   has_secure_password
 
   def owner?(resource = nil)
-    current_user.admin? || current_user.id == resource&.owner_id
+    admin? || id == resource&.owner_id
   end
 
   def generate_login_token
@@ -52,6 +52,12 @@ class User < ApplicationRecord
 
   def fan?
     role == 'attendee'
+  end
+
+  def vendor_record
+    return nil unless vendor?
+
+    @vendor_record ||= Vendor.find_by(owner_id: id)
   end
 
   private

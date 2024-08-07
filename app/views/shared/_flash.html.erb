@@ -1,7 +1,35 @@
-<% flash.each do |type, message| %>
-  <% bootstrap_class = type == "notice" ? "alert-info" : "alert-danger" %>
-  <div class="alert <%= bootstrap_class %> alert-dismissible fade show" role="alert">
-    <%= message %>
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+<div class="modal fade" id="flashModal" tabindex="-1" aria-labelledby="flashModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="flashModalLabel">Message</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" id="flashModalBody" class="text-center">
+        <!-- Flash messages will be inserted here -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
   </div>
-<% end %>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var flashMessages = gon.flash;
+    if (flashMessages && flashMessages.length > 0) {
+      var modal = new bootstrap.Modal(document.getElementById('flashModal'));
+      var modalBody = document.getElementById('flashModalBody');
+      
+      flashMessages.forEach(function(message) {
+        var p = document.createElement('p');
+        p.className = message[0]; // Add the type (e.g., 'alert') as a class
+        p.textContent = message[1];
+        modalBody.appendChild(p);
+      });
+
+      modal.show();
+    }
+  });
+</script>

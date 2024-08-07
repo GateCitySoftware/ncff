@@ -20,28 +20,4 @@ module ApplicationHelper
     colors = %w[ncff-teal ncff-blue ncff-orange]
     colors[index % colors.length]
   end
-
-  def artist_stock_image
-    images = ['beyonce.jpeg', 'bob-dylan.jpeg', 'david-bowie.jpeg', 'elvis.jpeg', 'madonna.jpeg',
-              'michael-jackson.jpeg', 'prince.jpeg', 'the-beatles.jpeg', 'whitney-houston.jpeg']
-
-    @image_index ||= rand(images.length)
-
-    image = images[@image_index]
-    @image_index = (@image_index + 1) % images.length
-
-    image
-  end
-
-  def vendor_stock_image
-    images = ['res-1.jpeg', 'res-2.jpeg', 'res-3.jpeg', 'res-4.jpeg', 'res-5.jpeg', 'res-6.jpeg', 'res-7.jpeg',
-              'res-8.jpeg', 'res-9.jpeg', 'res-10.jpeg']
-
-    @vendor_image_index ||= rand(images.length)
-
-    image = images[@vendor_image_index]
-    @vendor_image_index = (@vendor_image_index + 1) % images.length
-
-    image
-  end
 end

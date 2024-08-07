@@ -4,15 +4,16 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :null_session
   layout 'application'
 
-  before_action :gon_current_user
+  before_action :gon_global_data
   before_action :require_admin
   before_action :set_paper_trail_whodunnit
 
   helper_method :current_user
   helper_method :uuid?
 
-  def gon_current_user
+  def gon_global_data
     gon.current_user_id = current_user&.id
+    gon.flash = flash
   end
 
   private

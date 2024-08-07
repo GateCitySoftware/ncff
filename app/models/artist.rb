@@ -13,6 +13,7 @@
 #  tagline    :string
 #  owner_id   :uuid
 #  headliner  :boolean          default(FALSE), not null
+#  hide_tile  :boolean          default(FALSE)
 #
 class Artist < ApplicationRecord
   include Slugs

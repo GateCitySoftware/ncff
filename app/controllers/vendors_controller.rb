@@ -1,5 +1,6 @@
 class VendorsController < ApplicationController
   before_action :set_vendor, only: %i[show edit update destroy]
+  skip_before_action :require_admin, only: %i[show edit update]
 
   # TODO: consider creating a MatView for performance summary
   # TODO: also, use caching (with or without MatView)
@@ -12,6 +13,7 @@ class VendorsController < ApplicationController
 
   # GET /vendors/1 or /vendors/1.json
   def show
+    @data = OpenStruct.new(page_name: 'Vendor Preview')
   end
 
   # GET /vendors/new
@@ -38,19 +40,23 @@ class VendorsController < ApplicationController
 
   # PATCH/PUT /vendors/1 or /vendors/1.json
   def update
-    # TODO: chaneg this when user login is working!
-    user_can_edit = true
-    just_approved = true if params[:vendor][:approved] == 'true' && user_can_edit && @vendor.update(approved: true)
-    just_archived = true if params[:vendor][:archived] == 'true' && user_can_edit && @vendor.update(archived: true)
+    if current_user&.admin?
+      just_approved = true if params[:vendor][:approved] == 'true' && @vendor.update(approved: true)
+      just_archived = true if params[:vendor][:archived] == 'true' && @vendor.update(archived: true)
+    end
 
     if just_approved
       redirect_to vendors_url(unapproved_listings: true), notice: 'Listing was successfully approved.'
     elsif just_archived
       redirect_to vendors_url(unapproved_listings: true), notice: 'Vendor was successfully archived.'
-    elsif @vendor.update(vendor_params)
-      redirect_to edit_vendor_url(@vendor), notice: 'Vendor was successfully updated.'
     else
-      redirect_to edit_vendor_url(@vendor), notice: "Updates were not saved: #{@vendor.errors.full_messages}"
+      service = SaveVendor.new(@vendor, params[:vendor]).call
+      if service.success?
+        redirect_to edit_vendor_url(@vendor), notice: 'Vendor was successfully updated.'
+      else
+        flash[:error] = "Updates were not saved: #{@vendor.errors.full_messages}"
+        redirect_to edit_vendor_url(@vendor)
+      end
     end
   end
 
