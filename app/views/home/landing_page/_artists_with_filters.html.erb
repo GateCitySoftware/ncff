@@ -1,0 +1,6 @@
+<%= csrf_meta_tags %>
+<%= javascript_pack_tag 'artist-cards-bundle' %>
+
+<section class="position-relative py-4 py-md-5">
+  <%= react_component("ArtistCards", props: { artistData: @data[:artists_data] }) %>
+</section>

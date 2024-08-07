@@ -24,7 +24,7 @@ Rails.application.routes.draw do
   resources :performances
   resources :stages
   resources :artists
-  # get '/artists', to: redirect('/', status: :moved_permanently)
+  get '/artists', to: redirect('/', status: :moved_permanently)
   resources :tagged_items
   resources :tags
   resources :activations

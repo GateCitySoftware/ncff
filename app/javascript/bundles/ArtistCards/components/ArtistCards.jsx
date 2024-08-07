@@ -55,6 +55,12 @@ const ArtistCards = ({ artistData }) => {
 
   return (
     <div className="container">
+      <h2 className="mb-4  display-2 text-center">Artist Search</h2>
+      <h2 className="mb-4 text-center">
+        {filterCategory && filterValue 
+          ? `${filterCategory.charAt(0).toUpperCase() + filterCategory.slice(1)}: ${filterValue}`
+          : 'All Artists'}
+      </h2>
       <div className="row mb-4">
         <div className="col-md-4">
           <select 
@@ -91,31 +97,41 @@ const ArtistCards = ({ artistData }) => {
         </div>
       </div>
 
-      <h2 className="mb-4">
-        {filterCategory && filterValue 
-          ? `${filterCategory.charAt(0).toUpperCase() + filterCategory.slice(1)}: ${filterValue}`
-          : 'All Artists'}
-      </h2>
 
-      <div className="row">
+      <div className="row row-cols-lg-4 flex-nowrap flex-lg-wrap gy-lg-5 mx-n3">
+
         {filteredArtists.map(artist => (
-          <div key={artist.id} className="col-md-4 mb-4">
-            <div className="card">
+          <div key={artist.id} className="col">
+            <a 
+              className="d-block text-center text-decoration-none artist-link" 
+              data-bs-toggle="modal"
+              data-bs-target="#artistModal"
+              data-artist-slug={artist.slug}
+              data-artist-id={artist.id}
+              data-artist-name={artist.name}
+              data-artist-image={artist.image}
+              data-artist-genres={artist.genres.join(', ')}
+              style={{ minWidth: '210px' }}
+            >
               <img 
                 src={artist.image} 
-                className="card-img-top" 
-                alt={artist.name} 
-                style={{height: '200px', objectFit: 'cover'}}
+                className="rounded border-shadow" 
+                alt={artist.name}
               />
-              <div className="card-body">
-                <h5 className="card-title">{artist.name}</h5>
-                <p className="card-text">
-                  {artist.genres.join(', ')}
-                </p>
+              <h3 className="h5 pt-4 mb-1">{artist.name}</h3>
+            </a>
+            <div className="row">
+              <div className="d-flex flex-wrap gap-2 justify-content-center">
+                {artist.genres.map((genre, index) => (
+                  <a key={index} href="#" className="btn btn-outline-primary btn-sm">
+                    {genre}
+                  </a>
+                ))}
               </div>
             </div>
           </div>
         ))}
+
       </div>
     </div>
   );

@@ -8,7 +8,7 @@ class ArtistIndex
   end
 
   def self.json_for_react_component
-    json = Artist.all.joins(performances: :stage).each_with_object({}) do |artist, object|
+    json = Artist.all.where(hide_tile: false).joins(performances: :stage).each_with_object({}) do |artist, object|
       extra_attrs = {
         image: artist.primary_image(size: 'medium'),
         genres: artist.genres,

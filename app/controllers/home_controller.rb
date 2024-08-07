@@ -9,7 +9,7 @@ class HomeController < ApplicationController
       flash.now[:notice] = 'Welcome to the site! You have been logged in.'
     end
 
-    @data = { stats:, artists:, headliner_artists:, stages:, schedule_days: }
+    @data = { stats:, artists:, headliner_artists:, stages:, schedule_days:, artists_data: }
   end
 
   def list_view
@@ -64,5 +64,9 @@ class HomeController < ApplicationController
         headliner: artist.headliner?
       }
     end
+  end
+
+  def artists_data
+    ArtistIndex.json_for_react_component
   end
 end
