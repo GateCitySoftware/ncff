@@ -1,7 +1,7 @@
 # app/controllers/uploads_controller.rb
 class UploadsController < ApplicationController
   before_action :set_upload, only: %i[show edit destroy]
-  skip_before_action :require_admin, only: %i[create set_primary]
+  skip_before_action :require_admin, only: %i[create set_primary set_menu]
 
   # GET /uploads
   def index
@@ -70,6 +70,12 @@ class UploadsController < ApplicationController
   def set_primary
     @upload = Upload.find(params[:id])
     @upload.set_as_primary
+    redirect_back(fallback_location: artists_path)
+  end
+
+  def set_menu
+    @upload = Upload.find(params[:id])
+    @upload.set_as_menu
     redirect_back(fallback_location: artists_path)
   end
 

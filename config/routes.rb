@@ -32,6 +32,7 @@ Rails.application.routes.draw do
   resources :uploads do
     member do
       patch :set_primary
+      patch :set_menu
     end
   end
 

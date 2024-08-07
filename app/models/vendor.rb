@@ -45,6 +45,11 @@ class Vendor < ApplicationRecord
 
   default_scope { where(approved: true, archived: false) }
 
+  # "normal" website is attached via ExternalLink, this is for a menu link only
+  def menu_link
+    website
+  end
+
   def category_name
     CATEGORIES[category.to_sym]
   end

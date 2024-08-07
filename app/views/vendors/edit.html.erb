@@ -1,9 +1,8 @@
 <div class="container">
   <h1 class="mb-4">Edit Vendor Listing</h1>
 
-<h3>Basic Info</h3>
+  <h3>Basic Info</h3>
 
-<div class="row mb-4">
   <%= form_with(model: @vendor, local: true, class: "needs-validation", novalidate: true) do |form| %>
     <div class="row g-3">
       <div class="col-md-3">
@@ -62,7 +61,8 @@
       </div>
     </div>
 
-<hr class="my-4">
+    <hr class="my-4">
+
     <div class="mb-3">
       <h3>Social Media Links / Website</h3>
       <div class="row">
@@ -75,7 +75,7 @@
                     placeholder: "Copy and paste #{value[:display_text]} link here or leave blank",
                     value: @vendor.external_links.find{|link| link.link_type == key}&.url
                     # TODO: this is a likely N+1 query, fix htis!!!!!!!!!
-                %>
+              %>
             </div>
           <% end %>
         <% end %>
@@ -87,89 +87,90 @@
     </div>
   <% end %>
 
-<hr class="my-4">
+  <hr class="my-4">
 
-<h3>Images</h3>
+  <div class="row">
+    <div class="col">
+      <h3>Menu or Price List</h3>
+      <ul>
+        <li>You can add a link to your MENU or PRICE LIST here.</li>
+        <li>If you have a PDF or other file, you can upload it below and click <strong>Set as Menu</strong>.</li>
+      </ul>
+      <div class="col-md-3">
+        <%= form_with(model: @vendor, local: true) do |form| %>
+          <%= form.label 'Link to Menu / Price List', class: "form-label" %>
+          <%= form.text_field :website, class: "form-control" %>
+        <%= form.submit class: "btn btn-primary" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
 
-<div class="container">
-  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4 justify-content-center">
+  <hr class="my-4">
+
+  <h3>Images</h3>
+  <ul>
+    <li>Select <strong>Set as Primary</strong> to set the primary image.</li>
+    <li>Select <strong>Set as Menu</strong> to set the menu image (optional: you can also add a website link to your menu above).</li>
+    <li>All other images will only be displayed in gallery sections.</li>
+    <li>Images are automatically processesed and resized in multiple versions for optimal performance. If a newly uploaded image is blank, wait a few minutes and refresh the page.</li>
+  </ul>
+
+  <div class="row">
     <% @vendor.uploads.each do |upload| %>
-      <div class="col">
-        <div class="position-relative image-container <%= 'border border-3 border-primary' if upload.image_type == 'primary' %>">
-          <%= image_tag(upload.s3_url(size: 'large'), class: "img-thumbnail w-100", alt: "Artist upload") %>
+      <div class="col-sm-12 col-md-3 col-lg-4">
+        <div class="border border-3 border-primary p-4">
+          <%= image_tag(upload.s3_url(size: 'large'), class: "img-thumbnail", style:"max-width:300px;", alt: "Artist upload") %>
           <% if upload.image_type == 'primary' %>
             <p class="text-center fw-bold my-3">Primary Image</p> 
           <% end %>
-          <div class="overlay d-flex justify-content-center align-items-center">
-            <%= button_to "Delete", upload_path(upload), method: :delete, class: "btn btn-danger btn-sm me-2", data: { confirm: "Are you sure?" } %>
-            <% unless upload.image_type == 'primary' %>
-              <%= button_to "Set as Primary", set_primary_upload_path(upload), method: :patch, class: "btn btn-primary btn-sm" %>
-            <% end %>
+          <% if upload.image_type == 'menu' %>
+            <p class="text-center fw-bold my-3">Menu Image</p> 
+          <% end %>
+          <% if upload.image_type == 'gallery' %>
+            <p class="text-center my-3">Gallery Image</p> 
+          <% end %>
+          <div class="row">
+            <%= button_to "Delete", upload_path(upload), method: :delete, class: "btn btn-danger btn-sm m-2 w-100", data: { confirm: "Are you sure?" } %>
           </div>
+          <% unless upload.image_type == 'primary' %>
+            <div class="row">
+              <%= button_to "Set as Primary", set_primary_upload_path(upload), method: :patch, class: "btn btn-primary btn-sm m-2 w-100" %>
+            </div>
+          <% end %>
+          <% unless upload.image_type == 'menu' %>
+            <div class="row">
+              <%= button_to "Set as Menu", set_menu_upload_path(upload), method: :patch, class: "btn btn-secondary btn-sm m-2 w-100" %>
+            </div>
+          <% end %>
         </div>
       </div>
     <% end %>
   </div>
-</div>
 
-<style>
-  .image-container {
-    position: relative;
-    overflow: hidden;
-  }
-  .overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
-    opacity: 0;
-    transition: opacity 0.3s;
-  }
-  .image-container:hover .overlay {
-    opacity: 1;
-  }
-</style>
+  <h3 class="mt-4">Upload Images</h3>
 
-<script>
-  document.addEventListener('load', function() {
-    const containers = document.querySelectorAll('.image-container');
-    containers.forEach(container => {
-      container.addEventListener('mouseenter', () => {
-        container.querySelector('.overlay').style.opacity = '1';
-      });
-      container.addEventListener('mouseleave', () => {
-        container.querySelector('.overlay').style.opacity = '0';
-      });
-    });
-  });
-</script>
+  <%= form_with(url: @upload, local: true, multipart: true, class: "mb-4") do |form| %>
+    <% if @upload.errors.any? %>
+      <div class="alert alert-danger" role="alert">
+        <h4 class="alert-heading"><%= pluralize(@upload.errors.count, "error") %> prohibited this upload from being saved:</h4>
+        <ul>
+          <% @upload.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
 
+    <%= form.hidden_field :uploadable_type, value: @vendor.class.name %>
+    <%= form.hidden_field :uploadable_id, value: @vendor.id %>
 
-<h3 class="mt-4">Upload Images</h3>
-
-<%= form_with(url: @upload, local: true, multipart: true, class: "mb-4") do |form| %>
-  <% if @upload.errors.any? %>
-    <div class="alert alert-danger" role="alert">
-      <h4 class="alert-heading"><%= pluralize(@upload.errors.count, "error") %> prohibited this upload from being saved:</h4>
-      <ul>
-        <% @upload.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
+    <div class="mb-3">
+      <%= form.label :images, class: "form-label" %>
+      <div class="input-group">
+        <%= form.file_field :images, multiple: true, accept: 'image/*', class: "form-control", id: "customFile" %>
+        <%= form.submit 'Upload Images', class: "btn btn-primary" %>
+      </div>
     </div>
   <% end %>
-
-  <%= form.hidden_field :uploadable_type, value: @vendor.class.name %>
-  <%= form.hidden_field :uploadable_id, value: @vendor.id %>
-
-  <div class="mb-3">
-    <%= form.label :images, class: "form-label" %>
-    <div class="input-group">
-      <%= form.file_field :images, multiple: true, accept: 'image/*', class: "form-control", id: "customFile" %>
-      <%= form.submit 'Upload Images', class: "btn btn-primary" %>
-    </div>
-  </div>
-<% end %>
 </div>

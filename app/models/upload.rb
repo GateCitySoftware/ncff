@@ -26,10 +26,12 @@ class Upload < ApplicationRecord
   validates :content_type, presence: true
   validates :file_size, presence: true, numericality: { greater_than: 0 }
   validates :key, presence: true, uniqueness: true
-  validates :image_type, presence: true, inclusion: { in: %w[primary gallery] }
+  validates :image_type, presence: true, inclusion: { in: %w[primary gallery menu] }
   validate :only_one_primary_image_per_uploadable
 
   after_save :set_as_primary, if: -> { image_type != 'primary' && !primary_image_exists? }
+
+  scope :gallery, -> { where(image_type: 'gallery') }
 
   def s3_url(size:)
     selected_key = case size
@@ -45,16 +47,20 @@ class Upload < ApplicationRecord
                      raise ArgumentError, "Invalid size. Must be 'original', 'small', 'medium', or 'large'."
                    end
 
-    "https://#{s3_bucket_name}.s3.#{s3_region}.amazonaws.com/#{selected_key}"
+    "https://#{s3_bucket_name}.s3.#{s3_region}.amazonaws.com/#{selected_key || key}"
   end
 
   def set_as_primary
     Upload.transaction do
-      # Set all other uploads for this uploadable to "gallery"
-      uploadable.uploads.where.not(id:).update_all(image_type: 'gallery')
-
-      # Set this upload to "primary"
+      uploadable.uploads.where.not(id:).where(image_type: 'primary').update_all(image_type: 'gallery')
       update!(image_type: 'primary')
+    end
+  end
+
+  def set_as_menu
+    Upload.transaction do
+      uploadable.uploads.where.not(id:).where(image_type: 'menu').update_all(image_type: 'gallery')
+      update!(image_type: 'menu')
     end
   end
 
