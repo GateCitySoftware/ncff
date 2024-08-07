@@ -18,8 +18,8 @@ class Tag < ApplicationRecord
   has_many :artists, through: :tagged_items, source: :taggable, source_type: 'Artist'
   has_many :vendors, through: :tagged_items, source: :taggable, source_type: 'Vendor'
 
-  scope :genres, -> { where(category: 'music', sub_category: 'genre') }
-  scope :cuisines, -> { where(category: 'food-drink', sub_category: 'cuisine') }
+  scope :genres, -> { where(category: 'music', sub_category: 'genre').order(:name) }
+  scope :cuisines, -> { where(category: 'food-drink', sub_category: 'cuisine').order(:name) }
 
   attr_accessor :tagged_items_count
 
