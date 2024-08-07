@@ -57,7 +57,7 @@ class SessionsController < ApplicationController
         end
       elsif @user.authenticate(params[:password])
         session[:user_id] = @user.id
-        redirect_to edit_vendor_path(@user.vendor), notice: "Logged in as vendor: #{@user.identifier}"
+        redirect_to edit_vendor_path(@user.vendor_record), notice: "Logged in as vendor: #{@user.identifier}"
       else
         flash.now[:alert] = 'Invalid vendor credentials'
         render :vendor_new

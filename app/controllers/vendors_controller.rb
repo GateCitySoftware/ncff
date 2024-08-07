@@ -40,11 +40,14 @@ class VendorsController < ApplicationController
   def update
     if current_user&.admin?
       just_approved = true if params[:vendor][:approved] == 'true' && @vendor.update(approved: true)
+      just_unapproved = true if params[:vendor][:approved] == 'false' && @vendor.update(approved: false)
       just_archived = true if params[:vendor][:archived] == 'true' && @vendor.update(archived: true)
     end
 
     if just_approved
       redirect_to vendors_url(unapproved_listings: true), notice: 'Listing was successfully approved.'
+    elsif just_unapproved
+      redirect_to vendors_url(unapproved_listings: true), notice: 'Listing was successfully unapproved.'
     elsif just_archived
       redirect_to vendors_url(unapproved_listings: true), notice: 'Vendor was successfully archived.'
     else
