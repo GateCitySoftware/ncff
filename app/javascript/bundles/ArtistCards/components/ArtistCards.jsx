@@ -10,6 +10,10 @@ const ArtistCards = ({ artistData }) => {
   const [guestEmail, setGuestEmail] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
 
+  const [genreFilter, setGenreFilter] = useState('');
+  const [stageFilter, setStageFilter] = useState('');
+  const [dateFilter, setDateFilter] = useState('');
+
   const artists = useMemo(() => Object.values(artistData), [artistData]);
 
   const uniqueGenres = useMemo(() => {
@@ -56,6 +60,20 @@ const ArtistCards = ({ artistData }) => {
   const handleFilterChange = (category, value) => {
     setFilterCategory(category);
     setFilterValue(value);
+      
+    if (category === 'genre') {
+      setGenreFilter(value);
+      setStageFilter('');
+      setDateFilter('');
+    } else if (category === 'stage') {
+      setGenreFilter('');
+      setStageFilter(value);
+      setDateFilter('');
+    } else if (category === 'date') {
+      setGenreFilter('');
+      setStageFilter('');
+      setDateFilter(value);
+    }
   };
 
   const handleArtistClick = (artist) => {
@@ -128,13 +146,14 @@ const ArtistCards = ({ artistData }) => {
       <h2 className="mb-4 display-2 text-center">Artist Search</h2>
       <h2 className="mb-4 text-center">
         {filterCategory && filterValue 
-          ? `${filterCategory.charAt(0).toUpperCase() + filterCategory.slice(1)}: ${filterValue}`
+          ? `${filterCategory.charAt(0).toUpperCase() + filterCategory.slice(1)}: ${ filterCategory === 'date' ? new Date(filterValue).toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) : filterValue }`
           : 'All Artists'}
       </h2>
       <div className="row mb-4">
         <div className="col-md-4">
           <select 
             className="form-select" 
+            value={genreFilter}
             onChange={(e) => handleFilterChange('genre', e.target.value)}
           >
             <option value="">Select Genre</option>
@@ -146,6 +165,7 @@ const ArtistCards = ({ artistData }) => {
         <div className="col-md-4">
           <select 
             className="form-select" 
+            value={stageFilter}
             onChange={(e) => handleFilterChange('stage', e.target.value)}
           >
             <option value="">Select Stage</option>
@@ -157,96 +177,49 @@ const ArtistCards = ({ artistData }) => {
         <div className="col-md-4">
           <select 
             className="form-select" 
+            value={dateFilter}
             onChange={(e) => handleFilterChange('date', e.target.value)}
           >
             <option value="">Select Date</option>
-            {uniqueDates.map(date => (
-              <option key={date} value={date}>{date}</option>
-            ))}
+              {uniqueDates.map(date => {
+                const formattedDate = new Date(date).toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+                return (
+                  <option key={date} value={date}>
+                    {formattedDate}
+                  </option>
+                );
+              })}
           </select>
         </div>
       </div>
 
-
-
-
-
-
-
-
-
-
       <div className="row row-cols-lg-4 flex-nowrap flex-lg-wrap gy-lg-5 mx-n3">
-  {filteredArtists.map(artist => (
-    <div key={artist.id} className="col">
-      <div
-        className="d-block text-center text-decoration-none artist-link"
-        onClick={() => handleArtistClick(artist)}
-        style={{ minWidth: '210px', cursor: 'pointer' }}
-      >
-        <img 
-          src={artist.image} 
-          className="rounded border-shadow" 
-          alt={artist.name}
-        />
-        <h3 className="h5 pt-4 mb-1">{artist.name}</h3>
+        {filteredArtists.map(artist => (
+          <div key={artist.id} className="col">
+            <div
+              className="d-block text-center text-decoration-none artist-link"
+              onClick={() => handleArtistClick(artist)}
+              style={{ minWidth: '210px', cursor: 'pointer' }}
+            >
+              <img 
+                src={artist.image} 
+                className="rounded border-shadow" 
+                alt={artist.name}
+              />
+              <h3 className="h5 pt-4 mb-1">{artist.name}</h3>
+            </div>
+            <div className="row">
+              <div className="d-flex flex-wrap gap-2 justify-content-center">
+                {artist.genres.map((genre, index) => (
+                  <Button key={index} variant="outline-primary" size="sm">
+                    {genre}
+                  </Button>
+                ))}
+              </div>
+            </div>
+          </div>
+        ))}
       </div>
-      <div className="row">
-        <div className="d-flex flex-wrap gap-2 justify-content-center">
-          {artist.genres.map((genre, index) => (
-            <Button key={index} variant="outline-primary" size="sm">
-              {genre}
-            </Button>
-          ))}
-        </div>
-      </div>
-    </div>
-  ))}
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
       <Modal show={showModal} onHide={handleCloseModal} centered>
         <Modal.Header closeButton>
