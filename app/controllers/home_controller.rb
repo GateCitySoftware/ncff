@@ -39,7 +39,7 @@ class HomeController < ApplicationController
     [
       { value: Artist.count, label: 'Artists' },
       { value: Stage.count, label: 'Stages' },
-      { value: Tag.genre_map.count, label: 'Genres' }
+      { value: 3, label: 'Days' }
     ].sort_by { |stat| stat[:value] }.reverse
   end
 
