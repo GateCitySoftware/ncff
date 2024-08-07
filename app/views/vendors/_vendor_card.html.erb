@@ -95,7 +95,7 @@
               <% vendor.external_links.ordered_by_link_type.each do |link| %>
                 <%= external_link_button(link, icon_only: true) %>
               <% end %>
-              <% if vendor.external_links.none? %>
+              <% if vendor.external_links.count.zero? %>
                 <p>Add your website or any social media links</p>
               <% end %>
             </div>
