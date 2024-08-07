@@ -21,7 +21,13 @@ class SaveArtist
   private
 
   def update_artist_attributes
-    @artist.update!(name: @params[:name], tagline: @params[:tagline], bio: @params[:bio], content: @params[:content])
+    @artist.update!(
+      name: @params[:name],
+      tagline: @params[:tagline],
+      bio: @params[:bio],
+      content: @params[:content],
+      hide_tile: @params[:hide_tile]
+    )
   end
 
   def update_tags
