@@ -29,6 +29,11 @@
       <%= form.text_field :tagline, class: "form-control" %>
     </div>
 
+    <div class="mb-3">
+      <%= form.check_box :hide_tile %>
+      <%= form.label :hide_tile, "Hide this Artist?" %>
+    </div>
+
     <div class="field">
       <%= form.label :content %>
       <%= form.rich_text_area :content %>
