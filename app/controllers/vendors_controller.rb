@@ -5,9 +5,7 @@ class VendorsController < ApplicationController
   # TODO: consider creating a MatView for performance summary
   # TODO: also, use caching (with or without MatView)
   def index
-    # TODO: chaneg this when user login is working!
-    user_can_edit = true
-    unapproved_listings = true if params[:unapproved_listings] && user_can_edit
+    unapproved_listings = true if params[:unapproved_listings] && current_user&.admin?
     @data = ::VendorIndex.all(params[:category], params[:option], unapproved_listings)
   end
 

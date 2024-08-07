@@ -26,6 +26,7 @@ class SaveVendor
       name: @params[:name],
       description: @params[:description],
       image: @params[:image],
+      website: @params[:website], # this is for the menu only! normal website is an external link
       phone: @params[:phone],
       email: @params[:email],
       address: @params[:address],
@@ -53,6 +54,8 @@ class SaveVendor
   end
 
   def update_external_links
+    return unless @params[:external_links]
+
     external_links = @params[:external_links].to_unsafe_h.reject { |k, v| v.blank? }
     external_links.each do |link_type, url|
       link_type = link_type.to_s.sub('_url', '')

@@ -1,4 +1,4 @@
-<div class="modal fade" id="flashModal" tabindex="-1" aria-labelledby="flashModalLabel" aria-hidden="true">
+<div class="modal" id="flashModal" tabindex="-1" aria-labelledby="flashModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -22,12 +22,12 @@
       var modal = new bootstrap.Modal(document.getElementById('flashModal'));
       var modalBody = document.getElementById('flashModalBody');
       
-      flashMessages.forEach(function(message) {
-        var p = document.createElement('p');
-        p.className = message[0]; // Add the type (e.g., 'alert') as a class
-        p.textContent = message[1];
-        modalBody.appendChild(p);
-      });
+      // Only process the first message
+      var firstMessage = flashMessages[0];
+      var p = document.createElement('p');
+      p.className = firstMessage[0]; // Add the type (e.g., 'alert') as a class
+      p.textContent = firstMessage[1];
+      modalBody.appendChild(p);
 
       modal.show();
     }

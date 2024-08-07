@@ -46,8 +46,15 @@ class Vendor < ApplicationRecord
   default_scope { where(approved: true, archived: false) }
 
   # "normal" website is attached via ExternalLink, this is for a menu link only
-  def menu_link
-    website
+  def linked_menu
+    _url = website
+    return unless _url.present?
+
+    _url.start_with?('http://', 'https://') ? _url : "https://#{_url}"
+  end
+
+  def uploaded_menu
+    @uploaded_menu ||= uploads.find_by(image_type: 'menu')
   end
 
   def category_name

@@ -1,5 +1,3 @@
-<%= render 'category_dropdown' %>
-
 <% @data.vendors.each_with_index do |vendor, index| %>
   <%= render 'vendor_card', vendor: vendor, index: index %>
 <% end %>

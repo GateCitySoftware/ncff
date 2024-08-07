@@ -37,6 +37,15 @@
           <% end %>
 
           <% if current_user&.admin?%>
+            <li class="nav-item">
+              <a class="btn btn-outline-dark" href="/vendors?category=eat_drink">Approved - Eat & Drink</a>
+            </li>
+            <li class="nav-item">
+              <a class="btn btn-outline-dark" href="/vendors?category=shop_do">Approved - Shop & Do</a>
+            </li>
+            <li class="nav-item">
+              <a class="btn btn-outline-dark" href="/vendors?unapproved_listings=true">Unapproved Listings - All</a>
+            </li>
           <% end %>
 
           <% if current_user.present? %>
