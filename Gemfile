@@ -48,8 +48,10 @@ gem 'bootsnap', require: false
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
+  gem 'bullet'
   gem 'debug', platforms: %i[mri mswin mswin64 mingw x64_mingw]
   gem 'factory_bot_rails'
+  gem 'launchy'
   gem 'pry'
   gem 'rspec-rails'
 end
@@ -65,7 +67,6 @@ group :development do
   # gem "spring"
 
   gem 'annotate'
-  gem 'bullet'
   gem 'error_highlight', '>= 0.4.0', platforms: [:ruby]
   gem 'letter_opener'
   gem 'memory_profiler'
@@ -78,6 +79,7 @@ group :test do
 end
 
 gem 'aws-sdk-s3'
+gem 'bugsnag', '~> 6.27'
 gem 'faker', '~> 2.20'
 gem 'figaro'
 gem 'gon'
@@ -85,13 +87,9 @@ gem 'mini_magick'
 gem 'newrelic_rpm'
 gem 'paper_trail'
 gem 'postmark-rails'
+gem 'react_on_rails', '= 14.0.4'
 gem 'rubocop', '~> 1.64'
 gem 'scout_apm'
 gem 'sendgrid-ruby'
+gem 'shakapacker', '= 8.0'
 gem 'sidekiq'
-
-gem "shakapacker", "= 8.0"
-
-gem "react_on_rails", "= 14.0.4"
-
-gem "bugsnag", "~> 6.27"

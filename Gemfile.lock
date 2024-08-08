@@ -396,6 +396,7 @@ DEPENDENCIES
   gon
   importmap-rails
   jbuilder
+  launchy
   letter_opener
   memory_profiler
   mini_magick
