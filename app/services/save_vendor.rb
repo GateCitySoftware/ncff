@@ -21,7 +21,7 @@ class SaveVendor
   private
 
   def update_vendor_attributes
-    update_param_keys = %w[name description image website phone email address city state]
+    update_param_keys = %w[name description image website phone email address city state content]
     update_attrs = @params.to_unsafe_h.slice(*update_param_keys)
     @vendor.update!(update_attrs)
   end

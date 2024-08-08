@@ -45,6 +45,8 @@ class Vendor < ApplicationRecord
 
   default_scope { where(approved: true, archived: false) }
 
+  has_rich_text :content
+
   # "normal" website is attached via ExternalLink, this is for a menu link only
   def linked_menu
     _url = website
