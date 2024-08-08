@@ -57,7 +57,7 @@ class User < ApplicationRecord
   def vendor_record
     return nil unless vendor?
 
-    @vendor_record ||= Vendor.find_by(owner_id: id)
+    @vendor_record ||= Vendor.unscoped.find_by(owner_id: id)
   end
 
   private

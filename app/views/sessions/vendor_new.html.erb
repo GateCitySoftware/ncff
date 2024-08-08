@@ -24,6 +24,7 @@
             
             <%= form_with(url: login_path, local: true, class: "needs-validation", novalidate: true) do |form| %>
               <%= form.hidden_field :user_type, value: "vendor" %>
+              <%= form.hidden_field :login_type, value: "new_vendor" %>
               <div class="mb-3">
                 <%= form.label :identifier, "Email", class: "form-label" %>
                 <%= form.email_field :identifier, required: true, class: "form-control", placeholder: "Enter your email" %>
@@ -71,6 +72,7 @@
             
             <%= form_with(url: login_path, local: true, class: "needs-validation", novalidate: true) do |form| %>
               <%= form.hidden_field :user_type, value: "vendor" %>
+              <%= form.hidden_field :login_type, value: "existing_vendor" %>
               <div class="mb-3">
                 <%= form.label :identifier, "Email", class: "form-label" %>
                 <%= form.email_field :identifier, required: true, class: "form-control", placeholder: "Enter your email" %>
