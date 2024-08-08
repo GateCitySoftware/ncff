@@ -29,6 +29,17 @@
         </div>
       </div>
 
+      <!-- Primary Image/Logo -->
+      <div class="row mb-4">
+        <div class="col-12">
+          <% if vendor.primary_image.present? %>
+            <%= image_tag(vendor.primary_image(size: 'medium'), class:'img-fluid rounded') %>
+          <% else %>
+            <%= placeholder_tile('Add a Primary Image') %>
+          <% end %>
+        </div>
+      </div>
+
       <!-- Business Information -->
       <div class="row mb-4">
         <div class="col-12">
@@ -46,7 +57,7 @@
           </div>
         </div>
       </div>
-      
+
       <!-- View Menu -->
       <div class="row mb-4">
         <div class="col-12">
@@ -61,16 +72,6 @@
         </div>
       </div>
 
-      <!-- Primary Image/Logo -->
-      <div class="row mb-4">
-        <div class="col-12">
-          <% if vendor.primary_image.present? %>
-            <%= image_tag(vendor.primary_image, class:'img-fluid rounded') %>
-          <% else %>
-            <%= placeholder_tile('Add a Primary Image') %>
-          <% end %>
-        </div>
-      </div>
 
       <!-- Image Gallery -->
       <div class="row mb-4">
@@ -80,7 +81,7 @@
               <% if vendor.uploads.any? %>
                 <% vendor.uploads.gallery.each_with_index do |image, index| %>
                   <div class="carousel-item <%= 'active' if index.zero? %>">
-                    <%= image_tag image.s3_url(size: 'small'), class: 'd-block w-100', alt: "Slide #{index + 1}" %>
+                    <%= image_tag image.s3_url(size: 'medium'), class: 'd-block w-100', alt: "Slide #{index + 1}" %>
                   </div>
                 <% end %>
               <% else %>

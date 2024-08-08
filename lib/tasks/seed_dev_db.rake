@@ -4,7 +4,7 @@ task create_vendors: :environment do
   require 'services/fake_vendor_generator'
 
   Vendor::CATEGORIES.keys.each do |category|
-    50.times do
+    2.times do
       params = Services::FakeVendorGenerator.new(category).call
       Vendor.create!(params)
     end
