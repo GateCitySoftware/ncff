@@ -38,6 +38,11 @@ class Upload < ApplicationRecord
     uploadable_type.constantize.unscoped { super }
   end
 
+  def extract_uuid
+    uuid_pattern = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/
+    key.match(uuid_pattern)&.to_s
+  end
+
   def s3_url(size:)
     selected_key = case size
                    when 'original'

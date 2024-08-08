@@ -8,7 +8,7 @@ class ImageOptimizerWorker
 
     %w[small medium large].each do |size|
       optimized_file = optimize_image(original_file.path, size)
-      s3_key = upload_to_s3(s3_uploader, optimized_file.path, size, upload.filename)
+      s3_key = upload_to_s3(s3_uploader, optimized_file.path, size, upload)
       upload.update("#{size}_key": s3_key)
     end
 
@@ -54,9 +54,9 @@ class ImageOptimizerWorker
     temp_file
   end
 
-  def upload_to_s3(s3_uploader, file_path, size, original_filename)
-    original_name = File.basename(original_filename, '.*')
-    new_filename = "#{original_name}_#{size}.webp"
+  def upload_to_s3(s3_uploader, file_path, size, upload)
+    original_name = File.basename(upload.filename, '.*')
+    new_filename = "#{upload.extract_uuid}-#{original_name}_#{size}.webp"
     key = new_filename
 
     s3_uploader.upload(file_path, key)
