@@ -56,9 +56,12 @@ class SessionsController < ApplicationController
           flash.now[:alert] = 'Password is required for new vendor accounts'
           render :vendor_new
         end
-      elsif @user.authenticate(params[:password])
+      elsif @user.vendor? && @user.authenticate(params[:password])
         session[:user_id] = @user.id
         redirect_to edit_vendor_path(@user.vendor_record), notice: "Logged in as vendor: #{@user.identifier}"
+      elsif @user.admin?
+        flash.now[:alert] = 'This is an Admin account, please login here.'
+        render :admin_new
       else
         flash.now[:alert] = 'Invalid vendor credentials'
         render :vendor_new
