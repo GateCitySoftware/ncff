@@ -48,7 +48,8 @@ class SessionsController < ApplicationController
           @user.password = params[:password]
           @user.role = 'vendor'
           @user.save!
-          @vendor = Vendor.create!(owner_id: @user.id, category: params[:category], name: params[:name])
+          @vendor = Vendor.create!(owner_id: @user.id, category: params[:category], name: params[:name],
+                                   approved: false)
           session[:user_id] = @user.id
           redirect_to edit_vendor_path(@vendor), notice: "Vendor account created and logged in as: #{@user.identifier}"
         else
