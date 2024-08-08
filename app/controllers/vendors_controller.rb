@@ -1,6 +1,6 @@
 class VendorsController < ApplicationController
   before_action :set_vendor, only: %i[show edit update destroy]
-  skip_before_action :require_admin, only: %i[show edit update]
+  skip_before_action :require_admin, only: %i[show edit update help]
 
   # TODO: consider creating a MatView for performance summary
   # TODO: also, use caching (with or without MatView)
@@ -69,6 +69,9 @@ class VendorsController < ApplicationController
       format.html { redirect_to vendors_url, notice: 'Vendor was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def help
   end
 
   private

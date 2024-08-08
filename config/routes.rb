@@ -29,6 +29,7 @@ Rails.application.routes.draw do
   resources :tags
   resources :activations
   resources :vendors
+  get '/vendor_help', to: 'vendors#help'
   resources :uploads do
     member do
       patch :set_primary
