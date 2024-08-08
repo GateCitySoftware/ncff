@@ -17,6 +17,8 @@ class VendorsController < ApplicationController
   # GET /vendors/new
   def new
     @vendor = Vendor.new
+    @tags = Tag.cuisines
+    @upload = Upload.new
   end
 
   # GET /vendors/1/edit
@@ -28,6 +30,7 @@ class VendorsController < ApplicationController
   # POST /vendors or /vendors.json
   def create
     @vendor = Vendor.new(vendor_params)
+    @vendor.approved = false # necessary due to default_scope
 
     if @vendor.save
       redirect_to vendor_url(@vendor), notice: 'Vendor was successfully created.'
