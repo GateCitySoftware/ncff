@@ -58,12 +58,15 @@ class UploadsController < ApplicationController
       end
     else
       @upload.errors.add(:images, 'must be selected')
-      render :new
+      Bugsnag.notify('No images selected for upload, please try again on a non-mobile device. Our engineers have been notified.')
+      redirect_back(fallback_location: artists_path, notice: 'Upload was successfully created.')
     end
   rescue ActiveRecord::RecordInvalid => e
     cleanup_failed_uploads(uploader, uploaded_files)
     @upload.errors.add(:base, "Failed to save file: #{e.message}")
-    render :new
+    Bugsnag.notify(e)
+    redirect_back(fallback_location: artists_path,
+                  notice: 'Something went wrong. Please try again. Our engineers have been notified.')
   end
 
   # specific update action
