@@ -3,9 +3,11 @@ module ExternalLinksHelper
     link_type = link.link_type.downcase
     link_info = ExternalLink::LINK_TYPES[link_type]
 
+    url = ensure_https_link(link.url)
+
     if link_info
       anchor_args = {
-        href: link.url,
+        href: url,
         target: '_blank',
         rel: 'noopener noreferrer',
         class: 'btn border w-100',

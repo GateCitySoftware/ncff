@@ -22,17 +22,8 @@ class SaveVendor
 
   def update_vendor_attributes
     update_param_keys = %w[name description image website phone email address city state]
-    @vendor.update!(
-      name: @params[:name],
-      description: @params[:description],
-      image: @params[:image],
-      website: @params[:website], # this is for the menu only! normal website is an external link
-      phone: @params[:phone],
-      email: @params[:email],
-      address: @params[:address],
-      city: @params[:city],
-      state: @params[:state]
-    )
+    update_attrs = @params.to_unsafe_h.slice(*update_param_keys)
+    @vendor.update!(update_attrs)
   end
 
   def update_tags

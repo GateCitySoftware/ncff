@@ -1,4 +1,4 @@
-    <div class="border rounded p-4 my-5">
+    <div class="border rounded p-4 my-5 text-center">
       <!-- Edit, Approve, and Archive buttons -->
       <div class="admin-vendor-controls" class="row mb-4">
         <p><strong>Admin Only</strong></p>
@@ -62,14 +62,14 @@
 
       <!-- View Menu -->
       <div class="row mb-4">
-        <div class="col-12">
+        <div class="col-12 text-center">
           <h5>View Menu</h5>
           <% if vendor.uploaded_menu.present? %>
-            <%= link_to 'Menu', vendor.uploaded_menu.s3_url(size: 'large'), class: 'btn btn-secondary w-100', target: '_blank' %>
+            <%= link_to 'Menu', vendor.uploaded_menu.s3_url(size: 'large'), class: 'btn btn-primary w-75', target: '_blank' %>
           <% elsif vendor.linked_menu.present? %>
-            <%= link_to 'Menu', vendor.linked_menu, class: 'btn btn-secondary w-100', target: '_blank', rel: "noopener noreferrer" %>
+            <%= link_to 'Menu', vendor.linked_menu, class: 'btn btn-primary w-75 m-auto', target: '_blank', rel: "noopener noreferrer" %>
           <% else %>
-            <button class="btn btn-primary w-100">ADD MENU / PRICE LIST</button>
+            <button class="btn btn-primary w-75 m-auto">ADD MENU / PRICE LIST</button>
           <% end %>
         </div>
       </div>

@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 module ApplicationHelper
+  def ensure_https_link(url)
+    url.start_with?('http://', 'https://') ? url : "https://#{url}"
+  end
+
   def placeholder_tile(text)
     content_tag(:div,
                 class: 'w-100 h-100 d-flex justify-content-center align-items-center bg-light border border-secondary') do
