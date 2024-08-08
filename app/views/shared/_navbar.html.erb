@@ -10,7 +10,7 @@
       <ul class="navbar-nav ms-auto text-black">
         <% if current_user.nil? %>
           <li class="nav-item">
-            <a class="nav-link" href="/login">Login</a>
+            <a class="btn btn-outline-primary text-black" href="/login">Login</a>
           </li>
         <% else %>
           <% if current_user.fan? %>
@@ -39,7 +39,7 @@
             <a class="nav-link" href="#"><%= current_user.identifier %></a>
           </li>
           <li class="nav-item">
-            <%= button_to "Logout", logout_path, method: :delete, class: "btn btn-link nav-link" %>
+            <%= button_to "Logout", logout_path, method: :delete, class: "btn btn-outline-primary" %>
           </li>
         <% end %>
       </ul>

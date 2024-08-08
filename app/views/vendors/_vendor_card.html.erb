@@ -67,7 +67,7 @@
           <% elsif vendor.linked_menu.present? %>
             <%= link_to 'Menu', vendor.linked_menu, class: 'btn btn-secondary w-100', target: '_blank', rel: "noopener noreferrer" %>
           <% else %>
-            <button class="btn btn-secondary w-100">No Menu Available</button>
+            <button class="btn btn-primary w-100">ADD MENU / PRICE LIST</button>
           <% end %>
         </div>
       </div>
@@ -87,24 +87,48 @@
                 <%= placeholder_tile('Add Gallery Images') %>
               <% end %>
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#imageCarousel" data-bs-slide="prev">
-              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <button class="carousel-control-prev custom-carousel-control" type="button" data-bs-target="#imageCarousel" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon custom-icon" aria-hidden="true"></span>
               <span class="visually-hidden">Previous</span>
             </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#imageCarousel" data-bs-slide="next">
-              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <button class="carousel-control-next custom-carousel-control" type="button" data-bs-target="#imageCarousel" data-bs-slide="next">
+              <span class="carousel-control-next-icon custom-icon" aria-hidden="true"></span>
               <span class="visually-hidden">Next</span>
             </button>
           </div>
         </div>
       </div>
 
+      <style>
+        .custom-carousel-control {
+          width: 5%;
+          opacity: 0.7;
+        }
+        
+        .custom-carousel-control:hover {
+          opacity: 1;
+        }
+        
+        .custom-icon {
+          width: 30px;
+          height: 30px;
+          background-size: 100% 100%;
+        }
+        
+        .carousel-control-prev-icon.custom-icon {
+          background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23000'%3e%3cpath d='M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z'/%3e%3c/svg%3e");
+        }
+        
+        .carousel-control-next-icon.custom-icon {
+          background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23000'%3e%3cpath d='M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+        }
+      </style>
 
       <!-- Festival Location -->
-      <div class="row mb-4">
+      <div class="row m-4">
         <div class="col-12">
           <h5>Festival Location</h5>
-          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6449.540611296966!2d-79.7880926!3d36.07470620000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x885319263795fe67%3A0xacdd248ec46e3d08!2sLeBauer%20Park%20%40%20Greensboro%20Downtown%20Parks%2C%20Inc.!5e0!3m2!1sen!2sus!4v1723058744260!5m2!1sen!2sus" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6449.540611296966!2d-79.7880926!3d36.07470620000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x885319263795fe67%3A0xacdd248ec46e3d08!2sLeBauer%20Park%20%40%20Greensboro%20Downtown%20Parks%2C%20Inc.!5e0!3m2!1sen!2sus!4v1723058744260!5m2!1sen!2sus" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" class="rounded"></iframe>
         </div>
       </div>
 
@@ -120,7 +144,6 @@
           <% end %>
         </div>
       </div>
-
 
       <!-- Information -->
       <div class="row">
