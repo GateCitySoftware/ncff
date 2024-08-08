@@ -54,21 +54,23 @@
       </div>
     </div>
 
-    <hr class="my-4">
 
-    <div class="mb-3">
-      <h3>Tags</h3>
-      <div class="row">
-        <%= form.collection_check_boxes :tag_ids, @tags, :id, :name do |b| %>
-          <div class="col-lg-2 col-md-4 col-sm- 12">
-            <div class="form-check">
-              <%= b.check_box(class: "form-check-input") %>
-              <%= b.label(class: "form-check-label") %>
+    <% if @vendor.category == 'eat_drunk' %>
+      <hr class="my-4">
+      <div class="mb-3">
+        <h3>Tags</h3>
+        <div class="row">
+          <%= form.collection_check_boxes :tag_ids, @tags, :id, :name do |b| %>
+            <div class="col-lg-2 col-md-4 col-sm- 12">
+              <div class="form-check">
+                <%= b.check_box(class: "form-check-input") %>
+                <%= b.label(class: "form-check-label") %>
+              </div>
             </div>
-          </div>
-        <% end %>
+          <% end %>
+        </div>
       </div>
-    </div>
+    <% end %>
 
     <hr class="my-4">
 

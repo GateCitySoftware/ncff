@@ -55,9 +55,6 @@
                 <span class="badge bg-info px-4 py-2"><%= tag.name %></span>
               <% end %>
             </div>
-            <% if vendor.tags.none? %>
-              <span class="badge bg-info px-4 py-2">ADD CUISINE TYPES</span>
-            <% end %>
           </div>
         </div>
       </div>
@@ -65,43 +62,38 @@
       <!-- View Menu -->
       <div class="row mb-4">
         <div class="col-12 text-center">
-          <h5>View Menu</h5>
           <% if vendor.uploaded_menu.present? %>
             <%= link_to 'Menu', vendor.uploaded_menu.s3_url(size: 'large'), class: 'btn btn-primary w-75', target: '_blank' %>
           <% elsif vendor.linked_menu.present? %>
             <%= link_to 'Menu', vendor.linked_menu, class: 'btn btn-primary w-75 m-auto', target: '_blank', rel: "noopener noreferrer" %>
-          <% else %>
-            <p>ADD MENU / PRICE LIST</p>
           <% end %>
         </div>
       </div>
 
       <!-- Image Gallery -->
-      <div class="row mb-4">
-        <div class="col-12">
-          <div id="imageCarousel" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner">
-              <% if vendor.uploads.any? %>
-                <% vendor.uploads.gallery.each_with_index do |image, index| %>
-                  <div class="carousel-item <%= 'active' if index.zero? %>">
-                    <%= image_tag image.s3_url(size: 'medium'), class: 'd-block w-75 m-auto rounded', alt: "Slide #{index + 1}" %>
-                  </div>
+      <% if vendor.uploads.gallery.any? %>
+        <div class="row mb-4">
+          <div class="col-12">
+            <div id="imageCarousel" class="carousel slide" data-bs-ride="carousel">
+              <div class="carousel-inner">
+                  <% vendor.uploads.gallery.each_with_index do |image, index| %>
+                    <div class="carousel-item <%= 'active' if index.zero? %>">
+                      <%= image_tag image.s3_url(size: 'medium'), class: 'd-block w-75 m-auto rounded', alt: "Slide #{index + 1}" %>
+                    </div>
                 <% end %>
-              <% else %>
-                <%= placeholder_tile('Add Gallery Images') %>
-              <% end %>
+              </div>
+              <button class="carousel-control-prev custom-carousel-control" type="button" data-bs-target="#imageCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon custom-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+              </button>
+              <button class="carousel-control-next custom-carousel-control" type="button" data-bs-target="#imageCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon custom-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+              </button>
             </div>
-            <button class="carousel-control-prev custom-carousel-control" type="button" data-bs-target="#imageCarousel" data-bs-slide="prev">
-              <span class="carousel-control-prev-icon custom-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next custom-carousel-control" type="button" data-bs-target="#imageCarousel" data-bs-slide="next">
-              <span class="carousel-control-next-icon custom-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Next</span>
-            </button>
           </div>
         </div>
-      </div>
+      <% end %>
 
       <style>
         .custom-carousel-control {
@@ -137,14 +129,12 @@
       </div>
 
       <!-- Connect -->
-      <div class="row mb-4">
+      <div class="row">
         <div class="col-12">
-          <h5>Connect</h5>
           <% vendor.external_links.ordered_by_link_type.each do |link| %>
-            <%= external_link_button(link, icon_only: true) %>
-          <% end %>
-          <% if vendor.external_links.count.zero? %>
-            <p>Add your website or any social media links</p>
+            <div class="m-4">
+              <%= external_link_button(link) %>
+            </div>
           <% end %>
         </div>
       </div>
@@ -152,16 +142,8 @@
       <!-- Information -->
       <div class="row">
         <div class="col-12">
-          <h5>Information</h5>
           <p><%= [vendor.email, vendor.phone].reject(&:blank?).join(" | ") %></p>
-          <% if [vendor.email, vendor.phone].all?(&:blank?) %>
-            <p>Add contact information</p>
-          <% end %>
-
           <p><%= vendor.address %> <%= vendor.city %> <%= vendor.state %></p>
-          <% if [vendor.address, vendor.city, vendor.state].all?(&:blank?) %>
-            <p>Add address information</p>
-          <% end %>
         </div>
       </div>
     </div>
