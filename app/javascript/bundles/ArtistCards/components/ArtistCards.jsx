@@ -195,7 +195,7 @@ const ArtistCards = ({ artistData }) => {
 
       <div className="row row-cols-lg-4 flex-lg-wrap gy-lg-5 mx-n3">
         {filteredArtists.map(artist => (
-          <div key={artist.id} className="col">
+          <div key={artist.id} className="col mb-5">
             <div
               className="d-block text-center text-decoration-none artist-link"
               onClick={() => handleArtistClick(artist)}
