@@ -1,7 +1,6 @@
-<div class="container my-4">
-  <div class="row g-4 border border-rounded p-4 my-5">
-
-      <div class="row">
+    <div class="border rounded p-4 my-5">
+      <!-- Edit, Approve, and Archive buttons -->
+      <div class="row mb-4">
         <div class="col d-flex justify-content-end">
           <% if current_user&.owner?(vendor) || current_user&.admin? %>
             <%= link_to edit_vendor_path(vendor.id) do %>
@@ -11,18 +10,18 @@
 
           <% if current_user&.admin? %>
             <% if vendor.approved? %>
-              <%= form_with(model: vendor, local: true, method: :patch, class: "d-inline") do |form| %>
+              <%= form_with(model: vendor, local: true, method: :patch) do |form| %>
                 <%= form.hidden_field :approved, value: false %>
                 <%= form.submit "Unapprove", class: "btn btn-success m-2" %>
               <% end %>
             <% else %>
-              <%= form_with(model: vendor, local: true, method: :patch, class: "d-inline") do |form| %>
+              <%= form_with(model: vendor, local: true, method: :patch) do |form| %>
                 <%= form.hidden_field :approved, value: true %>
                 <%= form.submit "Approve", class: "btn btn-success m-2" %>
               <% end %>
             <% end %>
 
-            <%= form_with(model: vendor, local: true, method: :patch, class: "d-inline") do |form| %>
+            <%= form_with(model: vendor, local: true, method: :patch) do |form| %>
               <%= form.hidden_field :archived, value: true %>
               <%= form.submit "Archive", class: "btn btn-danger m-2" %>
             <% end %>
@@ -30,23 +29,55 @@
         </div>
       </div>
 
-    <!-- Primary Image/Logo -->
-    <div class="col-md-4 col-lg-3">
-      <div class="row">
-        <div class="col">
+      <!-- Business Information -->
+      <div class="row mb-4">
+        <div class="col-12">
+          <h2 class="mb-3"><%= vendor.name %></h2>
+          <p class="mb-3"><%= vendor.description %></p>
+          
+          <!-- Category/Tag Section -->
+          <div class="mb-3">
+            <% vendor.tags.each do |tag| %>
+              <span class="badge bg-info px-4 py-2"><%= tag.name %></span>
+            <% end %>
+            <% if vendor.tags.none? %>
+              <span class="badge bg-info px-4 py-2">ADD CUISINE TYPES</span>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      
+      <!-- View Menu -->
+      <div class="row mb-4">
+        <div class="col-12">
+          <h5>View Menu</h5>
+          <% if vendor.uploaded_menu.present? %>
+            <%= link_to 'Menu', vendor.uploaded_menu.s3_url(size: 'large'), class: 'btn btn-secondary w-100', target: '_blank' %>
+          <% elsif vendor.linked_menu.present? %>
+            <%= link_to 'Menu', vendor.linked_menu, class: 'btn btn-secondary w-100', target: '_blank', rel: "noopener noreferrer" %>
+          <% else %>
+            <button class="btn btn-secondary w-100">No Menu Available</button>
+          <% end %>
+        </div>
+      </div>
+
+      <!-- Primary Image/Logo -->
+      <div class="row mb-4">
+        <div class="col-12">
           <% if vendor.primary_image.present? %>
-            <%= image_tag(vendor.primary_image, class:'img-fluid rounded ') %>
+            <%= image_tag(vendor.primary_image, class:'img-fluid rounded') %>
           <% else %>
             <%= placeholder_tile('Add a Primary Image') %>
           <% end %>
         </div>
       </div>
-      <div class="row">
-        <div class="col mt-5">
-          <!-- Image Gallery -->
+
+      <!-- Image Gallery -->
+      <div class="row mb-4">
+        <div class="col-12">
           <div id="imageCarousel" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
-              <% if vendor.uploads.any? %>%
+              <% if vendor.uploads.any? %>
                 <% vendor.uploads.gallery.each_with_index do |image, index| %>
                   <div class="carousel-item <%= 'active' if index.zero? %>">
                     <%= image_tag image.s3_url(size: 'small'), class: 'd-block w-100', alt: "Slide #{index + 1}" %>
@@ -67,69 +98,43 @@
           </div>
         </div>
       </div>
-    </div>
 
-    <!-- Business Information -->
-    <div class="col-md-8 col-lg-9">
-      <h2 class="mb-3"><%= vendor.name %></h2>
-      <p class="mb-3"><%= vendor.description %></p>
-      
-      <!-- Category/Tag Section -->
-      <div class="mb-3">
-        <% vendor.tags.each do |tag| %>
-          <span class="badge bg-info px-4 py-2"><%= tag.name %></span>
-        <% end %>
-      </div>
 
-      <!-- Contact and Location Information -->
-      <div class="row">
-        <div class="col-sm-6">
+      <!-- Festival Location -->
+      <div class="row mb-4">
+        <div class="col-12">
           <h5>Festival Location</h5>
-          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6449.540611296966!2d-79.7880926!3d36.07470620000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x885319263795fe67%3A0xacdd248ec46e3d08!2sLeBauer%20Park%20%40%20Greensboro%20Downtown%20Parks%2C%20Inc.!5e0!3m2!1sen!2sus!4v1723058744260!5m2!1sen!2sus" width="300" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6449.540611296966!2d-79.7880926!3d36.07470620000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x885319263795fe67%3A0xacdd248ec46e3d08!2sLeBauer%20Park%20%40%20Greensboro%20Downtown%20Parks%2C%20Inc.!5e0!3m2!1sen!2sus!4v1723058744260!5m2!1sen!2sus" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
-        <div class="col-sm-6">
+      </div>
 
-          <div class="row">
-            <div class="col m-4">
-              <h5>Connect</h5>
-              <% vendor.external_links.ordered_by_link_type.each do |link| %>
-                <%= external_link_button(link, icon_only: true) %>
-              <% end %>
-              <% if vendor.external_links.count.zero? %>
-                <p>Add your website or any social media links</p>
-              <% end %>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col m-4">
-              <h5>View Menu</h5>
-              <% if vendor.uploaded_menu.present? %>
-                <%= link_to 'Menu', vendor.uploaded_menu.s3_url(size: 'large'), class: 'btn btn-secondary w-100', target: '_blank' %>
-              <% elsif vendor.linked_menu.present? %>
-                <%= link_to 'Menu', vendor.linked_menu, class: 'btn btn-secondary w-100', target: '_blank', rel: "noopener noreferrer" %>
-              <% else %>
-                <button class="btn btn-secondary w-100">No Menu Available</button>
-              <% end %>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col m-4">
-              <h5>Information</h5>
-              <!-- TODO: make sure we save null not empty strings -->
+      <!-- Connect -->
+      <div class="row mb-4">
+        <div class="col-12">
+          <h5>Connect</h5>
+          <% vendor.external_links.ordered_by_link_type.each do |link| %>
+            <%= external_link_button(link, icon_only: true) %>
+          <% end %>
+          <% if vendor.external_links.count.zero? %>
+            <p>Add your website or any social media links</p>
+          <% end %>
+        </div>
+      </div>
 
-              <p><%= [vendor.email, vendor.phone].reject(&:blank?).join(" | ") %></p>
-              <% if [vendor.email, vendor.phone].all?(&:blank?) %></p>
-                <p>Add contact information</p>
-              <% end %>
 
-              <p><%= vendor.address %> <%= vendor.city %> <%= vendor.state %></p>
-              <% if [vendor.address, vendor.city, vendor.state].all?(&:blank?) %></p>
-                <p>Add address information</p>
-              <% end %>
-            </div>
-          </div>
+      <!-- Information -->
+      <div class="row">
+        <div class="col-12">
+          <h5>Information</h5>
+          <p><%= [vendor.email, vendor.phone].reject(&:blank?).join(" | ") %></p>
+          <% if [vendor.email, vendor.phone].all?(&:blank?) %>
+            <p>Add contact information</p>
+          <% end %>
+
+          <p><%= vendor.address %> <%= vendor.city %> <%= vendor.state %></p>
+          <% if [vendor.address, vendor.city, vendor.state].all?(&:blank?) %>
+            <p>Add address information</p>
+          <% end %>
         </div>
       </div>
     </div>
-  </div>
-</div>
