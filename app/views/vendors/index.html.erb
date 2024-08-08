@@ -21,10 +21,10 @@
 
 <div class="container">
   <div class="row">
-      <% @data.vendors.includes(:external_links).each_with_index do |vendor, index| %>
-    <div class="col-12 col-md-6">
+    <% @data.vendors.includes(:external_links).each_with_index do |vendor, index| %>
+      <div class="col-12 col-md-6">
         <%= render 'vendor_card', vendor: vendor, index: index %>
-    </div>
-      <% end %>
+      </div>
+    <% end %>
   </div>
 </div>
