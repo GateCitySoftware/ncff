@@ -193,7 +193,7 @@ const ArtistCards = ({ artistData }) => {
         </div>
       </div>
 
-      <div className="row row-cols-lg-4 flex-nowrap flex-lg-wrap gy-lg-5 mx-n3">
+      <div className="row row-cols-lg-4 flex-lg-wrap gy-lg-5 mx-n3">
         {filteredArtists.map(artist => (
           <div key={artist.id} className="col">
             <div
