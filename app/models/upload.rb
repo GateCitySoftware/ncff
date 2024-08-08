@@ -33,6 +33,11 @@ class Upload < ApplicationRecord
 
   scope :gallery, -> { where(image_type: 'gallery') }
 
+  # necessary due to default_scope on Vendor
+  def uploadable
+    uploadable_type.constantize.unscoped { super }
+  end
+
   def s3_url(size:)
     selected_key = case size
                    when 'original'
