@@ -36,7 +36,7 @@
             </li>
           <% end %>
           <li class="nav-item">
-            <a class="nav-link" href="#"><%= current_user.identifier %></a>
+            <a class="nav-link" href="#" disabled="true"><%= current_user.identifier %></a>
           </li>
           <li class="nav-item">
             <%= button_to "Logout", logout_path, method: :delete, class: "btn btn-outline-primary" %>
