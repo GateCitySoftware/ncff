@@ -3,13 +3,11 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
-  get 'hello_world', to: 'hello_world#index'
   mount Sidekiq::Web => '/sidekiq'
 
+  match '/404', to: 'errors#not_found', via: :all
+  match '/500', to: 'errors#internal_server_error', via: :all
   root 'home#landing_page'
-  get '/list_view', to: 'home#list_view'
-  get '/item_view', to: 'home#item_view'
-  get '/todo', to: 'home#todo'
 
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'

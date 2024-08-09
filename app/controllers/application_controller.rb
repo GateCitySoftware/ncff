@@ -34,7 +34,7 @@ class ApplicationController < ActionController::Base
     redirect_to root_path, alert: 'You must be an admin to access this page.'
   end
 
-  def handle_error
+  def handle_error(exception)
     Rails.logger.error "ApplicationController Rescued Error: #{exception.message}"
 
     # Send error to Bugsnag with custom metadata
@@ -43,7 +43,6 @@ class ApplicationController < ActionController::Base
                             user_id: current_user&.id
                           })
     end
-
     flash[:error] = 'Something went wrong, please try again. Our engineers have been notified.'
     redirect_to root_path
   end
