@@ -3,6 +3,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :null_session
   layout 'application'
+  rescue_from StandardError, with: :handle_error
 
   before_action :gon_global_data
   before_action :require_admin
@@ -31,5 +32,19 @@ class ApplicationController < ActionController::Base
     return if current_user&.admin?
 
     redirect_to root_path, alert: 'You must be an admin to access this page.'
+  end
+
+  def handle_error
+    Rails.logger.error "ApplicationController Rescued Error: #{exception.message}"
+
+    # Send error to Bugsnag with custom metadata
+    Bugsnag.notify(exception) do |report|
+      report.add_metadata(:custom, {
+                            user_id: current_user&.id
+                          })
+    end
+
+    flash[:error] = 'Something went wrong, please try again. Our engineers have been notified.'
+    redirect_to root_path
   end
 end
